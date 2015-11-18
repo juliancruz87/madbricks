@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ManagerInput;
 
-namespace Combiner.Detail
+namespace ManagerInput.CameraControls
 {
 	[System.Serializable]
 	public class SnapRotator : MonoBehaviour
