@@ -3,3 +3,5 @@ Assembly-CSharp-firstpass.csproj
 Assembly-CSharp.csproj
 madbricks.sln
 madbricks.userprefs
+Library/
+Temp/
