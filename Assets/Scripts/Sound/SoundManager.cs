@@ -38,8 +38,18 @@ namespace Sound
 			if(soundType.Type != SoundType.None)
 			{
 				AudioClip sound = soundSettings.GetSound (soundType.Id, soundType.Type);
-				audioSource.PlayOneShot (sound);
+				PlayOneShot (sound);
 			}
+		}
+
+		public void Play (AudioClip sound)
+		{
+			PlayOneShot (sound);
+		}
+
+		private void PlayOneShot (AudioClip sound)
+		{
+			audioSource.PlayOneShot (sound);
 		}
 	}
 }
