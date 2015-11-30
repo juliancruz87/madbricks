@@ -1,68 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ManagerInput;
+using System;
 
 namespace InteractiveObjects.Detail
 {
 	public class DragableItem : MonoBehaviour 
 	{ 
-		private CharacterController myRigidbody;
-		protected Vector3 nextPosition;
-	    protected bool isInRelease;
+		public event Action Release;
 
-		public virtual IInputDeviceTouchData InputDevice
-	    {
-	        get { return InputManager.Instance.InputDevice; }
-	    }
+		[SerializeField]
+		private Collider myCollider;
+
+		private CharacterController myRigidbody;
+		private Vector3 nextPosition;
+		private Transform myTransform;
+		private float yPos;
+		private bool wasTouched = false;
+
+		private Camera MainCamera
+		{
+			get{ return Camera.main;}
+		}
+
+		private ITouchInfo PrimaryTouch
+		{
+			get { return InputManager.Instance.InputDevice.PrimaryTouch; }
+		}
 
 		private void Start ()
 		{
-			myRigidbody = GetComponent<CharacterController> ();
+			myTransform = GetComponent<Transform> ();
+			yPos = myTransform.position.y;
 		}
 
-		public virtual ITouchInfo PrimaryTouch
+		private void Update()
 	    {
-	        get { return InputManager.Instance.InputDevice.PrimaryTouch; }
-	    }
+			if (TouchChecker.IsTouchingFromCollider (MainCamera, myCollider))
+				wasTouched = true;
+			if (wasTouched && PrimaryTouch.IsTouching)
+				TryDrag ();
 
-	    public virtual void Initialize(Vector3 initialPosition)
-	    {
-	        isInRelease = false;
-	        transform.position = initialPosition;
-	        TryDrag();
-	    }
-
-		public virtual void Update()
-	    {
-	        if (InputDevice.TouchCount == 1)
-	            CheckInputState();
-	        else if (!isInRelease)
-	            OnRelease();
-	    }
-
-		public virtual void OnRelease()
-	    {
-	        isInRelease = true;
-	    }
-
-		public virtual void CheckInputState()
-	    {
-	        if (PrimaryTouch.IsDragging)
-	            TryDrag();
-	    }
+			if (PrimaryTouch.ReleasedTouchThisFrame && wasTouched) 
+			{
+				wasTouched = false;
+				if(Release != null)
+					Release ();
+			}
+		}
 
 		public virtual void TryDrag()
 	    {
-	        CalculateNextPosition();
-			myRigidbody.SimpleMove(nextPosition);
+			CalculateNextPosition();
+			myTransform.position = nextPosition;
 	    }
 
 		public virtual void CalculateNextPosition()
 	    {
-	        float distance = Camera.main.WorldToScreenPoint(transform.position).z;
-			float distanceY = Camera.main.WorldToScreenPoint(transform.position).y;
 	        Vector3 touchPosition = PrimaryTouch.TouchPosition;
-			nextPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchPosition.x, distanceY, distance ));
+			float distance = MainCamera.WorldToScreenPoint(myTransform.position).z;
+			nextPosition = MainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distance ));
+			nextPosition = new Vector3 (nextPosition.x, yPos, nextPosition.z);
 	    }
 	}
 }
