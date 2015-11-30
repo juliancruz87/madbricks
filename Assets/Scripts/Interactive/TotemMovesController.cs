@@ -16,8 +16,12 @@ namespace InteractiveObjects.Detail
 
 		private void Start ()
 		{
-			Transform [] positions = parentToPositionsToSnap.GetComponentsInChildren<Transform> ();
-			System.Array.ForEach (positions, p=> positionsToSnap.Add(p.position));
+			if(parentToPositionsToSnap != null)
+			{
+				Transform [] positions = parentToPositionsToSnap.GetComponentsInChildren<Transform> ();
+				System.Array.ForEach (positions, p=> positionsToSnap.Add(p.position));
+			}
+
 			dragable.Release += OnRelease;
 		}
 

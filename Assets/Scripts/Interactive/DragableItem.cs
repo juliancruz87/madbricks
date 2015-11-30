@@ -9,9 +9,7 @@ namespace InteractiveObjects.Detail
 	{ 
 		public event Action Release;
 
-		[SerializeField]
 		private Collider myCollider;
-
 		private CharacterController myRigidbody;
 		private Vector3 nextPosition;
 		private Transform myTransform;
@@ -31,6 +29,7 @@ namespace InteractiveObjects.Detail
 		private void Start ()
 		{
 			myTransform = GetComponent<Transform> ();
+			myCollider = GetComponent<Collider> ();
 			yPos = myTransform.position.y;
 		}
 
