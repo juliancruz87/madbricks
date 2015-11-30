@@ -9,8 +9,8 @@ namespace Interactive.Detail
 	{
 		[SerializeField]
 		private Collider myCollider;
-		public override void StartStep ()
-		{
+
+        public override void StartStep () {
 
 		}
 
