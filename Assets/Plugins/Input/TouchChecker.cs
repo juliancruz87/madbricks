@@ -5,6 +5,8 @@ namespace ManagerInput
 {
     public static class TouchChecker
     {
+		private static Collider collider;
+
         private static ITouchInfo TouchInfo
         {
             get { return InputManager.Instance.InputDevice.PrimaryTouch; }
@@ -54,6 +56,22 @@ namespace ManagerInput
 
             return CheckTouchingFromCollider(cam, collider, usePreviousPosition, hasToCheckUI);
         }
+
+		public static void SetLastColliderTouched (Collider myCollider)
+		{
+			if(TouchInfo.IsTouching && collider == null)
+				collider = myCollider;
+		}
+
+		public static void ReleaseLastColliderTouched ()
+		{
+			collider = null;
+		}
+
+		public static bool NoHasColliderTouched ()
+		{
+			return collider == null;
+		}
 
         private static bool CheckTouchingFromCollider(Camera cam, Collider collider, bool usePreviousPosition, bool hasToCheckUI)
         {

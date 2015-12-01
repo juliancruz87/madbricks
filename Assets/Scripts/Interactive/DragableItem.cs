@@ -35,13 +35,18 @@ namespace InteractiveObjects.Detail
 
 		private void Update()
 	    {
-			if (TouchChecker.IsTouchingFromCollider (MainCamera, myCollider))
+			if (TouchChecker.IsTouchingFromCollider (MainCamera, myCollider, false) && TouchChecker.NoHasColliderTouched ())
+			{
+				TouchChecker.SetLastColliderTouched (myCollider);
 				wasTouched = true;
+			}
+
 			if (wasTouched && PrimaryTouch.IsTouching)
 				TryDrag ();
 
 			if (PrimaryTouch.ReleasedTouchThisFrame && wasTouched) 
 			{
+				TouchChecker.ReleaseLastColliderTouched ();
 				wasTouched = false;
 				if(Release != null)
 					Release ();
