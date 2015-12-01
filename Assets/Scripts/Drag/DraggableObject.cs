@@ -1,7 +1,10 @@
 ﻿using InteractiveObjects.Detail;
 using UnityEngine;
+using Path;
 
 // TODO: Extend to touch input
+
+
 namespace Drag {
     public class DraggableObject : MonoBehaviour {
 
@@ -22,6 +25,18 @@ namespace Drag {
         //TODO: Configure the plane as the gameobject thing
         [SerializeField]
         private Plane horizontalPlane = new Plane(Vector3.up, Vector3.zero);
+
+		private SnapItemToCloserPosition snapperObject;
+
+		public Node SnapperObject 
+		{
+			get { return snapperObject.NodeSpnaped; }
+		}
+
+		private void Start ()
+		{
+			snapperObject = GetComponent<SnapItemToCloserPosition>();
+		}
 
         private void Update() {
             if (!isBeingDragged)
@@ -87,7 +102,8 @@ namespace Drag {
                 dragSound.Play();
         }
 
-        public void StopDrag() {
+        public void StopDrag() 
+		{
             if (isBeingDragged)
                 Snap();
 
@@ -100,11 +116,10 @@ namespace Drag {
                 dragSound.Stop();
         }
 
-        private void Snap() {
-            Debug.Log("Snap item: " + this.name);
-            SnapItemToCloserPosition snapperObject = GetComponent<SnapItemToCloserPosition>();
-            if (snapperObject != null)
-                snapperObject.SnapToCloserTransform();
+        private void Snap() 
+		{
+			if (snapperObject != null)
+				snapperObject.SnapToCloserTransform();
         }
     }
 }

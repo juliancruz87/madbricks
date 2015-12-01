@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Map;
 using InteractiveObjects;
+using InteractiveObjects.Detail;
 
 namespace Interactive.Detail
 {
@@ -33,8 +34,17 @@ namespace Interactive.Detail
 			MapObject mapObject = gameObjectTotem.GetComponent<MapObject> ();
 			mapObject.SetStartPosition (CreateStartPosition (points, totem.PositionToAdd));
 
-			ITotemMovesController moveController = gameObjectTotem.GetComponent<ITotemMovesController> ();
-			moveController.CreatePositionsToSnap (positionsToSnap);
+			AddComponent (gameObjectTotem, totem);
+		}
+
+		private void AddComponent (GameObject gameObjectTotem, TotemInstantiatorConfig totem)
+		{
+			if (totem.Type == TotemType.Single) 
+			{
+				gameObjectTotem.AddComponent <TotemSingle>();
+				TotemSingle totemObject = gameObjectTotem.GetComponent<TotemSingle> ();
+				totemObject.SetUp (totem);
+			}
 		}
 
 		private Transform CreateStartPosition(List<Transform> points, int positionToAdd)

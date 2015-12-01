@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Path {
 
@@ -15,10 +16,51 @@ namespace Path {
         public Vector3 debugOffset;
         public Color debugColor;
         // Use this for initialization
-        void Start () {
+
+		public static PathBuilder Instance
+		{
+			get;
+			private set;
+		}
+
+		private void Awake ()
+		{
+			if(Instance == null)
+				Instance = this;
+		}
+
+        private void Start () {
             _nodes = FindObjectsOfType<Node>();
             BuildConnections();
         }
+
+		public List<Connection> GetShortPath (Node nodeSpnaped, int positionToGo)
+		{
+			/*Node nodeToGo = System.Array.Find (_nodes,c=> c.Id == positionToGo);
+			List<Connection> possiblePaths = GetConnectionsByNode (nodeSpnaped);
+
+			List<PossiblePath> paths = new List<PossiblePath>();
+			for (int i = 0; i < possiblePaths.Count; i++ )
+			{
+				paths[i].AddNode (nodeSpnaped);
+				paths[i].AddNode (possiblePaths[i].ToNode);
+			}*/
+
+			return new List<Connection> ();
+		}
+
+		public List<Connection> GetConnectionsByNode (Node node)
+		{
+			List<Connection> connections = new List<Connection> ();
+
+			foreach (Connection connection in _connections)
+			{
+				if( connection.FromNode == node)
+					connections.Add (connection);
+			}
+
+			return connections;
+		}
 
         private void BuildConnections() {
             _connections =  new ArrayList();

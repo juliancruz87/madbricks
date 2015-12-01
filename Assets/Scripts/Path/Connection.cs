@@ -11,5 +11,10 @@
             ToNode = toNode;
             Weight = weight;
         }
+
+		public bool Contains (Node node)
+		{
+			return FromNode == node || ToNode == node;
+		}
     }
 }
