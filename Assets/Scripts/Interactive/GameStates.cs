@@ -8,7 +8,7 @@ namespace Interactive
 	{
 		Introduction = 0,
 		Planning = 1,
-		Execution = 2,
+		Play = 2,
 	}
 	
 }

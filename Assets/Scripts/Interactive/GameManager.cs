@@ -38,5 +38,11 @@ namespace Interactive
 		{
 			CurrentState = GameStates.Planning;
 		}
+
+		public void Play ()
+		{
+			Debug.Log ("Play");
+			CurrentState = GameStates.Play;
+		}
 	}
 }

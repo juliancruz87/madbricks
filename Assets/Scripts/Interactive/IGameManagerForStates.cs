@@ -7,6 +7,7 @@ namespace Interactive
 	public interface IGameManagerForStates
 	{
 		GameStates CurrentState { get;}
+		void Play ();
 	}
 	
 }

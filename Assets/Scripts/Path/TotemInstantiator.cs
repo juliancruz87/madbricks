@@ -9,6 +9,8 @@ namespace Interactive.Detail
 	public class TotemInstantiator : ScriptableObject
 	{
 		[SerializeField]
+		private List<int> validStartPoints;
+		[SerializeField]
 		private List<TotemInstantiatorConfig> totems;
 
 		public void Instantiate ( List<Transform> points, Transform positionsToSnap , Transform parent)

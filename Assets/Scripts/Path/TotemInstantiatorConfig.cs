@@ -13,6 +13,9 @@ namespace Interactive.Detail
 		
 		[SerializeField]
 		private int positionToAdd;
+
+		[SerializeField]
+		private int positionToGo;
 		
 		public TotemType Type 
 		{
@@ -27,6 +30,11 @@ namespace Interactive.Detail
 		public int PositionToAdd 
 		{
 			get { return positionToAdd; }
+		}
+
+		public int PositionToGo 
+		{
+			get { return positionToGo; }
 		}
 	}
 }
