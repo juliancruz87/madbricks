@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using InteractiveObjects.Detail;
+using UnityEngine;
 
 // TODO: Extend to touch input
 namespace Drag {
@@ -49,7 +50,6 @@ namespace Drag {
         }
 
         private bool IsAllowedToStartANewDrag() {
-            Debug.Log("Objects being dragged: " + objectBeingDragged);
             if (allowMultipleDrags)
                 return true;
             else
@@ -88,12 +88,23 @@ namespace Drag {
         }
 
         public void StopDrag() {
+            if (isBeingDragged)
+                Snap();
+
             isBeingDragged = false;
+
             if (objectBeingDragged == this)
                 objectBeingDragged = null;
             
             if (dragSound != null)
                 dragSound.Stop();
+        }
+
+        private void Snap() {
+            Debug.Log("Snap item: " + this.name);
+            SnapItemToCloserPosition snapperObject = GetComponent<SnapItemToCloserPosition>();
+            if (snapperObject != null)
+                snapperObject.SnapToCloserTransform();
         }
     }
 }
