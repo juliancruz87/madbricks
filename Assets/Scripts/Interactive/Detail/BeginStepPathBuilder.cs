@@ -2,29 +2,27 @@
 
 namespace Interactive.Detail {
     
-    public class BeginStepPathBuilder : BeginStepGameBase {
+    public class BeginStepPathBuilder : BeginStepGameBase 
+	{
         [SerializeField]
         private GameObject pathPrototype;
-
         [SerializeField]
         private Transform mapTransform;
 
         private Transform pathTransform;
 
-        public override void StartStep() {
+        public override void StartStep() 
+		{
             CreatePath();
         }
 
-        private void CreatePath() {
-            pathTransform = ((GameObject) Instantiate(pathPrototype, mapTransform.position, mapTransform.rotation)).transform;
+        private void CreatePath() 
+		{
+            pathTransform = ((GameObject)Instantiate(pathPrototype, mapTransform.position, mapTransform.rotation)).transform;
+			pathTransform.parent = mapTransform;
+			pathTransform.localPosition = Vector3.zero;
             if (EndStep != null)
                 EndStep();
-        }
-
-        private void Update() {
-            if (pathTransform != null &&
-                mapTransform != null)
-            pathTransform.position = mapTransform.position;
         }
     }
 }

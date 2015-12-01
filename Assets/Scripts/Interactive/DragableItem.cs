@@ -2,11 +2,17 @@
 using System.Collections;
 using ManagerInput;
 using System;
+using Interactive;
 
 namespace InteractiveObjects.Detail
 {
 	public class DragableItem : MonoBehaviour 
 	{ 
+		[SerializeField]
+		private bool respositioning = false;
+		[SerializeField]
+		private Vector3 offset = new Vector3(0f,20F,0f);
+
 		public event Action Release;
 
 		private Collider myCollider;
@@ -35,7 +41,13 @@ namespace InteractiveObjects.Detail
 
 		private void Update()
 	    {
-			if (TouchChecker.IsTouchingFromCollider (MainCamera, myCollider, false) && TouchChecker.NoHasColliderTouched ())
+			if(GameManagerAccess.GameManagerState.CurrentState == GameStates.Planning)
+				CheckMoves ();
+		}
+
+		private void CheckMoves ()
+		{
+			if (TouchChecker.IsTouchingFromCollider (MainCamera, myCollider, false) && TouchChecker.NoHasColliderTouched ()) 
 			{
 				TouchChecker.SetLastColliderTouched (myCollider);
 				wasTouched = true;
@@ -45,12 +57,15 @@ namespace InteractiveObjects.Detail
 				TryDrag ();
 
 			if (PrimaryTouch.ReleasedTouchThisFrame && wasTouched) 
-			{
-				TouchChecker.ReleaseLastColliderTouched ();
-				wasTouched = false;
-				if(Release != null)
-					Release ();
-			}
+				ReleaseDrag ();
+		}
+
+		private void ReleaseDrag ()
+		{
+			TouchChecker.ReleaseLastColliderTouched ();
+			wasTouched = false;
+			if (Release != null)
+				Release ();
 		}
 
 		public virtual void TryDrag()
@@ -63,8 +78,9 @@ namespace InteractiveObjects.Detail
 	    {
 	        Vector3 touchPosition = PrimaryTouch.TouchPosition;
 			float distance = MainCamera.WorldToScreenPoint(myTransform.position).z;
-			nextPosition = MainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distance ));
-			nextPosition = new Vector3 (nextPosition.x, yPos, nextPosition.z);
+			nextPosition = MainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distance )- offset);
+			if(respositioning)
+				nextPosition = new Vector3 (nextPosition.x, yPos, nextPosition.z);
 	    }
 	}
 }

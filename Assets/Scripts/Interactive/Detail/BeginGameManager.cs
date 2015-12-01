@@ -14,11 +14,9 @@ namespace Interactive.Detail
 		[SerializeField]
 		private List<BeginStepGameBase> steps;
 
-		private IEnumerator Start ()
+		private void Start ()
 		{
 			steps.ForEach (c => c.EndStep += OnNextStep);
-			yield return new WaitForSeconds (1F);
-			Init ();
 		}
 
 		private void OnDestroy ()

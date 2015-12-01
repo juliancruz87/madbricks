@@ -7,6 +7,8 @@ namespace ManagerInput.CameraControls
 	public class RotatorByAxes : MonoBehaviour
 	{
 		[SerializeField]
+		private Collider myCollider;
+		[SerializeField]
 		private float sensitivity = 500.0F;
 		[SerializeField]
 		private Axis rotateInAxis = Axis.All;
@@ -53,7 +55,7 @@ namespace ManagerInput.CameraControls
 
 		private void Update ()
 		{
-			if (IsMoving) 
+			if (IsMoving && TouchChecker.IsTouchingFromCollider(Camera.main, myCollider))
 				Rotate ();
 			else 
 				Stop ();

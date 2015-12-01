@@ -9,11 +9,18 @@ namespace Map {
         [SerializeField]
         private Vector3 startPositionOffset;
 
-        // Use this for initialization
-        private void Awake() {
-            if (startPosition != null)
-                transform.position = startPosition.position + 
-                                        startPositionOffset;
+        private void Awake() 
+		{
+			SetStartPosition (startPosition);
         }
+
+		public void SetStartPosition (Transform position)
+		{
+			if (position != null) 
+			{
+				startPosition = position;
+				transform.position = position.position + startPositionOffset;
+			}
+		}
     }
 }

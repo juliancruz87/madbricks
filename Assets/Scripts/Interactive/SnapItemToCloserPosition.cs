@@ -28,11 +28,11 @@ namespace InteractiveObjects.Detail
 				float distanceBetweenPoints = Vector3.Distance (myTransform.position, position);
 				if(distanceBetweenPoints < distance)
 				{
-					positionToGo = new Vector3(position.x, myTransform.position.y, position.z);
+					positionToGo = position;
 					distance = distanceBetweenPoints;
 				}
 			}
-			
+
 			myTransform.DOMove(positionToGo, timeToSnap).SetEase (easeToSnap);
 		} 
 	}

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Path;
 
 namespace InteractiveObjects.Detail
 {
-	public class TotemMovesController : MonoBehaviour 
+	public class TotemMovesController : MonoBehaviour, ITotemMovesController
 	{
 		[SerializeField]
 		private DragableItem dragable;
@@ -12,17 +13,27 @@ namespace InteractiveObjects.Detail
 		private SnapItemToCloserPosition snaper;
 		[SerializeField]
 		private Transform parentToPositionsToSnap;
-		private List<Vector3> positionsToSnap = new List<Vector3> ();
+		private List<Transform> points = new List<Transform> (); 
+		private List<Vector3> PositionsToSnap
+		{
+			get{ return points.ConvertAll(p => p.position);}
+		}
 
 		private void Start ()
 		{
-			if(parentToPositionsToSnap != null)
-			{
-				Transform [] positions = parentToPositionsToSnap.GetComponentsInChildren<Transform> ();
-				System.Array.ForEach (positions, p=> positionsToSnap.Add(p.position));
-			}
-
+			CreatePositionsToSnap (parentToPositionsToSnap);
 			dragable.Release += OnRelease;
+		}
+
+		public void CreatePositionsToSnap (Transform parentForPositionsToSnap)
+		{
+			if (parentForPositionsToSnap != null) 
+			{
+				points = new List<Transform> (); 
+				parentToPositionsToSnap = parentForPositionsToSnap;
+				Node [] positions = parentToPositionsToSnap.GetComponentsInChildren<Node> ();
+				System.Array.ForEach (positions, p => points.Add (p.transform));
+			}
 		}
 
 		private void OnDestroy ()
@@ -32,7 +43,7 @@ namespace InteractiveObjects.Detail
 
 		private void OnRelease ()
 		{
-			snaper.SnapToCloserPosition (positionsToSnap);
+			snaper.SnapToCloserPosition (PositionsToSnap);
 		}
 	}
 }
