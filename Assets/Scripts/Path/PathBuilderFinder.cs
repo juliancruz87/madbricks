@@ -12,12 +12,14 @@ namespace Path {
 
 		public float MaxNodeDistance 
 		{
-			get { return maxNodeDistance; }
+			set;
+			private	get;
 		}
 
-		public PathBuilderFinder (Node[] nodes)
+		public PathBuilderFinder (Node[] nodes, float maxNodeDistance)
 		{
 			this._nodes = nodes;
+			this.MaxNodeDistance = maxNodeDistance;
 		}
 
 		public List<Node> GetNodes (Node nodeSpnaped, int positionToGo)

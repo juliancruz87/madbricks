@@ -178,7 +178,7 @@ namespace Drag {
         private bool EnabledToMove(Vector3 desiredDirection) {
             Vector3 debugOffset = new Vector3(0, 0.3f, 0);
             Debug.DrawLine(myTransform.position + debugOffset,
-                            (myTransform.position + debugOffset + (desiredDirection * PathBuilder.Instance.Finder.MaxNodeDistance)), 
+                            (myTransform.position + debugOffset + (desiredDirection * PathBuilder.Instance.maxNodeDistance)), 
                             Color.blue);
             Node nextNode = GetNextNodeInDirection(desiredDirection);
             return nextNode;

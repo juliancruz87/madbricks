@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace Path {
 	
     public class PathBuilder : MonoBehaviour {
+		public float maxNodeDistance = -1;
 
         private Node[] _nodes;
         private ArrayList _connections;
@@ -35,7 +36,7 @@ namespace Path {
 
         private void Start () {
             _nodes = FindObjectsOfType<Node>();
-			finder = new PathBuilderFinder (_nodes);
+			finder = new PathBuilderFinder (_nodes, maxNodeDistance);
             BuildConnections();
         }
 	
