@@ -71,13 +71,33 @@ namespace Drag {
 
                 RaycastHit[] raycastHits = Physics.RaycastAll(ray);
 
-                if (RaycastHitsThisGameObject(raycastHits) && 
+                if (RaycastHitsThisGameObject(raycastHits) &&
+                    ThisGameObjectIsTheFirstHit(raycastHits) && 
                     IsAllowedToStartANewDrag()) {
                     StartDrag();
                 }
                 else 
                     StopDrag();
             }
+        }
+
+        private bool ThisGameObjectIsTheFirstHit(RaycastHit[] raycastHits) {
+            GameObject firstGameObject = GetTheFirstGameObject(raycastHits);
+            return firstGameObject == gameObject;
+        }
+
+        private GameObject GetTheFirstGameObject(RaycastHit[] raycastHits) {
+            GameObject firstGameObject = null;
+            float nearestDistance = float.MaxValue;
+            foreach (RaycastHit hitinfo in raycastHits) {
+                float distance = Vector3.Distance(Camera.main.transform.position, hitinfo.collider.transform.position);
+                if (distance < nearestDistance) {
+                    firstGameObject = hitinfo.collider.gameObject;
+                    nearestDistance = distance;
+                }
+            }
+
+            return firstGameObject;
         }
 
         private bool IsAllowedToStartANewDrag() {
