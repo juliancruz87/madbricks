@@ -34,6 +34,10 @@ namespace Drag {
 
         private Vector3 startDragDirection;
 
+		public Node CurrentNode 
+		{
+			get { return currentNode; }
+		}
 
 		private SnapItemToCloserPosition snapperObject;
         private Transform myTransform;
@@ -174,14 +178,14 @@ namespace Drag {
         private bool EnabledToMove(Vector3 desiredDirection) {
             Vector3 debugOffset = new Vector3(0, 0.3f, 0);
             Debug.DrawLine(myTransform.position + debugOffset,
-                            (myTransform.position + debugOffset + (desiredDirection * PathBuilder.Instance.maxNodeDistance)), 
+                            (myTransform.position + debugOffset + (desiredDirection * PathBuilder.Instance.Finder.MaxNodeDistance)), 
                             Color.blue);
             Node nextNode = GetNextNodeInDirection(desiredDirection);
             return nextNode;
         }
 
         private Node GetNextNodeInDirection(Vector3 desiredDirection) {
-            Node nearestNode = PathBuilder.Instance.GetNearsetNodeInDirection(currentNode, desiredDirection);
+            Node nearestNode = PathBuilder.Instance.Finder.GetNearsetNodeInDirection(currentNode, desiredDirection);
             return nearestNode;
         }
 

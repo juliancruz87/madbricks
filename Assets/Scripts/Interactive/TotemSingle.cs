@@ -3,28 +3,68 @@ using System.Collections;
 using Path;
 using System.Collections.Generic;
 using Interactive.Detail;
+using Drag;
+using DG.Tweening;
+using Interactive;
 
 namespace InteractiveObjects.Detail
 {
-	public class TotemSingle : MonoBehaviour 
+	public class TotemSingle : MonoBehaviour
 	{
 		private SnapItemToCloserPosition snaper;
 		private TotemInstantiatorConfig totem;
+		private List<int> validStartPoints;
+		private Transform myTransform;
+		private bool isPlaying = false;
+		private DraggableObject dragObject;
 
 		private void Awake ()
 		{
 			snaper = GetComponent<SnapItemToCloserPosition> ();
+			dragObject = GetComponent<DraggableObject> ();
+			myTransform = transform;
 		}
 
-		public void SetUp (TotemInstantiatorConfig totem)
+		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints)
 		{
 			this.totem = totem;
+			this.validStartPoints = validStartPoints;
 		}
 
-		public void Play ()
+		private void Update ()
 		{
-			//List<Connection> connections = PathBuilder.Instance.GetConnectionsByNode(snaper.NodeSpnaped);
-			List<Connection> connections = PathBuilder.Instance.GetShortPath(snaper.NodeSpnaped, totem.PositionToGo);
+			if(GameManagerAccess.GameManagerState.CurrentState == GameStates.Play && !isPlaying)
+			{
+				isPlaying = true;
+				Play ();
+			}
+		}
+
+		private void Play ()
+		{
+			if(validStartPoints.Contains (dragObject.CurrentNode.Id))
+				TryMove ();
+			else
+				Debug.LogWarning ("Totem : " + name+ " cannot move");
+		}
+
+		private void TryMove ()
+		{
+			List<Node> nodes =  PathBuilder.Instance.Finder.GetNodes (snaper.NodeSpnaped, totem.PositionToGo);
+			if (nodes.Count > 0)
+				GoToNode (0, nodes);
+			else
+				Debug.LogWarning ("Totem : " + name + " could not found a path");
+		}
+
+		private void GoToNode (int currentNode, List<Node> nodes)
+		{
+			if(currentNode < nodes.Count)
+			{
+				Node node = nodes[currentNode];
+				int nextNode = currentNode++;
+				myTransform.DOMove (node.transform.position, totem.SpeedPerTile).OnComplete (() => GoToNode (nextNode, nodes));
+			}
 		}
 	}
 }

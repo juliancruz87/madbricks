@@ -16,6 +16,9 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private int positionToGo;
+
+		[SerializeField]
+		private float speedPerTile = 0.5F;
 		
 		public TotemType Type 
 		{
@@ -35,6 +38,11 @@ namespace Interactive.Detail
 		public int PositionToGo 
 		{
 			get { return positionToGo; }
+		}
+
+		public float SpeedPerTile 
+		{
+			get { return speedPerTile;}
 		}
 	}
 }

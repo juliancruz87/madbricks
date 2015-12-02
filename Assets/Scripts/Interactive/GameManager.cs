@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Interactive.Detail;
+using InteractiveObjects;
 
 namespace Interactive
 {
@@ -41,7 +42,6 @@ namespace Interactive
 
 		public void Play ()
 		{
-			Debug.Log ("Play");
 			CurrentState = GameStates.Play;
 		}
 	}
