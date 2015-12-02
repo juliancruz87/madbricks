@@ -67,7 +67,7 @@ namespace Path {
         }
 
         private Node GetNextNodeInDirection(Vector3 direction) {
-            Node nearestNode = PathBuilder.Instance.GetNearsetNodeInDirection(currentNode, direction);
+            Node nearestNode = PathBuilder.Instance.Finder.GetNearsetNodeInDirection(currentNode, direction);
             return nearestNode;
         }
 
