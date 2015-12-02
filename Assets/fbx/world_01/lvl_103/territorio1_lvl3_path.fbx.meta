@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 62648d0b646321b48acb7f59e4f71188
+timeCreated: 1449033712
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Mesh
+    100002: Mesh (2)
+    100004: Skeleton_Skeleton_Joint
+    100006: Skeleton_Skeleton_Joint (10)
+    100008: Skeleton_Skeleton_Joint (11)
+    100010: Skeleton_Skeleton_Joint (12)
+    100012: Skeleton_Skeleton_Joint (13)
+    100014: Skeleton_Skeleton_Joint (14)
+    100016: Skeleton_Skeleton_Joint (15)
+    100018: Skeleton_Skeleton_Joint (16)
+    100020: Skeleton_Skeleton_Joint (17)
+    100022: Skeleton_Skeleton_Joint (18)
+    100024: Skeleton_Skeleton_Joint (19)
+    100026: Skeleton_Skeleton_Joint (2)
+    100028: Skeleton_Skeleton_Joint (20)
+    100030: Skeleton_Skeleton_Joint (21)
+    100032: Skeleton_Skeleton_Joint (22)
+    100034: Skeleton_Skeleton_Joint (23)
+    100036: Skeleton_Skeleton_Joint (24)
+    100038: Skeleton_Skeleton_Joint (25)
+    100040: Skeleton_Skeleton_Joint (26)
+    100042: Skeleton_Skeleton_Joint (27)
+    100044: Skeleton_Skeleton_Joint (28)
+    100046: Skeleton_Skeleton_Joint (29)
+    100048: Skeleton_Skeleton_Joint (3)
+    100050: Skeleton_Skeleton_Joint (30)
+    100052: Skeleton_Skeleton_Joint (31)
+    100054: Skeleton_Skeleton_Joint (32)
+    100056: Skeleton_Skeleton_Joint (33)
+    100058: Skeleton_Skeleton_Joint (34)
+    100060: Skeleton_Skeleton_Joint (35)
+    100062: Skeleton_Skeleton_Joint (36)
+    100064: Skeleton_Skeleton_Joint (37)
+    100066: Skeleton_Skeleton_Joint (38)
+    100068: Skeleton_Skeleton_Joint (39)
+    100070: Skeleton_Skeleton_Joint (4)
+    100072: Skeleton_Skeleton_Joint (40)
+    100074: Skeleton_Skeleton_Joint (41)
+    100076: Skeleton_Skeleton_Joint (42)
+    100078: Skeleton_Skeleton_Joint (43)
+    100080: Skeleton_Skeleton_Joint (44)
+    100082: Skeleton_Skeleton_Joint (45)
+    100084: Skeleton_Skeleton_Joint (46)
+    100086: Skeleton_Skeleton_Joint (47)
+    100088: Skeleton_Skeleton_Joint (48)
+    100090: Skeleton_Skeleton_Joint (49)
+    100092: Skeleton_Skeleton_Joint (5)
+    100094: Skeleton_Skeleton_Joint (50)
+    100096: Skeleton_Skeleton_Joint (6)
+    100098: Skeleton_Skeleton_Joint (7)
+    100100: Skeleton_Skeleton_Joint (8)
+    100102: Skeleton_Skeleton_Joint (9)
+    100104: Territorio1_lvl3_path
+    100106: //RootNode
+    400000: Mesh
+    400002: Mesh (2)
+    400004: Skeleton_Skeleton_Joint
+    400006: Skeleton_Skeleton_Joint (10)
+    400008: Skeleton_Skeleton_Joint (11)
+    400010: Skeleton_Skeleton_Joint (12)
+    400012: Skeleton_Skeleton_Joint (13)
+    400014: Skeleton_Skeleton_Joint (14)
+    400016: Skeleton_Skeleton_Joint (15)
+    400018: Skeleton_Skeleton_Joint (16)
+    400020: Skeleton_Skeleton_Joint (17)
+    400022: Skeleton_Skeleton_Joint (18)
+    400024: Skeleton_Skeleton_Joint (19)
+    400026: Skeleton_Skeleton_Joint (2)
+    400028: Skeleton_Skeleton_Joint (20)
+    400030: Skeleton_Skeleton_Joint (21)
+    400032: Skeleton_Skeleton_Joint (22)
+    400034: Skeleton_Skeleton_Joint (23)
+    400036: Skeleton_Skeleton_Joint (24)
+    400038: Skeleton_Skeleton_Joint (25)
+    400040: Skeleton_Skeleton_Joint (26)
+    400042: Skeleton_Skeleton_Joint (27)
+    400044: Skeleton_Skeleton_Joint (28)
+    400046: Skeleton_Skeleton_Joint (29)
+    400048: Skeleton_Skeleton_Joint (3)
+    400050: Skeleton_Skeleton_Joint (30)
+    400052: Skeleton_Skeleton_Joint (31)
+    400054: Skeleton_Skeleton_Joint (32)
+    400056: Skeleton_Skeleton_Joint (33)
+    400058: Skeleton_Skeleton_Joint (34)
+    400060: Skeleton_Skeleton_Joint (35)
+    400062: Skeleton_Skeleton_Joint (36)
+    400064: Skeleton_Skeleton_Joint (37)
+    400066: Skeleton_Skeleton_Joint (38)
+    400068: Skeleton_Skeleton_Joint (39)
+    400070: Skeleton_Skeleton_Joint (4)
+    400072: Skeleton_Skeleton_Joint (40)
+    400074: Skeleton_Skeleton_Joint (41)
+    400076: Skeleton_Skeleton_Joint (42)
+    400078: Skeleton_Skeleton_Joint (43)
+    400080: Skeleton_Skeleton_Joint (44)
+    400082: Skeleton_Skeleton_Joint (45)
+    400084: Skeleton_Skeleton_Joint (46)
+    400086: Skeleton_Skeleton_Joint (47)
+    400088: Skeleton_Skeleton_Joint (48)
+    400090: Skeleton_Skeleton_Joint (49)
+    400092: Skeleton_Skeleton_Joint (5)
+    400094: Skeleton_Skeleton_Joint (50)
+    400096: Skeleton_Skeleton_Joint (6)
+    400098: Skeleton_Skeleton_Joint (7)
+    400100: Skeleton_Skeleton_Joint (8)
+    400102: Skeleton_Skeleton_Joint (9)
+    400104: Territorio1_lvl3_path
+    400106: //RootNode
+    2300000: Mesh (2)
+    3300000: Mesh (2)
+    4300000: Mesh (2)
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
