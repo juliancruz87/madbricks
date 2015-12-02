@@ -24,7 +24,7 @@ namespace InteractiveObjects.Detail
 		public void Play ()
 		{
 			//List<Connection> connections = PathBuilder.Instance.GetConnectionsByNode(snaper.NodeSpnaped);
-			List<Connection> connections = PathBuilder.Instance.GetShortWay (snaper.NodeSpnaped, totem.PositionToGo);
+			List<Connection> connections = PathBuilder.Instance.GetShortPath(snaper.NodeSpnaped, totem.PositionToGo);
 		}
 	}
 }

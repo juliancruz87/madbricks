@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Path {
-    public class Node : MonoBehaviour 
-	{
+    public class Node : MonoBehaviour {
 		[SerializeField]
 		private int id;
 

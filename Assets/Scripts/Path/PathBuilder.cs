@@ -34,8 +34,7 @@ namespace Path {
             BuildConnections();
         }
 
-		public List<Connection> GetShortPath (Node nodeSpnaped, int positionToGo)
-		{
+		public List<Connection> GetShortPath (Node nodeSpnaped, int positionToGo) {
 			/*Node nodeToGo = System.Array.Find (_nodes,c=> c.Id == positionToGo);
 			List<Connection> possiblePaths = GetConnectionsByNode (nodeSpnaped);
 
@@ -78,7 +77,7 @@ namespace Path {
                 _connections.Add(new Connection(node, nearestNode, 1));
         }
 
-        private Node GetNearsetNodeInDirection(Node node, Vector3 direction) {
+        public Node GetNearsetNodeInDirection(Node node, Vector3 direction) {
             Node nearestNode = null;
             float nearestDistance = 0;
             foreach (Node candidateNode in _nodes) {
@@ -90,7 +89,11 @@ namespace Path {
                         }
                 }
             }
-
+            Debug.DrawLine(node.transform.position, (node.transform.position + direction), Color.magenta); 
+            if (nearestNode != null) {
+                Debug.DrawLine(node.transform.position, nearestNode.transform.position, Color.cyan);
+                
+            }
             return nearestNode;
         }
 
@@ -117,6 +120,20 @@ namespace Path {
                 Debug.DrawLine(startPosition, endPosition, debugColor);
             }
                 
+        }
+
+
+        public Node GetNearsetNode(Vector3 position) { 
+            Node nearestNode = null;
+            float nearestDistance = 0;
+            foreach (Node candidateNode in _nodes) {
+                if (nearestNode == null ||
+                    (Vector3.Distance(position, candidateNode.transform.position) < nearestDistance)) {
+                    nearestNode = candidateNode;
+                    nearestDistance = Vector3.Distance(position, candidateNode.transform.position);
+                }
+            }
+            return nearestNode;
         }
     }
 }

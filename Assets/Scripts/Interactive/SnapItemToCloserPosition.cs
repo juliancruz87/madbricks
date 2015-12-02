@@ -17,14 +17,12 @@ namespace InteractiveObjects.Detail
 
 		private Transform myTransform;
 
-		public Node NodeSpnaped
-		{
+		public Node NodeSpnaped {
 			get;
 			private set;
 		}
 
-	    private void Awake() 
-		{
+	    private void Awake() {
             myTransform = GetComponent<Transform>();
 	        FindPositionsToSnap();
 	    }
