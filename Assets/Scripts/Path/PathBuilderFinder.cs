@@ -22,6 +22,17 @@ namespace Path {
 			this.MaxNodeDistance = maxNodeDistance;
 		}
 
+		public Node FindNode (int positionToAdd)
+		{
+			foreach (Node candidateNode in _nodes) 
+			{
+				if (candidateNode.Id == positionToAdd)
+					return candidateNode;
+			}
+
+			return null;
+		}
+
 		public List<Node> GetNodes (Node nodeSpnaped, int positionToGo)
 		{
 			List<Node> nodes = new List<Node>();

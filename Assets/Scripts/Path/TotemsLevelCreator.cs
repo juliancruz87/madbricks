@@ -18,7 +18,6 @@ namespace Interactive.Detail
 		{
 			Transform [] childs = GetComponentsInChildren<Transform> ();
 			System.Array.ForEach (childs, c => points.Add (c));
-
 			instantiator.Instantiate (points, grid, grid);
 		}
 	}
