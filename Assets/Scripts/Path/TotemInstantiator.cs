@@ -14,6 +14,11 @@ namespace Interactive.Detail
 		[SerializeField]
 		private List<TotemInstantiatorConfig> totems;
 
+		public int TotemsNum
+		{
+			get { return totems.Count; }
+		}
+
 		public void Instantiate ( List<Transform> points, Transform positionsToSnap , Transform parent)
 		{
 			foreach (TotemInstantiatorConfig totem in totems) 

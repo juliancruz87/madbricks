@@ -8,9 +8,24 @@ namespace Interactive
 	public class GameManager : MonoBehaviour , IGameManagerForStates
 	{
 		[SerializeField]
-		private BeginGameManager startSequencer;
+		private SequencerManager startSequencer;
+
+		[SerializeField]
+		private SequencerManager endSequencer;
+
+		[SerializeField]
+		private TotemInstantiator totemInstantiator;
+		private bool wasEndGame;
+
+		private int goals = 0;
 
 		public GameStates CurrentState 
+		{
+			get;
+			private set;
+		}
+
+		public GameResults Result 
 		{
 			get;
 			private set;
@@ -32,7 +47,7 @@ namespace Interactive
 		{
 			CurrentState = GameStates.Introduction;
 			startSequencer.EndIntroduction += StartPlanning;
-			startSequencer.Init ();
+			startSequencer.Play ();
 		}
 
 		private void StartPlanning ()
@@ -43,6 +58,29 @@ namespace Interactive
 		public void Play ()
 		{
 			CurrentState = GameStates.Play;
+		}
+
+		public void Goal ()
+		{
+			goals++;
+			if(goals == totemInstantiator.TotemsNum && !wasEndGame)
+			{
+				wasEndGame = true;
+				PlayEndSequence (GameResults.Win);
+			}
+		}
+
+		public void Lose ()
+		{
+			if(!wasEndGame)
+				PlayEndSequence (GameResults.Lose);
+			wasEndGame = true;
+		}
+
+		private void PlayEndSequence (GameResults results)
+		{
+			Result = results;
+			endSequencer.Play ();
 		}
 	}
 }

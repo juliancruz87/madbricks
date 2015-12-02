@@ -45,16 +45,19 @@ namespace InteractiveObjects.Detail
 			if(validStartPoints.Contains (dragObject.CurrentNode.Id))
 				TryMove ();
 			else
-				Debug.LogWarning ("Totem : " + name+ " cannot move");
+				EndGame ("Totem : " + name+ " cannot move");
 		}
 
 		private void TryMove ()
 		{
 			List<Node> nodes =  PathBuilder.Instance.Finder.GetNodes (snaper.NodeSpnaped, totem.PositionToGo);
 			if (nodes.Count > 0)
+			{
 				GoToNode (0, nodes);
+				GameManagerAccess.GameManagerState.Goal ();
+			}
 			else
-				Debug.LogWarning ("Totem : " + name + " could not found a path");
+				EndGame ("Totem : " + name + " could not found a path");
 		}
 
 		private void GoToNode (int currentNode, List<Node> nodes)
@@ -65,6 +68,12 @@ namespace InteractiveObjects.Detail
 				int nextNode = currentNode++;
 				myTransform.DOMove (node.transform.position, totem.SpeedPerTile).OnComplete (() => GoToNode (nextNode, nodes));
 			}
+		}
+
+		private void EndGame (string warning)
+		{
+			Debug.LogWarning (warning);
+			GameManagerAccess.GameManagerState.Lose ();
 		}
 	}
 }

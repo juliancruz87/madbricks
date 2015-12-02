@@ -5,7 +5,7 @@ using System;
 
 namespace Interactive.Detail
 {
-	public class BeginGameManager : MonoBehaviour 
+	public class SequencerManager : MonoBehaviour 
 	{
 		public event Action EndIntroduction;
 
@@ -24,7 +24,7 @@ namespace Interactive.Detail
 			steps.ForEach (c => c.EndStep -= OnNextStep);
 		} 
 
-		public void Init ()
+		public void Play ()
 		{
 			StartCurrentStep ();
 		}

@@ -6,8 +6,11 @@ namespace Interactive
 {
 	public interface IGameManagerForStates
 	{
+		GameResults Result { get; }
 		GameStates CurrentState { get;}
 		void Play ();
+		void Goal ();
+		void Lose ();
 	}
 	
 }
