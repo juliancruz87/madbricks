@@ -11,6 +11,9 @@ namespace Drag {
         
         private static DraggableObject objectBeingDragged;
 
+        public OnObjectDragged OnObjectDragged;
+        public Action OnSnap;
+        
         [SerializeField]
         private AudioSource dragSound;
 
@@ -129,7 +132,10 @@ namespace Drag {
                     }
                     else 
                         startDragDirection = new Vector3();
-                    
+
+                    if (OnObjectDragged != null)
+                        OnObjectDragged(myTransform.position, newDragPosition);
+
                     myTransform.position = newDragPosition;
                 }
             }
@@ -227,10 +233,19 @@ namespace Drag {
                 dragSound.Stop();
         }
 
-        private void Snap() 
-		{
+        private void Snap() {
 			if (snapperObject != null)
 				snapperObject.SnapToCloserTransform();
+
+            if (OnSnap != null)
+                OnSnap();
+        }
+
+        private void OnDestroy() {
+            if (this == objectBeingDragged && OnSnap != null)
+                OnSnap();
         }
     }
+
+    public delegate void OnObjectDragged(Vector3 currentPosition, Vector3 newPosition);
 }
