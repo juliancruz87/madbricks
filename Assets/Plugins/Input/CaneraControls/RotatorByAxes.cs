@@ -8,17 +8,14 @@ namespace ManagerInput.CameraControls
 	{
 		[SerializeField]
 		private Collider myCollider;
+
 		[SerializeField]
 		private float sensitivity = 500.0F;
+	 
 		[SerializeField]
 		private Axis rotateInAxis = Axis.All;
-		private bool wasRotated;
-		private Transform myTransform;
 
-		private void Start ()
-		{
-			myTransform = transform;
-		}
+		private Transform myTransform;
 		
 		private ITouchInfo Touch
 		{
@@ -30,37 +27,25 @@ namespace ManagerInput.CameraControls
 			get; 
 			set;
 		}
-		
-		private bool WasRotated 
+
+		private void Start ()
 		{
-			get { return wasRotated && !IsMoving; }
+			myTransform = transform;
 		}
-		
-		private bool IsMoving 
+
+		private void Rotate ()
 		{
-			get{ return Touch.IsDragging; }
-		}
-		
-		private void Stop ()
-		{
-			wasRotated = false;
-		}
-		
-		public void Rotate ()
-		{
-			wasRotated = true;
 			Vector3 rotateIn = Touch.NormalizedDragDeltaThisFrame * sensitivity;
 			SetCurrentRotationByAxis (rotateIn);
 		}
 
 		private void Update ()
 		{
-			if (IsMoving && TouchChecker.IsTouchingFromCollider(Camera.main, myCollider))
+			if ( Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false)) 
+			{
 				Rotate ();
-			else 
-				Stop ();
-
-			myTransform.Rotate (CurrentRotation, Space.World);
+				myTransform.Rotate (CurrentRotation, Space.World);
+			}
 		}
 
 		private void SetCurrentRotationByAxis (Vector3 rotateIn)

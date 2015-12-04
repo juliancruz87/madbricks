@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LevelLoaderController;
 
 namespace UI
 {
@@ -7,7 +8,7 @@ namespace UI
 	{
 		public void OnClickEvent ()
 		{
-			Application.LoadLevel (Application.loadedLevelName);
+			LevelLoader.Instance.LoadScene (Application.loadedLevelName);
 		}
 	}
 }
