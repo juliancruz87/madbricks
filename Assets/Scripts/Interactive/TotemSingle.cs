@@ -31,10 +31,10 @@ namespace InteractiveObjects.Detail
 			this.validStartPoints = validStartPoints;
 		}
 
-		private void Update ()
-		{
-			if(GameManagerAccess.GameManagerState.CurrentState == GameStates.Play && !isPlaying)
-			{
+		private void Update () {
+            if(GameManagerAccess.GameManagerState != null &&
+               GameManagerAccess.GameManagerState.CurrentState == GameStates.Play && 
+               !isPlaying) {
 				isPlaying = true;
 				Play ();
 			}

@@ -5,8 +5,7 @@ namespace UI
 {
 	public class UIButtonRestartLevel : MonoBehaviour 
 	{
-		public void OnClickEvent ()
-		{
+		public void OnClickEvent () {
 			Application.LoadLevel (Application.loadedLevelName);
 		}
 	}

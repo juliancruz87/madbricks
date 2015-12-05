@@ -96,7 +96,7 @@ namespace Path {
 					}
 				}
 			}
-			Debug.DrawLine(node.transform.position, (node.transform.position + direction), Color.magenta); 
+			//Debug.DrawLine(node.transform.position, (node.transform.position + direction), Color.magenta); 
 			if (nearestNode != null) {
 				Debug.DrawLine(node.transform.position, nearestNode.transform.position, Color.cyan);
 				
