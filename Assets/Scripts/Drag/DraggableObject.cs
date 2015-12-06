@@ -36,8 +36,8 @@ namespace Drag {
 
 
         private Vector3 startDragDirection;
-
-		public Node CurrentNode 
+        private Vector3 lastDragPosition;
+        public Node CurrentNode 
 		{
 			get { return currentNode; }
 		}
@@ -64,16 +64,9 @@ namespace Drag {
             if (isBeingDragged) {
                 UpdateDrag();
 
-                if (InputIsOut() ||
-                    Input.GetMouseButtonUp(0)) 
+                if (Input.GetMouseButtonUp(0)) 
                     StopDrag();
             }
-        }
-
-        private bool InputIsOut() {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] raycastHits = Physics.RaycastAll(ray);
-            return !RaycastHitsGameObject(raycastHits, gameObject);
         }
 
         private void UpdateNearestNode() {
@@ -108,10 +101,12 @@ namespace Drag {
             GameObject firstGameObject = null;
             float nearestDistance = float.MaxValue;
             foreach (RaycastHit hitinfo in raycastHits) {
-                float distance = Vector3.Distance(Camera.main.transform.position, hitinfo.collider.transform.position);
-                if (distance < nearestDistance) {
-                    firstGameObject = hitinfo.collider.gameObject;
-                    nearestDistance = distance;
+                if (hitinfo.collider.gameObject.GetComponent<DraggableObject>() != null) {
+                    float distance = Vector3.Distance(Camera.main.transform.position, hitinfo.collider.transform.position);
+                    if (distance < nearestDistance) {
+                        firstGameObject = hitinfo.collider.gameObject;
+                        nearestDistance = distance;
+                    }
                 }
             }
 
@@ -140,26 +135,32 @@ namespace Drag {
                 if (horizontalPlane.Raycast(ray, out distance1)) {
                     Vector3 newDragPosition = ray.GetPoint(distance1) + inputStartOffset;
 
-                    if (Vector3.Distance(myTransform.position, newDragPosition) > maxJumpDistance)
-                        return;
+                    Vector3 candidatePosition = myTransform.position + (newDragPosition - lastDragPosition);
 
-                    if (ItWillHitAnotherTotem(newDragPosition))
-                        return;
-
-                    Vector3 rayStartPoint = (newDragPosition + new Vector3(0, 0.5f, 0));
+                    Vector3 rayStartPoint = (candidatePosition + new Vector3(0, 0.5f, 0));
                     
                     RaycastHit[] hits = Physics.RaycastAll(rayStartPoint, Vector3.down);
                     
                     bool hitFloor = RaycastHitsGameObject(hits, dragFloor);
                     DebugHitFloor(hitFloor, rayStartPoint);
 
+                    lastDragPosition = newDragPosition;
+
                     if (!hitFloor)
                         return;
 
-                    if (OnObjectDragged != null)
-                        OnObjectDragged(myTransform.position, newDragPosition);
+                    if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
+                        return;
 
-                    myTransform.position = newDragPosition;
+                    if (ItWillHitAnotherTotem(candidatePosition))
+                        return;
+
+                    if (OnObjectDragged != null)
+                        OnObjectDragged(myTransform.position, candidatePosition);
+
+                    myTransform.position = candidatePosition;
+
+                    
                 }
             }
             DebugDragDirection();
@@ -190,6 +191,7 @@ namespace Drag {
         }
 
         private void StartDrag() {
+            lastDragPosition = myTransform.position;
             startDragDirection = new Vector3();
             isBeingDragged = true;
             objectBeingDragged = this;
