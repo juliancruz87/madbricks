@@ -2,11 +2,15 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Sound;
+using Zenject;
 
 namespace Interactive.Detail
 {
 	public class ResultsWindows : BeginStepGameBase
 	{
+		[Inject]
+		private IGameManagerForUI gameManagerForUI;
+
 		[SerializeField]
 		private GameObject winResults;
 
@@ -15,7 +19,7 @@ namespace Interactive.Detail
 
 		public override void StartStep ()
 		{
-			if(GameManagerAccess.GameManagerState.Result == GameResults.Win)
+			if(gameManagerForUI.Result == GameResults.Win)
 				winResults.SetActive (true);
 			else
 				loseResults.SetActive (true);

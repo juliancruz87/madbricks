@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Map;
 using InteractiveObjects;
 using InteractiveObjects.Detail;
+using Zenject;
 
 namespace Interactive.Detail
 {
@@ -11,8 +12,15 @@ namespace Interactive.Detail
 	{
 		[SerializeField]
 		private List<int> validStartPoints;
+
 		[SerializeField]
 		private List<TotemInstantiatorConfig> totems;
+
+		public IGameManagerForStates GameStates 
+		{
+			set;
+			private get;
+		}
 
 		public int TotemsNum
 		{
@@ -48,7 +56,7 @@ namespace Interactive.Detail
 			{
 				gameObjectTotem.AddComponent <TotemSingle>();
 				TotemSingle totemObject = gameObjectTotem.GetComponent<TotemSingle> ();
-				totemObject.SetUp (totem, validStartPoints);
+				totemObject.SetUp (totem, validStartPoints, GameStates);
 			}
 		}
 

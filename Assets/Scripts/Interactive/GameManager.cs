@@ -2,11 +2,14 @@
 using System.Collections;
 using Interactive.Detail;
 using InteractiveObjects;
+using System;
 
 namespace Interactive
 {
-	public class GameManager : MonoBehaviour , IGameManagerForStates
+	public class GameManager : MonoBehaviour , IGameManagerForStates, IGameManagerForUI
 	{
+		public event Action StartedGame;
+
 		[SerializeField]
 		private SequencerManager startSequencer;
 
@@ -14,9 +17,9 @@ namespace Interactive
 		private SequencerManager endSequencer;
 
 		[SerializeField]
-		private TotemInstantiator totemInstantiator;
-		private bool wasEndGame;
+		private int maxNumTotems;
 
+		private bool wasEndGame;
 		private int goals = 0;
 
 		public GameStates CurrentState 
@@ -58,12 +61,14 @@ namespace Interactive
 		public void Play ()
 		{
 			CurrentState = GameStates.Play;
+			if (StartedGame != null)
+				StartedGame ();
 		}
 
 		public void Goal ()
 		{
 			goals++;
-			if(goals == totemInstantiator.TotemsNum && !wasEndGame)
+			if(goals == maxNumTotems && !wasEndGame)
 			{
 				wasEndGame = true;
 				PlayEndSequence (GameResults.Win);

@@ -19,6 +19,9 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private float speedPerTile = 0.5F;
+
+		[SerializeField]
+		private AudioClip soundToGetReach;
 		
 		public TotemType Type 
 		{
@@ -43,6 +46,11 @@ namespace Interactive.Detail
 		public float SpeedPerTile 
 		{
 			get { return speedPerTile;}
+		}
+
+		public AudioClip SoundToGetReach 
+		{
+			get { return soundToGetReach; }
 		}
 	}
 }

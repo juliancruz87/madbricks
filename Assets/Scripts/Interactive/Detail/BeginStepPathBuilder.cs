@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Interactive.Detail {
     
-    public class BeginStepPathBuilder : BeginStepGameBase 
+    public class BeginStepPathBuilder : BeginStepGameBase
 	{
         [SerializeField]
         private GameObject pathPrototype;
-        [SerializeField]
+       
+		[SerializeField]
         private Transform mapTransform;
+
+		[SerializeField]
+		private Transform riel;
+
+		[Inject]
+		private IGameManagerForStates gameStates;
 
         private Transform pathTransform;
 
@@ -18,10 +26,18 @@ namespace Interactive.Detail {
 
         private void CreatePath() 
 		{
-            pathTransform = ((GameObject)Instantiate(pathPrototype, mapTransform.position, mapTransform.rotation)).transform;
+            //pathTransform = ((GameObject)Instantiate(pathPrototype, mapTransform.position, mapTransform.rotation)).transform;
+			Transform rielTransform = Instantiate<Transform> (riel);
+			pathTransform = Instantiate <GameObject> (pathPrototype).transform;
+
+			rielTransform.parent = mapTransform;
 			pathTransform.parent = mapTransform;
+
+			rielTransform.localPosition = Vector3.zero;
 			pathTransform.localPosition = Vector3.zero;
-            if (EndStep != null)
+			pathTransform.GetComponent<TotemsLevelCreator> ().SetUp (gameStates);
+				
+			if (EndStep != null)
                 EndStep();
         }
     }

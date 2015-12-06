@@ -11,6 +11,7 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private int currentStep = 0;
+
 		[SerializeField]
 		private List<BeginStepGameBase> steps;
 
@@ -34,13 +35,19 @@ namespace Interactive.Detail
 			currentStep++;
 			if (currentStep < steps.Count)
 				StartCurrentStep ();
-			else if (EndIntroduction != null)
-				EndIntroduction ();
+			else 
+				EndSequence ();
 		}
 
 		private void StartCurrentStep ()
 		{
 			steps [currentStep].StartStep ();
+		}
+
+		private void EndSequence ()
+		{
+			if (EndIntroduction != null)
+				EndIntroduction ();
 		}
 	}
 }

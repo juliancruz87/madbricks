@@ -46,7 +46,6 @@ namespace Path {
             GetTheCorrectedPosition(ref newDragPosition, (opositeStep.normalized) * -1);
 
             myTransform.position = newDragPosition;
-            //myTransform.Translate(opositeStep);
         }
 
         private void GetTheCorrectedPosition(ref Vector3 newDragPosition, Vector3 direction) {

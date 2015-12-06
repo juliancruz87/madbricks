@@ -10,6 +10,7 @@ namespace InteractiveObjects.Detail
 	{ 
 		[SerializeField]
 		private bool respositioning = false;
+
 		[SerializeField]
 		private Vector3 offset = new Vector3(0f,20F,0f);
 
@@ -41,8 +42,7 @@ namespace InteractiveObjects.Detail
 
 		private void Update()
 	    {
-			if(GameManagerAccess.GameManagerState.CurrentState == GameStates.Planning)
-				CheckMoves ();
+			CheckMoves ();
 		}
 
 		private void CheckMoves ()
