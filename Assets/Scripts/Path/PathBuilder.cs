@@ -36,6 +36,7 @@ namespace Path {
 
         private void Start () {
             _nodes = FindObjectsOfType<Node>();
+            Debug.Log("Max node distance: " + maxNodeDistance);
 			finder = new PathBuilderFinder (_nodes, maxNodeDistance);
             BuildConnections();
         }

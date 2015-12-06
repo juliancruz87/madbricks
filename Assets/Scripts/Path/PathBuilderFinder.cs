@@ -7,7 +7,6 @@ namespace Path {
 
 	public class PathBuilderFinder
 	{
-		private float maxNodeDistance = -1;
 		private Node[] _nodes;
 
 		public float MaxNodeDistance 
@@ -20,6 +19,7 @@ namespace Path {
 		{
 			this._nodes = nodes;
 			this.MaxNodeDistance = maxNodeDistance;
+            Debug.Log("PathBuilderFinder (Node[] nodes, maxNodeDistance : " + MaxNodeDistance + ")");
 		}
 
 		public Node FindNode (int positionToAdd)
@@ -130,10 +130,10 @@ namespace Path {
 
 		private bool IsAValidCandidateNode(Node nodeA, Node nodeB, Vector3 direction) 
 		{
-			Vector3 aToB = (nodeA.transform.position - nodeB.transform.position);
+            Vector3 aToB = (nodeA.transform.position - nodeB.transform.position);
 			bool validDirection = (Math.Abs(Vector3.Angle(aToB, direction)) < 0.01f);
-			bool validDistance = maxNodeDistance < 0 || 
-				(Vector3.Distance(nodeA.transform.position, nodeB.transform.position) < maxNodeDistance);
+			bool validDistance = MaxNodeDistance < 0 || 
+				(Vector3.Distance(nodeA.transform.position, nodeB.transform.position) < MaxNodeDistance);
 			return validDirection && validDistance;
 		}
 	}
