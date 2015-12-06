@@ -50,5 +50,11 @@ namespace Interactive.Detail {
         public override void StartStep() {
             StartLerp();
         }
+
+		public override void EndStep_Debug ()
+		{
+			base.EndStep_Debug ();
+			lerpObject.position = targetPosition.position;
+		}
     }
 }

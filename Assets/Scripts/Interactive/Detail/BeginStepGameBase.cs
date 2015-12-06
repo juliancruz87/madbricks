@@ -15,5 +15,11 @@ namespace Interactive.Detail
 			if(EndStep != null)
 				EndStep ();
 		}
+
+		public virtual void EndStep_Debug ()
+		{
+			if(EndStep != null)
+				EndStep ();
+		}
 	}
 }
