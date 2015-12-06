@@ -13,7 +13,16 @@ namespace Interactive.Detail
 		[SerializeField]
 		private TotemInstantiator instantiator;
 
+		[Inject]
+		private IGameManagerForStates gameStates;
+
 		private List<Transform> points = new List<Transform>();
+
+		[PostInject]
+		private void PostInject ()
+		{
+			SetUp (gameStates);
+		}
 
 		public void SetUp (IGameManagerForStates gameStates)
 		{
