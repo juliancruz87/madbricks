@@ -3,14 +3,14 @@ using Zenject;
 using CameraTools;
 using ManagerInput;
 
-namespace World.Detail
+namespace Interactive.Detail
 {
 	[RequireComponent (typeof(CameraManager))]
 	public class ZoneCamera : MonoBehaviour
 	{
 		[SerializeField]
 		private ZoomableCameraBehaviour zoomBehaviour;
-		
+
 		private CameraManager cameraManager;
 		private bool couldPanAndZoomLastFrame;
 		
@@ -39,7 +39,7 @@ namespace World.Detail
 		
 		private void ToggleBehaviours ()
 		{
-			bool canPanAndZoom = InputManager.Instance.InputDevice.TouchCount == 2;
+			bool canPanAndZoom = true;
 			if (couldPanAndZoomLastFrame != canPanAndZoom)
 			{
 				ToggleZooming (canPanAndZoom);
