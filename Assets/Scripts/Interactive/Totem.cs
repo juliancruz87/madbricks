@@ -33,6 +33,14 @@ namespace InteractiveObjects.Detail
 			this.totem = totem;
 			this.validStartPoints = validStartPoints;
 			gameStates.StartedGame += OnStartedGame;
+			SetGameManagerForUI (gameStates);
+		}
+
+		private void SetGameManagerForUI (IGameManagerForStates gameStates)
+		{
+			SetterGameManagerForStates setter = GetComponent<SetterGameManagerForStates> ();
+			if (setter != null)
+				setter.GameManager = gameStates;
 		}
 		
 		private void OnDestroy ()

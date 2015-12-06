@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Interactive.Activators
 {
-	public class ColliderActivatorByGameState : MonoBehaviour 
+	public class ColliderActivatorByGameState : MonoBehaviour, SetterGameManagerForStates 
 	{
 		[SerializeField]
 		private GameStates gameState;
@@ -13,7 +13,12 @@ namespace Interactive.Activators
 		private Collider colliderToActivate;
 
 		[Inject]
-		private IGameManagerForUI gameManager;
+		private IGameManagerForStates gameManager;
+
+		public IGameManagerForStates GameManager 
+		{
+			set { gameManager = value; }
+		}
 
 		private bool ShouldActivate
 		{
