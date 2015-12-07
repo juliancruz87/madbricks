@@ -19,7 +19,6 @@ namespace Path {
 		{
 			this._nodes = nodes;
 			this.MaxNodeDistance = maxNodeDistance;
-            Debug.Log("PathBuilderFinder (Node[] nodes, maxNodeDistance : " + MaxNodeDistance + ")");
 		}
 
 		public Node FindNode (int positionToAdd)

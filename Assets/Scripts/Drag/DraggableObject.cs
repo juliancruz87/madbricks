@@ -1,5 +1,6 @@
 ﻿using System;
 using InteractiveObjects.Detail;
+using Map;
 using UnityEngine;
 using Path;
 
@@ -8,7 +9,10 @@ using Path;
 
 namespace Drag {
     public class DraggableObject : MonoBehaviour {
-        
+
+        private const string TAG_OBSTACLE = "Obstacle";
+        private const float NODE_TOLERANCE = 0.001f;
+
         private static DraggableObject objectBeingDragged;
 
         public OnObjectDragged OnObjectDragged;
@@ -16,6 +20,8 @@ namespace Drag {
 
         [SerializeField]
         private float collideDistance;
+        [SerializeField]
+        private float styckDistance;
         [SerializeField]
         private float maxJumpDistance;
         [SerializeField]
@@ -71,8 +77,8 @@ namespace Drag {
 
         private void UpdateNearestNode() {
             Node nearestNode = PathBuilder.Instance.GetNearsetNode(myTransform.position);
-            if (nearestNode != null && 
-                Math.Abs(Vector3.Distance(nearestNode.transform.position, myTransform.position)) < 0.01 &&
+            if (nearestNode != null &&
+                Math.Abs(Vector3.Distance(nearestNode.transform.position, myTransform.position)) < NODE_TOLERANCE &&
                 currentNode != nearestNode)
                 currentNode = nearestNode;
         }
@@ -134,9 +140,7 @@ namespace Drag {
                 float distance1 = 0f;
                 if (horizontalPlane.Raycast(ray, out distance1)) {
                     Vector3 newDragPosition = ray.GetPoint(distance1) + inputStartOffset;
-
                     Vector3 candidatePosition = myTransform.position + (newDragPosition - lastDragPosition);
-
                     Vector3 rayStartPoint = (candidatePosition + new Vector3(0, 0.5f, 0));
                     
                     RaycastHit[] hits = Physics.RaycastAll(rayStartPoint, Vector3.down);
@@ -159,15 +163,38 @@ namespace Drag {
                         OnObjectDragged(myTransform.position, candidatePosition);
 
                     myTransform.position = candidatePosition;
-
-                    
                 }
             }
             DebugDragDirection();
+            CheckStickCondition();
         }
 
+        private void CheckStickCondition() {
+            MapObject stickyShit = GetAStickyShit();
+            if (stickyShit != null) {
+                StickToLauncher(stickyShit);
+            }
+        }
+
+        private MapObject GetAStickyShit() {
+            MapObject[] mapObjects = FindObjectsOfType<MapObject>();
+
+            foreach (MapObject mapObject in mapObjects)
+                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance &&
+                    mapObject.Type == MapObjectType.LauncherSticky)
+                    return mapObject;
+
+            return null;
+        }
+
+        private void StickToLauncher(MapObject stickyLauncher) {
+            gameObject.GetComponent<Collider>().enabled = false;
+            StopDrag();
+        }
+
+
         private bool ItWillHitAnotherTotem(Vector3 newDragPosition) { 
-            GameObject[] totems = GameObject.FindGameObjectsWithTag("Totem");
+            GameObject[] totems = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
             foreach (GameObject totem in totems) {
                 if (totem != gameObject &&
                     Vector3.Distance(totem.transform.position, newDragPosition) < collideDistance) {
