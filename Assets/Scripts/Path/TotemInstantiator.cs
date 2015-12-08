@@ -29,17 +29,20 @@ namespace Interactive.Detail
 
 		public void Instantiate ( List<Transform> points, Transform positionsToSnap , Transform parent)
 		{
+			List<GameObject> totemsCreated = new List<GameObject> ();
+
 			foreach (TotemInstantiatorConfig totem in totems) 
 			{
 				GameObject gameObjectTotem = Instantiate<GameObject> (totem.Prefab);
-				if(gameObjectTotem == null)
-					Debug.LogWarning ("There isn't prefab set in totem instantiator");
-				else
+				if (gameObjectTotem != null)
 				{
 					InitializeComponents (gameObjectTotem, totem, points, positionsToSnap);
 					gameObjectTotem.transform.parent = parent;
+					totemsCreated.Add (gameObjectTotem);
 				}
 			}
+
+			totemsCreated.ForEach (c => c.GetComponent<TotemControllerStop> ().SetTotems (totemsCreated));
 		}
 
 		private void InitializeComponents (GameObject gameObjectTotem, TotemInstantiatorConfig totem, List<Transform> points, Transform positionsToSnap)
@@ -57,7 +60,6 @@ namespace Interactive.Detail
 				gameObjectTotem.AddComponent <TotemSingle>();
 				TotemSingle totemObject = gameObjectTotem.GetComponent<TotemSingle> ();
 				totemObject.SetUp (totem, validStartPoints, GameStates);
-				gameObjectTotem.AddComponent <TotemControllerStop> ();
 			}
 		}
 

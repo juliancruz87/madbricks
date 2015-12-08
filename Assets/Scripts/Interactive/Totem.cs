@@ -16,15 +16,22 @@ namespace InteractiveObjects.Detail
 		private List<int> validStartPoints;
 		private DraggableObject dragObject;
 		private IGameManagerForStates gameStates;
+		private TotemControllerStop controllerToStop;
+		private SnapItemToCloserPosition snaper;
 
 		protected TotemInstantiatorConfig totem;
-		protected SnapItemToCloserPosition snaper;
 		private bool canMove = false;
+
+		protected Node CurrentNode 
+		{
+			get{ return dragObject.CurrentNode;}
+		}
 
 		private void Awake ()
 		{
 			snaper = GetComponent<SnapItemToCloserPosition> ();
 			dragObject = GetComponent<DraggableObject> ();
+			controllerToStop = GetComponent<TotemControllerStop> ();
 			myTransform = transform;
 		}
 		
@@ -34,13 +41,15 @@ namespace InteractiveObjects.Detail
 			this.totem = totem;
 			this.validStartPoints = validStartPoints;
 			gameStates.StartedGame += OnStartedGame;
+			controllerToStop.CollidedWithTotem += OnCrashWithOtherCollider;
 			SetGameManagerForUI (gameStates);
 		}
 
-		public void Stop ()
+		private void OnCrashWithOtherCollider ()
 		{
-			Debug.Log ("stop " + gameObject.name);
 			canMove = false;
+			myTransform.DOKill ();
+			snaper.SnapToCloserTransform ();
 		}
 
 		private void SetGameManagerForUI (IGameManagerForStates gameStates)
@@ -52,8 +61,11 @@ namespace InteractiveObjects.Detail
 		
 		private void OnDestroy ()
 		{
-			if(gameStates != null)
+			if (gameStates != null) 
+			{
 				gameStates.StartedGame -= OnStartedGame;
+				controllerToStop.CollidedWithTotem -= OnCrashWithOtherCollider;
+			}
 		}
 		
 		private void OnStartedGame ()
@@ -61,6 +73,7 @@ namespace InteractiveObjects.Detail
 			if(dragObject.CurrentNode != null && validStartPoints.Contains (dragObject.CurrentNode.Id))
 			{
 				canMove = true;
+				controllerToStop.TurnOnColliderToDetect ();
 				Move ();
 			}
 			else

@@ -1,34 +1,41 @@
-using Drag;
-using Path;
 using UnityEngine;
-using DG.Tweening;
-using Interactive;
-using Interactive.Detail;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Sound;
 
 namespace InteractiveObjects.Detail
 {
 	public class TotemControllerStop : MonoBehaviour
 	{
-		private Totem myTotem;
+		public event Action CollidedWithTotem;
+		private Rigidbody myRigidbody;
+		private Collider myCollider;
+		private List<GameObject> forbbidenObjects = new List<GameObject> ();
 
 		private void Start ()
 		{
-			myTotem = GetComponent<Totem> ();
+			myRigidbody = GetComponent<Rigidbody> ();
+			myCollider =  GetComponent<Collider> ();
+		}
+
+		public void TurnOnColliderToDetect ()
+		{
+			myCollider.enabled = true;
+		}
+
+		public void SetTotems (List<GameObject> totemsCreated)
+		{
+			forbbidenObjects = totemsCreated.FindAll (c => c != gameObject);
 		}
 
 		private void OnCollisionEnter(Collision collisionInfo)
 		{
-			Debug.Log ("collision");
-			Totem totem =  collisionInfo.gameObject.GetComponent<Totem> ();
-			if( totem != null)
+			if (forbbidenObjects.Contains(collisionInfo.gameObject)) 
 			{
-				totem.Stop ();
-				myTotem.Stop ();
+				myCollider.enabled = false;
+				Destroy (myRigidbody);
+				if(CollidedWithTotem != null)
+					CollidedWithTotem ();
 			}
 		}
 	}
-	
 }

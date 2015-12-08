@@ -7,15 +7,17 @@ namespace InteractiveObjects.Detail
 	{
 		protected override void Move ()
 		{
-			List<Node> nodes =  PathBuilder.Instance.Finder.GetNodes (snaper.NodeSpnaped, totem.PositionToGo);
+			List<Node> nodes = GetNodesToTravel ();
 			if (nodes.Count > 0)
 				GoToNode (0, nodes);
-			else 
-			{
-				nodes =  PathBuilder.Instance.Finder.GetNodesInLongDirection (snaper.NodeSpnaped, totem.PositionToGo);
-				if(nodes.Count > 0)
-					GoToNode (0, nodes);
-			}
+		}
+
+		private List<Node> GetNodesToTravel ()
+		{
+			List<Node> nodes = PathBuilder.Instance.Finder.GetNodes (CurrentNode, totem.PositionToGo);
+			if( nodes.Count <= 0)
+				nodes = PathBuilder.Instance.Finder.GetNodesInLongDirection (CurrentNode, totem.PositionToGo);
+			return nodes;
 		}
 	}
 }

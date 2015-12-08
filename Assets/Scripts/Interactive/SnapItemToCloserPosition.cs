@@ -10,19 +10,23 @@ namespace InteractiveObjects.Detail
 	{
 		[SerializeField]
 		private float timeToSnap = 0.75f;
+
 		[SerializeField]
 		private Ease easeToSnap = Ease.InBounce;
-        [SerializeField]
+        
+		[SerializeField]
 	    private Transform[] transformsToSnap;
 
 		private Transform myTransform;
 
-		public Node NodeSpnaped {
+		public Node NodeSpnaped 
+		{
 			get;
 			private set;
 		}
 
-	    private void Awake() {
+	    private void Awake() 
+		{
             myTransform = GetComponent<Transform>();
 	        FindPositionsToSnap();
 	    }
@@ -33,9 +37,7 @@ namespace InteractiveObjects.Detail
 	        Node[] nodes = FindObjectsOfType<Node>();
             transformsToSnap = new Transform[nodes.Length];
 	        for (int i = 0; i < nodes.Length; i++) 
-			{
 	            transformsToSnap[i] = nodes[i].transform;
-	        }
 	    }
 
 	    public void SnapToCloserTransform() 
