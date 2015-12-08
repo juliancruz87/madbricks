@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Path;
 
-namespace InteractiveObjects.Detail
+namespace Interactive.Detail
 {
 	public class TotemMovesController : MonoBehaviour, ITotemMovesController
 	{

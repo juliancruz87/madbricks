@@ -2,18 +2,16 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace InteractiveObjects.Detail
+namespace Interactive.Detail
 {
 	public class TotemControllerStop : MonoBehaviour
 	{
 		public event Action CollidedWithTotem;
-		private Rigidbody myRigidbody;
 		private Collider myCollider;
 		private List<GameObject> forbbidenObjects = new List<GameObject> ();
 
 		private void Start ()
 		{
-			myRigidbody = GetComponent<Rigidbody> ();
 			myCollider =  GetComponent<Collider> ();
 		}
 
@@ -31,8 +29,6 @@ namespace InteractiveObjects.Detail
 		{
 			if (forbbidenObjects.Contains(collisionInfo.gameObject)) 
 			{
-				myCollider.enabled = false;
-				Destroy (myRigidbody);
 				if(CollidedWithTotem != null)
 					CollidedWithTotem ();
 			}

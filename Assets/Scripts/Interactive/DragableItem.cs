@@ -4,7 +4,7 @@ using ManagerInput;
 using System;
 using Interactive;
 
-namespace InteractiveObjects.Detail
+namespace Interactive.Detail
 {
 	public class DragableItem : MonoBehaviour 
 	{ 

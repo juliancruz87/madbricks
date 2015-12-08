@@ -19,11 +19,7 @@ namespace Interactive.Detail
         private GUITexture fadeTexture;
         private AlphaLerp timeAlphaLerp;
         private AlphaLerp fadeAlphaLerp;
-        private bool stopped;
-
-        private void Awake() {
-            StartStep();
-        }
+        private bool stopped = true;
 
         public override void StartStep() {
             elapsedTime = 0;

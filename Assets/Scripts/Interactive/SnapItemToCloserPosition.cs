@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Path;
 using System;
 
-namespace InteractiveObjects.Detail
+namespace Interactive.Detail
 {
 	public class SnapItemToCloserPosition : MonoBehaviour 
 	{

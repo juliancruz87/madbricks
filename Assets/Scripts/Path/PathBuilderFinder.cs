@@ -97,11 +97,11 @@ namespace Path {
 			
 			if(node == null)
 				return newNodes;
-			
-			else if(node.Id != positionToGo)
-				newNodes.AddRange(GetNodesInDirection (node, positionToGo , direction, newNodes));
-			
+
 			newNodes.Add (node);
+
+			if(node.Id != positionToGo)
+				newNodes = GetNodesInDirection (node, positionToGo , direction, newNodes);
 			
 			return newNodes;
 		}

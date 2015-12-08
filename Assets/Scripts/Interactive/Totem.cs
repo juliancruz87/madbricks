@@ -1,14 +1,12 @@
-using Drag;
 using Path;
-using UnityEngine;
-using DG.Tweening;
-using Interactive;
-using Interactive.Detail;
-using System.Collections;
-using System.Collections.Generic;
+using Drag;
 using Sound;
+using UnityEngine;
+using Interactive;
+using DG.Tweening;
+using System.Collections.Generic;
 
-namespace InteractiveObjects.Detail
+namespace Interactive.Detail
 {
 	public abstract class Totem : MonoBehaviour
 	{
@@ -18,9 +16,7 @@ namespace InteractiveObjects.Detail
 		private IGameManagerForStates gameStates;
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
-
 		protected TotemInstantiatorConfig totem;
-		private bool canMove = false;
 
 		protected Node CurrentNode 
 		{
@@ -29,10 +25,10 @@ namespace InteractiveObjects.Detail
 
 		private void Awake ()
 		{
+			myTransform = transform;
 			snaper = GetComponent<SnapItemToCloserPosition> ();
 			dragObject = GetComponent<DraggableObject> ();
 			controllerToStop = GetComponent<TotemControllerStop> ();
-			myTransform = transform;
 		}
 		
 		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
@@ -47,9 +43,9 @@ namespace InteractiveObjects.Detail
 
 		private void OnCrashWithOtherCollider ()
 		{
-			canMove = false;
 			myTransform.DOKill ();
 			snaper.SnapToCloserTransform ();
+			EndGame ("Has been crashed with other totem");
 		}
 
 		private void SetGameManagerForUI (IGameManagerForStates gameStates)
@@ -72,7 +68,6 @@ namespace InteractiveObjects.Detail
 		{
 			if(dragObject.CurrentNode != null && validStartPoints.Contains (dragObject.CurrentNode.Id))
 			{
-				canMove = true;
 				controllerToStop.TurnOnColliderToDetect ();
 				Move ();
 			}
@@ -80,44 +75,27 @@ namespace InteractiveObjects.Detail
 				EndGame ("Totem : " + name+ " cannot move");
 		}
 
-		protected void GoToNode (int currentNode, List<Node> nodes)
+		protected void GoToNode (Node node, float speed)
 		{
-			if(!canMove)
-				return;
+			myTransform.DOMove (node.transform.position, speed).OnComplete (() => GetReachedToPoint(node));
+		}
 
-			if(currentNode < nodes.Count)
-			{
-				Node node = nodes[currentNode];
-				int nextNode = currentNode++;
-				bool hasBeenReached = CheckIfHaBeenArrivedToHisDestiny (node);
-				myTransform.DOMove (node.transform.position, totem.SpeedPerTile).OnComplete (() => GetReachedToPoint(nextNode, nodes, hasBeenReached));
-			}
-		}
-		
-		private void GetReachedToPoint (int nextNode, List<Node> nodes, bool hasBeenReached)
+		protected void GoalReachedNode(Node node)
 		{
-			if (hasBeenReached && totem.SoundToGetReach != null)
-				SoundManager.Instance.Play (totem.SoundToGetReach);
-			
-			GoToNode (nextNode, nodes);
-		}
-		
-		private bool CheckIfHaBeenArrivedToHisDestiny (Node node)
-		{
-			if (node.Id == totem.PositionToGo) 
-			{
+			if (node.Id == totem.PositionToGo)
 				gameStates.Goal ();
-				return true;
-			}
-			return false;
+			
+			if(totem.SoundToGetReach != null) 
+				SoundManager.Instance.Play (totem.SoundToGetReach);
 		}
-		
+
 		protected void EndGame (string warning)
 		{
 			Debug.LogWarning (warning);
 			gameStates.Lose ();
 		}
 
+		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();
 	}
 }

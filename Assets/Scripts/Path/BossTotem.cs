@@ -1,7 +1,7 @@
 ﻿using System;
 using Drag;
-using InteractiveObjects.Detail;
 using UnityEngine;
+using Interactive.Detail;
 
 namespace Path {
     public class BossTotem : MonoBehaviour {
