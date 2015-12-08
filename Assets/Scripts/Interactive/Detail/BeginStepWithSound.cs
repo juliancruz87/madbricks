@@ -9,12 +9,20 @@ namespace Interactive.Detail
 	{
 		[SerializeField]
 		protected AudioClip clip;
+
 		[SerializeField]
 		protected float delay = 0F;
+
+		[SerializeField]
+		private AudioSource audioSource;
+
 		
 		public override void StartStep ()
 		{
-			SoundManager.Instance.Play (clip);
+			if(audioSource == null)
+				SoundManager.Instance.Play (clip);
+			else
+				audioSource.PlayOneShot (clip);
 			FinishStep (0F + delay);
 		}
 

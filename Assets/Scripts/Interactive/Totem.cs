@@ -19,6 +19,7 @@ namespace InteractiveObjects.Detail
 
 		protected TotemInstantiatorConfig totem;
 		protected SnapItemToCloserPosition snaper;
+		private bool canMove = false;
 
 		private void Awake ()
 		{
@@ -36,6 +37,12 @@ namespace InteractiveObjects.Detail
 			SetGameManagerForUI (gameStates);
 		}
 
+		public void Stop ()
+		{
+			Debug.Log ("stop " + gameObject.name);
+			canMove = false;
+		}
+
 		private void SetGameManagerForUI (IGameManagerForStates gameStates)
 		{
 			SetterGameManagerForStates setter = GetComponent<SetterGameManagerForStates> ();
@@ -51,14 +58,20 @@ namespace InteractiveObjects.Detail
 		
 		private void OnStartedGame ()
 		{
-			if(validStartPoints.Contains (dragObject.CurrentNode.Id))
+			if(dragObject.CurrentNode != null && validStartPoints.Contains (dragObject.CurrentNode.Id))
+			{
+				canMove = true;
 				Move ();
+			}
 			else
 				EndGame ("Totem : " + name+ " cannot move");
 		}
 
 		protected void GoToNode (int currentNode, List<Node> nodes)
 		{
+			if(!canMove)
+				return;
+
 			if(currentNode < nodes.Count)
 			{
 				Node node = nodes[currentNode];

@@ -57,6 +57,7 @@ namespace Interactive.Detail
 				gameObjectTotem.AddComponent <TotemSingle>();
 				TotemSingle totemObject = gameObjectTotem.GetComponent<TotemSingle> ();
 				totemObject.SetUp (totem, validStartPoints, GameStates);
+				gameObjectTotem.AddComponent <TotemControllerStop> ();
 			}
 		}
 
