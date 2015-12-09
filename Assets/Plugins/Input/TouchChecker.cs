@@ -85,6 +85,23 @@ namespace ManagerInput
             return collider.Raycast(ray, out hit, 1000.0f);
         }
 
+        public static bool InputIsOverThisCollider(Camera cam, Collider someCollider) {
+            Ray ray = cam.ScreenPointToRay(GetTouchPosition(true));
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            
+            Collider firstCollider = null;
+            float nearestDistance = float.MaxValue;
+            foreach (RaycastHit hitinfo in hits) {
+                float distance = Vector3.Distance(Camera.main.transform.position, hitinfo.collider.transform.position); 
+                if (distance < nearestDistance) {
+                    firstCollider = hitinfo.collider;
+                    nearestDistance = distance;
+                }
+            }
+
+            return firstCollider == someCollider;
+        }
+
         private static Vector3 GetTouchPosition(bool usePreviousPosition)
         {
             if (usePreviousPosition)
