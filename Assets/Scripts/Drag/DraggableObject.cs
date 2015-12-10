@@ -19,6 +19,7 @@ namespace Drag {
         public Action OnObjectStopDrag;
         public Action OnSnap;
         public Action OnNodeUpdated;
+        public OnLauncherTouched OnLauncherTouched;
 
         [SerializeField]
         private float collideDistance;
@@ -42,9 +43,10 @@ namespace Drag {
         [SerializeField]
         private Node currentNode;
 
-
         private Vector3 startDragDirection;
         private Vector3 lastDragPosition;
+        private MapObject currentLauncher;
+
         public Node CurrentNode 
 		{
 			get { return currentNode; }
@@ -174,22 +176,46 @@ namespace Drag {
                 }
             }
             DebugDragDirection();
-            CheckStickCondition();
+            CheckMapObjectCondition();
         }
         
-        private void CheckStickCondition() {
-            MapObject stickyShit = GetAStickyShit();
-            if (stickyShit != null) {
-                StickToLauncher(stickyShit);
+        private void CheckMapObjectCondition() {
+            MapObject nearestMapObject = GetNearestMapObject();
+            if (nearestMapObject != null) {
+                ProcessMapObjectCollision(nearestMapObject);
             }
         }
 
-        private MapObject GetAStickyShit() {
+        private void ProcessMapObjectCollision(MapObject nearestMapObject) {
+            switch (nearestMapObject.Type) {
+                case MapObjectType.LauncherNormal:
+                    Debug.Log("Normal");
+                    SetNewLauncher(nearestMapObject);
+                    break;
+                case MapObjectType.LauncherSticky:
+                    SetNewLauncher(nearestMapObject);
+                    StickToLauncher(nearestMapObject);
+                    break;
+            }
+        }
+
+        private void SetNewLauncher(MapObject newLauncher) {
+            if (newLauncher != null &&
+                newLauncher != currentLauncher &&
+                OnLauncherTouched != null) {
+                currentLauncher = newLauncher;
+                OnLauncherTouched(newLauncher);
+            }
+                
+        }
+
+        private MapObject GetNearestMapObject() {
             MapObject[] mapObjects = FindObjectsOfType<MapObject>();
 
             foreach (MapObject mapObject in mapObjects)
                 if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance &&
-                    mapObject.Type == MapObjectType.LauncherSticky)
+                    (mapObject.Type == MapObjectType.LauncherSticky ||
+                     mapObject.Type == MapObjectType.LauncherNormal))
                     return mapObject;
 
             return null;
@@ -270,4 +296,5 @@ namespace Drag {
     }
 
     public delegate void OnObjectDragged(Vector3 currentPosition, Vector3 newPosition);
+    public delegate void OnLauncherTouched(MapObject launcher);
 }
