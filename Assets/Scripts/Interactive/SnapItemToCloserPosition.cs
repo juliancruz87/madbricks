@@ -17,6 +17,8 @@ namespace Interactive.Detail
 		[SerializeField]
 	    private Transform[] transformsToSnap;
 
+		private bool keepInSamePlace = false;
+		private Vector3 snapedPosition = Vector3.zero;
 		private Transform myTransform;
 
 		public Node NodeSpnaped 
@@ -65,6 +67,18 @@ namespace Interactive.Detail
 				myTransform.DOMove (transformToSnap.position, timeToSnap).SetEase (easeToSnap);
 				NodeSpnaped = transformToSnap.GetComponent<Node> ();
 			}
+		}
+
+		public void SnapInPlace ()
+		{
+			snapedPosition = myTransform.position;
+			keepInSamePlace = true;
+		}
+
+		public void LateUpdate ()
+		{
+			if(keepInSamePlace)
+				myTransform.position = snapedPosition;
 		}
 	}
 }

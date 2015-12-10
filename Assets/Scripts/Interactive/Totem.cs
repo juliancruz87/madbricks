@@ -10,12 +10,13 @@ namespace Interactive.Detail
 {
 	public abstract class Totem : MonoBehaviour
 	{
-		private Transform myTransform;
 		private List<int> validStartPoints;
 		private DraggableObject dragObject;
 		private IGameManagerForStates gameStates;
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
+
+		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
 
 		protected Node CurrentNode 
@@ -87,6 +88,8 @@ namespace Interactive.Detail
 			
 			if(totem.SoundToGetReach != null) 
 				SoundManager.Instance.Play (totem.SoundToGetReach);
+
+			snaper.SnapInPlace ();
 		}
 
 		protected void EndGame (string warning)

@@ -12,9 +12,9 @@ public class Handler : MonoBehaviour
 	[Inject]
 	private IGameManagerForStates gameManager;
 
-	private void Update () {
+	private void Update () 
+	{
 		if (InputManager.Instance.InputDevice.PrimaryTouch.ReleasedTapThisFrame && 
-            /*TouchChecker.WasTappingFromCollider (Camera.main, myCollider)*/
             TouchChecker.InputIsOverThisCollider(Camera.main, myCollider))
 			gameManager.Play ();
 	}

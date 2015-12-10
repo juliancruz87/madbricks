@@ -33,7 +33,7 @@ namespace Interactive.Detail
 		private void OnNextStep ()
 		{
 			currentStep++;
-			if (currentStep < steps.Count)
+			if (steps.Count > currentStep)
 				StartCurrentStep ();
 			else 
 				EndSequence ();
@@ -41,7 +41,8 @@ namespace Interactive.Detail
 
 		private void StartCurrentStep ()
 		{
-			steps [currentStep].StartStep ();
+			if(steps.Count > currentStep)
+				steps [currentStep].StartStep ();
 		}
 
 		private void EndSequence ()
