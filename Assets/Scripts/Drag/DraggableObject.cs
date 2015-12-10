@@ -11,12 +11,14 @@ namespace Drag {
     public class DraggableObject : MonoBehaviour {
 
         private const string TAG_OBSTACLE = "Obstacle";
-        private const float NODE_TOLERANCE = 0.001f;
+        private const float NODE_TOLERANCE = 0.05f;
 
         private static DraggableObject objectBeingDragged;
 
         public OnObjectDragged OnObjectDragged;
+        public Action OnObjectStopDrag;
         public Action OnSnap;
+        public Action OnNodeUpdated;
 
         [SerializeField]
         private float collideDistance;
@@ -76,11 +78,17 @@ namespace Drag {
         }
 
         private void UpdateNearestNode() {
+            Node lastNode = currentNode;
             Node nearestNode = PathBuilder.Instance.GetNearsetNode(myTransform.position);
             if (nearestNode != null &&
                 Math.Abs(Vector3.Distance(nearestNode.transform.position, myTransform.position)) < NODE_TOLERANCE &&
-                currentNode != nearestNode)
+                currentNode != nearestNode) {
                 currentNode = nearestNode;
+                if (OnNodeUpdated != null && 
+                    lastNode != null)
+                    OnNodeUpdated();
+            }
+                
         }
 
         private void CheckMouseInput() {
@@ -168,7 +176,7 @@ namespace Drag {
             DebugDragDirection();
             CheckStickCondition();
         }
-
+        
         private void CheckStickCondition() {
             MapObject stickyShit = GetAStickyShit();
             if (stickyShit != null) {
@@ -232,6 +240,9 @@ namespace Drag {
         }
 
         public void StopDrag() {
+            if (OnObjectStopDrag != null)
+                OnObjectStopDrag();
+
             if (isBeingDragged)
                 Snap();
 
