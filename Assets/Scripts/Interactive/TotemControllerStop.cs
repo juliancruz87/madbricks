@@ -13,7 +13,6 @@ namespace Interactive.Detail
 		private void Start ()
 		{
 			myCollider =  GetComponent<Collider> ();
-
 		}
 
 		public void TurnOnColliderToDetect ()
@@ -26,7 +25,7 @@ namespace Interactive.Detail
 			forbbidenObjects = totemsCreated.FindAll (c => c != gameObject);
 		}
 
-		private void OnCollisionEnter(Collision collisionInfo)
+		private void  OnTriggerEnter(Collider collisionInfo)
 		{
 			if (forbbidenObjects.Contains(collisionInfo.gameObject)) 
 			{

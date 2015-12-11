@@ -101,6 +101,18 @@ namespace Interactive.Detail
 			gameStates.Lose ();
 		}
 
+		
+		#if UNITY_EDITOR
+		protected void Update ()
+		{
+			Vector3 position = myTransform.position;
+			Debug.DrawLine(position , position - (Vector3.forward * 0.1F), Color.red);
+			Debug.DrawLine(position , position - (Vector3.back * 0.1F), Color.blue);
+			Debug.DrawLine(position , position - (Vector3.left * 0.1F), Color.yellow);
+			Debug.DrawLine(position , position - (Vector3.right * 0.1F), Color.green);
+		}
+		#endif
+
 		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();
 	}

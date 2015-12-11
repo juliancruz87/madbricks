@@ -91,7 +91,7 @@ namespace Path {
 			return false;
 		}
 		
-		private List<Node> GetNodesInDirection (Node nodeSpnaped, int positionToGo , Vector3 direction, List<Node> newNodes)
+		public List<Node> GetNodesInDirection (Node nodeSpnaped, int positionToGo , Vector3 direction, List<Node> newNodes)
 		{
 			Node node = GetNearsetNodeInDirection(nodeSpnaped, direction);
 			

@@ -6,7 +6,6 @@ namespace Interactive.Detail
 {
 	public class TotemSingle : Totem
 	{
-		private Node nodeToArrives;
 		protected override void Move ()
 		{
 			List<Node> nodes = GetNodesToTravel ();
@@ -37,17 +36,7 @@ namespace Interactive.Detail
 
 		protected override void GetReachedToPoint (Node node)
 		{
-			nodeToArrives = node;
 			GoalReachedNode (node);
 		}
-
-#if UNITY_EDITOR
-		private void Update ()
-		{
-			Vector3 position = myTransform.position;
-			Debug.DrawLine(position + (Vector3.forward * 0.1F)  , position - (Vector3.forward * 0.1F), Color.blue);
-			Debug.DrawLine(position + (Vector3.left * 0.1F) , position - (Vector3.left * 0.1F), Color.blue);
-		}
-#endif
 	}
 }
