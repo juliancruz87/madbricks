@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: 5574b0b4b0ab839439c72c37268cae7e
+timeCreated: 1449799044
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Mesh
+    100002: Mesh (2)
+    100004: nivel_2-3_tapa
+    100006: Skeleton_nivel_2-1_tapa
+    100008: Skeleton_nivel_2-1_tapa (10)
+    100010: Skeleton_nivel_2-1_tapa (11)
+    100012: Skeleton_nivel_2-1_tapa (12)
+    100014: Skeleton_nivel_2-1_tapa (13)
+    100016: Skeleton_nivel_2-1_tapa (14)
+    100018: Skeleton_nivel_2-1_tapa (15)
+    100020: Skeleton_nivel_2-1_tapa (16)
+    100022: Skeleton_nivel_2-1_tapa (17)
+    100024: Skeleton_nivel_2-1_tapa (18)
+    100026: Skeleton_nivel_2-1_tapa (19)
+    100028: Skeleton_nivel_2-1_tapa (2)
+    100030: Skeleton_nivel_2-1_tapa (20)
+    100032: Skeleton_nivel_2-1_tapa (21)
+    100034: Skeleton_nivel_2-1_tapa (22)
+    100036: Skeleton_nivel_2-1_tapa (23)
+    100038: Skeleton_nivel_2-1_tapa (24)
+    100040: Skeleton_nivel_2-1_tapa (25)
+    100042: Skeleton_nivel_2-1_tapa (26)
+    100044: Skeleton_nivel_2-1_tapa (27)
+    100046: Skeleton_nivel_2-1_tapa (28)
+    100048: Skeleton_nivel_2-1_tapa (29)
+    100050: Skeleton_nivel_2-1_tapa (3)
+    100052: Skeleton_nivel_2-1_tapa (30)
+    100054: Skeleton_nivel_2-1_tapa (31)
+    100056: Skeleton_nivel_2-1_tapa (32)
+    100058: Skeleton_nivel_2-1_tapa (33)
+    100060: Skeleton_nivel_2-1_tapa (34)
+    100062: Skeleton_nivel_2-1_tapa (35)
+    100064: Skeleton_nivel_2-1_tapa (36)
+    100066: Skeleton_nivel_2-1_tapa (37)
+    100068: Skeleton_nivel_2-1_tapa (38)
+    100070: Skeleton_nivel_2-1_tapa (39)
+    100072: Skeleton_nivel_2-1_tapa (4)
+    100074: Skeleton_nivel_2-1_tapa (40)
+    100076: Skeleton_nivel_2-1_tapa (41)
+    100078: Skeleton_nivel_2-1_tapa (42)
+    100080: Skeleton_nivel_2-1_tapa (43)
+    100082: Skeleton_nivel_2-1_tapa (44)
+    100084: Skeleton_nivel_2-1_tapa (45)
+    100086: Skeleton_nivel_2-1_tapa (46)
+    100088: Skeleton_nivel_2-1_tapa (47)
+    100090: Skeleton_nivel_2-1_tapa (48)
+    100092: Skeleton_nivel_2-1_tapa (49)
+    100094: Skeleton_nivel_2-1_tapa (5)
+    100096: Skeleton_nivel_2-1_tapa (50)
+    100098: Skeleton_nivel_2-1_tapa (51)
+    100100: Skeleton_nivel_2-1_tapa (52)
+    100102: Skeleton_nivel_2-1_tapa (53)
+    100104: Skeleton_nivel_2-1_tapa (54)
+    100106: Skeleton_nivel_2-1_tapa (55)
+    100108: Skeleton_nivel_2-1_tapa (56)
+    100110: Skeleton_nivel_2-1_tapa (57)
+    100112: Skeleton_nivel_2-1_tapa (58)
+    100114: Skeleton_nivel_2-1_tapa (59)
+    100116: Skeleton_nivel_2-1_tapa (6)
+    100118: Skeleton_nivel_2-1_tapa (60)
+    100120: Skeleton_nivel_2-1_tapa (61)
+    100122: Skeleton_nivel_2-1_tapa (62)
+    100124: Skeleton_nivel_2-1_tapa (63)
+    100126: Skeleton_nivel_2-1_tapa (7)
+    100128: Skeleton_nivel_2-1_tapa (8)
+    100130: Skeleton_nivel_2-1_tapa (9)
+    100132: //RootNode
+    100134: territorio2_lvl3_path
+    400000: Mesh
+    400002: Mesh (2)
+    400004: nivel_2-3_tapa
+    400006: Skeleton_nivel_2-1_tapa
+    400008: Skeleton_nivel_2-1_tapa (10)
+    400010: Skeleton_nivel_2-1_tapa (11)
+    400012: Skeleton_nivel_2-1_tapa (12)
+    400014: Skeleton_nivel_2-1_tapa (13)
+    400016: Skeleton_nivel_2-1_tapa (14)
+    400018: Skeleton_nivel_2-1_tapa (15)
+    400020: Skeleton_nivel_2-1_tapa (16)
+    400022: Skeleton_nivel_2-1_tapa (17)
+    400024: Skeleton_nivel_2-1_tapa (18)
+    400026: Skeleton_nivel_2-1_tapa (19)
+    400028: Skeleton_nivel_2-1_tapa (2)
+    400030: Skeleton_nivel_2-1_tapa (20)
+    400032: Skeleton_nivel_2-1_tapa (21)
+    400034: Skeleton_nivel_2-1_tapa (22)
+    400036: Skeleton_nivel_2-1_tapa (23)
+    400038: Skeleton_nivel_2-1_tapa (24)
+    400040: Skeleton_nivel_2-1_tapa (25)
+    400042: Skeleton_nivel_2-1_tapa (26)
+    400044: Skeleton_nivel_2-1_tapa (27)
+    400046: Skeleton_nivel_2-1_tapa (28)
+    400048: Skeleton_nivel_2-1_tapa (29)
+    400050: Skeleton_nivel_2-1_tapa (3)
+    400052: Skeleton_nivel_2-1_tapa (30)
+    400054: Skeleton_nivel_2-1_tapa (31)
+    400056: Skeleton_nivel_2-1_tapa (32)
+    400058: Skeleton_nivel_2-1_tapa (33)
+    400060: Skeleton_nivel_2-1_tapa (34)
+    400062: Skeleton_nivel_2-1_tapa (35)
+    400064: Skeleton_nivel_2-1_tapa (36)
+    400066: Skeleton_nivel_2-1_tapa (37)
+    400068: Skeleton_nivel_2-1_tapa (38)
+    400070: Skeleton_nivel_2-1_tapa (39)
+    400072: Skeleton_nivel_2-1_tapa (4)
+    400074: Skeleton_nivel_2-1_tapa (40)
+    400076: Skeleton_nivel_2-1_tapa (41)
+    400078: Skeleton_nivel_2-1_tapa (42)
+    400080: Skeleton_nivel_2-1_tapa (43)
+    400082: Skeleton_nivel_2-1_tapa (44)
+    400084: Skeleton_nivel_2-1_tapa (45)
+    400086: Skeleton_nivel_2-1_tapa (46)
+    400088: Skeleton_nivel_2-1_tapa (47)
+    400090: Skeleton_nivel_2-1_tapa (48)
+    400092: Skeleton_nivel_2-1_tapa (49)
+    400094: Skeleton_nivel_2-1_tapa (5)
+    400096: Skeleton_nivel_2-1_tapa (50)
+    400098: Skeleton_nivel_2-1_tapa (51)
+    400100: Skeleton_nivel_2-1_tapa (52)
+    400102: Skeleton_nivel_2-1_tapa (53)
+    400104: Skeleton_nivel_2-1_tapa (54)
+    400106: Skeleton_nivel_2-1_tapa (55)
+    400108: Skeleton_nivel_2-1_tapa (56)
+    400110: Skeleton_nivel_2-1_tapa (57)
+    400112: Skeleton_nivel_2-1_tapa (58)
+    400114: Skeleton_nivel_2-1_tapa (59)
+    400116: Skeleton_nivel_2-1_tapa (6)
+    400118: Skeleton_nivel_2-1_tapa (60)
+    400120: Skeleton_nivel_2-1_tapa (61)
+    400122: Skeleton_nivel_2-1_tapa (62)
+    400124: Skeleton_nivel_2-1_tapa (63)
+    400126: Skeleton_nivel_2-1_tapa (7)
+    400128: Skeleton_nivel_2-1_tapa (8)
+    400130: Skeleton_nivel_2-1_tapa (9)
+    400132: //RootNode
+    400134: territorio2_lvl3_path
+    2300000: Mesh (2)
+    3300000: Mesh (2)
+    4300000: Mesh (2)
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
