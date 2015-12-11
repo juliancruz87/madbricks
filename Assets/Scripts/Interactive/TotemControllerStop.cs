@@ -13,6 +13,7 @@ namespace Interactive.Detail
 		private void Start ()
 		{
 			myCollider =  GetComponent<Collider> ();
+
 		}
 
 		public void TurnOnColliderToDetect ()
