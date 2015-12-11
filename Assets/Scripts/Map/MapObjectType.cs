@@ -4,6 +4,7 @@
         None,
         LauncherNormal,
         LauncherSticky,
-        Totem_target
+        Totem_target,
+        BossJail
     }
 }
