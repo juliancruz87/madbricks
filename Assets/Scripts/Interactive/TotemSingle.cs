@@ -18,7 +18,7 @@ namespace Interactive.Detail
 			} 
 			else 
 			{
-				Debug.LogWarning ("Wasn't found a path to follow");
+				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 			}
 		}
 
@@ -27,7 +27,7 @@ namespace Interactive.Detail
 			List<Node> nodes = PathBuilder.Instance.Finder.GetNodes (CurrentNode, totem.PositionToGo);
 			if (nodes.Count <= 0)
 			{
-				Debug.LogWarning ("Try to find an alternative path");
+				Debug.LogWarning (gameObject.name +" try to find an alternative path");
 				nodes = PathBuilder.Instance.Finder.GetNodesInLongDirection (CurrentNode, totem.PositionToGo);
 			}
 

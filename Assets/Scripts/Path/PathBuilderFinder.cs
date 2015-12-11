@@ -94,9 +94,12 @@ namespace Path {
 		public List<Node> GetNodesInDirection (Node nodeSpnaped, int positionToGo , Vector3 direction, List<Node> newNodes)
 		{
 			Node node = GetNearsetNodeInDirection(nodeSpnaped, direction);
-			
+
 			if(node == null)
+			{
+				Debug.LogWarning ("Node: " + nodeSpnaped.Id + " did not found an closer node in direction -> " + direction);
 				return newNodes;
+			}
 
 			newNodes.Add (node);
 
@@ -109,7 +112,7 @@ namespace Path {
 		public Node GetNearsetNodeInDirection(Node node, Vector3 direction) 
 		{
 			Node nearestNode = null;
-			float nearestDistance = 0;
+			float nearestDistance = 0.3f;
 			foreach (Node candidateNode in _nodes) {
 				if (IsAValidCandidateNode(node, candidateNode, direction)) {
 					if (nearestNode == null || 
