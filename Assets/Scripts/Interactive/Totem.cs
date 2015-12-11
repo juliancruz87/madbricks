@@ -10,21 +10,29 @@ namespace Interactive.Detail
 {
 	public abstract class Totem : MonoBehaviour
 	{
-		private List<int> validStartPoints;
 		private DraggableObject dragObject;
 		private IGameManagerForStates gameStates;
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
+		private List<int> validStartPoints;
 
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
+
+		protected bool IsInStartPoint
+		{
+			get
+			{ 
+				return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id);
+			}
+		}
 
 		protected Node CurrentNode 
 		{
 			get{ return dragObject.CurrentNode;}
 		}
 
-		private void Awake ()
+		protected virtual void Awake ()
 		{
 			myTransform = transform;
 			snaper = GetComponent<SnapItemToCloserPosition> ();
@@ -34,7 +42,7 @@ namespace Interactive.Detail
 		
 		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
 		{
-			if (totem.Type == TotemType.Single) 
+			if (totem.Type == TotemType.Single || totem.Type == TotemType.Triangle)  
 			{
 				this.gameStates = gameStates;
 				this.totem = totem;
@@ -70,7 +78,7 @@ namespace Interactive.Detail
 		
 		private void OnStartedGame ()
 		{
-			if(dragObject.CurrentNode != null && validStartPoints.Contains (dragObject.CurrentNode.Id))
+			if(IsInStartPoint)
 			{
 				controllerToStop.TurnOnColliderToDetect ();
 				Move ();
@@ -101,17 +109,16 @@ namespace Interactive.Detail
 			gameStates.Lose ();
 		}
 
-		
-		#if UNITY_EDITOR
-		protected void Update ()
+		protected virtual void Update ()
 		{
+#if UNITY_EDITOR
 			Vector3 position = myTransform.position;
 			Debug.DrawLine(position , position - (Vector3.forward * 0.1F), Color.red);
 			Debug.DrawLine(position , position - (Vector3.back * 0.1F), Color.blue);
 			Debug.DrawLine(position , position - (Vector3.left * 0.1F), Color.yellow);
 			Debug.DrawLine(position , position - (Vector3.right * 0.1F), Color.green);
+#endif
 		}
-		#endif
 
 		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();

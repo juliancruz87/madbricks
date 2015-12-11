@@ -61,11 +61,12 @@ namespace Interactive.Detail
 		private void AddComponent (GameObject gameObjectTotem, TotemInstantiatorConfig totem)
 		{
 			if (totem.Type == TotemType.Single) 
-			{
 				gameObjectTotem.AddComponent <TotemSingle>();
-				TotemSingle totemObject = gameObjectTotem.GetComponent<TotemSingle> ();
-				totemObject.SetUp (totem, validStartPoints, GameStates);
-			}
+			else if(totem.Type == TotemType.Triangle)
+				gameObjectTotem.AddComponent <TotemTriangle>();
+
+			Totem totemObject = gameObjectTotem.GetComponent<Totem> ();
+			totemObject.SetUp (totem, validStartPoints, GameStates);
 		}
 
 		private Transform CreateStartPosition(List<Transform> points, int positionToAdd)
