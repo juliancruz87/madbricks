@@ -47,6 +47,10 @@ namespace Drag {
         private Vector3 lastDragPosition;
         private MapObject currentLauncher;
 
+        private AudioSource collisionAudioSource;
+        [SerializeField] 
+        private AudioClip collideAudioClip;
+
         public Node CurrentNode 
 		{
 			get { return currentNode; }
@@ -61,6 +65,7 @@ namespace Drag {
 		}
         
 		private void Start () {
+            collisionAudioSource = GameObject.Find("CollisionSoundPlayer").GetComponent<AudioSource>();
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
 			snapperObject = GetComponent<SnapItemToCloserPosition>();
@@ -189,7 +194,6 @@ namespace Drag {
         private void ProcessMapObjectCollision(MapObject nearestMapObject) {
             switch (nearestMapObject.Type) {
                 case MapObjectType.LauncherNormal:
-                    Debug.Log("Normal");
                     SetNewLauncher(nearestMapObject);
                     break;
                 case MapObjectType.LauncherSticky:
@@ -227,6 +231,15 @@ namespace Drag {
         }
 
 
+        private void OnCollisionEnter(Collision collision) {
+            if (isBeingDragged && 
+                collision.gameObject.tag == TAG_OBSTACLE &&
+                collision.gameObject.GetComponent<DraggableObject>() != null
+                ) {
+                PlayCollideSound();
+            }
+        }
+
         private bool ItWillHitAnotherTotem(Vector3 newDragPosition) { 
             GameObject[] totems = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
             foreach (GameObject totem in totems) {
@@ -237,7 +250,13 @@ namespace Drag {
             }
             return false;
         }
-        
+
+        private void PlayCollideSound() {
+            if (!collisionAudioSource.isPlaying) {
+                collisionAudioSource.Play();
+            }
+        }
+
         private void DebugHitFloor(bool hitFloor, Vector3 rayStartPoint) {
             Color rayColor = Color.red;
             if (hitFloor)
