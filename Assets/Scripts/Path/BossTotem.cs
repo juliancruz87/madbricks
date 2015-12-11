@@ -145,7 +145,8 @@ namespace Path {
                 currentNode = nearestNode;
         }
 
-        void OnCollisionEnter(Collision collision) {
+        void OnTriggerEnter(Collider collision)
+        {
             if (collision.gameObject.GetComponent<DraggableObject>())
                 Destroy(collision.gameObject);
         }
