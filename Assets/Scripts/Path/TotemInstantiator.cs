@@ -42,7 +42,12 @@ namespace Interactive.Detail
 				}
 			}
 
-			totemsCreated.ForEach (c => c.GetComponent<TotemControllerStop> ().SetTotems (totemsCreated));
+			foreach (GameObject totem in totemsCreated) 
+			{
+				TotemControllerStop totemController = totem.GetComponent<TotemControllerStop> ();
+				if(totemController != null)
+					totemController.SetTotems (totemsCreated);
+			}
 		}
 
 		private void InitializeComponents (GameObject gameObjectTotem, TotemInstantiatorConfig totem, List<Transform> points, Transform positionsToSnap)

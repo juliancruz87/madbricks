@@ -34,12 +34,15 @@ namespace Interactive.Detail
 		
 		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
 		{
-			this.gameStates = gameStates;
-			this.totem = totem;
-			this.validStartPoints = validStartPoints;
-			gameStates.StartedGame += OnStartedGame;
-			controllerToStop.CollidedWithTotem += OnCrashWithOtherCollider;
-			SetGameManagerForUI (gameStates);
+			if (totem.Type == TotemType.Single) 
+			{
+				this.gameStates = gameStates;
+				this.totem = totem;
+				this.validStartPoints = validStartPoints;
+				gameStates.StartedGame += OnStartedGame;
+				controllerToStop.CollidedWithTotem += OnCrashWithOtherCollider;
+				SetGameManagerForUI (gameStates);
+			}
 		}
 
 		private void OnCrashWithOtherCollider ()
