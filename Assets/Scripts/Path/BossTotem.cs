@@ -12,10 +12,17 @@ namespace Path {
         [SerializeField]
         private Node currentNode;
 
+        [SerializeField]
+        private float maxJumpDistance = 0.02f;
+
+
+        private GameObject dragFloor;
+
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
 
         private void Awake() {
+            dragFloor = GameObject.FindWithTag("Floor");
             myTransform = transform;
             snapperObject = GetComponent<SnapItemToCloserPosition>();
         }
@@ -43,31 +50,41 @@ namespace Path {
             
             Vector3 newDragPosition = opositeStep + myTransform.position;
 
-            GetTheCorrectedPosition(ref newDragPosition, (opositeStep.normalized) * -1);
-
-            myTransform.position = newDragPosition;
+            MoveIfPossible(newDragPosition);
         }
 
-        private void GetTheCorrectedPosition(ref Vector3 newDragPosition, Vector3 direction) {
-            Debug.Log(direction);
+        private void MoveIfPossible(Vector3 newDragPosition) {
+            Vector3 candidatePosition = (newDragPosition);
+            Vector3 rayStartPoint = (candidatePosition + new Vector3(0, 0.5f, 0));
 
-            if (direction == new Vector3()) {
-                newDragPosition = myTransform.position;
+            RaycastHit[] hits = Physics.RaycastAll(rayStartPoint, Vector3.down);
+
+            bool hitFloor = RaycastHitsGameObject(hits, dragFloor);
+            DebugHitFloor(hitFloor, rayStartPoint);
+
+            if (!hitFloor)
                 return;
-            }
 
-            if (!EnabledToMove(direction)) 
-                newDragPosition = myTransform.position;
+            if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
+                return;
+
+            myTransform.position = candidatePosition;
         }
 
-        private bool EnabledToMove(Vector3 direction) {
-            Node nextNode = GetNextNodeInDirection(direction);
-            return nextNode;
+        private bool RaycastHitsGameObject(RaycastHit[] raycastHits, GameObject someGameObject) {
+            foreach (RaycastHit raycast in raycastHits)
+                if (raycast.transform.gameObject == someGameObject)
+                    return true;
+
+            return false;
         }
 
-        private Node GetNextNodeInDirection(Vector3 direction) {
-            Node nearestNode = PathBuilder.Instance.Finder.GetNearsetNodeInDirection(currentNode, direction);
-            return nearestNode;
+        private void DebugHitFloor(bool hitFloor, Vector3 rayStartPoint) {
+            Color rayColor = Color.red;
+            if (hitFloor)
+                rayColor = Color.green;
+
+            Debug.DrawLine(rayStartPoint, rayStartPoint + (5 * Vector3.down), rayColor);
         }
 
         // Update is called once per frame
