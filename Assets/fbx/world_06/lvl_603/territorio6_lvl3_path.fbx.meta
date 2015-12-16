@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 64e3baac6c031e24b842a278ff30e9ef
+timeCreated: 1450188719
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Mesh
+    100002: Mesh (2)
+    100004: nivel_6-3_tapa
+    100006: Skeleton_Joint
+    100008: Skeleton_Joint (10)
+    100010: Skeleton_Joint (11)
+    100012: Skeleton_Joint (12)
+    100014: Skeleton_Joint (13)
+    100016: Skeleton_Joint (14)
+    100018: Skeleton_Joint (15)
+    100020: Skeleton_Joint (16)
+    100022: Skeleton_Joint (17)
+    100024: Skeleton_Joint (18)
+    100026: Skeleton_Joint (19)
+    100028: Skeleton_Joint (2)
+    100030: Skeleton_Joint (20)
+    100032: Skeleton_Joint (21)
+    100034: Skeleton_Joint (22)
+    100036: Skeleton_Joint (23)
+    100038: Skeleton_Joint (24)
+    100040: Skeleton_Joint (25)
+    100042: Skeleton_Joint (26)
+    100044: Skeleton_Joint (27)
+    100046: Skeleton_Joint (28)
+    100048: Skeleton_Joint (29)
+    100050: Skeleton_Joint (3)
+    100052: Skeleton_Joint (30)
+    100054: Skeleton_Joint (31)
+    100056: Skeleton_Joint (32)
+    100058: Skeleton_Joint (33)
+    100060: Skeleton_Joint (34)
+    100062: Skeleton_Joint (35)
+    100064: Skeleton_Joint (36)
+    100066: Skeleton_Joint (37)
+    100068: Skeleton_Joint (38)
+    100070: Skeleton_Joint (39)
+    100072: Skeleton_Joint (4)
+    100074: Skeleton_Joint (40)
+    100076: Skeleton_Joint (41)
+    100078: Skeleton_Joint (42)
+    100080: Skeleton_Joint (43)
+    100082: Skeleton_Joint (44)
+    100084: Skeleton_Joint (45)
+    100086: Skeleton_Joint (46)
+    100088: Skeleton_Joint (47)
+    100090: Skeleton_Joint (48)
+    100092: Skeleton_Joint (49)
+    100094: Skeleton_Joint (5)
+    100096: Skeleton_Joint (50)
+    100098: Skeleton_Joint (51)
+    100100: Skeleton_Joint (52)
+    100102: Skeleton_Joint (53)
+    100104: Skeleton_Joint (54)
+    100106: Skeleton_Joint (55)
+    100108: Skeleton_Joint (56)
+    100110: Skeleton_Joint (57)
+    100112: Skeleton_Joint (58)
+    100114: Skeleton_Joint (59)
+    100116: Skeleton_Joint (6)
+    100118: Skeleton_Joint (60)
+    100120: Skeleton_Joint (61)
+    100122: Skeleton_Joint (62)
+    100124: Skeleton_Joint (7)
+    100126: Skeleton_Joint (8)
+    100128: Skeleton_Joint (9)
+    100130: //RootNode
+    400000: Mesh
+    400002: Mesh (2)
+    400004: nivel_6-3_tapa
+    400006: Skeleton_Joint
+    400008: Skeleton_Joint (10)
+    400010: Skeleton_Joint (11)
+    400012: Skeleton_Joint (12)
+    400014: Skeleton_Joint (13)
+    400016: Skeleton_Joint (14)
+    400018: Skeleton_Joint (15)
+    400020: Skeleton_Joint (16)
+    400022: Skeleton_Joint (17)
+    400024: Skeleton_Joint (18)
+    400026: Skeleton_Joint (19)
+    400028: Skeleton_Joint (2)
+    400030: Skeleton_Joint (20)
+    400032: Skeleton_Joint (21)
+    400034: Skeleton_Joint (22)
+    400036: Skeleton_Joint (23)
+    400038: Skeleton_Joint (24)
+    400040: Skeleton_Joint (25)
+    400042: Skeleton_Joint (26)
+    400044: Skeleton_Joint (27)
+    400046: Skeleton_Joint (28)
+    400048: Skeleton_Joint (29)
+    400050: Skeleton_Joint (3)
+    400052: Skeleton_Joint (30)
+    400054: Skeleton_Joint (31)
+    400056: Skeleton_Joint (32)
+    400058: Skeleton_Joint (33)
+    400060: Skeleton_Joint (34)
+    400062: Skeleton_Joint (35)
+    400064: Skeleton_Joint (36)
+    400066: Skeleton_Joint (37)
+    400068: Skeleton_Joint (38)
+    400070: Skeleton_Joint (39)
+    400072: Skeleton_Joint (4)
+    400074: Skeleton_Joint (40)
+    400076: Skeleton_Joint (41)
+    400078: Skeleton_Joint (42)
+    400080: Skeleton_Joint (43)
+    400082: Skeleton_Joint (44)
+    400084: Skeleton_Joint (45)
+    400086: Skeleton_Joint (46)
+    400088: Skeleton_Joint (47)
+    400090: Skeleton_Joint (48)
+    400092: Skeleton_Joint (49)
+    400094: Skeleton_Joint (5)
+    400096: Skeleton_Joint (50)
+    400098: Skeleton_Joint (51)
+    400100: Skeleton_Joint (52)
+    400102: Skeleton_Joint (53)
+    400104: Skeleton_Joint (54)
+    400106: Skeleton_Joint (55)
+    400108: Skeleton_Joint (56)
+    400110: Skeleton_Joint (57)
+    400112: Skeleton_Joint (58)
+    400114: Skeleton_Joint (59)
+    400116: Skeleton_Joint (6)
+    400118: Skeleton_Joint (60)
+    400120: Skeleton_Joint (61)
+    400122: Skeleton_Joint (62)
+    400124: Skeleton_Joint (7)
+    400126: Skeleton_Joint (8)
+    400128: Skeleton_Joint (9)
+    400130: //RootNode
+    2300000: Mesh (2)
+    3300000: Mesh (2)
+    4300000: Mesh (2)
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
