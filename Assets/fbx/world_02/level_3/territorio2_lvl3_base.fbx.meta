@@ -1,20 +1,26 @@
 fileFormatVersion: 2
-guid: efde4e89d0915b24da0d67b437e851a2
-timeCreated: 1449799045
+guid: 13c468d2f1f125941bad46fc5c033304
+timeCreated: 1450340188
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: Cube
-    100002: nivel_2-3
-    100004: //RootNode
-    100006: Texture Group
-    100008: Texture Group (2)
+    100002: Mesh
+    100004: nivel_2-3
+    100006: //RootNode
+    100008: territorio2_lvl3_base
+    100010: Texture Group
+    100012: Texture Group (2)
+    100014: Texture Group (2) (2)
     400000: Cube
-    400002: nivel_2-3
-    400004: //RootNode
-    400006: Texture Group
-    400008: Texture Group (2)
+    400002: Mesh
+    400004: nivel_2-3
+    400006: //RootNode
+    400008: territorio2_lvl3_base
+    400010: Texture Group
+    400012: Texture Group (2)
+    400014: Texture Group (2) (2)
     2300000: Cube
     3300000: Cube
     4300000: Cube
