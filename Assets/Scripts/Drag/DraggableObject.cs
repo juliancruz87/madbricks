@@ -31,6 +31,7 @@ namespace Drag {
         private AudioSource dragSound;
         [SerializeField]
         private GameObject dragFloor;
+        private Collider dragFloorCollider;
         [SerializeField]
         private bool allowMultipleDrags = false;
         [SerializeField]
@@ -68,6 +69,7 @@ namespace Drag {
             collisionAudioSource = GameObject.Find("CollisionSoundPlayer").GetComponent<AudioSource>();
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
+		    dragFloorCollider = dragFloor.GetComponent<Collider>();
 			snapperObject = GetComponent<SnapItemToCloserPosition>();
 		}
 
@@ -155,18 +157,18 @@ namespace Drag {
                 float distance1 = 0f;
                 if (horizontalPlane.Raycast(ray, out distance1)) {
                     Vector3 newDragPosition = ray.GetPoint(distance1) + inputStartOffset;
-                    Vector3 candidatePosition = myTransform.position + (newDragPosition - lastDragPosition);
-                    Vector3 rayStartPoint = (candidatePosition + new Vector3(0, 0.5f, 0));
+                    Vector3 dragStep = newDragPosition - lastDragPosition;
+                    Vector3 candidatePosition = myTransform.position + dragStep;
                     
-                    RaycastHit[] hits = Physics.RaycastAll(rayStartPoint, Vector3.down);
-                    
-                    bool hitFloor = RaycastHitsGameObject(hits, dragFloor);
-                    DebugHitFloor(hitFloor, rayStartPoint);
+                    bool hitFloor = HitFloorAtPosition(candidatePosition);
+                    //bool hitFloor = RaycastHitsGameObject(hits, dragFloor);
+                    //DebugHitFloor(hitFloor, rayStartPoint);
 
                     lastDragPosition = newDragPosition;
 
-                    if (!hitFloor)
-                        return;
+                    if (!hitFloor) 
+                        if(!CandidatePositionCanBeFixed(ref candidatePosition, dragStep))
+                            return;
 
                     if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
                         return;
@@ -183,7 +185,52 @@ namespace Drag {
             DebugDragDirection();
             CheckMapObjectCondition();
         }
-        
+
+        private bool CandidatePositionCanBeFixed(ref Vector3 candidatePosition, Vector3 dragStep) {
+            Vector3 newCandidatePosition = candidatePosition;
+            float absX = Math.Abs(dragStep.x);
+            float absZ = Math.Abs(dragStep.z);
+            if (absX > absZ) {
+                newCandidatePosition.z = myTransform.position.z;
+                if (HitFloorAtPosition(newCandidatePosition)) {
+                    candidatePosition = newCandidatePosition;
+                    return true;
+                }
+                
+                newCandidatePosition = candidatePosition;
+                newCandidatePosition.x = myTransform.position.x;
+                if (HitFloorAtPosition(newCandidatePosition)) {
+                    candidatePosition = newCandidatePosition;
+                    return true;
+                }
+
+                return false;
+            }
+            
+            newCandidatePosition.x = myTransform.position.x;
+            if (HitFloorAtPosition(newCandidatePosition)) {
+                candidatePosition = newCandidatePosition;
+                return true;
+            }
+            
+            newCandidatePosition = candidatePosition;
+            newCandidatePosition.z = myTransform.position.z;
+            if (HitFloorAtPosition(newCandidatePosition)) {
+                candidatePosition = newCandidatePosition;
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool HitFloorAtPosition(Vector3 position) {
+            Vector3 rayStartPoint = (position + new Vector3(0, 0.5f, 0));
+            Ray ray = new Ray(rayStartPoint, Vector3.down);
+            RaycastHit hitInfo = new RaycastHit();
+            dragFloorCollider.Raycast(ray, out hitInfo, 10f);
+            return hitInfo.collider == dragFloorCollider;
+        }
+
         private void CheckMapObjectCondition() {
             MapObject nearestMapObject = GetNearestMapObject();
             if (nearestMapObject != null) {
