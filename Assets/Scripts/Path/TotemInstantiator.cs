@@ -61,9 +61,11 @@ namespace Interactive.Detail
 		private void AddComponent (GameObject gameObjectTotem, TotemInstantiatorConfig totem)
 		{
 			if (totem.Type == TotemType.Single) 
-				gameObjectTotem.AddComponent <TotemSingle>();
-			else if(totem.Type == TotemType.Triangle)
-				gameObjectTotem.AddComponent <TotemTriangle>();
+				gameObjectTotem.AddComponent <TotemSingle> ();
+			else if (totem.Type == TotemType.Triangle)
+				gameObjectTotem.AddComponent <TotemTriangle> ();
+			else
+				return;
 
 			Totem totemObject = gameObjectTotem.GetComponent<Totem> ();
 			totemObject.SetUp (totem, validStartPoints, GameStates);
