@@ -4,7 +4,7 @@ using System.Collections;
 public enum TotemType
 {
 	None = 0,
-	Single = 1,
+	Square = 1,
 	Boss = 2,
 	Triangle = 3,
 }

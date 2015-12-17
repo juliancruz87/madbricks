@@ -7,7 +7,7 @@ using ManagerInput;
 
 namespace Interactive.Detail
 {
-	public class TotemTriangle : Totem
+	public class TriangleTotem : Totem
 	{
 		private Dictionary<float,Vector3> directionByRotation = new Dictionary<float, Vector3> ();
 		private Node cachedNode;

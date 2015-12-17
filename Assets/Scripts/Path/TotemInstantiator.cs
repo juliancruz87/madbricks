@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Map;
@@ -60,10 +60,10 @@ namespace Interactive.Detail
 
 		private void AddComponent (GameObject gameObjectTotem, TotemInstantiatorConfig totem)
 		{
-			if (totem.Type == TotemType.Single) 
-				gameObjectTotem.AddComponent <TotemSingle> ();
+			if (totem.Type == TotemType.Square) 
+				gameObjectTotem.AddComponent <SquareTotem> ();
 			else if (totem.Type == TotemType.Triangle)
-				gameObjectTotem.AddComponent <TotemTriangle> ();
+				gameObjectTotem.AddComponent <TriangleTotem> ();
 			else
 				return;
 

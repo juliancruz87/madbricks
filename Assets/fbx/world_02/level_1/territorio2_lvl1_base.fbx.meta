@@ -1,20 +1,30 @@
 fileFormatVersion: 2
-guid: 4a2367d3427cfc94684103e6cf5e68ba
-timeCreated: 1449799043
+guid: 2fc10e97e2b2f5b45af59d23de618916
+timeCreated: 1450328054
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Cube
-    100002: Mesh
-    100004: nivel_2-1
-    100006: //RootNode
-    100008: Texture Group
-    400000: Cube
-    400002: Mesh
-    400004: nivel_2-1
-    400006: //RootNode
-    400008: Texture Group
+    100000: Camera
+    100002: Cube
+    100004: Directional Light
+    100006: Mesh
+    100008: nivel_2-1
+    100010: //RootNode
+    100012: territorio2_lvl1_base
+    100014: Texture Group
+    100016: Texture Group (2)
+    100018: Texture Group (3)
+    400000: Camera
+    400002: Cube
+    400004: Directional Light
+    400006: Mesh
+    400008: nivel_2-1
+    400010: //RootNode
+    400012: territorio2_lvl1_base
+    400014: Texture Group
+    400016: Texture Group (2)
+    400018: Texture Group (3)
     2300000: Cube
     3300000: Cube
     4300000: Cube

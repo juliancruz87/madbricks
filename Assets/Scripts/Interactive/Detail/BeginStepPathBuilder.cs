@@ -26,12 +26,11 @@ namespace Interactive.Detail {
 
         private void CreatePath() 
 		{
-            //pathTransform = ((GameObject)Instantiate(pathPrototype, mapTransform.position, mapTransform.rotation)).transform;
 			Transform rielTransform = Instantiate<Transform> (riel);
 			pathTransform = Instantiate <GameObject> (pathPrototype).transform;
 
-			rielTransform.parent = mapTransform;
-			pathTransform.parent = mapTransform;
+			rielTransform.SetParent(mapTransform);
+			pathTransform.SetParent(mapTransform);
 
 			rielTransform.localPosition = Vector3.zero;
 			pathTransform.localPosition = Vector3.zero;

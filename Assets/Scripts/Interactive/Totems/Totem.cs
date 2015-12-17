@@ -42,7 +42,7 @@ namespace Interactive.Detail
 		
 		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
 		{
-			if (totem.Type == TotemType.Single || totem.Type == TotemType.Triangle)  
+			if (totem.Type == TotemType.Square || totem.Type == TotemType.Triangle)  
 			{
 				this.gameStates = gameStates;
 				this.totem = totem;

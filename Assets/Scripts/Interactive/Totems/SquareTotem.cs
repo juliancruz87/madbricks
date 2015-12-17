@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Interactive.Detail
 {
-	public class TotemSingle : Totem
+	public class SquareTotem : Totem
 	{
 		protected override void Move ()
 		{
