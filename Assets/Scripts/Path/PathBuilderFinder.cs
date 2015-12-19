@@ -96,10 +96,7 @@ namespace Path {
 			Node node = GetNearsetNodeInDirection(nodeSpnaped, direction);
 
 			if(node == null)
-			{
-				Debug.LogWarning ("Node: " + nodeSpnaped.Id + " did not found an closer node in direction -> " + direction);
 				return newNodes;
-			}
 
 			newNodes.Add (node);
 

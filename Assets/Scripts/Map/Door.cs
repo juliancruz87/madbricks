@@ -39,6 +39,11 @@ namespace Map
 			myCollider = GetComponent<Collider> ();
 			myTransform = GetComponent<Transform> ();
 
+			SetInitState ();
+		}
+
+		private void SetInitState ()
+		{
 			if (state == State.Close)
 				Close ();
 			else if (state == State.Open)
@@ -59,6 +64,14 @@ namespace Map
 			myTransform.DOLocalMoveY (openPos, speed);
 			myCollider.enabled = false;
 			myRenderer.enabled = false;
+		}
+
+		public void ToggleState ()
+		{
+			if (state == State.Close)
+				Open ();
+			else if (state == State.Open)
+				Close ();
 		}
 	}
 }

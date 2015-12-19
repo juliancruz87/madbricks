@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ManagerInput.CameraControls;
 using ManagerInput;
 using DG.Tweening;
+using Map;
 
 namespace Interactive.Detail
 {
@@ -13,6 +14,7 @@ namespace Interactive.Detail
 		private bool canRotate = false;
 		private Collider myCollider;
 		private Vector3 lastDirection;
+		private List<Node> pointsToPassedPath = new List<Node> ();
 
 		private bool CanRotate 
 		{
@@ -39,7 +41,14 @@ namespace Interactive.Detail
 		{
 			Node node = nodes [nodes.Count - 1];
 			float speed = totem.SpeedPerTile * nodes.Count;
-			GoToNode (node, speed);
+
+			if (!pointsToPassedPath.Contains (node)) 
+			{
+				pointsToPassedPath.Add (CurrentNode);
+				GoToNode (node, speed);
+			} 
+			else
+				EndGame ("Totem: " + gameObject.name + " trying to go back.");
 		}
 
 		protected override void GetReachedToPoint (Node node)
@@ -83,6 +92,17 @@ namespace Interactive.Detail
 				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F).OnComplete (() => Move ());
 			else if (rightNode != null)
 				myTransform.DORotate (currentEulers + turn90Dregrees, 0.3F).OnComplete (() => Move ());
+			else 
+				EndGame ("Totem : " + totem.name+ " could not found a path to follow");
+		}
+
+		private void  OnTriggerEnter(Collider collision)
+		{
+			if (collision.gameObject.GetComponent<Door> () != null) 
+			{
+				Stop ();
+				GoToOtherNode ();
+			}
 		}
 	}
 }
