@@ -5,6 +5,7 @@
         LauncherNormal,
         LauncherSticky,
         Totem_target,
-        BossJail
+        BossJail,
+        ExplosiveBox
     }
 }

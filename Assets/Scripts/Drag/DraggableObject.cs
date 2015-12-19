@@ -64,9 +64,14 @@ namespace Drag {
 		{
 			get { return snapperObject.NodeSpnaped; }
 		}
-        
+
+        private void Awake() {
+            myTransform = transform;
+        }
+
 		private void Start () {
-            collisionAudioSource = GameObject.Find("CollisionSoundPlayer").GetComponent<AudioSource>();
+            if (GameObject.Find("CollisionSoundPlayer"))
+                collisionAudioSource = GameObject.Find("CollisionSoundPlayer").GetComponent<AudioSource>();
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
 		    dragFloorCollider = dragFloor.GetComponent<Collider>();

@@ -12,7 +12,7 @@ namespace Map {
         private Vector3 startPositionOffset;
 
         [SerializeField]
-        private MapObjectType type;
+        protected MapObjectType type;
 
         public MapObjectType Type {
             get { return type; }
