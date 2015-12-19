@@ -1,55 +1,45 @@
 using Path;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+using System.Collections.Generic;
 using ManagerInput.CameraControls;
 using ManagerInput;
+using DG.Tweening;
 
 namespace Interactive.Detail
 {
 	public class TriangleTotem : Totem
 	{
-		private Dictionary<float,Vector3> directionByRotation = new Dictionary<float, Vector3> ();
 		private Node cachedNode;
 		private bool canRotate = false;
 		private Collider myCollider;
 		private Vector3 lastDirection;
 
+		private bool CanRotate 
+		{
+			get{ return TouchChecker.InputIsOverThisCollider(Camera.main, myCollider) && InputManager.Instance.InputDevice.PrimaryTouch.ReleasedTapThisFrame && canRotate;}
+		}
+
 		protected override void Awake ()
 		{
 			base.Awake ();
-			directionByRotation.Add (0, Vector3.forward);
-			directionByRotation.Add (90, Vector3.left);
-			directionByRotation.Add (180, Vector3.back);
-			directionByRotation.Add (270, Vector3.right);
-			directionByRotation.Add (360, Vector3.forward);
 			myCollider = GetComponent<Collider> ();
 		}
 
 		protected override void Move ()
 		{
-			List<Node> nodes = GetNodesToTravel ();
-			if (nodes.Count > 0) 
-			{
-				Node node = nodes [nodes.Count - 1];
-				float speed = totem.SpeedPerTile * nodes.Count;
-				GoToNode (node, speed);
-			} 
+			List<Node> nodes = new List<Node> ();
+			nodes = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.forward, nodes);
+			if (nodes.Count > 0)
+				ChoseNodeToGo (nodes);
 			else 
-			{
-				//Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
-			}
+				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 		}
 
-		private List<Node> GetNodesToTravel ()
+		private void ChoseNodeToGo (List<Node> nodes)
 		{
-			List<Node> nodes = new List<Node> ();
-			float currentDegrees = GetCloserDegrees (myTransform.localRotation.eulerAngles.y);
-			Vector3 directionToGo = directionByRotation[currentDegrees];
-			Debug.Log ("Current degress: " + currentDegrees);
-			nodes = PathBuilder.Instance.Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, directionToGo, nodes);
-			nodes = PathBuilder.Instance.Finder.GetNodesInLongDirection (CurrentNode, totem.PositionToGo);
-			return nodes;
+			Node node = nodes [nodes.Count - 1];
+			float speed = totem.SpeedPerTile * nodes.Count;
+			GoToNode (node, speed);
 		}
 
 		protected override void GetReachedToPoint (Node node)
@@ -57,7 +47,7 @@ namespace Interactive.Detail
 			if (node.Id == totem.PositionToGo) 
 				GoalReachedNode (node);
 			else 
-				GoToOtherPoint ();
+				GoToOtherNode ();
 		}
 
 		private float GetCloserDegrees (float currentDegrees)
@@ -75,22 +65,24 @@ namespace Interactive.Detail
 				canRotate = IsInStartPoint;
 			}
 
-			if(TouchChecker.InputIsOverThisCollider(Camera.main, myCollider) && canRotate && InputManager.Instance.InputDevice.PrimaryTouch.ReleasedTapThisFrame)
+			if(CanRotate)
 				myTransform.DORotate ((myTransform.rotation.eulerAngles.y - 90) * Vector3.up, 0.3F);
 
 		}
 
-		private void GoToOtherPoint ()
+		private void GoToOtherNode ()
 		{
-			Vector3 currentEulers = myTransform.rotation.eulerAngles;
-			Vector3 turn90Dregrees = Vector3.up * 90f;
+			Node leftNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right * -1);
+			Node rightNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right);
+			MoveToNextNode (leftNode, rightNode, myTransform.rotation.eulerAngles, (Vector3.up * 90f));
+		}
 
-			if (Random.Range (0, 100) < 50)
-				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F);
-			else
-				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F);
-
-			//Move ();
+		private void MoveToNextNode (Node leftNode, Node rightNode, Vector3 currentEulers, Vector3 turn90Dregrees)
+		{
+			if (leftNode != null)
+				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F).OnComplete (() => Move ());
+			else if (rightNode != null)
+				myTransform.DORotate (currentEulers + turn90Dregrees, 0.3F).OnComplete (() => Move ());
 		}
 	}
 }

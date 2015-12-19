@@ -21,10 +21,12 @@ namespace Interactive.Detail
 
 		protected bool IsInStartPoint
 		{
-			get
-			{ 
-				return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id);
-			}
+			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }
+		}
+
+		protected PathBuilderFinder Finder 
+		{
+			get { return PathBuilder.Instance.Finder; }
 		}
 
 		protected Node CurrentNode 
@@ -113,10 +115,10 @@ namespace Interactive.Detail
 		{
 #if UNITY_EDITOR
 			Vector3 position = myTransform.position;
-			Debug.DrawLine(position , position - (Vector3.forward * 0.1F), Color.red);
-			Debug.DrawLine(position , position - (Vector3.back * 0.1F), Color.blue);
-			Debug.DrawLine(position , position - (Vector3.left * 0.1F), Color.yellow);
-			Debug.DrawLine(position , position - (Vector3.right * 0.1F), Color.green);
+			Debug.DrawLine(position , position - (myTransform.forward * 0.1F), Color.red);
+			Debug.DrawLine(position , position - ((myTransform.forward *-1f) * 0.1F), Color.blue);
+			Debug.DrawLine(position , position - ((myTransform.right *-1f) * 0.1F), Color.yellow);
+			Debug.DrawLine(position , position - (myTransform.right * 0.1F), Color.green);
 #endif
 		}
 

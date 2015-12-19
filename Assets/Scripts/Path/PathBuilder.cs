@@ -14,7 +14,6 @@ namespace Path {
         public bool debugModeOn;
         public Vector3 debugOffset;
         public Color debugColor;
-        // Use this for initialization
 		private PathBuilderFinder finder;
 
 		public static PathBuilder Instance
