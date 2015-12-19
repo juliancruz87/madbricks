@@ -13,6 +13,7 @@ namespace Interactive.Detail
 		private Node cachedNode;
 		private bool canRotate = false;
 		private Collider myCollider;
+		private Vector3 lastDirection;
 
 		protected override void Awake ()
 		{
@@ -36,7 +37,7 @@ namespace Interactive.Detail
 			} 
 			else 
 			{
-				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
+				//Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 			}
 		}
 
@@ -45,6 +46,8 @@ namespace Interactive.Detail
 			List<Node> nodes = new List<Node> ();
 			float currentDegrees = GetCloserDegrees (myTransform.localRotation.eulerAngles.y);
 			Vector3 directionToGo = directionByRotation[currentDegrees];
+			Debug.Log ("Current degress: " + currentDegrees);
+			nodes = PathBuilder.Instance.Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, directionToGo, nodes);
 			nodes = PathBuilder.Instance.Finder.GetNodesInLongDirection (CurrentNode, totem.PositionToGo);
 			return nodes;
 		}
@@ -65,6 +68,7 @@ namespace Interactive.Detail
 
 		protected override void Update ()
 		{
+			base.Update ();
 			if (cachedNode != CurrentNode) 
 			{
 				cachedNode = CurrentNode;
@@ -86,7 +90,7 @@ namespace Interactive.Detail
 			else
 				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F);
 
-			Move ();
+			//Move ();
 		}
 	}
 }
