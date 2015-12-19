@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Interactive.Detail
 {
-	public abstract class Totem : MonoBehaviour
+	public abstract class Totem : MonoBehaviour, ITotem
 	{
 		private DraggableObject dragObject;
 		private IGameManagerForStates gameStates;
@@ -57,9 +57,14 @@ namespace Interactive.Detail
 
 		private void OnCrashWithOtherCollider ()
 		{
+			Stop ();
+			EndGame ("Has been crashed with other totem");
+		}
+
+		public void Stop ()
+		{
 			myTransform.DOKill ();
 			snaper.SnapToCloserTransform ();
-			EndGame ("Has been crashed with other totem");
 		}
 
 		private void SetGameManagerForUI (IGameManagerForStates gameStates)
