@@ -39,10 +39,6 @@ namespace Map {
         }
         
         private void TryToFillHole(Totem totem) {
-            //totem.Stop();
-            Debug.Log("Totem type: " + totem.Type);
-            Debug.Log("This hole type: " + holeType);
-
             TotemHoleFiller holeFiller = totem.GetComponent<TotemHoleFiller>();
 
             if (holeFiller != null &&
