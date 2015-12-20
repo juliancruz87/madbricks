@@ -38,5 +38,9 @@ namespace Interactive.Detail
 		{
 			GoalReachedNode (node);
 		}
-	}
+
+        public override TotemType Type {
+            get { return TotemType.Square; }
+        }
+    }
 }

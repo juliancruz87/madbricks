@@ -7,4 +7,5 @@ public enum TotemType
 	Square = 1,
 	Boss = 2,
 	Triangle = 3,
+    Circular = 4
 }

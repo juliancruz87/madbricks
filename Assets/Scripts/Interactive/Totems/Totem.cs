@@ -1,3 +1,4 @@
+using System;
 using Path;
 using Drag;
 using Sound;
@@ -18,8 +19,9 @@ namespace Interactive.Detail
 
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
+	    public abstract TotemType Type { get; }
 
-		protected bool IsInStartPoint
+	    protected bool IsInStartPoint
 		{
 			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }
 		}

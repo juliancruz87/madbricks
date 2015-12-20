@@ -104,5 +104,9 @@ namespace Interactive.Detail
 				GoToOtherNode ();
 			}
 		}
-	}
+
+        public override TotemType Type {
+            get { return TotemType.Triangle; }
+        }
+    }
 }

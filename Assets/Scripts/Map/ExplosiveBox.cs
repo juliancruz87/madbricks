@@ -1,6 +1,6 @@
 ﻿using Interactive;
 using Interactive.Detail;
-using Map;
+using Interactive.Totems;
 using UnityEngine;
 
 namespace Map {
@@ -23,7 +23,7 @@ namespace Map {
             if (GameManager.Instance.CurrentState != GameStates.Play || 
                 totem == null)
                 return;
-            if (collider.gameObject.GetComponent<ExplosiveTotem>() != null)
+            if (collider.gameObject.GetComponent<TotemExplosive>() != null)
                 Explode();
             else
                 HittedByNonExplosiveTotem(totem);
