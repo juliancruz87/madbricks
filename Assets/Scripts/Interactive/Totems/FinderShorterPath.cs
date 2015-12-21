@@ -6,89 +6,92 @@ namespace Interactive.Detail
 {
 	public class FinderShorterPath 
 	{
+		private int reachPoint = 0;
 		private PathBuilderFinder pathInfo;
-		private List<Connection> currentConnections = new List<Connection> ();
+		private List<Connection> shorterPath = new List<Connection> ();
+		private List<Connection> markedConnections = new List<Connection> ();
 
-		public FinderShorterPath (PathBuilderFinder pathInfo)
+		public List<Node> FindShorterPathFromTo (int fromId, int toId, PathBuilderFinder pathInfo)
 		{
+			reachPoint = toId;
 			this.pathInfo = pathInfo;
-		}
 
-		public void FindShorterPathFromTo (int fromId, int toId)
-		{
 			List<Connection> foundedConnections = pathInfo.Connections.FindAll (c => c.FromNode.Id == fromId);
-			List<List<Connection>> paths = new List<List<Connection>> (); 
-			foreach (Connection connection in foundedConnections) 
-			{
-				List<Connection> path = new List<Connection> ();
-				path.Add (connection);
-				path.AddRange (CreatePathFrom(connection, toId));
-				paths.Add (path);
+			List<List<Connection>> paths = CreatePathsConnections (foundedConnections, markedConnections, true);
+			shorterPath = SelectShorterPath (paths);
 
-				if(currentConnections.Count == 0)
-				{
-					currentConnections.Clear ();
-					currentConnections.AddRange (path);
-				}
-				else if(currentConnections.Count > path.Count && path.Count > 0)
-				{
-					currentConnections.Clear ();
-					currentConnections.AddRange (path);
-				}
-			}
+			return GetNodesInPath (shorterPath);
 		}
 
-		private List<Connection> CreatePathFrom (Connection connection, int toId)
+		private List<Connection> AddAlternativePaths (List<Connection> foundedConnections, List<Connection> markedConnections)
+		{
+			List<List<Connection>> paths = CreatePathsConnections (foundedConnections, markedConnections, false);
+			return SelectShorterPath (paths);
+		}
+
+		private List<List<Connection>> CreatePathsConnections (List<Connection> foundedConnections, List<Connection> markedConnections, bool isStartPoint)
+		{
+			List<List<Connection>> paths = new List<List<Connection>> (); 
+			foreach (Connection connection in foundedConnections)
+			{
+				if(isStartPoint)
+					markedConnections = new List<Connection> ();
+
+				List<Connection> path = CreatePath (connection, markedConnections);
+				if(path.FindAll (c=> c.ToNode.Id == reachPoint).Count > 0)
+					paths.Add (path);
+			}
+			return paths;
+		}
+
+		private List<Connection> CreatePath (Connection connection, List<Connection> markedConnections)
 		{
 			List<Connection> path = new List<Connection> ();
-			List<Connection> foundedConnections = pathInfo.Connections.FindAll (c => c.FromNode.Id == connection.ToNode.Id && c.ToNode.Id != connection.FromNode.Id);
-
-			if (foundedConnections.Count == 0)
-				return path;
-
-			if (foundedConnections.Count == 1) 
+			if (!path.Contains (connection) && !markedConnections.Contains (connection)) 
 			{
-				path.Add (foundedConnections [0]);
-				if (foundedConnections [0].ToNode.Id != toId)
-					path.AddRange (CreatePathFrom (foundedConnections [0], toId));
-			} 
-			else 
-			{
+				markedConnections.Add (connection);
+				path.Add (connection);
+			}
 
+			if (connection.ToNode.Id != reachPoint) 
+			{
+				List<Connection> alternativePaths = pathInfo.Connections.FindAll (c => c.FromNode.Id == connection.ToNode.Id && c.ToNode.Id != connection.FromNode.Id && !markedConnections.Contains (c));
+				bool hasAlternativePaths = alternativePaths.Count > 0;
+				if (hasAlternativePaths)
+					path.AddRange (AddAlternativePaths (alternativePaths, markedConnections));
 			}
 
 			return path;
 		}
 
-		private List<Connection> AttachPath (List<Connection> foundedConnections, int toId)
+		private List<Connection> SelectShorterPath (List<List<Connection>> paths)
 		{
-			List<Connection> currentPath = new List<Connection> ();
-			List<List<Connection>> paths = new List<List<Connection>> (); 
-			foreach (Connection connection in foundedConnections) 
-			{
-				List<Connection> path = new List<Connection> ();
-				path.Add (connection);
-				path.AddRange (CreatePathFrom (connection, toId));
-				paths.Add (path);
+			List<Connection> selectedPath = new List<Connection> ();
 
-				if(currentConnections.Count == 0)
-				{
-					currentPath.Clear ();
-					currentPath.AddRange (path);
-				}
-				else if(currentPath.Count > path.Count && path.Count > 0)
-				{
-					currentPath.Clear ();
-					currentPath.AddRange (path);
-				}
+			foreach (List<Connection> path in paths) 
+			{
+				if (selectedPath.Count == 0)
+					selectedPath = path;
+				else if (selectedPath.Count > path.Count)
+					selectedPath = path;
 			}
 
-			return currentPath;
+			return selectedPath;
 		}
 
-		public void DrawLines ()
+		private List<Node> GetNodesInPath (List<Connection> shorterPath)
 		{
-			currentConnections.ForEach (c => Debug.DrawLine (c.FromNode.transform.position, c.ToNode.transform.position, Color.magenta));
+			List<Node> nodes = new List<Node> ();
+			foreach (Connection connection in shorterPath)
+			{
+				if(!nodes.Contains(connection.FromNode))
+					nodes.Add (connection.FromNode);
+
+				if(!nodes.Contains(connection.ToNode))
+					nodes.Add (connection.ToNode);
+			}
+
+			return nodes;
 		}
 	}	
 }
