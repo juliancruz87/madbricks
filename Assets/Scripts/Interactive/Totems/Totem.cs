@@ -131,5 +131,10 @@ namespace Interactive.Detail
 
 		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();
+
+	    public void GoToSecondaryPositionToGo() {
+            //TODO: Start the new tween, so the totem can reach the new target
+            Debug.Log("GoToSecondaryPositionToGo() secondaryPositionToGo:" + totem.SecondaryPositionToGo);
+	    }
 	}
 }

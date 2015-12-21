@@ -17,6 +17,9 @@ namespace Interactive.Detail
 		[SerializeField]
 		private int positionToGo;
 
+        [SerializeField]
+        private int secondaryPositionToGo;
+
 		[SerializeField]
 		private float speedPerTile = 0.5F;
 
@@ -42,6 +45,11 @@ namespace Interactive.Detail
 		{
 			get { return positionToGo; }
 		}
+
+        public int SecondaryPositionToGo
+        {
+            get { return secondaryPositionToGo; }
+        }
 
 		public float SpeedPerTile 
 		{
