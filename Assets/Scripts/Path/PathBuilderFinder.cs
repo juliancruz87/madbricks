@@ -8,11 +8,23 @@ namespace Path {
 	public class PathBuilderFinder
 	{
 		private Node[] _nodes;
+		private List<Connection> connections = new List<Connection> ();
 
 		public float MaxNodeDistance 
 		{
 			set;
 			private	get;
+		}
+
+		public List<Connection> Connections 
+		{
+			get { return connections; }
+		}
+
+		public void SetConnections (ArrayList _connections)
+		{
+			foreach (Connection connection in _connections)
+				connections.Add (connection);
 		}
 
 		public PathBuilderFinder (Node[] nodes, float maxNodeDistance)
@@ -136,5 +148,4 @@ namespace Path {
 			return validDirection && validDistance;
 		}
 	}
-    
 }

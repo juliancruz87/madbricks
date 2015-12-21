@@ -37,6 +37,7 @@ namespace Path {
             _nodes = FindObjectsOfType<Node>();
             finder = new PathBuilderFinder (_nodes, maxNodeDistance);
             BuildConnections();
+			finder.SetConnections (_connections);
         }
 	
         private void BuildConnections() {
