@@ -6,19 +6,14 @@ namespace Path
 {
 	public class Grid : MonoBehaviour 
 	{
-		private List<Transform> nodes = new List<Transform> ();
+		private List<Node> nodes = new List<Node> ();
 
 		public void Create ()
 		{
-			GetComponentsInChildren<Transform> (nodes);
-
-			nodes = nodes.FindAll (c => c != transform);
+			GetComponentsInChildren<Node> (nodes);
 
 			for (int i = 0; i < nodes.Count; i++) 
-			{
-				nodes [i].gameObject.AddComponent<Node> ();
-				nodes [i].GetComponent<Node> ().SetUp (i+1);
-			}
+				nodes [i].SetUp (i+1);
 		}
 	}
 }

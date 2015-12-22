@@ -28,7 +28,8 @@ namespace Interactive.Detail
 		public void SetUp (IGameManagerForStates gameStates)
 		{
 			Grid gridConfig = grid.GetComponent<Grid> ();
-			gridConfig.Create ();
+			if(gridConfig != null)
+				gridConfig.Create ();
 			instantiator.GameStates = gameStates;
 			Transform [] childs = GetComponentsInChildren<Transform> ();
 			System.Array.ForEach (childs, c => points.Add (c));
