@@ -16,6 +16,7 @@ namespace Interactive.Detail
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
 		private List<int> validStartPoints;
+		private List<TotemType> validTypes = new List<TotemType> ();
 
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
@@ -42,11 +43,14 @@ namespace Interactive.Detail
 			snaper = GetComponent<SnapItemToCloserPosition> ();
 			dragObject = GetComponent<DraggableObject> ();
 			controllerToStop = GetComponent<TotemControllerStop> ();
+			validTypes.Add (TotemType.Triangle);
+			validTypes.Add (TotemType.Sphere);
+			validTypes.Add (TotemType.Square);
 		}
 		
 		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
 		{
-			if (totem.Type == TotemType.Square || totem.Type == TotemType.Triangle)  
+			if (validTypes.Contains (totem.Type))  
 			{
 				this.gameStates = gameStates;
 				this.totem = totem;

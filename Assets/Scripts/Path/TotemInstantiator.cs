@@ -64,6 +64,8 @@ namespace Interactive.Detail
 				gameObjectTotem.AddComponent <SquareTotem> ();
 			else if (totem.Type == TotemType.Triangle)
 				gameObjectTotem.AddComponent <TriangleTotem> ();
+			else if( totem.Type == TotemType.Sphere)
+				gameObjectTotem.AddComponent <SphereTotem> ();
 			else
 				return;
 

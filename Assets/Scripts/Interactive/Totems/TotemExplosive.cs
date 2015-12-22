@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Interactive.Totems {
-    public class TotemExplosive : MonoBehaviour { }
+namespace Interactive.Totems 
+{
+    public class TotemExplosive : MonoBehaviour 
+	{
+	}
 }

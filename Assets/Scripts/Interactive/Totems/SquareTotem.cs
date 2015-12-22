@@ -6,6 +6,11 @@ namespace Interactive.Detail
 {
 	public class SquareTotem : Totem
 	{
+		public override TotemType Type 
+		{
+			get { return TotemType.Square; }
+		}
+
 		protected override void Move ()
 		{
 			List<Node> nodes = GetNodesToTravel ();
@@ -38,9 +43,5 @@ namespace Interactive.Detail
 		{
 			GoalReachedNode (node);
 		}
-
-        public override TotemType Type {
-            get { return TotemType.Square; }
-        }
     }
 }
