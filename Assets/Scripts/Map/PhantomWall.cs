@@ -4,9 +4,12 @@ using Interactive.Detail;
 using Interactive.Totems;
 using UnityEngine;
 
-namespace Map {
-    public class PhantomWall : MapObject {
-        private void OnTriggerEnter(Collider collider) {
+namespace Map 
+{
+    public class PhantomWall : MapObject 
+	{
+        private void OnTriggerEnter(Collider collider) 
+		{
             GameObject collisionGameObject = collider.gameObject;
             Totem totem = collisionGameObject.GetComponent<Totem>();
 
@@ -17,7 +20,8 @@ namespace Map {
             TryStopTotem(totem);
         }
 
-        private void TryStopTotem(Totem totem) {
+        private void TryStopTotem(Totem totem) 
+		{
             TotemPhantom phantomTotem = totem.GetComponent<TotemPhantom>();
 
             if (phantomTotem == null) 
@@ -26,7 +30,8 @@ namespace Map {
                 Debug.Log("Hitted by a phantom totem, its ok!");
         }
 
-        private void StopTotem(Totem totem) {
+        private void StopTotem(Totem totem) 
+		{
             Debug.Log("Hitted by a non phantom totem, fuck you!");
             totem.Stop();
             totem.transform.DOKill();

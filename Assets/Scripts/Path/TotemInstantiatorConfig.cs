@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Interactive.Detail
 {
@@ -25,6 +26,9 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private AudioClip soundToGetReach;
+
+		[SerializeField]
+		private List<TotemBehaviours> behavioursTypes;
 		
 		public TotemType Type 
 		{
@@ -59,6 +63,11 @@ namespace Interactive.Detail
 		public AudioClip SoundToGetReach 
 		{
 			get { return soundToGetReach; }
+		}
+
+		public List<TotemBehaviours> BehavioursTypes 
+		{
+			get { return behavioursTypes; }
 		}
 	}
 }

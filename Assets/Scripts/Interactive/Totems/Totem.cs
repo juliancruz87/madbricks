@@ -125,6 +125,13 @@ namespace Interactive.Detail
 			gameStates.Lose ();
 		}
 
+		public void GoToSecondaryPositionToGo() 
+		{
+			positionToGo = totem.SecondaryPositionToGo;
+			dragObject.SetCurrentNode (myTransform.position);
+			Move();
+		}
+
 		protected virtual void Update ()
 		{
 #if UNITY_EDITOR
@@ -138,12 +145,5 @@ namespace Interactive.Detail
 
 		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();
-
-	    public void GoToSecondaryPositionToGo() {
-            //TODO: Start the new tween, so the totem can reach the new target
-            Debug.Log("GoToSecondaryPositionToGo() secondaryPositionToGo:" + totem.SecondaryPositionToGo);
-	        positionToGo = totem.SecondaryPositionToGo;
-            Move();
-	    }
 	}
 }
