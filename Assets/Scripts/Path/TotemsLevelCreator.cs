@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Zenject;
+using Path;
 
 namespace Interactive.Detail
 {
@@ -26,6 +27,8 @@ namespace Interactive.Detail
 
 		public void SetUp (IGameManagerForStates gameStates)
 		{
+			Grid gridConfig = grid.GetComponent<Grid> ();
+			gridConfig.Create ();
 			instantiator.GameStates = gameStates;
 			Transform [] childs = GetComponentsInChildren<Transform> ();
 			System.Array.ForEach (childs, c => points.Add (c));

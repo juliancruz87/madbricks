@@ -9,5 +9,10 @@ namespace Path {
 		{
 			get { return id; }
 		}
+
+		public void SetUp (int id)
+		{
+			this.id = id;
+		}
     }
 }
