@@ -29,11 +29,11 @@ namespace Interactive.Detail
 
 		private List<Node> GetNodesToTravel ()
 		{
-			List<Node> nodes = Finder.GetNodes (CurrentNode, totem.PositionToGo);
+			List<Node> nodes = Finder.GetNodes (CurrentNode, positionToGo);
 			if (nodes.Count <= 0)
 			{
 				Debug.LogWarning (gameObject.name +" try to find an alternative path");
-				nodes = Finder.GetNodesInLongDirection (CurrentNode, totem.PositionToGo);
+                nodes = Finder.GetNodesInLongDirection(CurrentNode, positionToGo);
 			}
 
 			return nodes;

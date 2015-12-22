@@ -22,6 +22,8 @@ namespace Interactive.Detail
 		protected TotemInstantiatorConfig totem;
 	    public abstract TotemType Type { get; }
 
+	    protected int positionToGo;
+        
 	    protected bool IsInStartPoint
 		{
 			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }
@@ -58,6 +60,7 @@ namespace Interactive.Detail
 				gameStates.StartedGame += OnStartedGame;
 				controllerToStop.CollidedWithTotem += OnCrashWithOtherCollider;
 				SetGameManagerForUI (gameStates);
+			    positionToGo = totem.PositionToGo;
 			}
 		}
 
@@ -139,6 +142,8 @@ namespace Interactive.Detail
 	    public void GoToSecondaryPositionToGo() {
             //TODO: Start the new tween, so the totem can reach the new target
             Debug.Log("GoToSecondaryPositionToGo() secondaryPositionToGo:" + totem.SecondaryPositionToGo);
+	        positionToGo = totem.SecondaryPositionToGo;
+            Move();
 	    }
 	}
 }
