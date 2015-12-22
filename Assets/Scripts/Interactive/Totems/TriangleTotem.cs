@@ -15,6 +15,11 @@ namespace Interactive.Detail
 		private Collider myCollider;
 		private Vector3 lastDirection;
 		private List<Node> pointsToPassedPath = new List<Node> ();
+		
+		public override TotemType Type 
+		{
+			get { return TotemType.Triangle; }
+		}
 
 		private bool CanRotate 
 		{
@@ -76,7 +81,6 @@ namespace Interactive.Detail
 
 			if(CanRotate)
 				myTransform.DORotate ((myTransform.rotation.eulerAngles.y - 90) * Vector3.up, 0.3F);
-
 		}
 
 		private void GoToOtherNode ()
@@ -104,9 +108,5 @@ namespace Interactive.Detail
 				GoToOtherNode ();
 			}
 		}
-
-        public override TotemType Type {
-            get { return TotemType.Triangle; }
-        }
     }
 }

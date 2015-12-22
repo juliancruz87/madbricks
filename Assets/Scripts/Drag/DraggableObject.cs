@@ -78,6 +78,11 @@ namespace Drag {
 			snapperObject = GetComponent<SnapItemToCloserPosition>();
 		}
 
+		public void SetCurrentNode (Vector3 position)
+		{
+			currentNode = PathBuilder.Instance.GetNearsetNode(position);
+		}
+
         private void Update() {
             UpdateNearestNode();
 
