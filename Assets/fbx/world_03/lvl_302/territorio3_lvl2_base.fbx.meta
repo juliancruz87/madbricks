@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 76673c1a0bf0a2e4b819d08f9bcca36c
-timeCreated: 1450188720
+guid: bcd942bcf01300e4bac020af33c75f9a
+timeCreated: 1450837121
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -11,12 +11,14 @@ ModelImporter:
     100006: territorio3_lvl2_base
     100008: Texture Group
     100010: Texture Group (2)
+    100012: Texture Group (3)
     400000: Cube (2)
     400002: Mesh
     400004: //RootNode
     400006: territorio3_lvl2_base
     400008: Texture Group
     400010: Texture Group (2)
+    400012: Texture Group (3)
     2300000: Cube (2)
     3300000: Cube (2)
     4300000: Cube (2)
