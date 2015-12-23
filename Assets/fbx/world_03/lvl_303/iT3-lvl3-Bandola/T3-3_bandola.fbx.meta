@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: 71e24c4660286f94297367bf5707ee60
+guid: f712900e73f7d5f49a294e9392401071
 timeCreated: 1450839891
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Mesh
-    100002: Mesh (2)
-    100004: nivel_3-3_tapa
+    100000: Camera
+    100002: Directional Light
+    100004: Mesh
     100006: //RootNode
-    400000: Mesh
-    400002: Mesh (2)
-    400004: nivel_3-3_tapa
+    400000: Camera
+    400002: Directional Light
+    400004: Mesh
     400006: //RootNode
-    2300000: Mesh (2)
-    3300000: Mesh (2)
-    4300000: Mesh (2)
+    2300000: Mesh
+    3300000: Mesh
+    4300000: Mesh
     7400000: Take 001
     9500000: //RootNode
   materials:
