@@ -1,15 +1,19 @@
 fileFormatVersion: 2
-guid: cc4abbc1156b1f341a568377d7b71479
+guid: b97d0174775f68f4eb4ce0687f5a5e09
 timeCreated: 1450925941
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Mesh
+    100000: polySurface32
+    100002: //RootNode
+    100004: transform19
+    400000: polySurface32
+    400002: //RootNode
+    400004: transform19
+    2300000: polySurface32
+    3300000: polySurface32
+    4300000: polySurface32
     7400000: Take 001
     9500000: //RootNode
   materials:
