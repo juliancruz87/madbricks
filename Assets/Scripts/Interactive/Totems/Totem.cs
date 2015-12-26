@@ -67,7 +67,7 @@ namespace Interactive.Detail
 		private void OnCrashWithOtherCollider ()
 		{
 			Stop ();
-			EndGame ("Has been crashed with other totem");
+			EndGame (name + " has been crashed with other totem");
 		}
 
 		public void Stop ()
@@ -119,8 +119,7 @@ namespace Interactive.Detail
 			snaper.SnapInPlace ();
 		}
 
-		protected void EndGame (string warning)
-		{
+		protected void EndGame (string warning) {
 			Debug.LogWarning (warning);
 			gameStates.Lose ();
 		}
