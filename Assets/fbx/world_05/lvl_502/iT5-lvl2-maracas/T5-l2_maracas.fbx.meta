@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 44108b91f4f347948b8cbd21f1ea1df5
-timeCreated: 1451158206
+guid: 13b019d1498cb62408806319e25f8e71
+timeCreated: 1451158205
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Mesh
+    4300000: maraca:Default
     7400000: Take 001
     9500000: //RootNode
   materials:
