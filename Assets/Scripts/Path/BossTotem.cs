@@ -74,7 +74,6 @@ namespace Path {
         }
 
         private void ProcessMapObjectCollision(MapObject nearestMapObject) {
-            Debug.Log("Here " + nearestMapObject);
             switch (nearestMapObject.Type) {
                 case MapObjectType.BossJail:
                     GetIntoJail();
