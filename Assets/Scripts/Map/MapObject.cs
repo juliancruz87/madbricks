@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Map {
     public class MapObject : MonoBehaviour {
@@ -44,5 +45,19 @@ namespace Map {
 				transform.position = position.position + startPositionOffset;
 			}
 		}
+
+        public static ArrayList GetMapObjectsOfType(MapObjectType type) {
+            ArrayList filteredMapObjects = new ArrayList();
+
+            MapObject[] mapObjects = FindObjectsOfType<MapObject>();
+
+            foreach (MapObject mapObject in mapObjects)
+            {
+                if (mapObject.Type == type)
+                    filteredMapObjects.Add(mapObject);
+            }
+
+            return filteredMapObjects;
+        }
     }
 }

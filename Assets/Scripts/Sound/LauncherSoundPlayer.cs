@@ -47,8 +47,12 @@ namespace Sound {
 
         private void PlayLauncherSound(MapObject launcher) {
             int launcherIndex = launchers.IndexOf(launcher);
-            audioSource.clip = clips[launcherIndex];
-            audioSource.Play();
+            if (launcherIndex >= 0 &&
+                launcherIndex < clips.Length) {
+                audioSource.clip = clips[launcherIndex];
+                audioSource.Play();    
+            }
+            
         }
     }
 }
