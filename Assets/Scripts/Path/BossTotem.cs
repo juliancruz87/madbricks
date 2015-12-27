@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Drag;
 using UnityEngine;
 using Interactive.Detail;
@@ -23,7 +24,7 @@ namespace Path {
         private float maxJumpDistance = 0.02f;
 
         [SerializeField]
-        private float styckDistance = 0.045f;
+        private float styckDistance = 1;
 
 
         private GameObject dragFloor;
@@ -41,8 +42,6 @@ namespace Path {
         void Start () {
             InitTotems();
         }
-
-        
 
         private void InitTotems() {
             totems = FindObjectsOfType<DraggableObject>();
@@ -86,11 +85,10 @@ namespace Path {
         }
 
         private MapObject GetNearestMapObject() {
-            MapObject[] mapObjects = FindObjectsOfType<MapObject>();
+            ArrayList mapObjects = MapObject.GetMapObjectsOfType(MapObjectType.BossJail);
 
             foreach (MapObject mapObject in mapObjects)
-                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance &&
-                    mapObject.Type == MapObjectType.BossJail)
+                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance)
                     return mapObject;
 
             return null;
