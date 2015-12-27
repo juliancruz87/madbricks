@@ -24,12 +24,13 @@ namespace Map {
                 totem == null)
                 return;
             if (collider.gameObject.GetComponent<TotemExplosive>() != null)
-                Explode();
+                Explode(totem);
             else
                 HittedByNonExplosiveTotem(totem);
         }
 
-        private void Explode() {
+        private void Explode(Totem totem) {
+            Destroy(totem.gameObject);
             Destroy(gameObject);
         }
 
