@@ -1,15 +1,45 @@
 fileFormatVersion: 2
-guid: 616cc8260469afc4c9024a937d056f7d
+guid: fb8c88d9f14910b48a51ba42dcc71ef1
 timeCreated: 1451185919
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Mesh
+    100000: arpa:Default
+    100002: group1_camera1_aim1
+    100004: polySurface44
+    100006: polySurface45
+    100008: polySurface46
+    100010: polySurface47
+    100012: polySurface48
+    100014: polySurface49
+    100016: //RootNode
+    100018: transform28
+    100020: transform89
+    100022: transform90
+    100024: transform91
+    100026: transform92
+    100028: transform93
+    100030: transform94
+    400000: arpa:Default
+    400002: group1_camera1_aim1
+    400004: polySurface44
+    400006: polySurface45
+    400008: polySurface46
+    400010: polySurface47
+    400012: polySurface48
+    400014: polySurface49
+    400016: //RootNode
+    400018: transform28
+    400020: transform89
+    400022: transform90
+    400024: transform91
+    400026: transform92
+    400028: transform93
+    400030: transform94
+    2300000: group1_camera1_aim1
+    3300000: group1_camera1_aim1
+    4300000: group1_camera1_aim1
     7400000: Take 001
     9500000: //RootNode
   materials:
