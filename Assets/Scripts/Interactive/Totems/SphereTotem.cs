@@ -47,5 +47,12 @@ namespace Interactive.Detail
 			else
 				EndGame ("Totem can reach the goal");
 		}
+
+		protected override void Update ()
+		{
+			base.Update ();
+			if (nodes.Count > 0)
+				finder.DrawShorterParthDebug ();
+		}
 	}
 }

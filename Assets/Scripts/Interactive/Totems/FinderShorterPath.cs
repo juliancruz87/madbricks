@@ -93,5 +93,10 @@ namespace Interactive.Detail
 
 			return nodes;
 		}
+
+		public void DrawShorterParthDebug ()
+		{
+			shorterPath.ForEach (c => Debug.DrawLine (c.FromNode.transform.position, c.ToNode.transform.position, Color.magenta));
+		}
 	}	
 }
