@@ -12,7 +12,7 @@ namespace Interactive.Detail
 	public abstract class Totem : MonoBehaviour, ITotem
 	{
 		private DraggableObject dragObject;
-		private IGameManagerForStates gameStates;
+		protected IGameManagerForStates gameStates;
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
 		private List<int> validStartPoints;

@@ -6,6 +6,8 @@ namespace Interactive.Detail
 {
 	public class SquareTotem : Totem
 	{
+		private FinderShorterPath finder = new FinderShorterPath ();
+		private List<Node> nodes = new List<Node> ();
 		public override TotemType Type 
 		{
 			get { return TotemType.Square; }
@@ -13,7 +15,7 @@ namespace Interactive.Detail
 
 		protected override void Move ()
 		{
-			List<Node> nodes = GetNodesToTravel ();
+			nodes = GetNodesToTravel ();
 
 			if (nodes.Count > 0) 
 			{
@@ -29,7 +31,7 @@ namespace Interactive.Detail
 
 		private List<Node> GetNodesToTravel ()
 		{
-			List<Node> nodes = Finder.GetNodes (CurrentNode, positionToGo);
+			List<Node> nodes = finder.FindShorterPathFromTo (CurrentNode.Id, totem.PositionToGo, Finder);//Finder.GetNodes (CurrentNode, positionToGo);
 			if (nodes.Count <= 0)
 			{
 				Debug.LogWarning (gameObject.name +" try to find an alternative path");
@@ -42,6 +44,13 @@ namespace Interactive.Detail
 		protected override void GetReachedToPoint (Node node)
 		{
 			GoalReachedNode (node);
+		}
+
+		protected override void Update ()
+		{
+			base.Update ();
+			if (nodes.Count > 0)
+				finder.DrawShorterParthDebug ();
 		}
     }
 }

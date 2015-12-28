@@ -35,7 +35,6 @@ namespace Map
             Debug.Log("Hitted by a non phantom totem, fuck you!");
             totem.Stop();
             totem.transform.DOKill();
-            GameManager.Instance.Lose();
         }
     }
 }
