@@ -6,6 +6,7 @@ using InteractiveObjects;
 using InteractiveObjects.Detail;
 using Zenject;
 using Interactive.Totems;
+using Path;
 
 namespace Interactive.Detail
 {
@@ -28,7 +29,7 @@ namespace Interactive.Detail
 			get { return totems.Count; }
 		}
 
-		public void Instantiate ( List<Transform> points, Transform positionsToSnap , Transform parent)
+		public void Instantiate ( List<Node> points, Transform positionsToSnap , Transform parent)
 		{
 			List<GameObject> totemsCreated = new List<GameObject> ();
 
@@ -51,11 +52,11 @@ namespace Interactive.Detail
 			}
 		}
 
-		private void InitializeComponents (GameObject gameObjectTotem, TotemInstantiatorConfig totem, List<Transform> points, Transform positionsToSnap)
+		private void InitializeComponents (GameObject gameObjectTotem, TotemInstantiatorConfig totem, List<Node> points, Transform positionsToSnap)
 		{
 			MapObject mapObject = gameObjectTotem.GetComponent<MapObject> ();
-			mapObject.SetStartPosition (CreateStartPosition (points, totem.PositionToAdd));
-
+			Transform startPosition = CreateStartPosition (points, totem.PositionToAdd);
+			mapObject.SetStartPosition (startPosition);
 			AddComponent (gameObjectTotem, totem);
 		}
 
@@ -96,10 +97,10 @@ namespace Interactive.Detail
 			}
 		}
 
-		private Transform CreateStartPosition(List<Transform> points, int positionToAdd)
+		private Transform CreateStartPosition(List<Node> points, int positionToAdd)
 		{
-			Transform positionToInstantiate = points.Find (c=> c.name.Contains(positionToAdd.ToString ()));
-			return positionToInstantiate;
+			Node positionToInstantiate = points.Find (c=> c.Id == positionToAdd );
+			return positionToInstantiate.transform;
 		}
 	}
 }

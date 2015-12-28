@@ -17,7 +17,7 @@ namespace Interactive.Detail
 		[Inject]
 		private IGameManagerForStates gameStates;
 
-		private List<Transform> points = new List<Transform>();
+		private List<Node> points = new List<Node>();
 
 		[PostInject]
 		private void PostInject ()
@@ -31,7 +31,7 @@ namespace Interactive.Detail
 			if(gridConfig != null)
 				gridConfig.Create ();
 			instantiator.GameStates = gameStates;
-			Transform [] childs = GetComponentsInChildren<Transform> ();
+			Node [] childs = GetComponentsInChildren<Node> ();
 			System.Array.ForEach (childs, c => points.Add (c));
 			instantiator.Instantiate (points, grid, grid);
 		}
