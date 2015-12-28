@@ -43,17 +43,19 @@ namespace Path {
         private void BuildConnections() {
             _connections =  new ArrayList();
             foreach (Node node in _nodes) {
-                AddConnectionInDirection(node, new Vector3(-1, 0, 0));
-                AddConnectionInDirection(node, new Vector3(1, 0, 0));
-                AddConnectionInDirection(node, new Vector3(0, 0, -1));
-                AddConnectionInDirection(node, new Vector3(0, 0, 1));
+                node.LeftNode = AddConnectionInDirection(node, new Vector3(-1, 0, 0));
+                node.RightNode = AddConnectionInDirection(node, new Vector3(1, 0, 0));
+                node.DownNode = AddConnectionInDirection(node, new Vector3(0, 0, -1));
+                node.UpNode = AddConnectionInDirection(node, new Vector3(0, 0, 1));
             }
         }
 
-        private void AddConnectionInDirection(Node node, Vector3 direcion) {
+        private Node AddConnectionInDirection(Node node, Vector3 direcion) {
 			Node nearestNode = finder.GetNearsetNodeInDirection(node, direcion);
             if (nearestNode != null)
                 _connections.Add(new Connection(node, nearestNode, 1));
+
+            return nearestNode;
         }
 
         // Update is called once per frame
