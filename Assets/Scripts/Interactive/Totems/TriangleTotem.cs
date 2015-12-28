@@ -13,7 +13,7 @@ namespace Interactive.Detail
 		private Node cachedNode;
 		private bool canRotate = false;
 		private Collider myCollider;
-		private Vector3 lastDirection;
+		private Vector3 lastDirection = Vector3.zero;
 		private List<Node> pointsToPassedPath = new List<Node> ();
 		
 		public override TotemType Type 
@@ -59,7 +59,10 @@ namespace Interactive.Detail
 		protected override void GetReachedToPoint (Node node)
 		{
 			if (node.Id == totem.PositionToGo) 
+			{
+				lastDirection = Vector3.zero;
 				GoalReachedNode (node);
+			}
 			else 
 				GoToOtherNode ();
 		}
@@ -84,18 +87,31 @@ namespace Interactive.Detail
 		}
 
 		private void GoToOtherNode ()
-		{
+		{	
 			Node leftNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right * -1);
 			Node rightNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right);
+
+			if (lastDirection != Vector3.zero && lastDirection != Vector3.left)
+				leftNode = null;
+
+			if (lastDirection != Vector3.zero && lastDirection != Vector3.right)
+				rightNode = null;
+
 			MoveToNextNode (leftNode, rightNode, myTransform.rotation.eulerAngles, (Vector3.up * 90f));
 		}
 
 		private void MoveToNextNode (Node leftNode, Node rightNode, Vector3 currentEulers, Vector3 turn90Dregrees)
 		{
-			if (leftNode != null)
+			if (leftNode != null) 
+			{
+				lastDirection = Vector3.left;
 				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F).OnComplete (() => Move ());
-			else if (rightNode != null)
+			} 
+			else if (rightNode != null) 
+			{
+				lastDirection = Vector3.right;
 				myTransform.DORotate (currentEulers + turn90Dregrees, 0.3F).OnComplete (() => Move ());
+			}
 			else 
 				EndGame ("Totem : " + totem.name+ " could not found a path to follow");
 		}
