@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 34afe2cefcbc8264684443cfcdb0cc01
-timeCreated: 1447896713
+guid: 7c7e130f7cb8b7d49b73d4a8a19ea239
+timeCreated: 1451337638
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Default
-    100002: //RootNode
-    400000: Default
-    400002: //RootNode
-    2300000: Default
-    3300000: Default
-    4300000: Default
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: deco_nivel_2_2:deco_nivel_2_2:Default
+    6400000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -37,7 +36,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -51,9 +50,9 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 0
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

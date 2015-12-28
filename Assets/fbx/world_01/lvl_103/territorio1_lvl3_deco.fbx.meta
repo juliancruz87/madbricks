@@ -1,17 +1,15 @@
 fileFormatVersion: 2
-guid: 6a7ef1b8c024fa640b31ce6eb19ad774
-timeCreated: 1447896161
+guid: 5b6fd82073559724290379611254179d
+timeCreated: 1451336413
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Default
-    100002: //RootNode
-    400000: Default
-    400002: //RootNode
-    2300000: Default
-    3300000: Default
-    4300000: Default
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -38,7 +36,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -51,9 +49,9 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 0
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

@@ -1,17 +1,15 @@
 fileFormatVersion: 2
-guid: aa7abdf2030849641b2f93b26ff15282
-timeCreated: 1447896713
+guid: 792f9295b2be1464fbd31a287da71403
+timeCreated: 1451336298
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Default
     400000: //RootNode
-    400002: Default
-    2300000: Default
-    3300000: Default
-    4300000: Default
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -38,7 +36,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
