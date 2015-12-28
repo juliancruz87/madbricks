@@ -14,6 +14,9 @@ namespace Drag {
         private const float NODE_TOLERANCE = 0.05f;
 
         private static DraggableObject objectBeingDragged;
+        private static int draggableObjects;
+
+        private int draggableObjectId;
 
         public OnObjectDragged OnObjectDragged;
         public Action OnObjectStopDrag;
@@ -67,6 +70,8 @@ namespace Drag {
 
         private void Awake() {
             myTransform = transform;
+            draggableObjectId = draggableObjects;
+            draggableObjects++;
         }
 
 		private void Start () {
@@ -78,8 +83,7 @@ namespace Drag {
 			snapperObject = GetComponent<SnapItemToCloserPosition>();
 		}
 
-		public void SetCurrentNode (Vector3 position)
-		{
+		public void SetCurrentNode (Vector3 position) {
 			currentNode = PathBuilder.Instance.GetNearsetNode(position);
 		}
 
@@ -87,13 +91,24 @@ namespace Drag {
             UpdateNearestNode();
 
             CheckMouseInput();
+            CheckTouchInput();
 
             if (isBeingDragged) {
                 UpdateDrag();
 
-                if (Input.GetMouseButtonUp(0)) 
+                if (IsInputUp()) 
                     StopDrag();
             }
+        }
+
+        private bool IsInputUp() {
+            if (Application.isMobilePlatform)
+                if (Input.touchCount > 0)
+                    return (Input.GetTouch(0).phase == TouchPhase.Ended);
+                else
+                    return true;
+
+            return Input.GetMouseButtonUp(0);
         }
 
         private void UpdateNearestNode() {
@@ -125,6 +140,40 @@ namespace Drag {
             }
         }
 
+        private void CheckTouchInput() {
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended) {
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+
+                RaycastHit[] raycastHits = Physics.RaycastAll(ray);
+
+                if (ThisGameObjectIsTheFirstHit(raycastHits) &&
+                    IsAllowedToStartANewDrag()) {
+                    StartDrag();
+                }
+            }
+        }
+
+        private void OnGUI() {
+            DebugTouchInput();    
+        }
+
+        private void DebugTouchInput() {
+            Rect labelRect = new Rect(5,5,150,22);
+            String messagge = "touch count: " + Input.touchCount;
+            GUI.Label(labelRect, messagge);
+
+            labelRect.y += labelRect.height;
+            messagge = "(" + draggableObjectId + " dragged: " + isBeingDragged + ")";
+            labelRect.x += labelRect.width * draggableObjectId;
+            GUI.Label(labelRect, messagge);
+
+            for (int i = 0; i < Input.touchCount; i++) {
+                labelRect.y += labelRect.height;
+                messagge = "touch " + i + " phase: " + Input.GetTouch(i).phase;
+                GUI.Label(labelRect, messagge);
+            }
+        }
+
         private bool ThisGameObjectIsTheFirstHit(RaycastHit[] raycastHits) {
             GameObject firstGameObject = GetTheFirstGameObject(raycastHits);
             return firstGameObject == gameObject;
@@ -149,21 +198,13 @@ namespace Drag {
         private bool IsAllowedToStartANewDrag() {
             if (allowMultipleDrags)
                 return true;
-            else
-                return objectBeingDragged == null;
-        }
-
-        private bool RaycastHitsGameObject(RaycastHit[] raycastHits, GameObject someGameObject) {
-            foreach (RaycastHit raycast in raycastHits)
-                if (raycast.transform.gameObject == someGameObject)
-                    return true;
-        
-            return false;
+            
+            return objectBeingDragged == null;
         }
 
         private void UpdateDrag() {
             if (isBeingDragged) {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(GetInputPosition());
                 float distance1 = 0f;
                 if (horizontalPlane.Raycast(ray, out distance1)) {
                     Vector3 newDragPosition = ray.GetPoint(distance1) + inputStartOffset;
@@ -194,6 +235,13 @@ namespace Drag {
             }
             DebugDragDirection();
             CheckMapObjectCondition();
+        }
+
+        private Vector3 GetInputPosition() {
+            if (Application.isMobilePlatform)
+                return Input.GetTouch(0).position;
+
+            return Input.mousePosition;
         }
 
         private bool CandidatePositionCanBeFixed(ref Vector3 candidatePosition, Vector3 dragStep) {
@@ -286,13 +334,11 @@ namespace Drag {
             gameObject.GetComponent<Collider>().enabled = false;
             StopDrag();
         }
-
-
+        
         private void OnCollisionEnter(Collision collision) {
             if (isBeingDragged && 
                 collision.gameObject.tag == TAG_OBSTACLE &&
-                collision.gameObject.GetComponent<DraggableObject>() != null
-                ) {
+                collision.gameObject.GetComponent<DraggableObject>() != null) {
                 PlayCollideSound();
             }
         }
