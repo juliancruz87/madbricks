@@ -10,6 +10,9 @@ namespace Map
 
 		private void  OnTriggerEnter(Collider collision)
 		{
+			if (GameManager.Instance.CurrentState != GameStates.Play)
+				return;
+
 			ITotem totem = collision.gameObject.GetComponent<ITotem> ();
 
 			if (totem != null)
