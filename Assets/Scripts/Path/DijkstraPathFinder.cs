@@ -65,11 +65,11 @@ namespace Path
             }
                 
             
-            Debug.Log("Here creating the reverse path");
+            //Debug.Log("Here creating the reverse path");
             ArrayList path = new ArrayList();
             while (current.Node != start) {
                 path.Add(current.Node);
-                Debug.Log("path node: " + current.Node.Id); 
+                //Debug.Log("path node: " + current.Node.Id); 
                 current = current.Connection.FromNodeRecord;
             }
             
@@ -81,8 +81,8 @@ namespace Path
             for (int i = path.Count - 1; i >= 0; i--)
                 invertedPath.Add((Node)path[i]);
 
-            foreach (Node node in invertedPath)
-                Debug.Log("path inverted node: " + node.Id);
+            //foreach (Node node in invertedPath)
+             //   Debug.Log("path inverted node: " + node.Id);
 
             return invertedPath;
         }
