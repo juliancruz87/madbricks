@@ -14,7 +14,8 @@ public class Handler : MonoBehaviour
 
 	private void Update () 
 	{
-		if ( gameManager.CurrentState == GameStates.Planning &&
+		if ( gameManager.CurrentState == GameStates.Planning && 
+		    InputManager.Instance.InputDevice.PrimaryTouch.ReleasedTapThisFrame &&
             TouchChecker.InputIsOverThisCollider(Camera.main, myCollider))
 			gameManager.Play ();
 	}
