@@ -51,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -176,6 +182,10 @@
     <Compile Include="Assets\Scripts\Sound\SoundConfig.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundType.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\FirstTutorialManager.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\TutorialContainer.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\TutorialManager.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\TutorialSequence.cs" />
     <Compile Include="Assets\Scripts\UI\UIButtonRestartLevel.cs" />
     <Compile Include="Assets\Scripts\Util\AlphaLerp.cs" />
     <Compile Include="Assets\Zenject\Internal\Assert.cs" />
