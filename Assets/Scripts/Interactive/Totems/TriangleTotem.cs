@@ -90,6 +90,16 @@ namespace Interactive.Detail
 		{	
 			Node leftNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right * -1);
 			Node rightNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right);
+			List<Node> lNodesProbability = new List<Node> ();
+			List<Node> rNodesProbability = new List<Node> ();
+
+			rNodesProbability = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.right, rNodesProbability);
+			lNodesProbability = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.right * -1, lNodesProbability);
+
+			if (rNodesProbability.Exists (c => c.Id == totem.PositionToGo)) 
+				leftNode = null;
+			else if (lNodesProbability.Exists (c => c.Id == totem.PositionToGo))
+				rightNode = null;
 
 			if (lastDirection != Vector3.zero && lastDirection != Vector3.left)
 				leftNode = null;
