@@ -1,14 +1,20 @@
 fileFormatVersion: 2
-guid: 6bdfec45d8c9c2d45bb421139eb0c97e
-timeCreated: 1451190601
-licenseType: Free
+guid: bd7cc0328fe4f4b9eafd779cd047a2ff
+timeCreated: 1451414303
+licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: Cube
+    100002: //RootNode
+    100004: Texture Group
+    100006: Texture Group (2)
+    400000: Cube
+    400002: //RootNode
+    400004: Texture Group
+    400006: Texture Group (2)
+    2300000: Cube
+    3300000: Cube
     4300000: Cube
     7400000: Take 001
     9500000: //RootNode
