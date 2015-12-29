@@ -18,10 +18,10 @@ namespace Interactive.Detail
 		protected override void Move ()
 		{
 			//nodes = finder.FindShorterPathFromTo (CurrentNode.Id, totem.PositionToGo, Finder);
-		    nodes = DijkstraPathFinder.FindShortestPath(CurrentNode, PathBuilder.Instance.GetNodeById(totem.PositionToGo));
+		    nodes = DijkstraPathFinder.FindShortestPath(CurrentNode, PathBuilder.Instance.GetNodeById(positionToGo));
 			if (nodes.Count > 0) 
 				ChoseNodeToGo ();
-			else 
+			else
 				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 		}
 
@@ -33,8 +33,11 @@ namespace Interactive.Detail
 		
 		protected override void GetReachedToPoint (Node node)
 		{
-			if (node.Id == totem.PositionToGo)
+			if (node.Id == totem.PositionToGo) 
+			{
+				currentNode = 0;
 				GoalReachedNode (node);
+			}
 			else
 				TryFindOtherPoint ();
 		}

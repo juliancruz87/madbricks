@@ -35,7 +35,7 @@ namespace Interactive.Detail
 		protected override void Move ()
 		{
 			List<Node> nodes = new List<Node> ();
-			nodes = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.forward, nodes);
+			nodes = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.forward, nodes);
 			if (nodes.Count > 0)
 				ChoseNodeToGo (nodes);
 			else 
@@ -44,7 +44,8 @@ namespace Interactive.Detail
 
 		private void ChoseNodeToGo (List<Node> nodes)
 		{
-			Node node = nodes [nodes.Count - 1];
+			int nodeToGo = nodes.Count > 1 ? nodes.Count - 1 : 1;
+			Node node = nodes [nodeToGo];
 			float speed = totem.SpeedPerTile * nodes.Count;
 
 			if (!pointsToPassedPath.Contains (node)) 
