@@ -67,24 +67,24 @@ namespace Path {
 			return new [] {nodesInForward, nodesInBackward, nodesInLeft, nodesInRight};
 		}
 
-		public List<Node> GetNodes (Node nodeSpnaped, int positionToGo)
+		public List<Node> GetNodes (Node nodeSpnaped, int positionToGo, Transform from)
 		{
 			List<Node> nodes = new List<Node>();
-			if (FoundNodeInDirection (nodeSpnaped, positionToGo, Vector3.forward))
+			if (FoundNodeInDirection (nodeSpnaped, positionToGo, from.forward))
 			{
-				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, Vector3.forward, nodes);
+				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, from.forward, nodes);
 			}
-			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, Vector3.back))
+			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, from.forward *-1))
 			{
-				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, Vector3.back, nodes);
+				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, from.forward *-1, nodes);
 			}
-			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, Vector3.left))
+			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, from.right *-1))
 			{
-				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, Vector3.left, nodes);
+				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, from.right *-1, nodes);
 			}
-			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, Vector3.right))
+			else if (FoundNodeInDirection (nodeSpnaped, positionToGo, from.right))
 			{
-				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, Vector3.right, nodes);
+				nodes = GetNodesInDirection (nodeSpnaped, positionToGo, from.right, nodes);
 			}
 			return nodes;
 		}

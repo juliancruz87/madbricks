@@ -31,7 +31,7 @@ namespace Interactive.Detail
 
 		private List<Node> GetNodesToTravel ()
 		{
-			List<Node> nodes = Finder.GetNodes (CurrentNode, positionToGo);
+			List<Node> nodes = Finder.GetNodes (CurrentNode, positionToGo, myTransform);
 			if (nodes.Count <= 0)
 			{
 				Debug.LogWarning (gameObject.name +" try to find an alternative path");
