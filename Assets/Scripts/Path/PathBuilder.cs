@@ -52,9 +52,11 @@ namespace Path {
 
         private Node AddConnectionInDirection(Node node, Vector3 direcion) {
 			Node nearestNode = finder.GetNearsetNodeInDirection(node, direcion);
-            if (nearestNode != null)
-                _connections.Add(new Connection(node, nearestNode, 1));
-
+            if (nearestNode != null) {
+                Connection newConnection = new Connection(node, nearestNode, 1);
+                _connections.Add(newConnection);
+                node.AddConnection(newConnection);
+            }
             return nearestNode;
         }
 
@@ -75,6 +77,15 @@ namespace Path {
                 
         }
 
+        public Node GetNodeById(int id) {
+            foreach (Node node in _nodes) {
+                if (node.Id == id) {
+                    return node;
+                }
+            }
+
+            return null;
+        }
 
         public Node GetNearsetNode(Vector3 position) { 
             Node nearestNode = null;

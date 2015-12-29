@@ -13,6 +13,7 @@ namespace Interactive.Detail
 
 		public List<Node> FindShorterPathFromTo (int fromId, int toId, PathBuilderFinder pathInfo)
 		{
+            Debug.Log("FindShorterPathFromTo");
 			reachPoint = toId;
 			this.pathInfo = pathInfo;
 
