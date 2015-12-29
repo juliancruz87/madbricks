@@ -1,4 +1,5 @@
 ﻿using System;
+using Interactive;
 using Map;
 using UnityEngine;
 using Path;
@@ -88,6 +89,12 @@ namespace Drag {
 		}
 
         private void Update() {
+            if (GameManager.Instance.CurrentState == GameStates.Planning ||
+                GameManager.Instance.CurrentState == GameStates.Introduction)
+                UpdatePlanning();
+        }
+
+        private void UpdatePlanning() {
             UpdateNearestNode();
 
             CheckMouseInput();
@@ -100,6 +107,8 @@ namespace Drag {
                     StopDrag();
             }
         }
+
+
 
         private bool IsInputUp() {
             if (Application.isMobilePlatform)

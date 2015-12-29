@@ -108,8 +108,13 @@ namespace Interactive
 				StartedGame ();
 
             //TODO: Fix this hack
-            //Invoke("EndGame", maxPlayTime);
+            Invoke("ForceEndGame", maxPlayTime);
 		}
+
+        private void ForceEndGame() {
+            if (!wasEndGame)
+                EndGame();
+        }
 
 	    private void EndGame()
 	    {
