@@ -66,7 +66,8 @@ namespace Interactive.Detail
 
 		private void OnCrashWithOtherCollider ()
 		{
-		    if (GameManager.Instance.CurrentState == GameStates.Play) {
+		    if (GameManager.Instance.CurrentState == GameStates.Play) 
+			{
                 Stop();
                 EndGame(name + " has been crashed with other totem");    
 		    }
