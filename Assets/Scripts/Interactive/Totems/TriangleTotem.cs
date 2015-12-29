@@ -44,7 +44,9 @@ namespace Interactive.Detail
 
 		private void ChoseNodeToGo (List<Node> nodes)
 		{
-			int nodeToGo = nodes.Count > 1 ? nodes.Count - 1 : 1;
+            Debug.Log("ChoseNodeToGo " + nodes + " count: " + nodes.Count);
+			int nodeToGo = nodes.Count > 1 ? nodes.Count - 1 : 0;
+            Debug.Log("nodeToGo: " + nodeToGo);
 			Node node = nodes [nodeToGo];
 			float speed = totem.SpeedPerTile * nodes.Count;
 
