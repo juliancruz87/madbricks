@@ -94,12 +94,12 @@ namespace Interactive.Detail
 			List<Node> lNodesProbability = new List<Node> ();
 			List<Node> rNodesProbability = new List<Node> ();
 
-			rNodesProbability = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.right, rNodesProbability);
-			lNodesProbability = Finder.GetNodesInDirection (CurrentNode, totem.PositionToGo, myTransform.right * -1, lNodesProbability);
+			rNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right, rNodesProbability);
+			lNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right * -1, lNodesProbability);
 
-			if (rNodesProbability.Exists (c => c.Id == totem.PositionToGo)) 
+			if (rNodesProbability.Exists (c => c.Id == positionToGo)) 
 				leftNode = null;
-			else if (lNodesProbability.Exists (c => c.Id == totem.PositionToGo))
+			else if (lNodesProbability.Exists (c => c.Id == positionToGo))
 				rightNode = null;
 
 			if (lastDirection != Vector3.zero && lastDirection != Vector3.left)
