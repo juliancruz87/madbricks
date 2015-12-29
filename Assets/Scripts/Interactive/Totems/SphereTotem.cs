@@ -17,8 +17,8 @@ namespace Interactive.Detail
 
 		protected override void Move ()
 		{
-			nodes = finder.FindShorterPathFromTo (CurrentNode.Id, totem.PositionToGo, Finder);
-
+			//nodes = finder.FindShorterPathFromTo (CurrentNode.Id, totem.PositionToGo, Finder);
+		    nodes = DijkstraPathFinder.FindShortestPath(CurrentNode, PathBuilder.Instance.GetNodeById(totem.PositionToGo));
 			if (nodes.Count > 0) 
 				ChoseNodeToGo ();
 			else 

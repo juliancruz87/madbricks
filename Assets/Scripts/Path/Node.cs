@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Path {
     public class Node : MonoBehaviour {
@@ -20,6 +21,14 @@ namespace Path {
         [SerializeField]
         // (1,0,0)
         private Node rightNode;
+
+        private ArrayList connections = new ArrayList();
+
+        public Connection pathConnection { get; set; }
+
+        public ArrayList Connections {
+            get { return connections; }
+        }
 
         public Node UpNode {
             get { return upNode; }
@@ -48,5 +57,9 @@ namespace Path {
 		public void SetUp (int id) {
 			this.id = id;
 		}
+
+        public void AddConnection(Connection newConnection) {
+            connections.Add(newConnection);
+        }
     }
 }
