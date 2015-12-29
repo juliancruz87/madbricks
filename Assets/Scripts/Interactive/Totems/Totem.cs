@@ -12,12 +12,12 @@ namespace Interactive.Detail
 	public abstract class Totem : MonoBehaviour, ITotem
 	{
 		private DraggableObject dragObject;
-		protected IGameManagerForStates gameStates;
 		private TotemControllerStop controllerToStop;
 		private SnapItemToCloserPosition snaper;
 		private List<int> validStartPoints;
 		private List<TotemType> validTypes = new List<TotemType> ();
 
+		protected IGameManagerForStates gameStates;
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
 	    public abstract TotemType Type { get; }
@@ -113,7 +113,7 @@ namespace Interactive.Detail
 
 		protected void GoalReachedNode(Node node)
 		{
-			if (node.Id == totem.PositionToGo)
+			if (node.Id == positionToGo)
 				gameStates.Goal ();
 			
 			if(totem.SoundToGetReach != null) 
@@ -127,7 +127,7 @@ namespace Interactive.Detail
 			gameStates.Lose ();
 		}
 
-		public void GoToSecondaryPositionToGo() 
+		public virtual void GoToSecondaryPositionToGo() 
 		{
 			positionToGo = totem.SecondaryPositionToGo;
 			dragObject.SetCurrentNode (myTransform.position);

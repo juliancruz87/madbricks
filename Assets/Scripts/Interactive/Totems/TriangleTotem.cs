@@ -44,9 +44,7 @@ namespace Interactive.Detail
 
 		private void ChoseNodeToGo (List<Node> nodes)
 		{
-            Debug.Log("ChoseNodeToGo " + nodes + " count: " + nodes.Count);
 			int nodeToGo = nodes.Count > 1 ? nodes.Count - 1 : 0;
-            Debug.Log("nodeToGo: " + nodeToGo);
 			Node node = nodes [nodeToGo];
 			float speed = totem.SpeedPerTile * nodes.Count;
 
@@ -61,7 +59,7 @@ namespace Interactive.Detail
 
 		protected override void GetReachedToPoint (Node node)
 		{
-			if (node.Id == totem.PositionToGo) 
+			if (node.Id == positionToGo) 
 			{
 				lastDirection = Vector3.zero;
 				GoalReachedNode (node);
