@@ -5,3 +5,5 @@ madbricks.sln
 madbricks.userprefs
 Library/
 Temp/
+*.csproj
+*.sln

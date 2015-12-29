@@ -7,8 +7,17 @@ using Map;
 
 namespace Interactive
 {
-	public class GameManager : MonoBehaviour , IGameManagerForStates, IGameManagerForUI
+    public class GameManager : MonoBehaviour , IGameManagerForStates, IGameManagerForUI
 	{
+        [System.Serializable]
+        public class LevelInfo
+        {
+            public int area;
+            public int level;
+        }
+
+        public LevelInfo levelInfo;
+
 		public event Action StartedGame;
 
 		[SerializeField]
@@ -28,7 +37,15 @@ namespace Interactive
 		private bool wasEndGame;
 		private int goals = 0;
 
-		public GameStates CurrentState 
+        [SerializeField]
+        private bool isGamePaused;
+
+        private TutorialManager tutorialManager;
+
+        [SerializeField]
+        private bool areTutorialsActive;
+
+        public GameStates CurrentState 
 		{
 			get;
 			private set;
@@ -50,14 +67,34 @@ namespace Interactive
 		{
 			if (Instance == null)
 				Instance = this;
-		}
+
+            tutorialManager = gameObject.AddComponent<TutorialManager>();
+            tutorialManager.Initialize();
+        }
 
 		private void Start ()
 		{
-			CurrentState = GameStates.Introduction;
-			startSequencer.EndIntroduction += StartPlanning;
-			startSequencer.Play ();
+            if (tutorialManager.CheckForTutorialInLevel(levelInfo.area, levelInfo.level))
+            {
+                tutorialManager.FinishTutorial += Pause;
+                tutorialManager.FinishTutorial += StartGame;
+                tutorialManager.ShowTutorial();
+                Pause();
+            }
+            else
+            {
+                StartGame();
+            }
+            
 		}
+
+        private void StartGame()
+        {
+            tutorialManager.FinishTutorial -= Pause;
+            CurrentState = GameStates.Introduction;
+            startSequencer.EndIntroduction += StartPlanning;
+            startSequencer.Play();
+        }
 
 		private void StartPlanning ()
 		{
@@ -132,5 +169,15 @@ namespace Interactive
 			Result = results;
 			endSequencer.Play ();
 		}
+
+        public void Pause ()
+        {
+            isGamePaused = !isGamePaused;
+            if (isGamePaused)
+                Time.timeScale = 0;
+            else
+                Time.timeScale = 1;
+        }
+
 	}
 }
