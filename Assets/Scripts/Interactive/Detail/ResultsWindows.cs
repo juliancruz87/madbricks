@@ -19,10 +19,15 @@ namespace Interactive.Detail
 
 		public override void StartStep ()
 		{
-			if(gameManagerForUI.Result == GameResults.Win)
-				winResults.SetActive (true);
-			else
-				loseResults.SetActive (true);
+            if (gameManagerForUI.Result == GameResults.Win)
+            {
+                //winResults.SetActive(true);
+                LevelLoaderController.LevelLoader.Instance.LoadNextLevel();
+            }
+            else
+            {
+                loseResults.SetActive(true);
+            }
 
 			EndStep ();
 		}

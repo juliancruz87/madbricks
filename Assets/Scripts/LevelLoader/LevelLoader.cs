@@ -4,45 +4,85 @@ using LevelLoaderController.Detail;
 
 namespace LevelLoaderController
 {
-	public class LevelLoader : MonoBehaviour 
-	{
-		[SerializeField]
-		private LevelLoaderSettings settings;
+    public class LevelLoader : MonoBehaviour
+    {
+        [SerializeField]
+        private LevelLoaderSettings settings;
 
-		private string pendingScene = string.Empty;
-		
-		public static LevelLoader Instance 
-		{
-			get;
-			private set;
-		}
+        private string pendingScene = string.Empty;
 
-		private void Awake ()
-		{
-			if (Instance == null) 
-			{
-				DontDestroyOnLoad (gameObject);
-				Instance = this;
-			}
-		}
+        public static LevelLoader Instance
+        {
+            get;
+            private set;
+        }
 
-		public void LoadScene(string levelName)
-		{
-			pendingScene = levelName;
-			Application.LoadLevel (settings.LevelLoader);
-		}
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                DontDestroyOnLoad(gameObject);
+                Instance = this;
+            }
+        }
 
-		public void LoadPendingScene()
-		{
-			StartCoroutine (LoadLevelAsync());
-		}
-		
-		private IEnumerator LoadLevelAsync()
-		{	
-			System.GC.Collect ();
-			System.GC.WaitForPendingFinalizers ();
-			yield return Resources.UnloadUnusedAssets();
-			yield return Application.LoadLevelAsync (pendingScene);
-		}
-	}	
+        public void LoadScene(string levelName)
+        {
+            pendingScene = levelName;
+            Application.LoadLevel(settings.LevelLoader);
+        }
+
+        public void LoadPendingScene()
+        {
+            StartCoroutine(LoadLevelAsync());
+        }
+
+        private IEnumerator LoadLevelAsync()
+        {
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            yield return Resources.UnloadUnusedAssets();
+            yield return Application.LoadLevelAsync(pendingScene);
+        }
+
+        public void LoadNextLevel()
+        {
+            string levelName = "";
+            Interactive.GameManager.LevelInfo info = FindObjectOfType<Interactive.GameManager>().levelInfo;
+            int area = info.area;
+            int level = info.level;
+
+            Debug.Log("[LevelLoader] Getting level info " + area + " - " + level);
+
+            if (area < 6)
+            {
+                if (level < 3)
+                    level++;
+                else
+                {
+                    area++;
+                    level = 1;
+                }
+            }
+            else
+            {
+                if (level < 3)
+                    level++;
+                else
+                    levelName = SceneProperties.SCENE_MAIN_MENU;
+            }
+
+            levelName = "W" + area + "_L" + level;
+
+            if(level == 1)
+                levelName = SceneProperties.SCENE_LOADER_AREA;
+
+
+            SaveManager.Instance.SetSelectedArea(area.ToString());
+
+            Debug.Log("[LevelLoader] Loading " + levelName);
+            LoadScene(levelName);
+
+        }
+    }
 }
