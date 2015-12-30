@@ -69,10 +69,14 @@ namespace LevelLoaderController
                 if (level < 3)
                     level++;
                 else
-                    levelName = SceneProperties.SCENE_MAIN_MENU;
+                    level = -1;
+               
             }
 
-            levelName = "W" + area + "_L" + level;
+            if (level == -1)
+                levelName = SceneProperties.SCENE_MAIN_MENU;
+            else
+                levelName = "W" + area + "_L" + level;
 
             if(level == 1)
                 levelName = SceneProperties.SCENE_LOADER_AREA;

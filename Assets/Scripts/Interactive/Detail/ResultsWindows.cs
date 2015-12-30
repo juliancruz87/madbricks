@@ -26,7 +26,8 @@ namespace Interactive.Detail
             }
             else
             {
-                loseResults.SetActive(true);
+                // loseResults.SetActive(true);
+                Application.LoadLevel(Application.loadedLevelName);
             }
 
 			EndStep ();

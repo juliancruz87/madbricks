@@ -6,6 +6,7 @@ using System.Collections;
 public class MainMenuManager : MonoBehaviour {
 
     public Text textLevel;
+    public bool isMenuActive;
 
 	// Use this for initialization
 	void Start () {
@@ -29,5 +30,10 @@ public class MainMenuManager : MonoBehaviour {
     public void StartLevel(int level)
     {
         Application.LoadLevel("Level " + level);
+    }
+
+    public void SwitchMenuState()
+    {
+        isMenuActive = !isMenuActive;
     }
 }
