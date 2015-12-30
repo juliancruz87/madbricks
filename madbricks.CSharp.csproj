@@ -200,6 +200,7 @@
     <Compile Include="Assets\Scripts\Util\AlphaLerp.cs" />
     <Compile Include="Assets\Scripts\Utilities\CombineChildren.cs" />
     <Compile Include="Assets\Scripts\Utilities\FadeManager.cs" />
+    <Compile Include="Assets\Scripts\Utilities\LevelNamesParser.cs" />
     <Compile Include="Assets\Zenject\Internal\Assert.cs" />
     <Compile Include="Assets\Zenject\Internal\Func.cs" />
     <Compile Include="Assets\Zenject\Internal\LinqExtensions.cs" />
@@ -306,6 +307,7 @@
     <None Include="Assets\Materials\Generic\DiffuseAlwaysVisible.shader" />
     <None Include="Assets\Materials\Generic\Projector Light.shader" />
     <None Include="Assets\Materials\Generic\Projector Multiply.shader" />
+    <None Include="Assets\Resources\Texts\LevelNames.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

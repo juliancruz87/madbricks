@@ -204,6 +204,7 @@
     <None Include="Assets\Materials\Generic\DiffuseAlwaysVisible.shader" />
     <None Include="Assets\Materials\Generic\Projector Light.shader" />
     <None Include="Assets\Materials\Generic\Projector Multiply.shader" />
+    <None Include="Assets\Resources\Texts\LevelNames.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
