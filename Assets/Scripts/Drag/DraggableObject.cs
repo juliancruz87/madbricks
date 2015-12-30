@@ -88,14 +88,15 @@ namespace Drag {
 			currentNode = PathBuilder.Instance.GetNearsetNode(position);
 		}
 
-        private void Update() {
+        private void Update() 
+		{
+			UpdateNearestNode();
             if (GameManager.Instance.CurrentState == GameStates.Planning ||
                 GameManager.Instance.CurrentState == GameStates.Introduction)
                 UpdatePlanning();
         }
 
         private void UpdatePlanning() {
-            UpdateNearestNode();
 
             CheckMouseInput();
             CheckTouchInput();
