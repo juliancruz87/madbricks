@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -94,6 +88,10 @@
   <ItemGroup>
     <Compile Include="Assets\FX Mega Pack\Scripts\SmoothCameraOrbit.cs" />
     <Compile Include="Assets\Scripts\Drag\DraggableObject.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\AreaBuilderManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\AreaSelectionObject.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\General\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\LevelSelectionObject.cs" />
     <Compile Include="Assets\Scripts\Graphics\Detail\Billboard.cs" />
     <Compile Include="Assets\Scripts\Graphics\Detail\ColorAnimationForLight.cs" />
     <Compile Include="Assets\Scripts\Graphics\Detail\ColorAnimationForMaterial.cs" />
@@ -149,6 +147,8 @@
     <Compile Include="Assets\Scripts\LevelLoader\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\LevelLoader\LevelLoaderSettings.cs" />
     <Compile Include="Assets\Scripts\LevelLoader\LoadingScene.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Map\Door.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSwitcher.cs" />
     <Compile Include="Assets\Scripts\Map\ExplosiveBox.cs" />
@@ -171,6 +171,9 @@
     <Compile Include="Assets\Scripts\Path\TotemInstantiatorConfig.cs" />
     <Compile Include="Assets\Scripts\Path\TotemType.cs" />
     <Compile Include="Assets\Scripts\Path\TotemsLevelCreator.cs" />
+    <Compile Include="Assets\Scripts\Persistence\SaveManager.cs" />
+    <Compile Include="Assets\Scripts\Settings\PrefProperties.cs" />
+    <Compile Include="Assets\Scripts\Settings\SceneProperties.cs" />
     <Compile Include="Assets\Scripts\Sound\Audio\AudioClipGroup.cs" />
     <Compile Include="Assets\Scripts\Sound\Audio\AudioSourceGroup.cs" />
     <Compile Include="Assets\Scripts\Sound\Audio\AudioSourceInterpolation.cs" />
@@ -185,12 +188,18 @@
     <Compile Include="Assets\Scripts\Sound\SoundConfig.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundType.cs" />
+    <Compile Include="Assets\Scripts\SplashScreen\SplashScreenManager.cs" />
     <Compile Include="Assets\Scripts\Tutorials\FirstTutorialManager.cs" />
     <Compile Include="Assets\Scripts\Tutorials\TutorialContainer.cs" />
     <Compile Include="Assets\Scripts\Tutorials\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Tutorials\TutorialSequence.cs" />
+    <Compile Include="Assets\Scripts\UI\GameHUD\HudContainer.cs" />
+    <Compile Include="Assets\Scripts\UI\GameHUD\HudManager.cs" />
+    <Compile Include="Assets\Scripts\UI\GameUIManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIButtonRestartLevel.cs" />
     <Compile Include="Assets\Scripts\Util\AlphaLerp.cs" />
+    <Compile Include="Assets\Scripts\Utilities\CombineChildren.cs" />
+    <Compile Include="Assets\Scripts\Utilities\FadeManager.cs" />
     <Compile Include="Assets\Zenject\Internal\Assert.cs" />
     <Compile Include="Assets\Zenject\Internal\Func.cs" />
     <Compile Include="Assets\Zenject\Internal\LinqExtensions.cs" />
@@ -294,6 +303,9 @@
     <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
     <None Include="Assets\FX Mega Pack\Scripts\Simple Particle Scaler\Simple Particle Scaler - Readme.txt" />
     <None Include="Assets\Fonts\Anton\OFL.txt" />
+    <None Include="Assets\Materials\Generic\DiffuseAlwaysVisible.shader" />
+    <None Include="Assets\Materials\Generic\Projector Light.shader" />
+    <None Include="Assets\Materials\Generic\Projector Multiply.shader" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
