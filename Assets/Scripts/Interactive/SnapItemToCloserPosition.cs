@@ -34,6 +34,11 @@ namespace Interactive.Detail
 	        FindPositionsToSnap();
 	    }
 
+		private void Start ()
+		{
+			myParent = transform.parent;
+		}
+
         //TODO: Do not marry this shit with the class Node, find them by other media
 	    private void FindPositionsToSnap() 
 		{
@@ -53,7 +58,6 @@ namespace Interactive.Detail
                 float distanceBetweenPoints = Vector3.Distance(myTransform.position, transform.position);
                 if (distanceBetweenPoints < distance) 
 				{
-					myParent = myTransform.parent;
 					transformToSnap = transform;
 					myTransform.SetParent(transformToSnap);
                     distance = distanceBetweenPoints;
@@ -67,6 +71,7 @@ namespace Interactive.Detail
 		{
 			if (transformToSnap != null) 
 			{
+				myTransform.DOKill ();
 				myTransform.DOLocalMove (Vector3.zero, timeToSnap).SetEase (easeToSnap).OnComplete (()=>ResetParent ());
 				NodeSpnaped = transformToSnap.GetComponent<Node> ();
 			}
@@ -75,7 +80,6 @@ namespace Interactive.Detail
 		private void ResetParent ()
 		{
 			myTransform.SetParent (myParent);
-			myParent = null;
 		}
 
 		public void SnapInPlace ()
