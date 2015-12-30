@@ -13,8 +13,11 @@ public class AreaSelectionObject : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("Selected Area: " + areaID);
-        SaveManager.Instance.SetSelectedArea(areaID);
-        Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+        if (!FindObjectOfType<MainMenuManager>().isMenuActive)
+        {
+            Debug.Log("Selected Area: " + areaID);
+            SaveManager.Instance.SetSelectedArea(areaID);
+            Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+        }
     }
 }
