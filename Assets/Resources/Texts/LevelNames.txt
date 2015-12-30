@@ -1,6 +1,6 @@
-El Vacío,Acertijo,El Todo
-Realización,Quietud,Cambio
+El Vacio,Acertijo,El Todo
+Realizacion,Quietud,Cambio
 Fuerza,Voluntad,Vida
 Rutas,Sonido,Magia
-Flora,Fauna,Música
+Flora,Fauna,Musica
 Ser,Victoria,EKKO
