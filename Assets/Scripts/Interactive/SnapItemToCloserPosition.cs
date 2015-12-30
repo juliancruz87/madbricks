@@ -20,6 +20,7 @@ namespace Interactive.Detail
 		private bool keepInSamePlace = false;
 		private Vector3 snapedPosition = Vector3.zero;
 		private Transform myTransform;
+		private Transform myParent;
 
 		public Node NodeSpnaped 
 		{
@@ -52,7 +53,9 @@ namespace Interactive.Detail
                 float distanceBetweenPoints = Vector3.Distance(myTransform.position, transform.position);
                 if (distanceBetweenPoints < distance) 
 				{
-                    transformToSnap = transform;
+					myParent = myTransform.parent;
+					transformToSnap = transform;
+					myTransform.SetParent(transformToSnap);
                     distance = distanceBetweenPoints;
                 }
             }
@@ -64,9 +67,15 @@ namespace Interactive.Detail
 		{
 			if (transformToSnap != null) 
 			{
-				myTransform.DOMove (transformToSnap.position, timeToSnap).SetEase (easeToSnap);
+				myTransform.DOLocalMove (Vector3.zero, timeToSnap).SetEase (easeToSnap).OnComplete (()=>ResetParent ());
 				NodeSpnaped = transformToSnap.GetComponent<Node> ();
 			}
+		}
+
+		private void ResetParent ()
+		{
+			myTransform.SetParent (myParent);
+			myParent = null;
 		}
 
 		public void SnapInPlace ()
