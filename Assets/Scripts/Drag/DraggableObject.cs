@@ -51,6 +51,7 @@ namespace Drag {
         private Vector3 startDragDirection;
         private Vector3 lastDragPosition;
         private MapObject currentLauncher;
+		private bool canBeDragged = true;
 
         private AudioSource collisionAudioSource;
         [SerializeField] 
@@ -96,8 +97,8 @@ namespace Drag {
         private void Update() 
 		{
 			UpdateNearestNode();
-            if (GameManager.Instance.CurrentState == GameStates.Planning ||
-                GameManager.Instance.CurrentState == GameStates.Introduction)
+            if ((GameManager.Instance.CurrentState == GameStates.Planning ||
+			     GameManager.Instance.CurrentState == GameStates.Introduction) && canBeDragged)
                 UpdatePlanning();
         }
 
@@ -345,8 +346,9 @@ namespace Drag {
             return null;
         }
 
-        private void StickToLauncher(MapObject stickyLauncher) {
-            gameObject.GetComponent<Collider>().enabled = false;
+        private void StickToLauncher(MapObject stickyLauncher) 
+		{
+			canBeDragged = false;
             StopDrag();
         }
         
