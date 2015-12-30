@@ -56,6 +56,11 @@ namespace Drag {
         [SerializeField] 
         private AudioClip collideAudioClip;
 
+		public bool IsBeingDragged 
+		{
+			get { return isBeingDragged; }
+		}
+
         public Node CurrentNode 
 		{
 			get { return currentNode; }

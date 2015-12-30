@@ -4,6 +4,7 @@ using Interactive.Detail;
 using InteractiveObjects;
 using System;
 using Map;
+using System.Collections.Generic;
 
 namespace Interactive
 {
@@ -49,6 +50,12 @@ namespace Interactive
 		{
 			get;
 			private set;
+		}
+
+		public List<ITotem> Totems 
+		{
+			set;
+			get;
 		}
 
 		public GameResults Result 

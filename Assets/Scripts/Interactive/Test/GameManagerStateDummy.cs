@@ -16,6 +16,11 @@ public class GameManagerStateDummy : MonoBehaviour , IGameManagerForStates
 
 	}
 
+	public System.Collections.Generic.List<ITotem> Totems {
+		get;
+		set;
+	}
+
 	public void Goal ()
 	{
 

@@ -4,9 +4,11 @@ using Drag;
 using UnityEngine;
 using Interactive.Detail;
 using Map;
+using Interactive;
 
 namespace Path {
-    public class BossTotem : MonoBehaviour {
+    public class BossTotem : MonoBehaviour, ITotem 
+	{
         [SerializeField]
         private bool isJailed = false;
 
@@ -31,6 +33,11 @@ namespace Path {
 
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
+	
+		public bool IsDragged
+		{
+			get { return false; }
+		}
 
         private void Awake() {
             dragFloor = GameObject.FindWithTag("Floor");

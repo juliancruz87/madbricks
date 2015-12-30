@@ -17,6 +17,12 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private List<TotemInstantiatorConfig> totems;
+		private List<GameObject> totemsCreated = new List<GameObject> ();
+
+		public List<ITotem> Totems
+		{
+			get{ return totemsCreated.ConvertAll (c=> c.GetComponent<ITotem> ());}
+		}
 
 		public IGameManagerForStates GameStates 
 		{

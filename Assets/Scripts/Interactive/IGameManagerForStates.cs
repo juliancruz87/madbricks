@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Interactive.Detail;
 using System;
+using System.Collections.Generic;
 
 namespace Interactive
 {
@@ -15,6 +16,8 @@ namespace Interactive
 	{
 		event Action StartedGame;
 		GameStates CurrentState { get; }
+		List<ITotem> Totems { get; set; }
+
 		void Play ();
 		void Goal ();
 		void Lose ();

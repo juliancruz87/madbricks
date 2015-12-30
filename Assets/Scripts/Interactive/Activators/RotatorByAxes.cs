@@ -1,5 +1,7 @@
 using UnityEngine;
 using ManagerInput.Detail;
+using Zenject;
+using Interactive;
 
 namespace ManagerInput.CameraControls
 {
@@ -15,7 +17,16 @@ namespace ManagerInput.CameraControls
 		[SerializeField]
 		private Axis rotateInAxis = Axis.All;
 
+		[Inject]
+		private IGameManagerForStates gameManager;
+
 		private Transform myTransform;
+		private ConditionalDrag conditional = new ConditionalDrag ();
+
+		private bool CanDrag
+		{
+			get{ return conditional.Check ();}
+		}
 		
 		private ITouchInfo Touch
 		{
@@ -26,6 +37,12 @@ namespace ManagerInput.CameraControls
 		{
 			get; 
 			set;
+		}
+
+		[PostInject]
+		private void PostInject ()
+		{
+			conditional.GameManager = gameManager;
 		}
 
 		private void Start ()
@@ -41,7 +58,7 @@ namespace ManagerInput.CameraControls
 
 		private void Update ()
 		{
-			if ( Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false)) 
+			if (CanDrag && Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false)) 
 			{
 				Rotate ();
 				myTransform.Rotate (CurrentRotation, Space.World);

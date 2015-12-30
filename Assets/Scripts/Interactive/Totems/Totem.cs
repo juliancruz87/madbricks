@@ -23,7 +23,12 @@ namespace Interactive.Detail
 	    public abstract TotemType Type { get; }
 
 	    protected int positionToGo;
-        
+
+		public bool IsDragged 
+		{
+			get { return dragObject.IsBeingDragged; }
+		}
+
 	    protected bool IsInStartPoint
 		{
 			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }

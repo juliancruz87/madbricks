@@ -34,6 +34,7 @@ namespace Interactive.Detail
 			Node [] childs = GetComponentsInChildren<Node> ();
 			System.Array.ForEach (childs, c => points.Add (c));
 			instantiator.Instantiate (points, grid, grid);
+			gameStates.Totems = instantiator.Totems;
 		}
 	}
 }
