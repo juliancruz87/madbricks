@@ -54,8 +54,8 @@ public class SaveManager : MonoBehaviour
     //Level
     public void SetSelectedLevel(string selectedLevel)
     {
-        LogSetOperation("Area " + selectedLevel.ToString());
-        PlayerPrefs.SetString(PrefsProperties.SELECTED_AREA, selectedLevel.ToString());
+        LogSetOperation("Level " + selectedLevel.ToString());
+        PlayerPrefs.SetString(PrefsProperties.SELECTED_LEVEL, selectedLevel.ToString());
     }
 
     public string GetSelectedLevel()

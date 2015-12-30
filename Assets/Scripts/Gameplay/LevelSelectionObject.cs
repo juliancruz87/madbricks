@@ -16,40 +16,14 @@ public class LevelSelectionObject : MonoBehaviour {
         Debug.Log("Selected Level: " + levelID);
         SaveManager.Instance.SetSelectedLevel(levelID);
         //Application.LoadLevel(SceneProperties.SCENE_LOADER_LEVEL);
-        LevelLoaderController.LevelLoader.Instance.LoadScene(GetSceneToLoad(SaveManager.Instance.GetSelectedArea(), SaveManager.Instance.GetSelectedLevel()));
-
-
-
+        LevelLoaderController.LevelLoader.Instance.LoadScene(GetSceneToLoad(SaveManager.Instance.GetSelectedArea(), levelID));
     }
 
     public string GetSceneToLoad(string area, string level)
     {
-        string sceneName = "";
+        string sceneName = "W" + area + "_L" + level;
 
-        switch (area)
-        {
-            case "1":
-                sceneName = "level_0";
-                switch (level)
-                {
-                    case "1":
-                        sceneName += 1;
-                        break;
-
-                    case "2":
-                        sceneName += 2;
-                        break;
-
-                    case "3":
-                        sceneName += 3;
-                        break;
-                }
-                break;
-
-
-            default:
-                break;
-        }
+       
 
         return sceneName;
     }
