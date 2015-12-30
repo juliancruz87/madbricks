@@ -52,6 +52,8 @@ namespace Interactive.Detail
 
 			foreach (GameObject totem in totemsCreated) 
 			{
+				ITotem t = totem.GetComponent<ITotem> ();
+				t.GameStates = GameStates;
 				TotemControllerStop totemController = totem.GetComponent<TotemControllerStop> ();
 				if(totemController != null)
 					totemController.SetTotems (totemsCreated);

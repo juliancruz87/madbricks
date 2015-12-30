@@ -11,7 +11,7 @@ namespace Path {
 	{
         [SerializeField]
         private bool isJailed = false;
-
+		private IGameManagerForStates gameForStates;
         public bool IsJailed {
             get { return isJailed; }
         }
@@ -37,6 +37,12 @@ namespace Path {
 		public bool IsDragged
 		{
 			get { return false; }
+		}
+
+
+		public IGameManagerForStates GameStates 
+		{
+			set { gameForStates = value; }
 		}
 
         private void Awake() {
@@ -151,8 +157,11 @@ namespace Path {
 
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.gameObject.GetComponent<DraggableObject>())
-                Destroy(collision.gameObject);
+			if (collision.gameObject.GetComponent<DraggableObject> ()) 
+			{
+				Destroy(collision.gameObject);
+				gameForStates.Lose ();
+			}
         }
     }
 }

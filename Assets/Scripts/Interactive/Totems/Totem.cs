@@ -22,6 +22,11 @@ namespace Interactive.Detail
 		protected TotemInstantiatorConfig totem;
 	    public abstract TotemType Type { get; }
 
+		public IGameManagerForStates GameStates 
+		{
+			set { gameStates = value; }
+		}
+
 	    protected int positionToGo;
 
 		public bool IsDragged 
