@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+    public Text labeLevellName;
+    private Interactive.GameManager gameManager;
+
+	void Start ()
+    {
+        Initialize();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void Initialize()
     {
-
+        gameManager = FindObjectOfType<Interactive.GameManager>();
+        string levelNameLine = LevelNameParser.ParseNames()[gameManager.levelInfo.area-1];
+        string levelName = levelNameLine.Split(',')[gameManager.levelInfo.level-1];
+        labeLevellName.text = levelName;
     }
 
     public void ReturnToLevelSelection()
