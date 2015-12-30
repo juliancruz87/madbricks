@@ -95,12 +95,21 @@ namespace Interactive
             
 		}
 
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                PlayEndSequence(GameResults.Win);
+            }
+        }
+
         private void StartGame()
         {
             tutorialManager.FinishTutorial -= Pause;
             CurrentState = GameStates.Introduction;
             startSequencer.EndIntroduction += StartPlanning;
             startSequencer.Play();
+            InitializeUI();
         }
 
 		private void StartPlanning ()
@@ -191,5 +200,10 @@ namespace Interactive
                 Time.timeScale = 1;
         }
 
+        public void InitializeUI()
+        {
+            Debug.Log("[UI]Initializing UI..");
+            Instantiate(Resources.Load("Prefabs/UI/CanvasGameUI"));
+        }
 	}
 }
