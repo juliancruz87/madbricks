@@ -109,7 +109,7 @@ namespace Interactive.Detail
 
 		protected void GoToNode (Node node, float speed)
 		{
-			myTransform.DOMove (node.transform.position, speed).OnComplete (() => GetReachedToPoint(node));
+			myTransform.DOMove (node.transform.position, speed).SetEase(Ease.Linear).OnComplete (() => GetReachedToPoint(node));
 		}
 
 		protected void GoalReachedNode(Node node)
