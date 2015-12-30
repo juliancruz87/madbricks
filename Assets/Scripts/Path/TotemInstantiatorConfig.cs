@@ -22,10 +22,16 @@ namespace Interactive.Detail
         private int secondaryPositionToGo;
 
 		[SerializeField]
+		private int optimalPositionToStart;
+
+		[SerializeField]
 		private float speedPerTile = 0.5F;
 
 		[SerializeField]
 		private AudioClip soundToGetReach;
+
+		[SerializeField]
+		private bool isDebugTotemMove = false;
 
 		[SerializeField]
 		private List<TotemBehaviours> behavioursTypes;
@@ -42,7 +48,13 @@ namespace Interactive.Detail
 		
 		public int PositionToAdd 
 		{
-			get { return positionToAdd; }
+			get 
+			{ 
+				if(isDebugTotemMove && Application.isEditor)
+					return optimalPositionToStart;
+				else
+					return positionToAdd; 
+			}
 		}
 
 		public int PositionToGo 
