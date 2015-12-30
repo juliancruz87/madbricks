@@ -39,7 +39,7 @@ namespace Interactive.Detail
 			if (nodes.Count > 0)
 				ChoseNodeToGo (nodes);
 			else 
-				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
+				EndGame (gameObject.name + " wasn't found a path to follow");
 		}
 
 		private void ChoseNodeToGo (List<Node> nodes)
