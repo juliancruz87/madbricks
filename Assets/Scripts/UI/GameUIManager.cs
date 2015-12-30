@@ -23,11 +23,11 @@ public class GameUIManager : MonoBehaviour {
 
     public void ReturnToLevelSelection()
     {
-        LevelLoaderController.LevelLoader.Instance.LoadScene(SceneProperties.SCENE_LOADER_AREA);
+        gameManager.ReturnToLevelSelection();
     }
 
     public void RestartGame()
     {
-        LevelLoaderController.LevelLoader.Instance.LoadScene(Application.loadedLevelName);
+        gameManager.RestartGame();
     }
 }

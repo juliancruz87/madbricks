@@ -205,5 +205,15 @@ namespace Interactive
             Debug.Log("[UI]Initializing UI..");
             Instantiate(Resources.Load("Prefabs/UI/CanvasGameUI"));
         }
-	}
+
+        public void ReturnToLevelSelection()
+        {
+            LevelLoaderController.LevelLoader.Instance.LoadScene(SceneProperties.SCENE_LOADER_AREA);
+        }
+
+        public void RestartGame()
+        {
+            LevelLoaderController.LevelLoader.Instance.LoadScene(Application.loadedLevelName);
+        }
+    }
 }
