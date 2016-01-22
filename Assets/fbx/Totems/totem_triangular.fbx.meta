@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: f0ad508c10391d74d99b859c707c0346
-timeCreated: 1449811545
-licenseType: Free
+guid: fcbc5c841d31b4f34b74bf1df188e740
+timeCreated: 1450895696
+licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -12,8 +12,11 @@ ModelImporter:
     400002: totem_triangula_animacion:totem3
     400004: //RootNode
     2300000: 'totem_triangula_animacion:Mesh '
+    2300002: //RootNode
     3300000: 'totem_triangula_animacion:Mesh '
+    3300002: //RootNode
     4300000: 'totem_triangula_animacion:Mesh '
+    4300002: Triangulo
     7400000: Take 001
     9500000: //RootNode
   materials:
