@@ -23,6 +23,11 @@ namespace CameraTools
 		private float currentZoomValue;
 		private IInputDeviceTouchData inputDevice;
 
+		public float CurrentZoomValue 
+		{
+			get { return currentZoomValue; }
+		}
+
 		public bool IsEnabled
 		{ 
 			get; 

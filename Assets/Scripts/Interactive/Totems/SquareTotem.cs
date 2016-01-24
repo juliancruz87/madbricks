@@ -6,6 +6,7 @@ namespace Interactive.Detail
 {
 	public class SquareTotem : Totem
 	{
+		private int currentNode = 0;
 		private FinderShorterPath finder = new FinderShorterPath ();
 		private List<Node> nodes = new List<Node> ();
 		public override TotemType Type 
@@ -18,15 +19,15 @@ namespace Interactive.Detail
 			nodes = GetNodesToTravel ();
 
 			if (nodes.Count > 0) 
-			{
-				Node node = nodes [nodes.Count - 1];
-				float speed = totem.SpeedPerTile * nodes.Count;
-				GoToNode (node, speed);
-			} 
-			else 
-			{
+				ChoseNodeToGo ();
+			else
 				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
-			}
+		}
+
+		private void ChoseNodeToGo ()
+		{
+			Node node = nodes [currentNode];
+			GoToNode (node, totem.SpeedPerTile);
 		}
 
 		private List<Node> GetNodesToTravel ()
@@ -43,7 +44,22 @@ namespace Interactive.Detail
 
 		protected override void GetReachedToPoint (Node node)
 		{
-			GoalReachedNode (node);
+			if (node.Id == positionToGo) 
+			{
+				currentNode = 0;
+				GoalReachedNode (node);
+			}
+			else
+				TryFindOtherPoint ();
+		}
+
+		private void TryFindOtherPoint ()
+		{
+			currentNode++;
+			if (currentNode < nodes.Count)
+				ChoseNodeToGo ();
+			else
+				EndGame ("Totem cannot reach the goal cant find " + positionToGo);
 		}
 
 		protected override void Update ()

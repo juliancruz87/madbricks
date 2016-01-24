@@ -13,7 +13,12 @@ namespace Interactive.Detail
 
 		private CameraManager cameraManager;
 		private bool couldPanAndZoomLastFrame;
-		
+
+		public float CurrentZoomValue 
+		{
+			get { return zoomBehaviour.CurrentZoomValue; }
+		}
+
 		private void Start ()
 		{
 			cameraManager = GetComponent<CameraManager> ();
