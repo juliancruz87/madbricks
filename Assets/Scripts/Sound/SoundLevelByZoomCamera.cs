@@ -8,15 +8,19 @@ namespace Sound
 	public class SoundLevelByZoomCamera : MonoBehaviour
 	{
 		[SerializeField]
-		private AudioSource mainSound;
+		private AudioMixer mixer;
 		[SerializeField]
-		private AudioSource hiddenSound;
+		private float minDecibels = -80F;
+		[SerializeField]
+		private float maxDecibels = 1F;
 
+		private float lastVolume = 0;
 		private ZoneCamera cameraZoom;
 
 		private void Awake ()
 		{
 			cameraZoom = gameObject.GetComponent<ZoneCamera> ();
+			UpdateVolumeByZoom ();
 		}
 
 		private void Update ()
@@ -24,11 +28,18 @@ namespace Sound
 			if(cameraZoom == null)
 				return;
 
-			if(hiddenSound.volume != cameraZoom.CurrentZoomValue)
+			UpdateVolumeByZoom ();
+		}
+
+		private void UpdateVolumeByZoom ()
+		{
+			if (cameraZoom.CurrentZoomValue != lastVolume) 
 			{
-				mainSound.volume = 1;
-				hiddenSound.volume = cameraZoom.CurrentZoomValue;
-				mainSound.volume -= hiddenSound.volume;
+				lastVolume = cameraZoom.CurrentZoomValue;
+				float currentVolume = Mathf.Lerp (minDecibels, maxDecibels, cameraZoom.CurrentZoomValue);
+				float currentVolume2 = Mathf.Lerp (maxDecibels, minDecibels, cameraZoom.CurrentZoomValue);
+				mixer.SetFloat ("MusicVolume", currentVolume);
+				mixer.SetFloat ("ThemeVolume", currentVolume2);
 			}
 		}
 	}
