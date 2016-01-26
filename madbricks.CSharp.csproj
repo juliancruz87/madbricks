@@ -192,6 +192,7 @@
     <Compile Include="Assets\Scripts\Sound\ScriptableSoundSettings.cs" />
     <Compile Include="Assets\Scripts\Sound\SnapSoundPlayer.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundConfig.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundLevelByZoomCamera.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundType.cs" />
     <Compile Include="Assets\Scripts\SplashScreen\SplashScreenManager.cs" />
