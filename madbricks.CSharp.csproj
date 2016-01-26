@@ -153,8 +153,6 @@
     <Compile Include="Assets\Scripts\LevelLoader\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\LevelLoader\LevelLoaderSettings.cs" />
     <Compile Include="Assets\Scripts\LevelLoader\LoadingScene.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Map\Door.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSwitcher.cs" />
     <Compile Include="Assets\Scripts\Map\ExplosiveBox.cs" />
@@ -203,8 +201,15 @@
     <Compile Include="Assets\Scripts\UI\GameHUD\HudContainer.cs" />
     <Compile Include="Assets\Scripts\UI\GameHUD\HudManager.cs" />
     <Compile Include="Assets\Scripts\UI\GameUIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\AreaBox.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\AreaBoxesManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\AreaSelectionManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\MenuRotator.cs" />
     <Compile Include="Assets\Scripts\UI\UIButtonRestartLevel.cs" />
     <Compile Include="Assets\Scripts\Util\AlphaLerp.cs" />
+    <Compile Include="Assets\Scripts\Util\LookAtTransform.cs" />
     <Compile Include="Assets\Scripts\Utilities\CombineChildren.cs" />
     <Compile Include="Assets\Scripts\Utilities\FadeManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\LevelNamesParser.cs" />
