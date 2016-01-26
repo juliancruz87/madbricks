@@ -16,12 +16,13 @@ namespace Interactive.Detail
 		[SerializeField]
 		private AudioSource audioSource;
 
-		
 		public override void StartStep ()
 		{
-			if(audioSource == null)
+			if (audioSource != null)
+				audioSource.Play ();
+			else if (audioSource == null)
 				SoundManager.Instance.Play (clip);
-			else
+			else if (clip != null && audioSource != null)
 				audioSource.PlayOneShot (clip);
 			FinishStep (0F + delay);
 		}

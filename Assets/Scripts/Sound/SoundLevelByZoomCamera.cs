@@ -13,13 +13,21 @@ namespace Sound
 		private float minDecibels = -80F;
 		[SerializeField]
 		private float maxDecibels = 1F;
+		[SerializeField]
+		private float maxCapped = 0F;
+		[SerializeField]
+		private float minCapped = 0F;
+		[SerializeField]
+		private string paramToChange = "";
+		[SerializeField]
+		private bool reverse = false;
 
 		private float lastVolume = 0;
 		private ZoneCamera cameraZoom;
 
 		private void Awake ()
 		{
-			cameraZoom = gameObject.GetComponent<ZoneCamera> ();
+			cameraZoom = FindObjectOfType<ZoneCamera> ();
 			UpdateVolumeByZoom ();
 		}
 
@@ -36,11 +44,17 @@ namespace Sound
 			if (cameraZoom.CurrentZoomValue != lastVolume) 
 			{
 				lastVolume = cameraZoom.CurrentZoomValue;
-				float currentVolume = Mathf.Lerp (minDecibels, maxDecibels, cameraZoom.CurrentZoomValue);
-				float currentVolume2 = Mathf.Lerp (maxDecibels, minDecibels, cameraZoom.CurrentZoomValue);
-				mixer.SetFloat ("MusicVolume", currentVolume);
-				mixer.SetFloat ("ThemeVolume", currentVolume2);
+				float currentVolume = GetCurrentVolume ();
+				currentVolume = Mathf.Clamp (currentVolume, minCapped, maxCapped);
+				mixer.SetFloat (paramToChange, currentVolume);
 			}
+		}
+
+		private float GetCurrentVolume ()
+		{
+			if(reverse)
+				return Mathf.Lerp (maxDecibels, minDecibels, cameraZoom.CurrentZoomValue);
+			return Mathf.Lerp (minDecibels, maxDecibels, cameraZoom.CurrentZoomValue);
 		}
 	}
 }
