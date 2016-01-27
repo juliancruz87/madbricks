@@ -65,6 +65,33 @@ public class SaveManager : MonoBehaviour
         return selectedLevel;
     }
 
+    //Cleared Area
+    public void SetClearedArea(string clearedArea)
+    {
+        LogSetOperation("Area " + clearedArea.ToString());
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, clearedArea.ToString());
+    }
+
+    public string GetClearedArea()
+    {
+        string clearedArea = PlayerPrefs.GetString(PrefsProperties.CLEARED_AREA, "1");
+        LogGetOperation("Area " + clearedArea);
+        return clearedArea;
+    }
+
+    //Cleared Level
+    public void SetClearedLevel(string clearedLevel)
+    {
+        LogSetOperation("Level " + clearedLevel.ToString());
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, clearedLevel.ToString());
+    }
+
+    public string GetClearedLevel()
+    {
+        string clearedLevel = PlayerPrefs.GetString(PrefsProperties.CLEARED_LEVEL, "1");
+        LogGetOperation("Level " + clearedLevel);
+        return clearedLevel;
+    }
 
 
     //Logging
