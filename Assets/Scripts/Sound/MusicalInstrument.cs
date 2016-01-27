@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Sound;
 
 public class MusicalInstrument : MonoBehaviour
 {
-    [SerializeField] 
     private AudioSource audioSource;
-
-	// Use this for initialization
-	void Start () {
 	
+	private void Start () 
+	{
+		audioSource = SoundManager.Instance.AudioSourceLib.Instrument;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	private void Update () 
+	{
 	    CheckInput();
 	}
 

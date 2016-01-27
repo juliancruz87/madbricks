@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using ManagerInput;
 using Sound.Detail;
+using Interactive;
 
 namespace Sound
 {
@@ -11,6 +12,17 @@ namespace Sound
 		[SerializeField]
 		private ScriptableSoundSettings soundSettings;
 		private AudioSource audioSource;
+		private AudioSourceLibAccess audioSourceLib;
+
+		public AudioSourceLibAccess AudioSourceLib 
+		{
+			get
+			{
+				if(audioSourceLib == null)
+					audioSourceLib = FindObjectOfType<AudioSourceLibAccess> ();
+				return audioSourceLib;
+			}
+		}
 
 		public static SoundManager Instance 
 		{
@@ -50,6 +62,14 @@ namespace Sound
 		private void PlayOneShot (AudioClip sound)
 		{
 			audioSource.PlayOneShot (sound);
+		}
+
+		public void PlayEndSound (GameResults results)
+		{
+			if (results == GameResults.Win)
+				audioSourceLib.WinLevel.Play ();
+			else
+				audioSourceLib.LoseLevel.Play ();
 		}
 	}
 }

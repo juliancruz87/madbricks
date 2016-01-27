@@ -19,17 +19,20 @@ namespace Interactive.Detail
 
 		public override void StartStep ()
 		{
-            if (gameManagerForUI.Result == GameResults.Win)
-            {
-                //winResults.SetActive(true);
-                LevelLoaderController.LevelLoader.Instance.LoadNextLevel();
-            }
-            else
-            {
-                // loseResults.SetActive(true);
-                Application.LoadLevel(Application.loadedLevelName);
-            }
+            ShowResults ();
 
+		}
+
+		private void ShowResults ()
+		{
+			if (gameManagerForUI.Result == GameResults.Win) {
+				//winResults.SetActive(true);
+				LevelLoaderController.LevelLoader.Instance.LoadNextLevel ();
+			}
+			else {
+				// loseResults.SetActive(true);
+				Application.LoadLevel (Application.loadedLevelName);
+			}
 			EndStep ();
 		}
 	}

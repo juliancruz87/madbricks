@@ -2,9 +2,11 @@
 using Interactive.Detail;
 using Interactive.Totems;
 using UnityEngine;
+using Sound;
 
 namespace Map {
-    public class ExplosiveBox : MapObject {
+    public class ExplosiveBox : MapObject 
+	{
 
         // Use this for initialization
         void Start () {
@@ -29,7 +31,9 @@ namespace Map {
                 HittedByNonExplosiveTotem(totem);
         }
 
-        private void Explode(Totem totem) {
+        private void Explode(Totem totem) 
+		{
+			SoundManager.Instance.AudioSourceLib.ExplosiveTotem.Play ();
             Destroy(totem.gameObject);
             Destroy(gameObject);
         }

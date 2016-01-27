@@ -5,6 +5,7 @@ using InteractiveObjects;
 using System;
 using Map;
 using System.Collections.Generic;
+using Sound;
 
 namespace Interactive
 {
@@ -189,6 +190,7 @@ namespace Interactive
 		{
 			Result = results;
 			endSequencer.Play ();
+			SoundManager.Instance.PlayEndSound (results);
 		}
 
         public void Pause ()

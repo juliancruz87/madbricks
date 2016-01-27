@@ -3,6 +3,7 @@ using Interactive;
 using Interactive.Detail;
 using Interactive.Totems;
 using UnityEngine;
+using Sound;
 
 namespace Map 
 {
@@ -32,6 +33,7 @@ namespace Map
             totem.Stop();
             totem.transform.DOKill();
             totem.transform.position = portalTarget.transform.position;
+			SoundManager.Instance.AudioSourceLib.PortalSound.Play ();
 
             totem.GoToSecondaryPositionToGo();
         }
