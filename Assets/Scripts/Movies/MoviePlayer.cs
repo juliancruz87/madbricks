@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MoviePlayer : MonoBehaviour
 {
-
+#if !UNITY_ANDROID
     private Renderer movieRenderer;
     public bool useLocalTexture;
 
@@ -80,4 +80,5 @@ public class MoviePlayer : MonoBehaviour
                 yield return null;
         }
     }
+#endif
 }
