@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2016
 		Month: 1
-		Day: 28
-		Hour: 20
-		Minute: 50
-		Second: 43
-		Millisecond: 604
+		Day: 29
+		Hour: 14
+		Minute: 1
+		Second: 4
+		Millisecond: 134
 	}
 	Creator: "FBX SDK/FBX Plugins version 2016.0"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -36,13 +36,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya"
 			P: "Original|ApplicationVersion", "KString", "", "", "2016"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "29/01/2016 01:50:43.602"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "29/01/2016 19:01:04.121"
 			P: "Original|FileName", "KString", "", "", "E:/Mad Bricks/Crea Digital/Git Ekko/madbricks/Assets/fbx/General/Muro.FBX"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2016"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "29/01/2016 01:50:43.602"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "29/01/2016 19:01:04.121"
 		}
 	}
 }
@@ -60,7 +60,7 @@ GlobalSettings:  {
 		P: "UnitScaleFactor", "double", "Number", "",1
 		P: "OriginalUnitScaleFactor", "double", "Number", "",1
 		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
-		P: "DefaultCamera", "KString", "", "", "Producer Left"
+		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
 		P: "TimeMode", "enum", "", "",11
 		P: "TimeProtocol", "enum", "", "",2
 		P: "SnapOnFrameMode", "enum", "", "",0
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 802297473040, "", "Scene" {
+	Document: 543955963632, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -258,7 +258,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 802267953760, "Geometry::", "Mesh" {
+	Geometry: 543956217632, "Geometry::", "Mesh" {
 		Vertices: *72 {
 			a: -9.42608070373535,0,9.42608070373535,9.42608070373535,0,9.42608070373535,-9.42608070373535,0,-9.42608070373535,9.42608070373535,0,-9.42608070373535,-9.42607879638672,4.44312381744385,9.42607879638672,9.42607879638672,4.44312381744385,9.42607879638672,-9.42607879638672,4.44312381744385,-9.42607879638672,9.42607879638672,4.44312381744385,-9.42607879638672,-8.30162334442139,4.44312381744385,8.30162334442139,8.30162334442139,4.44312381744385,8.30162334442139,-8.30162334442139,4.44312429428101,-8.30162239074707,8.30162334442139,4.44312429428101,-8.30162239074707,-8.30162143707275,18.5671768188477,8.30162143707275,8.30162143707275,18.5671768188477,8.30162143707275,-8.30162143707275,18.5671768188477,-8.30162048339844,8.30162143707275,18.5671768188477,-8.30162048339844,-9.42607593536377,18.5671768188477,9.42607593536377,9.42607593536377,18.5671768188477,9.42607593536377,-9.42607593536377,18.5671768188477,-9.42607498168945,9.42607593536377,18.5671768188477,-9.42607498168945,-9.42607498168945,23.1042823791504,9.42607498168945,9.42607498168945,23.1042823791504,9.42607498168945,-9.42607498168945,23.1042804718018,-9.42607307434082,9.42607498168945,23.1042804718018,-9.42607307434082
 		} 
@@ -320,7 +320,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 801697415408, "Model::Muro", "Mesh" {
+	Model: 544082927728, "Model::Muro", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -340,7 +340,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 802264195536, "Material::lambert1", "" {
+	Material: 543950315360, "Material::lambert2", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -363,62 +363,62 @@ Objects:  {
 Connections:  {
 	
 	;Model::Muro, Model::RootNode
-	C: "OO",801697415408,0
+	C: "OO",544082927728,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",802295272688,802294512320
+	C: "OO",544081983280,543951842080
 	
 	;AnimCurveNode::mr displacement use global settings, AnimLayer::BaseLayer
-	C: "OO",802294516896,802295272688
+	C: "OO",543951847696,544081983280
 	
 	;AnimCurveNode::mr displacement view dependent, AnimLayer::BaseLayer
-	C: "OO",802294512944,802295272688
+	C: "OO",543951843536,544081983280
 	
 	;AnimCurveNode::mr displacement method, AnimLayer::BaseLayer
-	C: "OO",802294511280,802295272688
+	C: "OO",543951852688,544081983280
 	
 	;AnimCurveNode::mr displacement smoothing on, AnimLayer::BaseLayer
-	C: "OO",802294516064,802295272688
+	C: "OO",543951854352,544081983280
 	
 	;AnimCurveNode::mr displacement edge length, AnimLayer::BaseLayer
-	C: "OO",802294509616,802295272688
+	C: "OO",543951841664,544081983280
 	
 	;AnimCurveNode::mr displacement max displace, AnimLayer::BaseLayer
-	C: "OO",802294517936,802295272688
+	C: "OO",543951841872,544081983280
 	
 	;AnimCurveNode::mr displacement parametric subdivision level, AnimLayer::BaseLayer
-	C: "OO",802294508576,802295272688
+	C: "OO",543951842288,544081983280
 	
 	;AnimCurveNode::MaxHandle, AnimLayer::BaseLayer
-	C: "OO",802294510656,802295272688
+	C: "OO",543951844160,544081983280
 	
 	;Geometry::, Model::Muro
-	C: "OO",802267953760,801697415408
+	C: "OO",543956217632,544082927728
 	
-	;Material::lambert1, Model::Muro
-	C: "OO",802264195536,801697415408
+	;Material::lambert2, Model::Muro
+	C: "OO",543950315360,544082927728
 	
 	;AnimCurveNode::mr displacement use global settings, Model::Muro
-	C: "OP",802294516896,801697415408, "mr displacement use global settings"
+	C: "OP",543951847696,544082927728, "mr displacement use global settings"
 	
 	;AnimCurveNode::mr displacement view dependent, Model::Muro
-	C: "OP",802294512944,801697415408, "mr displacement view dependent"
+	C: "OP",543951843536,544082927728, "mr displacement view dependent"
 	
 	;AnimCurveNode::mr displacement method, Model::Muro
-	C: "OP",802294511280,801697415408, "mr displacement method"
+	C: "OP",543951852688,544082927728, "mr displacement method"
 	
 	;AnimCurveNode::mr displacement smoothing on, Model::Muro
-	C: "OP",802294516064,801697415408, "mr displacement smoothing on"
+	C: "OP",543951854352,544082927728, "mr displacement smoothing on"
 	
 	;AnimCurveNode::mr displacement edge length, Model::Muro
-	C: "OP",802294509616,801697415408, "mr displacement edge length"
+	C: "OP",543951841664,544082927728, "mr displacement edge length"
 	
 	;AnimCurveNode::mr displacement max displace, Model::Muro
-	C: "OP",802294517936,801697415408, "mr displacement max displace"
+	C: "OP",543951841872,544082927728, "mr displacement max displace"
 	
 	;AnimCurveNode::mr displacement parametric subdivision level, Model::Muro
-	C: "OP",802294508576,801697415408, "mr displacement parametric subdivision level"
+	C: "OP",543951842288,544082927728, "mr displacement parametric subdivision level"
 	
 	;AnimCurveNode::MaxHandle, Model::Muro
-	C: "OP",802294510656,801697415408, "MaxHandle"
+	C: "OP",543951844160,544082927728, "MaxHandle"
 }
