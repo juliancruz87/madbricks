@@ -1,30 +1,15 @@
 fileFormatVersion: 2
-guid: 9a5ec2180aa0c9b42ba2b5f97a3290c2
-timeCreated: 1448419323
+guid: 11b9aab1e743f6e4caf91a4dd9e8e180
+timeCreated: 1454194926
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: manivela
-    100002: //RootNode
-    100004: manivela_caja
-    100006: Mesh
-    100008: Mesh (2)
-    100010: Mesh (2) (2)
-    400000: manivela
-    400002: //RootNode
-    400004: manivela_caja
-    400006: Mesh
-    400008: Mesh (2)
-    400010: Mesh (2) (2)
-    2300000: Mesh (2) (2)
-    2300002: //RootNode
-    3300000: Mesh (2) (2)
-    3300002: //RootNode
-    4300000: Mesh (2) (2)
-    4300002: Manivela
-    7400000: Take 001
-    9500000: //RootNode
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Manivela
   materials:
     importMaterials: 1
     materialName: 0
@@ -83,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
