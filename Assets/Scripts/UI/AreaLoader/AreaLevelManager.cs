@@ -1,30 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelSelectionObject : MonoBehaviour {
+public class AreaLevelManager : MonoBehaviour {
 
-    private string levelID;
+    [SerializeField] 
+    private Material[] areaMaterials;
 
     void Start()
     {
-        int nameLength = name.Length;
-        levelID = name.Substring(nameLength - 1, 1);
+        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea()) - 1;
+
+        foreach (Transform level in transform)
+        {
+            level.GetComponent<Renderer>().material = areaMaterials[selectedArea];
+        }
     }
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
-		Sound.SoundManager.Instance.AudioSourceLib.UiButtonSound.Play ();
         Debug.Log("Selected Level: " + levelID);
         SaveManager.Instance.SetSelectedLevel(levelID);
         //Application.LoadLevel(SceneProperties.SCENE_LOADER_LEVEL);
         LevelLoaderController.LevelLoader.Instance.LoadScene(GetSceneToLoad(SaveManager.Instance.GetSelectedArea(), levelID));
     }
-
+    */
     public string GetSceneToLoad(string area, string level)
     {
         string sceneName = "W" + area + "_L" + level;
 
-       
+
 
         return sceneName;
     }
