@@ -19,7 +19,13 @@ namespace Interactive.Detail
 
 		private List<Vector3> PositionsToSnap
 		{
-			get{ return points.ConvertAll(p => p.position);}
+			get
+			{ 
+				List<Vector3> positions = new List<Vector3> ();
+				foreach (Transform point in points)
+					positions.Add (point.position);
+				return positions;
+			}
 		}
 
 		private void Start ()
