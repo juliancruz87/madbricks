@@ -118,7 +118,10 @@ namespace CameraTools
 		{
 			RaycastHit[] hits = SphereCastAllFromScreenPoint (screenTouchPosition, radius);
 			Array.Sort (hits, (a, b) => a.distance.CompareTo (b.distance));
-			return Array.ConvertAll (hits, h => h.collider);
+			Collider[] colliders = new Collider[hits.Length];
+			for (int i = 0; i < hits.Length; i++)
+				colliders.Clone [i] = hits [i].collider;
+			return colliders;
 		}
 
 		public static T GetTappedComponent<T>(Vector3 screenTouchPosition, float radius, int layerMask) where T : Component
