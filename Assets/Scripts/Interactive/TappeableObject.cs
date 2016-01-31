@@ -28,10 +28,16 @@ namespace InteractiveObjects.Detail
 
 		private void ManageGraphicsFX ()
 		{
-			if (wasTouched)
-				System.Array.ForEach (graphicsFX, g => g.Stop ());
-			else
-				System.Array.ForEach (graphicsFX, g => g.Play ());
+			if (wasTouched) 
+			{
+				foreach (IGraphicsFX graphic in graphicsFX)
+					graphic.Stop ();
+			} 
+			else 
+			{
+				foreach (IGraphicsFX graphic in graphicsFX)
+					graphic.Play ();
+			}
 		}
 	}	
 }

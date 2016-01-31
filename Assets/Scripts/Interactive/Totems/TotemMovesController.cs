@@ -34,7 +34,8 @@ namespace Interactive.Detail
 				points = new List<Transform> (); 
 				parentToPositionsToSnap = parentForPositionsToSnap;
 				Node [] positions = parentToPositionsToSnap.GetComponentsInChildren<Node> ();
-				System.Array.ForEach (positions, p => points.Add (p.transform));
+				foreach (Node node in positions)
+					points.Add (node.transform);
 			}
 		}
 	}

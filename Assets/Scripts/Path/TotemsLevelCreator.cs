@@ -27,7 +27,10 @@ namespace Interactive.Detail
 				gridConfig.Create ();
 
 			Node [] childs = GetComponentsInChildren<Node> ();
-			System.Array.ForEach (childs, c => points.Add (c));
+
+			foreach (Node child in childs) 
+				points.Add (child);
+
 			instantiator.Instantiate (points, grid, grid);
 			GameManagerForStates.Totems = instantiator.Totems;
 		}

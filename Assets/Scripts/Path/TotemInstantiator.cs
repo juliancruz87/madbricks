@@ -20,7 +20,16 @@ namespace Interactive.Detail
 
 		public List<ITotem> Totems
 		{
-			get{ return totemsCreated.ConvertAll (c=> c.GetComponent<ITotem> ());}
+			get
+			{ 
+				List<ITotem> totemsConverted = new List<ITotem> ();
+				foreach (GameObject gameobject in totemsCreated)
+				{
+					ITotem createdTotem = gameobject.GetComponent<ITotem> ();
+					totemsConverted.Add (createdTotem);
+				}
+				return totemsConverted;
+			}
 		}
 
 		public int TotemsNum
