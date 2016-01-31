@@ -120,7 +120,7 @@ namespace CameraTools
 			Array.Sort (hits, (a, b) => a.distance.CompareTo (b.distance));
 			Collider[] colliders = new Collider[hits.Length];
 			for (int i = 0; i < hits.Length; i++)
-				colliders.Clone [i] = hits [i].collider;
+				colliders [i] = hits [i].collider;
 			return colliders;
 		}
 
