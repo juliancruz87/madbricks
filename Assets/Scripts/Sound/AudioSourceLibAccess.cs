@@ -29,6 +29,12 @@ namespace Sound
 		[SerializeField]
 		private AudioSource loseLevel;
 		[SerializeField]
+		private AudioSource rotationMusicBox;
+		[SerializeField]
+		private AudioSource uiButtonSound;
+		[SerializeField]
+		private AudioSource uiButtonCapturePhoto;
+		[SerializeField]
 		private ScritableAudioSourceLibLevelSettings settings;
 
 		public AudioSource Instrument 
@@ -56,12 +62,38 @@ namespace Sound
 			get { return portalSound;}
 		}
 
+		public AudioSource RotationMusicBox 
+		{
+			get { return rotationMusicBox;}
+		}
+
+		public AudioSource UiButtonSound 
+		{
+			get { return uiButtonSound; }
+		}
+
+		public AudioSource UiButtonCapturePhoto 
+		{
+			get { return uiButtonCapturePhoto; }
+		}
+
+		public AudioSource Collision 
+		{
+			get { return collision; }
+		}
+
 		private void Awake ()
 		{
 			instrument.clip = settings.Instrument;
 			dialog.clip = settings.Dialog;
 			levelMusic.clip = settings.MusicLevel;
 			levelMusicComplete.clip = settings.MusicLevelComplete;
+		}
+
+		private void Start ()
+		{
+			levelMusic.Play ();
+			levelMusicComplete.Play ();
 		}
 	}
 }

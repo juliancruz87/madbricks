@@ -13,6 +13,7 @@ public class LevelSelectionObject : MonoBehaviour {
 
     void OnMouseDown()
     {
+		Sound.SoundManager.Instance.AudioSourceLib.UiButtonSound.Play ();
         Debug.Log("Selected Level: " + levelID);
         SaveManager.Instance.SetSelectedLevel(levelID);
         //Application.LoadLevel(SceneProperties.SCENE_LOADER_LEVEL);

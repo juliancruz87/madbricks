@@ -6,6 +6,7 @@ using Path;
 using Interactive.Detail;
 
 // TODO: Extend to touch input
+using Sound;
 
 
 namespace Drag {
@@ -53,10 +54,6 @@ namespace Drag {
         private MapObject currentLauncher;
 		private bool canBeDragged = true;
 
-        private AudioSource collisionAudioSource;
-        [SerializeField] 
-        private AudioClip collideAudioClip;
-
 		public bool IsBeingDragged 
 		{
 			get { return isBeingDragged; }
@@ -81,9 +78,8 @@ namespace Drag {
             draggableObjects++;
         }
 
-		private void Start () {
-            if (GameObject.Find("CollisionSoundPlayer"))
-                collisionAudioSource = GameObject.Find("CollisionSoundPlayer").GetComponent<AudioSource>();
+		private void Start () 
+		{
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
 		    dragFloorCollider = dragFloor.GetComponent<Collider>();
@@ -372,8 +368,8 @@ namespace Drag {
         }
 
         private void PlayCollideSound() {
-            if (!collisionAudioSource.isPlaying) {
-                collisionAudioSource.Play();
+            if (!SoundManager.Instance.AudioSourceLib.Collision.isPlaying) {
+				SoundManager.Instance.AudioSourceLib.Collision.Play();
             }
         }
 

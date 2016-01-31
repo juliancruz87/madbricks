@@ -1,6 +1,7 @@
 using UnityEngine;
 using ManagerInput.Detail;
 using Interactive;
+using Sound;
 
 namespace ManagerInput.CameraControls
 {
@@ -56,9 +57,18 @@ namespace ManagerInput.CameraControls
 		{
 			if (CanDrag && Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false)) 
 			{
+				if(!SoundManager.Instance.AudioSourceLib.RotationMusicBox.isPlaying)
+					SoundManager.Instance.AudioSourceLib.RotationMusicBox.Play ();
+
 				Rotate ();
 				myTransform.Rotate (CurrentRotation, Space.World);
 			}
+		}
+
+		private void LateUpdate ()
+		{
+			if (Touch.ReleasedTouchThisFrame && SoundManager.Instance.AudioSourceLib.RotationMusicBox.isPlaying)
+				SoundManager.Instance.AudioSourceLib.RotationMusicBox.Stop ();
 		}
 
 		private void SetCurrentRotationByAxis (Vector3 rotateIn)
