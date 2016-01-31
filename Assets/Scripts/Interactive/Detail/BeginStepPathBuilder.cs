@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Interactive.Detail {
     
@@ -13,9 +12,6 @@ namespace Interactive.Detail {
 
 		[SerializeField]
 		private Transform riel;
-
-		[Inject]
-		private IGameManagerForStates gameStates;
 
         private Transform pathTransform;
 
@@ -34,7 +30,7 @@ namespace Interactive.Detail {
 
 			rielTransform.localPosition = Vector3.zero;
 			pathTransform.localPosition = Vector3.zero;
-			pathTransform.GetComponent<TotemsLevelCreator> ().SetUp (gameStates);
+			pathTransform.GetComponent<TotemsLevelCreator> ().SetUp ();
 				
 			if (EndStep != null)
                 EndStep();

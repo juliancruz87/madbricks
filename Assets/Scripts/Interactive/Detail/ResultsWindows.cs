@@ -2,14 +2,15 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Sound;
-using Zenject;
 
 namespace Interactive.Detail
 {
 	public class ResultsWindows : BeginStepGameBase
 	{
-		[Inject]
-		private IGameManagerForUI gameManagerForUI;
+		private IGameManagerForUI GameManagerForUI
+		{
+			get { return GameManager.Instance;}
+		}
 
 		[SerializeField]
 		private GameObject winResults;
@@ -25,7 +26,7 @@ namespace Interactive.Detail
 
 		private void ShowResults ()
 		{
-			if (gameManagerForUI.Result == GameResults.Win) {
+			if (GameManagerForUI.Result == GameResults.Win) {
 				//winResults.SetActive(true);
 				LevelLoaderController.LevelLoader.Instance.LoadNextLevel ();
 			}

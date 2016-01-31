@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Zenject;
 
 namespace Interactive.Activators
 {
-	public class ColliderActivatorByGameState : MonoBehaviour, SetterGameManagerForStates 
+	public class ColliderActivatorByGameState : MonoBehaviour 
 	{
 		[SerializeField]
 		private GameStates gameState;
@@ -12,22 +11,19 @@ namespace Interactive.Activators
 		[SerializeField]
 		private Collider colliderToActivate;
 
-		[Inject]
-		private IGameManagerForStates gameManager;
-
-		public IGameManagerForStates GameManager 
+		private IGameManagerForStates GameManagerForStates
 		{
-			set { gameManager = value; }
+			get { return GameManager.Instance;}
 		}
 
 		private bool ShouldActivate
 		{
 			get 
 			{
-				if(gameManager == null)
+				if(GameManagerForStates == null)
 					return false;
 				else 
-					return gameManager.CurrentState == gameState;
+					return GameManagerForStates.CurrentState == gameState;
 			}
 		}
 

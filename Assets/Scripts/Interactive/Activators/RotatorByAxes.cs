@@ -1,6 +1,5 @@
 using UnityEngine;
 using ManagerInput.Detail;
-using Zenject;
 using Interactive;
 
 namespace ManagerInput.CameraControls
@@ -17,8 +16,10 @@ namespace ManagerInput.CameraControls
 		[SerializeField]
 		private Axis rotateInAxis = Axis.All;
 
-		[Inject]
-		private IGameManagerForStates gameManager;
+		private IGameManagerForStates GameManagerForStates
+		{
+			get { return GameManager.Instance;}
+		}
 
 		private Transform myTransform;
 		private ConditionalDrag conditional = new ConditionalDrag ();
@@ -39,14 +40,9 @@ namespace ManagerInput.CameraControls
 			set;
 		}
 
-		[PostInject]
-		private void PostInject ()
-		{
-			conditional.GameManager = gameManager;
-		}
-
 		private void Start ()
 		{
+			conditional.GameManager = GameManagerForStates;
 			myTransform = transform;
 		}
 

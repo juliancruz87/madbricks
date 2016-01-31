@@ -1,28 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Zenject;
 
 namespace Interactive.Activators
 {
-	public class ColliderActivatorByDragTotem : MonoBehaviour , SetterGameManagerForStates 
+	public class ColliderActivatorByDragTotem : MonoBehaviour
 	{
-		[Inject]
-		private IGameManagerForStates gameManager;
 		[SerializeField]
 		private Collider colliderToActivate;
+
 		private List<ITotem> totems;
 
-		public IGameManagerForStates GameManager 
+		private IGameManagerForStates GameManagerForStates
 		{
-			set { gameManager = value; }
+			get{ return GameManager.Instance; }
 		}
 
 		private bool ShouldActivate
 		{
 			get 
 			{
-				if(gameManager == null)
+				if(GameManagerForStates == null)
 					return false;
 				else 
 					return CheckIfTotemIsDragged ();
@@ -31,8 +29,8 @@ namespace Interactive.Activators
 
 		private bool CheckIfTotemIsDragged ()
 		{
-			if (totems == null && gameManager.Totems != null)
-				totems = gameManager.Totems;
+			if (totems == null && GameManagerForStates.Totems != null)
+				totems = GameManagerForStates.Totems;
 
 			if (totems != null)
 				return !totems.Exists (c => c.IsDragged);

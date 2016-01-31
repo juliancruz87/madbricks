@@ -129,7 +129,7 @@ namespace Interactive.Detail
 
 		private void  OnTriggerEnter(Collider collision)
 		{
-			if (gameStates.CurrentState != GameStates.Play)
+			if (GameManagerForStates.CurrentState != GameStates.Play)
 				return;
 
 			bool cannotPassForPhantomWall = collision.gameObject.GetComponent<PhantomWall> () != null && !totem.BehavioursTypes.Contains(TotemBehaviours.Phantom);

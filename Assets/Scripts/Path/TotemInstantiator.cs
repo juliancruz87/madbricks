@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Map;
 using InteractiveObjects;
 using InteractiveObjects.Detail;
-using Zenject;
 using Interactive.Totems;
 using Path;
 
@@ -22,12 +21,6 @@ namespace Interactive.Detail
 		public List<ITotem> Totems
 		{
 			get{ return totemsCreated.ConvertAll (c=> c.GetComponent<ITotem> ());}
-		}
-
-		public IGameManagerForStates GameStates 
-		{
-			set;
-			private get;
 		}
 
 		public int TotemsNum
@@ -52,10 +45,6 @@ namespace Interactive.Detail
 
 			foreach (GameObject totem in totemsCreated) 
 			{
-				ITotem t = totem.GetComponent<ITotem> ();
-                if (t != null)
-				    t.GameStates = GameStates;
-
 				TotemControllerStop totemController = totem.GetComponent<TotemControllerStop> ();
 				if(totemController != null)
 					totemController.SetTotems (totemsCreated);
@@ -76,7 +65,7 @@ namespace Interactive.Detail
 			if (HasAddedTotemComponents (gameObjectTotem, totem)) 
 			{
 				Totem totemObject = gameObjectTotem.GetComponent<Totem> ();
-				totemObject.SetUp (totem, validStartPoints, GameStates);
+				totemObject.SetUp (totem, validStartPoints);
 				AddTotemBehaviours(gameObjectTotem, totem);
 			}
 		}

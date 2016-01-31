@@ -17,14 +17,13 @@ namespace Interactive.Detail
 		private List<int> validStartPoints;
 		private List<TotemType> validTypes = new List<TotemType> ();
 
-		protected IGameManagerForStates gameStates;
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
 	    public abstract TotemType Type { get; }
 
-		public IGameManagerForStates GameStates 
+		protected IGameManagerForStates GameManagerForStates
 		{
-			set { gameStates = value; }
+			get { return GameManager.Instance;}
 		}
 
 	    protected int positionToGo;
@@ -60,16 +59,14 @@ namespace Interactive.Detail
 			validTypes.Add (TotemType.Square);
 		}
 		
-		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints, IGameManagerForStates gameStates)
+		public void SetUp (TotemInstantiatorConfig totem, List<int> validStartPoints)
 		{
 			if (validTypes.Contains (totem.Type))  
 			{
-				this.gameStates = gameStates;
 				this.totem = totem;
 				this.validStartPoints = validStartPoints;
-				gameStates.StartedGame += OnStartedGame;
+				GameManagerForStates.StartedGame += OnStartedGame;
 				controllerToStop.CollidedWithTotem += OnCrashWithOtherCollider;
-				SetGameManagerForUI (gameStates);
 			    positionToGo = totem.PositionToGo;
 			}
 		}
@@ -89,19 +86,12 @@ namespace Interactive.Detail
 			myTransform.DOKill ();
 			snaper.SnapToCloserTransform ();
 		}
-
-		private void SetGameManagerForUI (IGameManagerForStates gameStates)
-		{
-			SetterGameManagerForStates setter = GetComponent<SetterGameManagerForStates> ();
-			if (setter != null)
-				setter.GameManager = gameStates;
-		}
 		
 		private void OnDestroy ()
 		{
-			if (gameStates != null) 
+			if (GameManagerForStates != null) 
 			{
-				gameStates.StartedGame -= OnStartedGame;
+				GameManagerForStates.StartedGame -= OnStartedGame;
 				controllerToStop.CollidedWithTotem -= OnCrashWithOtherCollider;
 			}
 		}
@@ -125,7 +115,7 @@ namespace Interactive.Detail
 		protected void GoalReachedNode(Node node)
 		{
 			if (node.Id == positionToGo)
-				gameStates.Goal ();
+				GameManagerForStates.Goal ();
 			
 			if(totem.SoundToGetReach != null) 
 				SoundManager.Instance.Play (totem.SoundToGetReach);
@@ -135,7 +125,7 @@ namespace Interactive.Detail
 
 		protected void EndGame (string warning) {
 			Debug.LogWarning (warning);
-			gameStates.Lose ();
+			GameManagerForStates.Lose ();
 		}
 
 		public virtual void GoToSecondaryPositionToGo() 

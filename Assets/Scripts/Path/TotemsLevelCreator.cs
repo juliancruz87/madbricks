@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Zenject;
 using Path;
 
 namespace Interactive.Detail
@@ -14,27 +13,28 @@ namespace Interactive.Detail
 		[SerializeField]
 		private TotemInstantiator instantiator;
 
-		[Inject]
-		private IGameManagerForStates gameStates;
+		private IGameManagerForStates GameManagerForStates
+		{
+			get { return GameManager.Instance;}
+		}
 
 		private List<Node> points = new List<Node>();
 
-		[PostInject]
-		private void PostInject ()
+		private void Start ()
 		{
-			SetUp (gameStates);
+			SetUp ();
 		}
 
-		public void SetUp (IGameManagerForStates gameStates)
+		public void SetUp ()
 		{
 			Grid gridConfig = grid.GetComponent<Grid> ();
 			if(gridConfig != null)
 				gridConfig.Create ();
-			instantiator.GameStates = gameStates;
+
 			Node [] childs = GetComponentsInChildren<Node> ();
 			System.Array.ForEach (childs, c => points.Add (c));
 			instantiator.Instantiate (points, grid, grid);
-			gameStates.Totems = instantiator.Totems;
+			GameManagerForStates.Totems = instantiator.Totems;
 		}
 	}
 }
