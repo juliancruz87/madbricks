@@ -20,11 +20,6 @@ namespace Interactive.Detail
 
 		private List<Node> points = new List<Node>();
 
-		private void Start ()
-		{
-			SetUp ();
-		}
-
 		public void SetUp ()
 		{
 			Grid gridConfig = grid.GetComponent<Grid> ();
