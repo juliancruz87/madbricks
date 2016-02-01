@@ -17,7 +17,6 @@ public class AreaBox : MonoBehaviour
 
     [SerializeField]
     private Material materialArea;
-    private Transform myTransform;
     private Transform numberTransform;
 
     [SerializeField]
@@ -31,7 +30,6 @@ public class AreaBox : MonoBehaviour
 
     void Start()
     {
-        myTransform = transform;
         numberTransform = transform.GetChild(0);
     }
 
@@ -56,7 +54,6 @@ public class AreaBox : MonoBehaviour
     IEnumerator GrowCoroutine(float growScale, float growTime)
     {
         Vector3 newScale = transform.localScale * growScale;
-        Vector3 originalScale = transform.localScale;
         float originalTime = growTime;
 
         while (growTime > 0.0f)
@@ -76,7 +73,6 @@ public class AreaBox : MonoBehaviour
     IEnumerator ShrinkCoroutine(float growScale, float growTime)
     {
         Vector3 newScale = Vector3.one;
-        Vector3 originalScale = transform.localScale;
         float originalTime = growTime;
 
         while (growTime > 0.0f)

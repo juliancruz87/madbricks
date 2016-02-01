@@ -11,9 +11,6 @@ namespace Path {
 	{
         [SerializeField]
         private bool isJailed = false;
-        public bool IsJailed {
-            get { return isJailed; }
-        }
 
         [SerializeField]
         private DraggableObject[] totems;
@@ -91,7 +88,8 @@ namespace Path {
             }
         }
 
-        private void GetIntoJail() {
+        private void GetIntoJail() 
+		{
             isJailed = true;
         }
 
@@ -153,8 +151,11 @@ namespace Path {
                 currentNode = nearestNode;
         }
 
-        void OnTriggerEnter(Collider collision)
+        private void OnTriggerEnter(Collider collision)
         {
+			if (isJailed)
+				return;
+
 			if (collision.gameObject.GetComponent<DraggableObject> ()) 
 			{
 				Destroy(collision.gameObject);

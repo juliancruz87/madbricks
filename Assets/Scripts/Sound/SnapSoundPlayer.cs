@@ -8,9 +8,6 @@ namespace Sound {
         [SerializeField]
         private bool playAtRandomOrder;
 
-        [SerializeField] 
-        private int lastIndexPlayed = -1;
-
         [SerializeField]
         private int currentIndexPlayed = -1;
 
@@ -44,7 +41,6 @@ namespace Sound {
 
         private void PlaySnapSound() {
             int nextIndex = GetNextIndex();
-            lastIndexPlayed = currentIndexPlayed;
             currentIndexPlayed = nextIndex;
             audioSource.clip = audioClips[nextIndex];
             audioSource.Play();

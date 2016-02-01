@@ -8,7 +8,6 @@ namespace Path {
         
         public static NodeRecord SmallestElement(ArrayList nodeRecords) {
             NodeRecord smallestElement = null;
-            float minimumCostSoFar = 0;
 
             foreach (NodeRecord nodeRecord in nodeRecords)
             {

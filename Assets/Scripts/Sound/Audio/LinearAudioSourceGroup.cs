@@ -4,14 +4,11 @@ public class LinearAudioSourceGroup : AudioSourceGroup {
 
     public int CurrentIndex = 0;
 
-    private Transform _myTransform;
-
     private bool _inited;
 
     protected override void Init() {
         //TODO: Fix this :(
         _inited = true;
-        _myTransform = transform;
         InitDistanceTriggers();
     }
 

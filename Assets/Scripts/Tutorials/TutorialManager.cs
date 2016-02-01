@@ -10,8 +10,6 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private TutorialContainer tutorialContainer;
     private string tutorialName;
-    [SerializeField]
-    private Canvas tutorialContainerCanvas;
     public GameObject tutorialGO;
 
     public event Action FinishTutorial;
@@ -19,7 +17,6 @@ public class TutorialManager : MonoBehaviour
     public void Initialize()
     {
         tutorialContainer = Instantiate(Resources.Load<TutorialContainer>("Prefabs/Tutorial/TutorialManager"));
-        tutorialContainerCanvas = tutorialContainer.GetComponent<Canvas>();
         tutorialGO = FindObjectOfType<TutorialContainer>().gameObject;
         tutorialGO.SetActive(false);
         Debug.Log("[Tutorial] " + tutorialContainer.name);
