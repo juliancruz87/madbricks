@@ -170,7 +170,7 @@ namespace Drag {
         }
 
         private void DebugTouchInput() {
-            Rect labelRect = new Rect(5,5,150,22);
+           /* Rect labelRect = new Rect(5,5,150,22);
             String messagge = "touch count: " + Input.touchCount;
             GUI.Label(labelRect, messagge);
 
@@ -183,7 +183,7 @@ namespace Drag {
                 labelRect.y += labelRect.height;
                 messagge = "touch " + i + " phase: " + Input.GetTouch(i).phase;
                 GUI.Label(labelRect, messagge);
-            }
+            }*/
         }
 
         private bool ThisGameObjectIsTheFirstHit(RaycastHit[] raycastHits) {

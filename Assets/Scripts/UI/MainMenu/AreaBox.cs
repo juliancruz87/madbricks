@@ -27,16 +27,53 @@ public class AreaBox : MonoBehaviour
         set { isSelected = value; }
     }
 
+    void Awake ()
+    {
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "3");
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "2");
+
+        DisableLevels();
+    }
 
     void Start()
     {
         numberTransform = transform.GetChild(0);
+        
     }
 
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 360 - transform.parent.rotation.y, 0);
         numberTransform.rotation = Quaternion.Euler(43, 45, 0);
+    }
+
+    public void EnableLevels(int levelAmount)
+    {
+        Debug.Log("Enabling levels " + levelAmount);
+        for (int i = 0; i < levelAmount; i++)
+        {
+            Transform level = transform.GetChild(i+1);
+           // if (level.GetComponent<TextMesh>() == null)
+            {
+                Debug.Log("Enabling level " + (i+1)); 
+                level.GetComponent<Renderer>().material = materialArea;
+            }
+        }
+    }
+
+    public void DisableLevels()
+    {
+        Material defaultMaterial = transform.parent.GetComponent<AreaBoxesManager>().MaterialDefault;
+        Debug.Log("Disable levels ");
+
+        for (int i = 1; i < 4; i++)
+        {
+            Transform level = transform.GetChild(i);
+            if (level.GetComponent<TextMesh>() == null)
+            {
+                level.GetComponent<Renderer>().material = defaultMaterial;
+            }
+        }
     }
 
     public void Grow(float growScale, float growTime)
@@ -86,17 +123,5 @@ public class AreaBox : MonoBehaviour
 
     }
 
-    /*void OnMouseDown()
-    {
-        if (isSelected)
-        {
-            if (!FindObjectOfType<MainMenuManager>().isMenuActive)
-            {
-                Debug.Log("Selected Area: " + area);
-                SaveManager.Instance.SetSelectedArea(area+"");
-                Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
-            }
-        }
-
-    }*/
+   
 }

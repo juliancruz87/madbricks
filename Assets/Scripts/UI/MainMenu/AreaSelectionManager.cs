@@ -53,8 +53,12 @@ public class AreaSelectionManager : MonoBehaviour {
         if (!FindObjectOfType<MainMenuManager>().isMenuActive)
         {
             Debug.Log("Selected Area: " + selectedArea);
-            SaveManager.Instance.SetSelectedArea(selectedArea + "");
-            Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+            int clearedArea = int.Parse(SaveManager.Instance.GetClearedArea());
+            if (clearedArea >= selectedArea)
+            {
+                SaveManager.Instance.SetSelectedArea(selectedArea + "");
+                Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+            }
         }
     }
 

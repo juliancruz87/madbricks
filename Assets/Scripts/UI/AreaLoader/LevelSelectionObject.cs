@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelSelectionObject : MonoBehaviour {
+public class LevelSelectionObject : MonoBehaviour
+{
 
     private string levelID;
 
@@ -16,15 +17,16 @@ public class LevelSelectionObject : MonoBehaviour {
         Debug.Log("Selected Level: " + levelID);
         SaveManager.Instance.SetSelectedLevel(levelID);
         //Application.LoadLevel(SceneProperties.SCENE_LOADER_LEVEL);
-        LevelLoaderController.LevelLoader.Instance.LoadScene(GetSceneToLoad(SaveManager.Instance.GetSelectedArea(), levelID));
+        LoadScene("", "");
     }
 
-    public string GetSceneToLoad(string area, string level)
+    public void LoadScene(string area, string level)
     {
-        string sceneName = "W" + area + "_L" + level;
+        string sceneName = transform.parent.GetComponent<AreaLevelManager>().GetSceneToLoad(levelID);
+        if (!sceneName.Equals(""))
+        {
+            LevelLoaderController.LevelLoader.Instance.LoadScene(sceneName);
 
-       
-
-        return sceneName;
+        }
     }
 }

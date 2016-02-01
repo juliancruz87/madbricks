@@ -6,14 +6,13 @@ public class AreaLevelManager : MonoBehaviour {
     [SerializeField] 
     private Material[] areaMaterials;
 
+    [SerializeField]
+    private Material defaultMaterial;
+
     void Start()
     {
-        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea()) - 1;
-
-        foreach (Transform level in transform)
-        {
-            level.GetComponent<Renderer>().material = areaMaterials[selectedArea];
-        }
+        DisableLevels();
+        EnableLevels(int.Parse(SaveManager.Instance.GetClearedLevel()));
     }
 
     /*void OnMouseDown()
@@ -24,12 +23,43 @@ public class AreaLevelManager : MonoBehaviour {
         LevelLoaderController.LevelLoader.Instance.LoadScene(GetSceneToLoad(SaveManager.Instance.GetSelectedArea(), levelID));
     }
     */
-    public string GetSceneToLoad(string area, string level)
+    public string GetSceneToLoad(string level)
     {
-        string sceneName = "W" + area + "_L" + level;
-
-
-
+        string sceneName = "";
+        if (int.Parse(level) <= int.Parse(SaveManager.Instance.GetClearedLevel()))
+            sceneName = "W" + SaveManager.Instance.GetSelectedArea() + "_L" + level;
+        else
+            return sceneName;
         return sceneName;
+    }
+
+    public void EnableLevels(int levelAmount)
+    {
+        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea()) - 1;
+
+        //Debug.Log("Enabling levels " + levelAmount);
+        for (int i = 0; i < levelAmount; i++)
+        {
+            Transform level = transform.GetChild(i);
+            // if (level.GetComponent<TextMesh>() == null)
+            {
+                //Debug.Log("Enabling level " + (i));
+                level.GetComponent<Renderer>().material = areaMaterials[selectedArea];
+            }
+        }
+    }
+
+    public void DisableLevels()
+    {
+        //Debug.Log("Disable levels ");
+
+        for (int i = 0; i < 3; i++)
+        {
+            Transform level = transform.GetChild(i);
+            if (level.GetComponent<TextMesh>() == null)
+            {
+                level.GetComponent<Renderer>().material = defaultMaterial;
+            }
+        }
     }
 }

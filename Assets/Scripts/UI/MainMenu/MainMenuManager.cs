@@ -46,4 +46,13 @@ public class MainMenuManager : MonoBehaviour {
     {
         isMenuActive = !isMenuActive;
     }
+
+    public void NewGame()
+    {
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "1");
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "1");
+
+        //Application.LoadLevel(Application.loadedLevel);
+        FindObjectOfType<AreaBoxesManager>().ResetAreaBoxes();
+    }
 }
