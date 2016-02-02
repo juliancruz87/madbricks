@@ -7,8 +7,13 @@ using Map;
 using Interactive;
 
 namespace Path {
-    public class BossTotem : MonoBehaviour, ITotem 
-	{
+    public class BossTotem : MonoBehaviour, ITotem {
+
+        private const string TAG_OBSTACLE = "Obstacle";
+
+        [SerializeField]
+        private float collideDistance;
+
         [SerializeField]
         private bool isJailed = false;
 
@@ -118,7 +123,21 @@ namespace Path {
             if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
                 return;
 
+            if (WillHitAnObstacle(candidatePosition))
+                return;
+
             myTransform.position = candidatePosition;
+        }
+
+        private bool WillHitAnObstacle(Vector3 newDragPosition) {
+            GameObject[] totems = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
+            foreach (GameObject totem in totems) {
+                if (totem != gameObject &&
+                    Vector3.Distance(totem.transform.position, newDragPosition) < collideDistance) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private bool RaycastHitsGameObject(RaycastHit[] raycastHits, GameObject someGameObject) {
