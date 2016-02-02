@@ -33,6 +33,16 @@ namespace Interactive.Detail
 			get { return dragObject.IsBeingDragged; }
 		}
 
+		public bool IsBoss 
+		{
+			get { return false; }
+		}
+
+		public bool IsJailed 
+		{
+			get { return false; }
+		}
+
 	    protected bool IsInStartPoint
 		{
 			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }

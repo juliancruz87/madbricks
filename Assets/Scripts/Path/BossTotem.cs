@@ -34,7 +34,17 @@ namespace Path {
 
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
-	
+		
+		public bool IsBoss 
+		{
+			get { return true; }
+		}
+
+		public bool IsJailed 
+		{
+			get { return isJailed; }
+		}
+
 		public bool IsDragged
 		{
 			get { return false; }

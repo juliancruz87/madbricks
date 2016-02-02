@@ -59,6 +59,18 @@ namespace Interactive
 			get;
 		}
 
+		private ITotem Boss
+		{
+			get
+			{
+				foreach(ITotem totem in Totems)
+					if(totem.IsBoss)
+						return totem;
+
+				return null;
+			}
+		}
+
 		public GameResults Result 
 		{
 			get;
@@ -96,13 +108,13 @@ namespace Interactive
             
 		}
 
+#if UNITY_EDITOR
         void Update()
         {
             if(Input.GetKeyDown(KeyCode.W))
-            {
                 PlayEndSequence(GameResults.Win);
-            }
         }
+#endif
 
         private void StartGame()
         {
@@ -137,25 +149,24 @@ namespace Interactive
 	    {
             wasEndGame = true;
 
-	        if (IsEveryTotemOnPlace())
-	        {
+			if (IsEveryTotemOnPlace() && IsBossJailed ())
 	            PlayEndSequence(GameResults.Win);
-	        }
 	        else
-	        {
 	            Lose();
-	        }
 	    }
 
-	    private bool IsEveryTotemOnPlace() {
+	    private bool IsEveryTotemOnPlace() 
+		{
 	        Debug.LogWarning("This is a hack that was made to force the end of the game, please fix it");
 
 	        Totem[] totems = FindObjectsOfType<Totem>();
             ArrayList targets = MapObject.GetMapObjectsOfType(MapObjectType.Totem_target);
             
-	        foreach (Totem totem in totems) {
+	        foreach (Totem totem in totems) 
+			{
 	            bool isOverATarget = false;
-	            foreach (MapObject target in targets) {
+	            foreach (MapObject target in targets) 
+				{
                     isOverATarget = Vector3.Distance(totem.transform.position, target.transform.position) < totemTargetToleranceDistance;
 
 	                if (isOverATarget) {
@@ -172,11 +183,19 @@ namespace Interactive
 	    public void Goal ()
 		{
 			goals++;
-			if(goals == maxNumTotems && !wasEndGame)
+			if(goals == Totems.Count && !wasEndGame && IsBossJailed ())
 			{
 				wasEndGame = true;
 				PlayEndSequence (GameResults.Win);
 			}
+		}
+
+		private bool IsBossJailed ()
+		{
+			ITotem boss = Boss;
+			if (boss != null && !boss.IsJailed)
+				return false;
+			return true;
 		}
 
 		public void Lose ()
