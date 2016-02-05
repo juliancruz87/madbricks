@@ -4,8 +4,16 @@ using System.Collections.Generic;
 
 namespace Interactive.Detail
 {
+	public enum TriangleTurnDirectionType
+	{
+		None = 0,
+		Left = 1,
+		Right = 2
+	}
 	public class TotemInstantiatorConfig : ScriptableObject
 	{
+		public TriangleTurnDirectionType preferedTriangleDirection;
+
 		[SerializeField]
 		private TotemType type;
 		
@@ -35,7 +43,7 @@ namespace Interactive.Detail
 
 		[SerializeField]
 		private List<TotemBehaviours> behavioursTypes;
-		
+
 		public TotemType Type 
 		{
 			get{ return type; }

@@ -28,9 +28,6 @@ namespace Interactive
 		[SerializeField]
 		private SequencerManager endSequencer;
 
-		[SerializeField]
-		private int maxNumTotems;
-
 	    [SerializeField] 
         private float maxPlayTime = 8f;
 
@@ -192,9 +189,9 @@ namespace Interactive
 
 		private bool IsBossJailed ()
 		{
-			ITotem boss = Boss;
+			/*ITotem boss = Boss;
 			if (boss != null && !boss.IsJailed)
-				return false;
+				return false;*/
 			return true;
 		}
 

@@ -39,7 +39,7 @@ namespace Interactive.Detail
 
 		public void Instantiate ( List<Node> points, Transform positionsToSnap , Transform parent)
 		{
-			List<GameObject> totemsCreated = new List<GameObject> ();
+			totemsCreated = new List<GameObject> ();
 
 			foreach (TotemInstantiatorConfig totem in totems) 
 			{

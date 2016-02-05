@@ -15,7 +15,8 @@ namespace Interactive.Detail
 		private Collider myCollider;
 		private Vector3 lastDirection = Vector3.zero;
 		private List<Node> pointsToPassedPath = new List<Node> ();
-		
+		private GameObject arrow;
+
 		public override TotemType Type 
 		{
 			get { return TotemType.Triangle; }
@@ -29,7 +30,16 @@ namespace Interactive.Detail
 		protected override void Awake ()
 		{
 			base.Awake ();
+			CreateArrow ();
 			myCollider = GetComponent<Collider> ();
+		}
+
+		private void CreateArrow ()
+		{
+			GameObject arrowIndicator = Resources.Load ("arrow_triangle_indicator") as GameObject;
+			arrow = Instantiate<GameObject> (arrowIndicator);
+			arrow.transform.SetParent (myTransform);
+			arrow.transform.localPosition = Vector3.zero;
 		}
 
 		protected override void Move ()
@@ -81,6 +91,7 @@ namespace Interactive.Detail
 			{
 				cachedNode = CurrentNode;
 				canRotate = IsInStartPoint;
+				arrow.SetActive (IsInStartPoint);
 			}
 
 			if(CanRotate)
@@ -91,22 +102,33 @@ namespace Interactive.Detail
 		{	
 			Node leftNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right * -1);
 			Node rightNode = Finder.GetNearsetNodeInDirection (CurrentNode, myTransform.right);
-			List<Node> lNodesProbability = new List<Node> ();
-			List<Node> rNodesProbability = new List<Node> ();
 
-			rNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right, rNodesProbability);
-			lNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right * -1, lNodesProbability);
-
-			if (rNodesProbability.Exists (c => c.Id == positionToGo)) 
-				leftNode = null;
-			else if (lNodesProbability.Exists (c => c.Id == positionToGo))
+			if (totem.preferedTriangleDirection == TriangleTurnDirectionType.None) {
+				List<Node> lNodesProbability = new List<Node> ();
+				List<Node> rNodesProbability = new List<Node> ();
+				
+				rNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right, rNodesProbability);
+				lNodesProbability = Finder.GetNodesInDirection (CurrentNode, positionToGo, myTransform.right * -1, lNodesProbability);
+			
+				if (rNodesProbability.Exists (c => c.Id == positionToGo)) 
+					leftNode = null;
+				else if (lNodesProbability.Exists (c => c.Id == positionToGo))
+					rightNode = null;
+				
+				if (lastDirection != Vector3.zero && lastDirection != Vector3.left)
+					leftNode = null;
+				
+				if (lastDirection != Vector3.zero && lastDirection != Vector3.right)
+					rightNode = null;	
+			}
+			else if (totem.preferedTriangleDirection == TriangleTurnDirectionType.Left && rightNode != null && leftNode != null) 
+			{
 				rightNode = null;
-
-			if (lastDirection != Vector3.zero && lastDirection != Vector3.left)
+			}
+			else if (totem.preferedTriangleDirection == TriangleTurnDirectionType.Right && rightNode != null && leftNode != null) 
+			{
 				leftNode = null;
-
-			if (lastDirection != Vector3.zero && lastDirection != Vector3.right)
-				rightNode = null;
+			}
 
 			MoveToNextNode (leftNode, rightNode, myTransform.rotation.eulerAngles, (Vector3.up * 90f));
 		}
@@ -116,12 +138,12 @@ namespace Interactive.Detail
 			if (leftNode != null) 
 			{
 				lastDirection = Vector3.left;
-				myTransform.DORotate (currentEulers - turn90Dregrees, 0.3F).OnComplete (() => Move ());
+				myTransform.DORotate (currentEulers - turn90Dregrees, 0.0F).OnComplete (() => Move ());
 			} 
 			else if (rightNode != null) 
 			{
 				lastDirection = Vector3.right;
-				myTransform.DORotate (currentEulers + turn90Dregrees, 0.3F).OnComplete (() => Move ());
+				myTransform.DORotate (currentEulers + turn90Dregrees, 0.0F).OnComplete (() => Move ());
 			}
 			else 
 				EndGame ("Totem : " + totem.name+ " could not found a path to follow");
