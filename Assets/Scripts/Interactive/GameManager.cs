@@ -180,6 +180,7 @@ namespace Interactive
 	    public void Goal ()
 		{
 			goals++;
+
 			if(goals == Totems.Count && !wasEndGame && IsBossJailed ())
 			{
 				wasEndGame = true;
@@ -189,9 +190,9 @@ namespace Interactive
 
 		private bool IsBossJailed ()
 		{
-			/*ITotem boss = Boss;
+			ITotem boss = Boss;
 			if (boss != null && !boss.IsJailed)
-				return false;*/
+				return false;
 			return true;
 		}
 

@@ -106,6 +106,7 @@ namespace Path {
         private void GetIntoJail() 
 		{
             isJailed = true;
+			GameManager.Instance.Goal ();
         }
 
         private MapObject GetNearestMapObject() {

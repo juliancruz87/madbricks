@@ -34,6 +34,7 @@ namespace Map {
         private void Explode(Totem totem) 
 		{
 			SoundManager.Instance.AudioSourceLib.ExplosiveTotem.Play ();
+			GameManager.Instance.Goal ();
             Destroy(totem.gameObject);
             Destroy(gameObject);
         }
