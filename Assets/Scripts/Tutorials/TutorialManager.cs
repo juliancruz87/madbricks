@@ -14,6 +14,8 @@ public class TutorialManager : MonoBehaviour
 
     public event Action FinishTutorial;
 
+    public bool useVideoTutorials;
+
     public void Initialize()
     {
         tutorialContainer = Instantiate(Resources.Load<TutorialContainer>("Prefabs/Tutorial/TutorialManager"));
@@ -26,13 +28,13 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             if (CheckForTutorialInLevel(1, 1))
             {
                 ShowTutorial();
             }
-        }
+        }*/
     }
 
     public void ShowTutorial()
