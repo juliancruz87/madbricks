@@ -105,6 +105,8 @@ namespace Path {
 
         private void GetIntoJail() 
 		{
+			if (isJailed)
+				return;
             isJailed = true;
 			GameManager.Instance.Goal ();
         }
