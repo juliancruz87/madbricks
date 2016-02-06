@@ -29,8 +29,6 @@ public class AreaBox : MonoBehaviour
 
     void Awake ()
     {
-        PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "3");
-        PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "2");
 
         DisableLevels();
     }

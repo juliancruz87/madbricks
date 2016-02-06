@@ -15,13 +15,26 @@ public class AreaSelectionManager : MonoBehaviour {
     private Transform selectionTransform;
     private Transform exitTransform;
 
+    public Camera mainCamera;
+    public LayerMask selectionLayer;
+
     void Start () {
 	
 	}
-	
-	void Update () {
-	
-	}
+
+    void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 1000, selectionLayer))
+            {
+                Debug.Log(hit.collider.name);
+                LoadSelectedLevel();
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -57,9 +70,18 @@ public class AreaSelectionManager : MonoBehaviour {
             if (clearedArea >= selectedArea)
             {
                 SaveManager.Instance.SetSelectedArea(selectedArea + "");
-                Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+                //Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+                StartCoroutine(LoadAreaCoroutine());
             }
         }
     }
+
+    public IEnumerator LoadAreaCoroutine()
+    {
+        FadeManager.Instance.FadeOut();
+        yield return new WaitForSeconds(1.88f);
+        Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+    }
+
 
 }

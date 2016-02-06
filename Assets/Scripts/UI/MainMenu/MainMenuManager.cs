@@ -8,25 +8,22 @@ public class MainMenuManager : MonoBehaviour {
     public Text textLevel;
     public bool isMenuActive;
     public Camera mainCamera;
-    public LayerMask selectLayer;
+    public bool unlockLevels;
+
+    void Awake()
+    {
+        if (unlockLevels)
+        {
+            PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "6");
+            PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "3");
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            RaycastHit hit;
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 1000, selectLayer))
-            {
-                Debug.Log(hit.collider.name);
-            }
-        }
-    }
+
 
     public void StartGame()
     {
