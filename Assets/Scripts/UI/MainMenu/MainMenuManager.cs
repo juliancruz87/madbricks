@@ -17,6 +17,8 @@ public class MainMenuManager : MonoBehaviour {
             PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "6");
             PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "3");
         }
+
+        Screen.sleepTimeout = SleepTimeout.SystemSetting;
     }
 
 	// Use this for initialization
