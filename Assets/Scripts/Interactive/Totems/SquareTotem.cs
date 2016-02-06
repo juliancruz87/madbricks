@@ -68,5 +68,11 @@ namespace Interactive.Detail
 			if (nodes.Count > 0)
 				finder.DrawShorterParthDebug ();
 		}
+
+		public override void GoToSecondaryPositionToGo ()
+		{
+			currentNode = 0;
+			base.GoToSecondaryPositionToGo ();
+		}
     }
 }
