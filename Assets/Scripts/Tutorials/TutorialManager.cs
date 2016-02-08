@@ -14,11 +14,12 @@ public class TutorialManager : MonoBehaviour
 
     public event Action FinishTutorial;
 
-    public bool useVideoTutorials;
+    [SerializeField]
+    private bool isUsingVideoTutorials = true;
 
     public void Initialize()
     {
-        tutorialContainer = Instantiate(Resources.Load<TutorialContainer>("Prefabs/Tutorial/TutorialManager"));
+        tutorialContainer = Instantiate(Resources.Load<TutorialContainer>("Prefabs/Tutorial/TutorialVideoManager"));
         tutorialGO = FindObjectOfType<TutorialContainer>().gameObject;
         tutorialGO.SetActive(false);
         Debug.Log("[Tutorial] " + tutorialContainer.name);
@@ -41,8 +42,8 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialGO.SetActive(true);
         Debug.Log("[Tutorial] ShowTutorial");
-        tutorialContainer.pages = tutorialSequence.tutorialPages;
-        tutorialContainer.Initialize();
+        
+        tutorialContainer.Initialize(isUsingVideoTutorials);
 
         //tutorialContainer.Open(); //Bug accesing reference
     }
@@ -55,16 +56,38 @@ public class TutorialManager : MonoBehaviour
         {
             if (sequence.name.Equals(tutorialName))
             {
-                tutorialSequence = sequence;
-                Debug.Log("[Tutorial] " + tutorialName + " exists!");
-                return true;
+                Debug.Log("Level has tutorial");
+                if (!isUsingVideoTutorials)
+                {
+                    Debug.Log("Show tutorial");
+                    tutorialSequence = sequence;
+                    tutorialContainer.pages = tutorialSequence.tutorialPages;
+                    Debug.Log("[Tutorial] " + tutorialName + " exists!");
+                    return true;
+                }
+                else
+                {
+                    if (sequence.movie != null)
+                    {
+                        Debug.Log("Show tutorial video");
+                        tutorialContainer.SetMovie(sequence.movie);
+                        return true;
+                    }
+                }
             }
         }
+        Debug.Log("Dont show tutorial");
         return false;
     }
 
     public void CloseTutorial()
     {
         FinishTutorial();
+    }
+
+    public void DestroyTutorialContainer()
+    {
+        Destroy(tutorialContainer.gameObject);
+        Resources.UnloadUnusedAssets();
     }
 }

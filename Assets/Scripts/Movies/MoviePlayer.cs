@@ -14,16 +14,8 @@ public class MoviePlayer : MonoBehaviour
     {
         if (useLocalTexture)
         {
-            MovieTexture movie = null;
-            if (!isUsingRawTexture)
-            {
-                movie = GetComponent<Renderer>().material.mainTexture as MovieTexture;
-            }
-            else
-            {
-                movie = GetComponent<RawImage>().mainTexture as MovieTexture;
-            }
-            movie.Play();
+            StartCoroutine(PlayMovieLocal());
+
         }
         else
         {
@@ -38,6 +30,31 @@ public class MoviePlayer : MonoBehaviour
 
     }
 
+    public void SetMovie(MovieTexture movie)
+    {
+        GetComponent<RawImage>().texture = movie;
+    }
+
+    IEnumerator PlayMovieLocal()
+    {
+        MovieTexture movie = null;
+        if (!isUsingRawTexture)
+        {
+            movie = GetComponent<Renderer>().material.mainTexture as MovieTexture;
+        }
+        else
+        {
+            movie = GetComponent<RawImage>().mainTexture as MovieTexture;
+        }
+        movie.Play();
+
+        while (movie.isPlaying)
+              yield return null;
+
+        //transform.parent.gameObject.SetActive(false);
+        FindObjectOfType<TutorialContainer>().CloseVideo();
+    }
+
     IEnumerator PlayMovie()
     {
         var www = new WWW("file://" + Application.streamingAssetsPath + "/T1.mov");
@@ -48,6 +65,9 @@ public class MoviePlayer : MonoBehaviour
         {
             gameObject.AddComponent<AudioListener>();
         }
+
+        Debug.Log("" + movie.isPlaying);
+
 
         if (www != null)
         {
@@ -76,8 +96,15 @@ public class MoviePlayer : MonoBehaviour
             audio.Play();
             Debug.Log("3");
 
-            while (movie.isPlaying && !Input.anyKeyDown)
+            Debug.Log("" + movie.isPlaying);
+
+            while (movie.isPlaying)
+            {
+                Debug.Log("" + movie.isPlaying);
                 yield return null;
+            }
+
+            gameObject.SetActive(false);
         }
     }
 #endif

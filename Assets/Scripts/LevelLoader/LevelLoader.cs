@@ -84,6 +84,12 @@ namespace LevelLoaderController
 
             SaveManager.Instance.SetSelectedArea(area.ToString());
 
+            SaveManager.Instance.SetSelectedLevel(level.ToString());
+            SaveManager.Instance.SetClearedArea(area.ToString());
+            SaveManager.Instance.SetClearedLevel(level.ToString());
+
+
+
             Debug.Log("[LevelLoader] Loading " + levelName);
             LoadScene(levelName);
 

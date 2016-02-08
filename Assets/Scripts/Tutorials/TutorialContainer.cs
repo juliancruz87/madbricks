@@ -10,10 +10,16 @@ public class TutorialContainer : MonoBehaviour {
     public List<Sprite> pages;
     public int currenPageIndex;
 
+    public GameObject panelPages;
+    public GameObject panelVideo;
+
     public Button buttonTurnRight;
     public Button buttonTurnLeft;
 
     public event Action CloseTutorial;
+
+    private MoviePlayer moviePlayer;
+    public MovieTexture tutorialMovie;
 
     void Start () 
     {
@@ -23,9 +29,22 @@ public class TutorialContainer : MonoBehaviour {
         //gameObject.SetActive(false);
 	}
 	
-    public void Initialize()
+    public void Initialize(bool isUsingVideoTutorials)
     {
-        mainPage.sprite = pages[currenPageIndex];
+        if (isUsingVideoTutorials)
+        {
+            panelPages.SetActive(false);
+            moviePlayer = panelVideo.GetComponentInChildren<MoviePlayer>();
+            moviePlayer.SetMovie(tutorialMovie);
+            panelVideo.SetActive(true);
+
+        }
+        else
+        {
+            panelPages.SetActive(true);
+            panelVideo.SetActive(false);
+            mainPage.sprite = pages[currenPageIndex];
+        }
     }
 
 	void Update () 
@@ -79,6 +98,16 @@ public class TutorialContainer : MonoBehaviour {
 
         //Debug.Log("Current index: " + currenPageIndex);
 
+    }
+
+    public void SetMovie(MovieTexture movie)
+    {
+        tutorialMovie = movie;
+    }
+
+    public void CloseVideo()
+    {
+        CloseTutorial();
     }
 
     public void Close()

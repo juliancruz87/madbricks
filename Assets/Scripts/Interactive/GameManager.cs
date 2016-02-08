@@ -116,6 +116,8 @@ namespace Interactive
         private void StartGame()
         {
             tutorialManager.FinishTutorial -= Pause;
+            tutorialManager.DestroyTutorialContainer();
+
             CurrentState = GameStates.Introduction;
             startSequencer.EndIntroduction += StartPlanning;
             startSequencer.Play();
@@ -205,6 +207,14 @@ namespace Interactive
 
 		private void PlayEndSequence (GameResults results)
 		{
+            if (results == GameResults.Win)
+            {
+
+            }
+            else
+            {
+
+            }
 			Result = results;
 			endSequencer.Play ();
 			SoundManager.Instance.PlayEndSound (results);
