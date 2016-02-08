@@ -349,10 +349,15 @@ namespace Drag {
         }
         
         private void OnCollisionEnter(Collision collision) {
+            GameObject collisionGO = collision.gameObject;
             if (isBeingDragged && 
-                collision.gameObject.tag == TAG_OBSTACLE &&
-                collision.gameObject.GetComponent<DraggableObject>() != null) {
+                collisionGO.tag == TAG_OBSTACLE &&
+                collisionGO.GetComponent<DraggableObject>() != null) {
                 PlayCollideSound();
+                if (collisionGO.GetComponent<BossTotem>()) {
+                    GameManager.Instance.Lose();
+                    Destroy(gameObject);
+                }
             }
         }
 
