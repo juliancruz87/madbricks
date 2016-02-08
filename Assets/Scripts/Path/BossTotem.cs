@@ -177,7 +177,9 @@ namespace Path {
         // Update is called once per frame
         void Update () {
             UpdateNearestNode();
-            CheckMapObjectCondition();    
+            CheckMapObjectCondition();
+            if (!isJailed)
+                CheckTotemCollision();
         }
 
         private void UpdateNearestNode() {
@@ -186,6 +188,16 @@ namespace Path {
                 Math.Abs(Vector3.Distance(nearestNode.transform.position, myTransform.position)) < 0.01 &&
                 currentNode != nearestNode)
                 currentNode = nearestNode;
+        }
+
+        private void CheckTotemCollision() {
+            DraggableObject[] totems = FindObjectsOfType<DraggableObject>();
+            foreach (DraggableObject totem in totems) {
+                if (Vector3.Distance(totem.transform.position, transform.position) < collideDistance) {
+                    Destroy(totem.gameObject);
+                    GameManagerForStates.Lose();
+                }
+            }
         }
 
         private void OnTriggerEnter(Collider collision) {

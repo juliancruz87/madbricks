@@ -354,10 +354,6 @@ namespace Drag {
                 collisionGO.tag == TAG_OBSTACLE &&
                 collisionGO.GetComponent<DraggableObject>() != null) {
                 PlayCollideSound();
-                if (collisionGO.GetComponent<BossTotem>()) {
-                    GameManager.Instance.Lose();
-                    Destroy(gameObject);
-                }
             }
         }
 
