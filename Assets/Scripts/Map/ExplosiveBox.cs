@@ -18,7 +18,8 @@ namespace Map {
 	        type = MapObjectType.ExplosiveBox;
         }
 
-        private void OnTriggerEnter(Collider collider) {
+        private void OnTriggerEnter(Collider collider) 
+		{
             GameObject collisionGameObject = collider.gameObject;
             Totem totem = collisionGameObject.GetComponent<Totem>();
 
