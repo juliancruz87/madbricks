@@ -136,18 +136,23 @@ namespace Path {
             if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
                 return;
 
-            if (WillHitAnObstacle(candidatePosition))
+            if (WillHitAnObstacle(candidatePosition)) 
                 return;
 
             myTransform.position = candidatePosition;
         }
 
         private bool WillHitAnObstacle(Vector3 newDragPosition) {
-            GameObject[] totems = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
-            foreach (GameObject totem in totems) {
-                if (totem != gameObject &&
-                    Vector3.Distance(totem.transform.position, newDragPosition) < collideDistance) {
+            GameObject[] obstacles = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
+            foreach (GameObject obstacle in obstacles) {
+                if (obstacle != gameObject &&
+                    Vector3.Distance(obstacle.transform.position, newDragPosition) < collideDistance) {
+                    if (obstacle.GetComponent<DraggableObject>()) {
+                        Destroy(obstacle);
+                        GameManagerForStates.Lose();
+                    }
                     return true;
+
                 }
             }
             return false;
@@ -183,13 +188,11 @@ namespace Path {
                 currentNode = nearestNode;
         }
 
-        private void OnTriggerEnter(Collider collision)
-        {
+        private void OnTriggerEnter(Collider collision) {
 			if (isJailed)
 				return;
 
-			if (collision.gameObject.GetComponent<DraggableObject> ()) 
-			{
+			if (collision.gameObject.GetComponent<DraggableObject> ()) {
 				Destroy(collision.gameObject);
 				GameManagerForStates.Lose ();
 			}
