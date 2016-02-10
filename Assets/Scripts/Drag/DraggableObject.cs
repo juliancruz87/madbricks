@@ -144,23 +144,23 @@ namespace Drag {
                 RaycastHit[] raycastHits = Physics.RaycastAll(ray);
 
                 if (ThisGameObjectIsTheFirstHit(raycastHits) && 
-                    IsAllowedToStartANewDrag()) {
+                    IsAllowedToStartANewDrag()) 
                     StartDrag();
-                }
                 else 
                     StopDrag();
             }
         }
 
         private void CheckTouchInput() {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended) {
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if (Input.touchCount > 0) {
+                if (Input.GetTouch(0).phase != TouchPhase.Ended) {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
-                RaycastHit[] raycastHits = Physics.RaycastAll(ray);
+                    RaycastHit[] raycastHits = Physics.RaycastAll(ray);
 
-                if (ThisGameObjectIsTheFirstHit(raycastHits) &&
-                    IsAllowedToStartANewDrag()) {
-                    StartDrag();
+                    if (ThisGameObjectIsTheFirstHit(raycastHits) &&
+                        IsAllowedToStartANewDrag())
+                        StartDrag();
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace Drag {
         }
 
         private Vector3 GetInputPosition() {
-            if (Application.isMobilePlatform)
+            if (Application.isMobilePlatform && Input.touchCount > 0)
                 return Input.GetTouch(0).position;
 
             return Input.mousePosition;
