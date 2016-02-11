@@ -101,7 +101,8 @@ namespace Drag {
         private void UpdatePlanning() {
 
             CheckMouseInput();
-            CheckTouchInput();
+            //TODO:Mod after test
+            //CheckTouchInput();
 
             if (isBeingDragged) {
                 UpdateDrag();
@@ -114,12 +115,14 @@ namespace Drag {
 
 
         private bool IsInputUp() {
+            //TODO:Mod after test
+            /*
             if (Application.isMobilePlatform)
                 if (Input.touchCount > 0)
                     return (Input.GetTouch(0).phase == TouchPhase.Ended);
                 else
                     return true;
-
+            */
             return Input.GetMouseButtonUp(0);
         }
 
@@ -250,9 +253,11 @@ namespace Drag {
         }
 
         private Vector3 GetInputPosition() {
+            //TODO:Mod after test
+            /*
             if (Application.isMobilePlatform && Input.touchCount > 0)
                 return Input.GetTouch(0).position;
-
+            */
             return Input.mousePosition;
         }
 
