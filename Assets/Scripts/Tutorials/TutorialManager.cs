@@ -67,12 +67,14 @@ public class TutorialManager : MonoBehaviour
                 }
                 else
                 {
+#if !UNITY_ANDROID
                     if (sequence.movie != null)
                     {
                         Debug.Log("Show tutorial video");
                         tutorialContainer.SetMovie(sequence.movie);
                         return true;
                     }
+#endif
                 }
             }
         }

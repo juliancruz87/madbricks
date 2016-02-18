@@ -19,7 +19,10 @@ public class TutorialContainer : MonoBehaviour {
     public event Action CloseTutorial;
 
     private MoviePlayer moviePlayer;
+
+#if !UNITY_ANDROID
     public MovieTexture tutorialMovie;
+#endif
 
     void Start () 
     {
@@ -102,10 +105,12 @@ public class TutorialContainer : MonoBehaviour {
 
     }
 
+#if !UNITY_ANDROID
     public void SetMovie(MovieTexture movie)
     {
         tutorialMovie = movie;
     }
+#endif
 
     public void CloseVideo()
     {
