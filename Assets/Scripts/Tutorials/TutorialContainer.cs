@@ -35,7 +35,9 @@ public class TutorialContainer : MonoBehaviour {
         {
             panelPages.SetActive(false);
             moviePlayer = panelVideo.GetComponentInChildren<MoviePlayer>();
+#if !UNITY_ANDROID
             moviePlayer.SetMovie(tutorialMovie);
+#endif
             panelVideo.SetActive(true);
 
         }
