@@ -9,7 +9,7 @@ namespace Interactive.Detail
 	public class SnapItemToCloserPosition : MonoBehaviour 
 	{
 		[SerializeField]
-		private float timeToSnap = 0.75f;
+		private float timeToSnap = 0.02f;
 
 		[SerializeField]
 		private Ease easeToSnap = Ease.InBounce;

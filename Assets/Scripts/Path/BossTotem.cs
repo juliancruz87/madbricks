@@ -12,7 +12,7 @@ namespace Path {
         private const string TAG_OBSTACLE = "Obstacle";
 
         [SerializeField]
-        private float collideDistance;
+        private MovementSettings settings;
 
         [SerializeField]
         private bool isJailed = false;
@@ -23,11 +23,7 @@ namespace Path {
         [SerializeField]
         private Node currentNode;
 
-        [SerializeField]
-        private float maxJumpDistance = 0.02f;
 
-        [SerializeField]
-        private float styckDistance = 1;
 
 
         private GameObject dragFloor;
@@ -115,7 +111,7 @@ namespace Path {
             ArrayList mapObjects = MapObject.GetMapObjectsOfType(MapObjectType.BossJail);
 
             foreach (MapObject mapObject in mapObjects)
-                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance)
+                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < settings.StickyDistance)
                     return mapObject;
 
             return null;
@@ -133,7 +129,7 @@ namespace Path {
             if (!hitFloor)
                 return;
 
-            if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
+            if (Vector3.Distance(myTransform.position, candidatePosition) > settings.MaxJumpDistance)
                 return;
 
             if (WillHitAnObstacle(candidatePosition)) 
@@ -146,7 +142,7 @@ namespace Path {
             GameObject[] obstacles = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
             foreach (GameObject obstacle in obstacles) {
                 if (obstacle != gameObject &&
-                    Vector3.Distance(obstacle.transform.position, newDragPosition) < collideDistance) {
+                    Vector3.Distance(obstacle.transform.position, newDragPosition) < settings.CollideDistance) {
                     if (obstacle.GetComponent<DraggableObject>()) {
                         Destroy(obstacle);
                         GameManagerForStates.Lose();
@@ -193,7 +189,7 @@ namespace Path {
         private void CheckTotemCollision() {
             DraggableObject[] totems = FindObjectsOfType<DraggableObject>();
             foreach (DraggableObject totem in totems) {
-                if (Vector3.Distance(totem.transform.position, transform.position) < collideDistance) {
+                if (Vector3.Distance(totem.transform.position, transform.position) < settings.CollideDistance) {
                     Destroy(totem.gameObject);
                     GameManagerForStates.Lose();
                 }

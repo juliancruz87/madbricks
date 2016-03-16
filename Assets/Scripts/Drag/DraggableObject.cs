@@ -27,11 +27,8 @@ namespace Drag {
         public OnLauncherTouched OnLauncherTouched;
 
         [SerializeField]
-        private float collideDistance;
-        [SerializeField]
-        private float styckDistance;
-        [SerializeField]
-        private float maxJumpDistance;
+        private MovementSettings settings;
+
         [SerializeField]
         private AudioSource dragSound;
         [SerializeField]
@@ -233,7 +230,7 @@ namespace Drag {
                         if(!CandidatePositionCanBeFixed(ref candidatePosition, dragStep))
                             return;
 
-                    if (Vector3.Distance(myTransform.position, candidatePosition) > maxJumpDistance)
+                    if (Vector3.Distance(myTransform.position, candidatePosition) > settings.MaxJumpDistance)
                         return;
 
                     if (ItWillHitAnotherTotem(candidatePosition))
@@ -334,7 +331,7 @@ namespace Drag {
             MapObject[] mapObjects = FindObjectsOfType<MapObject>();
 
             foreach (MapObject mapObject in mapObjects)
-                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < styckDistance &&
+                if (Vector3.Distance(mapObject.transform.position, myTransform.position) < settings.StickyDistance &&
                     (mapObject.Type == MapObjectType.LauncherSticky ||
                      mapObject.Type == MapObjectType.LauncherNormal))
                     return mapObject;
@@ -361,7 +358,7 @@ namespace Drag {
             GameObject[] totems = GameObject.FindGameObjectsWithTag(TAG_OBSTACLE);
             foreach (GameObject totem in totems) {
                 if (totem != gameObject &&
-                    Vector3.Distance(totem.transform.position, newDragPosition) < collideDistance) {
+                    Vector3.Distance(totem.transform.position, newDragPosition) < settings.CollideDistance) {
                     return true;
                 }
             }
