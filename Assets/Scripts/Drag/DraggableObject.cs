@@ -15,10 +15,14 @@ namespace Drag {
         private const string TAG_OBSTACLE = "Obstacle";
         private const float NODE_TOLERANCE = 0.05f;
 
+
+
         private static DraggableObject objectBeingDragged;
         private static int draggableObjects;
 
         private int draggableObjectId;
+
+		private float colliderDragScale = 4.0f;
 
         public OnObjectDragged OnObjectDragged;
         public Action OnObjectStopDrag;
@@ -46,10 +50,14 @@ namespace Drag {
         [SerializeField]
         private Node currentNode;
 
+		private BoxCollider myCollider;
+
         private Vector3 startDragDirection;
         private Vector3 lastDragPosition;
         private MapObject currentLauncher;
 		private bool canBeDragged = true;
+
+		private Vector3 colliderOriginalSize;
 
 		public bool IsBeingDragged 
 		{
@@ -77,6 +85,8 @@ namespace Drag {
 
 		private void Start () 
 		{
+			myCollider = GetComponent<BoxCollider> ();
+			colliderOriginalSize = myCollider.size;
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
 		    dragFloorCollider = dragFloor.GetComponent<Collider>();
@@ -103,12 +113,21 @@ namespace Drag {
             if (isBeingDragged) {
                 UpdateDrag();
 
-                if (IsInputUp()) 
+				if (IsInputUp() || IsOutsideDragZone()) 
                     StopDrag();
             }
         }
 
 
+
+		private bool IsOutsideDragZone() {
+
+			Ray ray = Camera.main.ScreenPointToRay(GetInputPosition());
+			RaycastHit hit;
+			bool isOutsideDragZone = !myCollider.Raycast (ray, out hit, float.MaxValue);
+
+			return isOutsideDragZone;
+		}
 
         private bool IsInputUp() {
             if (Application.isMobilePlatform)
@@ -384,9 +403,18 @@ namespace Drag {
             Debug.DrawLine(myTransform.position + debugOffset, (myTransform.position + (startDragDirection * 0.25f) + debugOffset), Color.green);
         }
 
-        private void StartDrag() {
+		private void EnlargeColliderSize() {
+			myCollider.size = colliderOriginalSize * colliderDragScale;
+		}
+
+		private void RestoreColliderSize() {
+			myCollider.size = colliderOriginalSize;
+		}
+
+		private void StartDrag() {
             lastDragPosition = myTransform.position;
             startDragDirection = new Vector3();
+			EnlargeColliderSize ();
             isBeingDragged = true;
             objectBeingDragged = this;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -399,6 +427,9 @@ namespace Drag {
         }
 
         public void StopDrag() {
+			
+			RestoreColliderSize ();
+
             if (OnObjectStopDrag != null)
                 OnObjectStopDrag();
 
