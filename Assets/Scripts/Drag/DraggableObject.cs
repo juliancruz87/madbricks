@@ -15,8 +15,6 @@ namespace Drag {
         private const string TAG_OBSTACLE = "Obstacle";
         private const float NODE_TOLERANCE = 0.05f;
 
-
-
         private static DraggableObject objectBeingDragged;
         private static int draggableObjects;
 
@@ -169,7 +167,7 @@ namespace Drag {
 
         private void CheckTouchInput() {
             if (Input.touchCount > 0) {
-                if (Input.GetTouch(0).phase != TouchPhase.Ended) {
+				if (Input.GetTouch(0).phase != TouchPhase.Ended && Input.GetTouch(0).phase != TouchPhase.Moved) {
                     Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
                     RaycastHit[] raycastHits = Physics.RaycastAll(ray);
