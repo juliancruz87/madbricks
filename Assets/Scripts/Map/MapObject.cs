@@ -29,6 +29,12 @@ namespace Map {
                 case MapObjectType.Totem_target:
                     InitAsTotemTarget();
                     break;
+                case MapObjectType.LauncherNormal:
+                    gameObject.AddComponent<AnimatedTexture>();
+                    break;
+                case MapObjectType.BossJail:
+                    gameObject.AddComponent<AnimatedTexture>();
+                    break;
                 default:
                     break;
             }
