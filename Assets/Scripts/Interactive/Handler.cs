@@ -27,7 +27,7 @@ public class Handler : MonoBehaviour
             {
                 animator.SetTrigger ("Start");
                 
-                //GameManagerForStates.Play();
+                GameManagerForStates.Play();
             }
             
 	}
