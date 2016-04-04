@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Sound;
+using ManagerInput;
 
 public class MusicalInstrument : MonoBehaviour
 {
     private AudioSource audioSource;
-	
+    private Collider myCollider;
+    private Animator myAnimator;
+
 	private void Start () 
 	{
+        myCollider = GetComponent<Collider>();
+        myAnimator = GetComponent<Animator>();
 		audioSource = SoundManager.Instance.AudioSourceLib.Instrument;
 	}
 
@@ -17,33 +22,15 @@ public class MusicalInstrument : MonoBehaviour
 	}
 
     private void CheckInput() {
-        if (Input.GetMouseButtonDown(0)) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit[] raycastHits = Physics.RaycastAll(ray);
-
-            if (ThisGameObjectWasHitted(raycastHits) &&
-                IsAllowedToPlay()) 
-                audioSource.Play();
+        if (TouchChecker.WasTappingFromCollider(Camera.main, myCollider) && IsAllowedToPlay()) 
+        { 
+            audioSource.Play();
+            myAnimator.SetTrigger("PlayInstrument");
         }
-    }
-
-    private bool ThisGameObjectWasHitted(RaycastHit[] raycastHits) {
-        GameObject firstGameObject = null;
-        float nearestDistance = float.MaxValue;
-        foreach (RaycastHit hitinfo in raycastHits) {
-            float distance = Vector3.Distance(Camera.main.transform.position, hitinfo.collider.transform.position);
-            if (distance < nearestDistance) {
-                    firstGameObject = hitinfo.collider.gameObject;
-                    nearestDistance = distance;
-            }
-        }
-
-        return firstGameObject == gameObject;
     }
     
     private bool IsAllowedToPlay() {
-        //TODO: Complete
-        return !audioSource.isPlaying;
+        return !audioSource.isPlaying && !myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Take 001");
     }
 }
