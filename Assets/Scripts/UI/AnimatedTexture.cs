@@ -9,8 +9,11 @@ public class AnimatedTexture : MonoBehaviour
     public Vector2 _scale = new Vector3(1f, 1f);    
     public Vector2 _offset = Vector2.zero;         
     public Vector2 _buffer = Vector2.zero;          
-    public float _framesPerSecond = 10f;            
-    public bool _playOnce = false;                 
+	           
+    public bool _playOnce = false;
+
+
+                 
     public bool _disableUponCompletion = false;              
     public bool _playOnEnable = true;               
     public bool _newMaterialInstance = false;       
@@ -22,6 +25,20 @@ public class AnimatedTexture : MonoBehaviour
     private bool _isPlaying = false;
     private new Renderer renderer;          
 
+	[SerializeField]
+	private float _framesPerSecond = 10f; 
+
+	public float FramesPerSecond 
+	{
+		get 
+		{ 
+			return _framesPerSecond;
+		}
+		set 
+		{
+			_framesPerSecond = value;
+		}
+	}
 
     public void Play()
     {

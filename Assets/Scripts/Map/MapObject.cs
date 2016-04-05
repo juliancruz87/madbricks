@@ -25,15 +25,18 @@ namespace Map {
 		}
 
         private void InitMapObjectType() {
-            switch (type) {
+			AnimatedTexture at;
+			switch (type) {
                 case MapObjectType.Totem_target:
                     InitAsTotemTarget();
                     break;
-                case MapObjectType.LauncherNormal:
-                    gameObject.AddComponent<AnimatedTexture>();
+				case MapObjectType.LauncherNormal:
+					at = gameObject.AddComponent<AnimatedTexture> ();
+					at.FramesPerSecond = 3f;
                     break;
                 case MapObjectType.BossJail:
-                    gameObject.AddComponent<AnimatedTexture>();
+                    at = gameObject.AddComponent<AnimatedTexture>();
+					at.FramesPerSecond = 10f;
                     break;
                 default:
                     break;
