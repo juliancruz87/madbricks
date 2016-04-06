@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2016
 		Month: 4
-		Day: 4
-		Hour: 20
-		Minute: 29
-		Second: 14
-		Millisecond: 378
+		Day: 6
+		Hour: 11
+		Minute: 36
+		Second: 39
+		Millisecond: 309
 	}
 	Creator: "FBX SDK/FBX Plugins version 2016.0"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,19 +30,19 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "C:\Users\toshiba\Desktop\RIELES\Tutos\Path_Tuto_1.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\toshiba\Desktop\RIELES\Tutos\Path_Tuto_1.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "C:\Users\toshiba\Desktop\RIELES\Tutos\Tuto_1_Riel.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\toshiba\Desktop\RIELES\Tutos\Tuto_1_Riel.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya"
 			P: "Original|ApplicationVersion", "KString", "", "", "2016"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "05/04/2016 01:29:14.376"
-			P: "Original|FileName", "KString", "", "", "C:/Users/toshiba/Desktop/RIELES/Tutos/Path_Tuto_1.fbx"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "06/04/2016 16:36:39.307"
+			P: "Original|FileName", "KString", "", "", "C:/Users/toshiba/Desktop/RIELES/Tutos/Tuto_1_Riel.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2016"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "05/04/2016 01:29:14.376"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "06/04/2016 16:36:39.307"
 		}
 	}
 }
@@ -60,7 +60,7 @@ GlobalSettings:  {
 		P: "UnitScaleFactor", "double", "Number", "",1
 		P: "OriginalUnitScaleFactor", "double", "Number", "",1
 		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
-		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
+		P: "DefaultCamera", "KString", "", "", "Producer Top"
 		P: "TimeMode", "enum", "", "",11
 		P: "TimeProtocol", "enum", "", "",2
 		P: "SnapOnFrameMode", "enum", "", "",0
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 90602820416, "", "Scene" {
+	Document: 234891251824, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -250,15 +250,15 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 91080230368, "Geometry::", "Mesh" {
+	Geometry: 234997169968, "Geometry::", "Mesh" {
 		Vertices: *36 {
-			a: -7.15255737304688e-007,26.1224975585938,-12.4664001464844,-7.15255737304688e-007,26.1224975585938,0,12.6224975585938,26.1224975585938,0,0,26.1224975585938,24.9328002929688,12.6224994659424,26.1224975585938,24.9328002929688,12.6224975585938,26.1224975585938,-12.4664001464844,0,26.1224975585938,31.4672889709473,12.6224994659424,26.1224975585938,31.4672889709473,0,26.1224975585938,12.4664001464844,12.6224994659424,26.1224975585938,12.4664001464844,0,26.1224975585938,-18.5554008483887,12.6224994659424,26.1224975585938,-18.5554008483887
+			a: 5.82826328277588,26.1224975585938,-12.4664001464844,5.82826328277588,26.1224975585938,0,6.79423522949219,26.1224975585938,0,5.82826328277588,26.1224975585938,24.9328002929688,6.79423522949219,26.1224975585938,24.9328002929688,5.82826328277588,26.1224975585938,-18.8887634277344,6.79423522949219,26.1224975585938,-18.8887634277344,6.79423522949219,26.1224975585938,-12.4664001464844,5.82826328277588,26.1224975585938,31.3837795257568,6.79423522949219,26.1224975585938,31.3837795257568,5.82826328277588,26.1224975585938,12.4664001464844,6.79423522949219,26.1224975585938,12.4664001464844
 		} 
 		PolygonVertexIndex: *20 {
-			a: 10,0,5,-12,0,1,2,-6,3,6,7,-5,1,8,9,-3,8,3,4,-10
+			a: 0,1,2,-8,3,8,9,-5,1,10,11,-3,10,3,4,-12,6,5,0,-8
 		} 
 		Edges: *16 {
-			a: 12,16,0,2,3,4,5,6,1,8,9,10,11,13,14,18
+			a: 8,12,0,1,2,3,4,5,6,7,9,10,14,16,17,19
 		} 
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
@@ -267,7 +267,7 @@ Objects:  {
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "Direct"
 			Normals: *60 {
-				a: 0,1,1.84732769525908e-007,0,1,1.84732769525908e-007,0,1,1.84732769525908e-007,0,1,1.84732783736763e-007,0.00145209429319948,0.999997913837433,-0.00144718971569091,0,1,0,0,1,0,-0.00145209371112287,0.999997913837433,-0.00144719053059816,0,1,0,0,1,0,0,1,0,0,1,0,0,1,1.9393836225845e-007,0,1,1.93938376469305e-007,0,1,1.9393836225845e-007,0,1,1.93938376469305e-007,0,1,0,0,1,0,0,1,0,0,1,0
+				a: 0.00145209429319948,0.999997913837433,-0.00144718971569091,0,1,0,0,1,0,-0.00145209371112287,0.999997913837433,-0.00144719053059816,0,1,0,0,1,0,0,1,0,0,1,0,0,1,1.9393836225845e-007,0,1,1.93938376469305e-007,0,1,1.9393836225845e-007,0,1,1.93938376469305e-007,0,1,0,0,1,0,0,1,0,0,1,0,-0.0136726768687367,0.999813675880432,0.013626404106617,0.0136726824566722,0.999813735485077,0.0136263938620687,0.013529472053051,0.999813675880432,0.0137713933363557,-0.0135294711217284,0.999813616275787,0.0137713998556137
 			} 
 			NormalsW: *20 {
 				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
@@ -279,10 +279,10 @@ Objects:  {
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "IndexToDirect"
 			UV: *40 {
-				a: 0.399999976158142,0.400000005960464,0.5,0.399999976158142,0.5,0.399999976158142,0.399999916553497,0.400000035762787,0.399999916553497,0.400000035762787,0.5,0.399999976158142,0.399999916553497,0.400000035762787,0.5,0.300000011920929,0.5,0.299999982118607,0.5,0.300000011920929,0.399999976158142,0.299999982118607,0.399999976158142,0.300000011920929,0.399999976158142,0.300000011920929,0.100000001490116,0.349999994039536,0,0.349999994039536,0,0.400000005960464,0.100000001490116,0.400000005960464,0.499999970197678,0.400000005960464,0.5,0.300000011920929,0.399999976158142,0.300000011920929
+				a: 0.399999976158142,0.400000005960464,0.5,0.399999976158142,0.699999988079071,0.400000035762787,0.5,0.399999976158142,0.399999916553497,0.400000035762787,0.399999916553497,0.400000035762787,0.5,0.399999976158142,0.399999916553497,0.400000035762787,0.5,0.300000011920929,0.5,0.299999982118607,0.5,0.300000011920929,0.399999976158142,0.299999982118607,0.399999976158142,0.300000011920929,0.399999976158142,0.300000011920929,0.700000047683716,0.299999982118607,0.600000023841858,0.300000011920929,0.600000023841858,0.399999976158142,0.499999970197678,0.400000005960464,0.5,0.300000011920929,0.399999976158142,0.300000011920929
 			} 
 			UVIndex: *20 {
-				a: 13,16,15,14,6,12,9,1,0,19,18,17,4,10,8,2,3,11,7,5
+				a: 7,13,10,1,0,19,18,17,5,11,9,3,4,12,8,6,2,16,15,14
 			} 
 		}
 		LayerElementMaterial: 0 {
@@ -310,21 +310,19 @@ Objects:  {
 			}
 		}
 	}
-	Model: 94460155440, "Model::Path_Tuto_1", "Mesh" {
+	Model: 234895070368, "Model::tutorial_1", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
-			P: "Lcl Translation", "Lcl Translation", "", "A",5.86724203961884,0,0
-			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.1,1,1
 			P: "currentUVSet", "KString", "", "U", "Texture"
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 90991406016, "Material::lambert2", "" {
+	Material: 234892492576, "Material::lambert2", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -346,15 +344,15 @@ Objects:  {
 
 Connections:  {
 	
-	;Model::Path_Tuto_1, Model::RootNode
-	C: "OO",94460155440,0
+	;Model::tutorial_1, Model::RootNode
+	C: "OO",234895070368,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",91001139920,94446589536
+	C: "OO",234890956784,234990329312
 	
-	;Geometry::, Model::Path_Tuto_1
-	C: "OO",91080230368,94460155440
+	;Geometry::, Model::tutorial_1
+	C: "OO",234997169968,234895070368
 	
-	;Material::lambert2, Model::Path_Tuto_1
-	C: "OO",90991406016,94460155440
+	;Material::lambert2, Model::tutorial_1
+	C: "OO",234892492576,234895070368
 }
