@@ -195,15 +195,6 @@ namespace Path {
                 }
             }
         }
-
-        private void OnTriggerEnter(Collider collision) {
-			if (isJailed)
-				return;
-
-			if (collision.gameObject.GetComponent<DraggableObject> ()) {
-				Destroy(collision.gameObject);
-				GameManagerForStates.Lose ();
-			}
-        }
+			
     }
 }
