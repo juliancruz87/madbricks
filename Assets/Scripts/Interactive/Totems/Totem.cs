@@ -28,6 +28,11 @@ namespace Interactive.Detail
 
 	    protected int positionToGo;
 
+		public int InitialPosition 
+		{
+			get { return totem != null ? totem.PositionToAdd : -1;}
+		}
+
 		public bool IsDragged 
 		{
 			get { return dragObject.IsBeingDragged; }

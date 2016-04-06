@@ -62,6 +62,18 @@ namespace Drag {
 			get { return isBeingDragged; }
 		}
 
+		public bool CanBeDragged 
+		{
+			get 
+			{
+				return canBeDragged;
+			}
+			set 
+			{
+				canBeDragged = value;
+			}
+		}
+
         public Node CurrentNode 
 		{
 			get { return currentNode; }
