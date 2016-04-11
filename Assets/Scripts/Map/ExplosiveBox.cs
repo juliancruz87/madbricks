@@ -20,6 +20,7 @@ namespace Map {
 
         private void OnTriggerEnter(Collider collider) 
 		{
+
             GameObject collisionGameObject = collider.gameObject;
             Totem totem = collisionGameObject.GetComponent<Totem>();
 

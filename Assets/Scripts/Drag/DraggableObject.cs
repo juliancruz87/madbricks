@@ -99,7 +99,8 @@ namespace Drag {
 			colliderOriginalSize = myCollider.size;
             myTransform = transform;
             dragFloor = GameObject.FindWithTag("Floor");
-		    dragFloorCollider = dragFloor.GetComponent<Collider>();
+			Debug.Log (dragFloor);
+			dragFloorCollider = dragFloor.GetComponent<Collider>();
 			snapperObject = GetComponent<SnapItemToCloserPosition>();
 		}
 
