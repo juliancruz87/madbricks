@@ -58,7 +58,7 @@ namespace Interactive.Detail
 			get { return PathBuilder.Instance.Finder; }
 		}
 
-		protected Node CurrentNode 
+		public Node CurrentNode 
 		{
 			get{ return dragObject.CurrentNode;}
 		}

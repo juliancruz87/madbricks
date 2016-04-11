@@ -2,6 +2,7 @@
 using Assets.Scripts.Util;
 using UnityEngine;
 using Drag;
+using Graphics;
 
 namespace Interactive.Detail
 {
@@ -9,30 +10,64 @@ namespace Interactive.Detail
 
         [SerializeField]
 		private int activeTotemPosition;
-      	[SerializeField]
-		private Shader highlightShader;
+		[SerializeField]
+		private int finalTotemPosition;
 
 		private Totem[] totems;
 
 		private Totem activeTotem;
-		private Shader originalShader;
+		private HighlightObject highlight;
+
 		private Renderer totemRenderer;
 
         public override void StartStep() 
 		{
-			totems = FindObjectsOfType<Totem>(); 
-			ConfigTotems ();
-			totemRenderer = activeTotem.gameObject.GetComponentInChildren<Renderer>();
-			originalShader = totemRenderer.material.shader;
-			totemRenderer.material.shader = highlightShader;
-
+			totems = FindObjectsOfType<Totem> ();
+			ConfigTotems (activeTotemPosition);
+			highlight = activeTotem.GetComponent<HighlightObject> ();
+			highlight.ActivateHighlight();
+			SetListeners (activeTotem);
         }
 
-		private void ConfigTotems () 
+		private void SetListeners(Totem totem)
+		{
+			DraggableObject draggabble = totem.GetComponent<DraggableObject> ();
+			draggabble.OnObjectDragged += totemDragged;
+			draggabble.OnSnap += totemReleased;
+			draggabble.OnNodeUpdated += updatedNode;
+			
+		}
+
+		private void updatedNode()
+		{
+			if (activeTotem.CurrentNode.Id == finalTotemPosition) 
+			{
+				highlight.DeactivateHighlight ();
+			} 
+		}
+
+		private void totemDragged(Vector3 initialPosition, Vector3 candidatePosition)
+		{
+			highlight.DeactivateHighlight ();
+		}
+
+		private void totemReleased()
+		{
+			if (activeTotem.CurrentNode.Id == finalTotemPosition) 
+			{
+				highlight.DeactivateHighlight ();
+			} 
+			else 
+			{
+				highlight.ActivateHighlight ();
+			}
+		}
+
+		private void ConfigTotems (int totemPosition) 
 		{
 			foreach(Totem totem in totems)
 			{
-				if (totem.InitialPosition == activeTotemPosition) 
+				if (totem.InitialPosition == totemPosition) 
 				{
 					SetToggleTotem (totem, true);
 					activeTotem = totem;
@@ -46,11 +81,6 @@ namespace Interactive.Detail
 		{
 			totem.GetComponent<DraggableObject>().CanBeDragged = canBeDragged;
 		}
-
-
-        private void Update() {
-
-        }
 
     }
 }

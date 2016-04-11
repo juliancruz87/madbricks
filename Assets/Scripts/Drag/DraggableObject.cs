@@ -110,10 +110,11 @@ namespace Drag {
 
         private void Update() 
 		{
-			UpdateNearestNode();
             if ((GameManager.Instance.CurrentState == GameStates.Planning ||
 			     GameManager.Instance.CurrentState == GameStates.Introduction) && canBeDragged)
                 UpdatePlanning();
+
+			UpdateNearestNode();
         }
 
         private void UpdatePlanning() {

@@ -34,6 +34,10 @@ namespace Map {
 					at = gameObject.AddComponent<AnimatedTexture> ();
 					at.FramesPerSecond = 3f;
                     break;
+				case MapObjectType.LauncherSticky:
+					at = gameObject.AddComponent<AnimatedTexture> ();
+					at.FramesPerSecond = 3f;
+					break;
                 case MapObjectType.BossJail:
                     at = gameObject.AddComponent<AnimatedTexture>();
 					at.FramesPerSecond = 10f;
