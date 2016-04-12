@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 414b45b111010a64b9c49a73411340e0
-timeCreated: 1459294610
+guid: b2e0f6a1bde534e2ea41028a695be177
+timeCreated: 1460490523
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Riel1_1_circular
-    4300002: Riel1_1_circular_Grande
+    4300000: Riel1_3_circular
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,7 +52,7 @@ ModelImporter:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
