@@ -73,7 +73,6 @@ namespace Interactive.Detail
 			{
 				myTransform.DOKill ();
 				myTransform.DOLocalMove (Vector3.zero, timeToSnap).SetEase (easeToSnap).OnComplete (()=>ResetParent ());
-				NodeSpnaped = transformToSnap.GetComponent<Node> ();
 			}
 		}
 
