@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Path;
 
 namespace Map {
     public class MapObject : MonoBehaviour {
@@ -15,11 +17,22 @@ namespace Map {
         [SerializeField]
         protected MapObjectType type;
 
+		private Renderer myRenderer;
+		private Texture originalTexture;
+
         public MapObjectType Type {
             get { return type; }
         } 
 
+		public Node ParentNode
+		{
+			get { return PathBuilder.Instance.GetNearsetNode (startPosition.position); }
+
+		}
+
         private void Awake() {
+			myRenderer = GetComponentInChildren<Renderer> ();
+			originalTexture = myRenderer.material.mainTexture;
 			SetStartPosition (startPosition);
             InitMapObjectType();
 		}
@@ -57,6 +70,32 @@ namespace Map {
 				startPosition = position;
 				transform.position = position.position + startPositionOffset;
 			}
+		}
+
+		public void ChangeTexture(Texture newtexture) 
+		{
+			myRenderer.material.mainTexture = newtexture;	
+		}
+
+		public void ResetTexture() 
+		{
+			ChangeTexture (originalTexture);
+		}
+
+		public static List<MapObject>GetMapObjectsOfType(params MapObjectType[] types)
+		{
+			List<MapObject> filteredMapObjects = new List<MapObject> ();
+
+			MapObject[] mapObjects = FindObjectsOfType<MapObject> ();
+
+			foreach (MapObject mapObject in mapObjects) {
+				foreach (MapObjectType type in types) {
+					if (mapObject.Type == type)
+						filteredMapObjects.Add (mapObject);
+				}
+			}
+
+			return filteredMapObjects;
 		}
 
         public static ArrayList GetMapObjectsOfType(MapObjectType type) {

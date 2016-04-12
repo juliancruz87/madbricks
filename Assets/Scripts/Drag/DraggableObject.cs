@@ -113,8 +113,9 @@ namespace Drag {
             if ((GameManager.Instance.CurrentState == GameStates.Planning ||
 			     GameManager.Instance.CurrentState == GameStates.Introduction) && canBeDragged)
                 UpdatePlanning();
-
+			
 			UpdateNearestNode();
+
         }
 
         private void UpdatePlanning() {
@@ -124,7 +125,7 @@ namespace Drag {
 
             if (isBeingDragged) {
                 UpdateDrag();
-
+			
 				if (IsInputUp() || IsOutsideDragZone()) 
                     StopDrag();
             }
@@ -460,6 +461,8 @@ namespace Drag {
         private void Snap() {
 			if (snapperObject != null)
 				snapperObject.SnapToCloserTransform();
+				
+			UpdateNearestNode();
 
             if (OnSnap != null)
                 OnSnap();
