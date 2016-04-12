@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\Graphics\Detail\TextureTilingController.cs" />
     <Compile Include="Assets\Scripts\Graphics\Detail\UVAnimationBase.cs" />
     <Compile Include="Assets\Scripts\Graphics\Detail\UVOffsetAnimation.cs" />
+    <Compile Include="Assets\Scripts\Graphics\HighlightObject.cs" />
     <Compile Include="Assets\Scripts\Graphics\IGraphicsFX.cs" />
     <Compile Include="Assets\Scripts\InputDemo\DemoInputManager.cs" />
     <Compile Include="Assets\Scripts\Interactive\Activators\ColliderActivatorByDragTotem.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\Scripts\Interactive\Detail\DelayStep.cs" />
     <Compile Include="Assets\Scripts\Interactive\Detail\ResultsWindows.cs" />
     <Compile Include="Assets\Scripts\Interactive\Detail\SequencerManager.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\BeginStepTutorial2Step1.cs" />
     <Compile Include="Assets\Scripts\Interactive\DragableItem.cs" />
     <Compile Include="Assets\Scripts\Interactive\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interactive\GameResults.cs" />
@@ -172,6 +174,9 @@
     <Compile Include="Assets\Scripts\Path\TotemType.cs" />
     <Compile Include="Assets\Scripts\Path\TotemsLevelCreator.cs" />
     <Compile Include="Assets\Scripts\Persistence\SaveManager.cs" />
+    <Compile Include="Assets\Scripts\Serializable\ShaderColorProperty.cs" />
+    <Compile Include="Assets\Scripts\Serializable\ShaderFloatProperty.cs" />
+    <Compile Include="Assets\Scripts\Settings\HighlightShaderSettings.cs" />
     <Compile Include="Assets\Scripts\Settings\MovementSettings.cs" />
     <Compile Include="Assets\Scripts\Settings\PrefProperties.cs" />
     <Compile Include="Assets\Scripts\Settings\SceneProperties.cs" />
@@ -220,6 +225,7 @@
     <Compile Include="Assets\Scripts\Utilities\LevelNamesParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\HighlightShader.shader" />
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />

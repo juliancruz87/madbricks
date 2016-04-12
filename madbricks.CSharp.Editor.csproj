@@ -150,6 +150,7 @@
     <Compile Include="Assets\Editor\Scripts\TutorialBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\HighlightShader.shader" />
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
