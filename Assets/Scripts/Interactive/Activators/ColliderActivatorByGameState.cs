@@ -11,25 +11,26 @@ namespace Interactive.Activators
 		[SerializeField]
 		private Collider colliderToActivate;
 
-		private IGameManagerForStates GameManagerForStates
+		private GameManager GameManagerInstance
 		{
 			get { return GameManager.Instance;}
 		}
 
-		private bool ShouldActivate
+		private void Start ()
 		{
-			get 
-			{
-				if(GameManagerForStates == null)
-					return false;
-				else 
-					return GameManagerForStates.CurrentState == gameState;
-			}
+			ActivateCollider (GameManagerInstance.CurrentState);
+			GameManagerInstance.GameStateChanged += ActivateCollider;
 		}
 
-		private void Update ()
+		private void ActivateCollider (GameStates gameState)
 		{
-			colliderToActivate.enabled = ShouldActivate;
+			colliderToActivate.enabled = this.gameState == gameState;
 		}
+
+		private void OnDestroy ()
+		{
+			GameManagerInstance.GameStateChanged -= ActivateCollider;
+		}
+
 	}
 }

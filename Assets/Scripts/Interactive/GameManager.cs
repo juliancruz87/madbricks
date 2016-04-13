@@ -21,6 +21,7 @@ namespace Interactive
         public LevelInfo levelInfo;
 
 		public event Action StartedGame;
+		public event Action<GameStates> GameStateChanged;
 
 		[SerializeField]
 		private SequencerManager startSequencer;
@@ -38,11 +39,6 @@ namespace Interactive
 
         [SerializeField]
         private bool isGamePaused;
-
-        private TutorialManager tutorialManager;
-
-        [SerializeField]
-        private bool areTutorialsActive;
 
         public GameStates CurrentState 
 		{
@@ -84,25 +80,11 @@ namespace Interactive
 		{
 			if (Instance == null)
 				Instance = this;
-
-            tutorialManager = gameObject.AddComponent<TutorialManager>();
-            tutorialManager.Initialize();
         }
 
 		private void Start ()
 		{
-            if (tutorialManager.CheckForTutorialInLevel(levelInfo.area, levelInfo.level))
-            {
-                tutorialManager.FinishTutorial += Pause;
-                tutorialManager.FinishTutorial += StartGame;
-                tutorialManager.ShowTutorial();
-                Pause();
-            }
-            else
-            {
-                StartGame();
-            }
-            
+			StartGame();
 		}
 
 #if UNITY_EDITOR
@@ -115,11 +97,9 @@ namespace Interactive
 
         private void StartGame()
         {
-            tutorialManager.FinishTutorial -= Pause;
-            tutorialManager.DestroyTutorialContainer();
-
             CurrentState = GameStates.Introduction;
-            startSequencer.EndIntroduction += StartPlanning;
+			OnGameStateChanged ();
+            startSequencer.SequenceEnded += StartPlanning;
             startSequencer.Play();
             InitializeUI();
         }
@@ -127,11 +107,13 @@ namespace Interactive
 		private void StartPlanning ()
 		{
 			CurrentState = GameStates.Planning;
+			OnGameStateChanged ();
 		}
 
 		public void Play ()
 		{
 			CurrentState = GameStates.Play;
+			OnGameStateChanged ();
 			if (StartedGame != null)
 				StartedGame ();
 
@@ -143,6 +125,8 @@ namespace Interactive
             if (!wasEndGame)
                 EndGame();
         }
+
+
 
 	    private void EndGame()
 	    {
@@ -228,6 +212,12 @@ namespace Interactive
             else
                 Time.timeScale = 1;
         }
+
+		private void OnGameStateChanged()
+		{
+			if (GameStateChanged != null)
+				GameStateChanged (CurrentState);	
+		}
 
         public void InitializeUI()
         {

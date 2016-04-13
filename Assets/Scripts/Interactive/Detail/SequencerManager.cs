@@ -7,7 +7,7 @@ namespace Interactive.Detail
 {
 	public class SequencerManager : MonoBehaviour 
 	{
-		public event Action EndIntroduction;
+		public event Action SequenceEnded;
 
 		[SerializeField]
 		private int currentStep = 0;
@@ -36,7 +36,7 @@ namespace Interactive.Detail
 			if (steps.Count > currentStep)
 				StartCurrentStep ();
 			else 
-				EndSequence ();
+				OnSequenceEnded ();
 		}
 
 		private void StartCurrentStep ()
@@ -45,10 +45,10 @@ namespace Interactive.Detail
 				steps [currentStep].StartStep ();
 		}
 
-		private void EndSequence ()
+		private void OnSequenceEnded ()
 		{
-			if (EndIntroduction != null)
-				EndIntroduction ();
+			if (SequenceEnded != null)
+				SequenceEnded ();
 		}
 	}
 }

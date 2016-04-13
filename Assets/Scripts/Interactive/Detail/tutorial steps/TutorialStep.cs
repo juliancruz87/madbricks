@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Interactive.Detail
 {
-    public class BeginStepTutorial2Step1 : BeginStepGameBase {
+    public class TutorialStep : BeginStepGameBase {
 
         [SerializeField]
 		private int activeTotemPosition;
