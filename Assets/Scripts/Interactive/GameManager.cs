@@ -26,13 +26,17 @@ namespace Interactive
 		[SerializeField]
 		private SequencerManager startSequencer;
 
-		[SerializeField]
+        [SerializeField]
+        private SequencerManager tutorialSequencer;
+
+        [SerializeField]
 		private SequencerManager endSequencer;
 
 	    [SerializeField] 
         private float maxPlayTime = 8f;
 
         private float totemTargetToleranceDistance = 0.2f;
+        private GameStates currentState;
 
 		private bool wasEndGame;
 		private int goals = 0;
@@ -42,8 +46,12 @@ namespace Interactive
 
         public GameStates CurrentState 
 		{
-			get;
-			private set;
+			get { return currentState; }
+			private set
+            {
+                currentState = value;
+                OnGameStateChanged();
+            }
 		}
 
 		public List<ITotem> Totems 
@@ -98,7 +106,6 @@ namespace Interactive
         private void StartGame()
         {
             CurrentState = GameStates.Introduction;
-			OnGameStateChanged ();
             startSequencer.SequenceEnded += StartPlanning;
             startSequencer.Play();
             InitializeUI();
@@ -107,13 +114,14 @@ namespace Interactive
 		private void StartPlanning ()
 		{
 			CurrentState = GameStates.Planning;
-			OnGameStateChanged ();
+
+            if(tutorialSequencer != null)
+                tutorialSequencer.Play();
 		}
 
 		public void Play ()
 		{
 			CurrentState = GameStates.Play;
-			OnGameStateChanged ();
 			if (StartedGame != null)
 				StartedGame ();
 
@@ -125,7 +133,6 @@ namespace Interactive
             if (!wasEndGame)
                 EndGame();
         }
-
 
 
 	    private void EndGame()

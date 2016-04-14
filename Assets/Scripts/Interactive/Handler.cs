@@ -22,13 +22,12 @@ public class Handler : MonoBehaviour
 
 	private void Update () 
 	{
-		if ( GameManagerForStates.CurrentState == GameStates.Planning && 
-            TouchChecker.WasTappingFromCollider(Camera.main, myCollider))
-            {
-                animator.SetTrigger ("Start");
+		if (TouchChecker.WasTappingFromCollider(Camera.main, myCollider))
+        {
+            animator.SetTrigger ("Start");
                 
-                GameManagerForStates.Play();
-            }
+            GameManagerForStates.Play();
+       }
             
 	}
 }
