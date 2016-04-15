@@ -42,22 +42,14 @@ namespace Interactive.Detail
             handlerCollider.enabled = true;
             isStepActive = true;
             isInIdle = false;
-            GameManager.Instance.GameStateChanged += CheckState;
             ShowStartText();
         }
-
-        private void CheckState(GameStates gameState)
-        {
-            if (gameState == GameStates.Play)
-                CompleteStep();
-        }
-
+			
         protected override void CompleteStep()
         {
             isStepActive = false;
             rotateAnimation.SetActive(false);
             handlePointerAnimation.SetActive(false);
-            GameManager.Instance.GameStateChanged -= CheckState;
             base.CompleteStep();
         }
 

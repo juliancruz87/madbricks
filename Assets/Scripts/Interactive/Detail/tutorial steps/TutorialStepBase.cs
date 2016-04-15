@@ -26,6 +26,7 @@ namespace Interactive.Detail
 
         public override void StartStep() 
 		{
+			GameManager.Instance.GameStateChanged += CheckState;
             textField.SetActive(true);
             textComp = textField.GetComponentInChildren<Text>();
             BeginTutorialStep();
@@ -51,10 +52,16 @@ namespace Interactive.Detail
 		
 		protected virtual void CompleteStep()
 		{
+			GameManager.Instance.GameStateChanged -= CheckState;
             textField.SetActive(false);
 			EndStep ();
 		}
 
+		private void CheckState(GameStates gameState)
+		{
+			if (gameState == GameStates.Play)
+				CompleteStep();
+		}
 
         private void ToggleText(string text)
         {

@@ -13,20 +13,8 @@ namespace Interactive.Detail
 
         protected override void BeginTutorialStep()
         {
-			GameManager.Instance.GameStateChanged += CheckState;
             ShowStartText();
         }
-
-		private void CheckState(GameStates gameState)
-		{
-			if (gameState == GameStates.Play)
-				CompleteStep();
-		}
-
-		protected override void CompleteStep()
-		{
-			GameManager.Instance.GameStateChanged -= CheckState;
-			base.CompleteStep();
-		}	
+			
     }
 }

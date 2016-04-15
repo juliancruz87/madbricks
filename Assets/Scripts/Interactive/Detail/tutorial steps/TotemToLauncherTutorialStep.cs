@@ -43,7 +43,7 @@ namespace Interactive.Detail
 
         private void ConfigLauncher()
 		{
-			List<MapObject> launchers = MapObject.GetMapObjectsOfType (MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
+			List<MapObject> launchers = MapObject.GetMapObjectsOfType (MapObjectType.LauncherSticky, MapObjectType.LauncherNormal, MapObjectType.None);
 			currentLauncher = launchers.Find (mapObject => mapObject.ParentNode.Id == finalTotemPosition);
 
 		}
