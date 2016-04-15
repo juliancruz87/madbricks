@@ -22,7 +22,7 @@ public class Handler : MonoBehaviour
 
 	private void Update () 
 	{
-		if (TouchChecker.WasTappingFromCollider(Camera.main, myCollider))
+		if (TouchChecker.WasTappingFromCollider(Camera.main, myCollider) && GameManager.Instance.IsEveryTotemOnLauncher)
         {
             animator.SetTrigger ("Start");
                 

@@ -5,5 +5,6 @@ namespace Interactive
 		bool IsDragged { get;}
 		bool IsBoss { get;}
 		bool IsJailed { get; }
+        bool IsInStartPoint { get; }
 	}
 }

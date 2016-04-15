@@ -48,9 +48,9 @@ namespace Interactive.Detail
 			get { return false; }
 		}
 
-	    protected bool IsInStartPoint
+	    public bool IsInStartPoint
 		{
-			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (dragObject.CurrentNode.Id); }
+			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (CurrentNode.Id); }
 		}
 
 		protected PathBuilderFinder Finder 

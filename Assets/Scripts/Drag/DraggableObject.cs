@@ -18,8 +18,6 @@ namespace Drag {
         private static DraggableObject objectBeingDragged;
         private static int draggableObjects;
 
-        private int draggableObjectId;
-
 		private float colliderDragScale = 4.0f;
 
         public OnObjectDragged OnObjectDragged;
@@ -89,7 +87,6 @@ namespace Drag {
 
         private void Awake() {
             myTransform = transform;
-            draggableObjectId = draggableObjects;
             draggableObjects++;
         }
 

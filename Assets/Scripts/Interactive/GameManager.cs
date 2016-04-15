@@ -54,6 +54,12 @@ namespace Interactive
             }
 		}
 
+        public List<MapObject> Launchers
+        {
+            get;
+            private set;
+        }
+
 		public List<ITotem> Totems 
 		{
 			set;
@@ -78,7 +84,14 @@ namespace Interactive
 			private set;
 		}
 
-		public static GameManager Instance 
+        public bool IsEveryTotemOnLauncher
+        {
+            get { return Totems.TrueForAll(totem => totem.IsInStartPoint); }
+            
+        }
+
+
+        public static GameManager Instance 
 		{
 			get;
 			private set;
@@ -92,7 +105,8 @@ namespace Interactive
 
 		private void Start ()
 		{
-			StartGame();
+            Launchers = MapObject.GetMapObjectsOfType(MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
+            StartGame();
 		}
 
 #if UNITY_EDITOR
@@ -145,7 +159,10 @@ namespace Interactive
 	            Lose();
 	    }
 
-	    private bool IsEveryTotemOnPlace() 
+        
+
+
+        private bool IsEveryTotemOnPlace() 
 		{
 	        Debug.LogWarning("This is a hack that was made to force the end of the game, please fix it");
 

@@ -5,10 +5,11 @@ using Drag;
 using Graphics;
 using Map;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace Interactive.Detail
 {
-    public class TutorialStep : BeginStepGameBase {
+    public class TotemToLauncherTutorialStep : TutorialStepBase {
 
         [SerializeField]
 		private int activeTotemPosition;
@@ -17,25 +18,30 @@ namespace Interactive.Detail
 		[SerializeField]
 		private Texture launcherHighlightTexture;
 
-		private Totem[] totems;
+        private Totem[] totems;
 
 		private Totem activeTotem;
 		private MapObject currentLauncher;
 		private HighlightObject highlight;
 
-        public override void StartStep() 
-		{
-			totems = FindObjectsOfType<Totem> ();
+        protected override void BeginTutorialStep()
+        {
+            totems = FindObjectsOfType<Totem>();
 
-			ConfigLauncher ();
-			ConfigTotems (activeTotemPosition);
-			SetListeners (activeTotem);
-			highlight = activeTotem.GetComponent<HighlightObject> ();
-			highlight.ActivateHighlight();
-
+            ConfigTotems(activeTotemPosition);
+            ConfigLauncher();
+            SetListeners(activeTotem);
+            highlight.ActivateHighlight();
+            ShowStartText();
         }
 
-		private void ConfigLauncher()
+        private void IdleStep()
+        {
+            highlight.ActivateHighlight();
+            ShowIdleText();
+        }
+
+        private void ConfigLauncher()
 		{
 			List<MapObject> launchers = MapObject.GetMapObjectsOfType (MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
 			currentLauncher = launchers.Find (mapObject => mapObject.ParentNode.Id == finalTotemPosition);
@@ -45,46 +51,33 @@ namespace Interactive.Detail
 		private void SetListeners(Totem totem)
 		{
 			DraggableObject draggabble = totem.GetComponent<DraggableObject> ();
-			draggabble.OnObjectDragged += totemDragged;
-			draggabble.OnSnap += totemReleased;	
+			draggabble.OnObjectDragged += TotemDragged;
+			draggabble.OnSnap += TotemReleased;	
 		}
 
 		private void StopListeners(Totem totem)
 		{
 			DraggableObject draggabble = totem.GetComponent<DraggableObject> ();
-			draggabble.OnObjectDragged -= totemDragged;
-			draggabble.OnSnap -= totemReleased;
+			draggabble.OnObjectDragged -= TotemDragged;
+			draggabble.OnSnap -= TotemReleased;
 		}
 
-		private void totemDragged(Vector3 initialPosition, Vector3 candidatePosition)
+		private void TotemDragged(Vector3 initialPosition, Vector3 candidatePosition)
 		{
 			highlight.DeactivateHighlight ();
 			currentLauncher.ChangeTexture (launcherHighlightTexture);
+            ShowActionText();
+        }
 
-			/*
-			HighlightObject hl = currentLauncher.GetComponent<HighlightObject> ();
-
-			if(hl != null)
-				hl.ActivateHighlight();
-				*/
-		}
-
-		private void totemReleased()
+		private void TotemReleased()
 		{
-			/*
-			HighlightObject hl = currentLauncher.GetComponent<HighlightObject> ();
-
-			if(hl != null)
-				hl.DeactivateHighlight();
-				*/
-
 			currentLauncher.ResetTexture ();
 
 			if (activeTotem.CurrentNode.Id == finalTotemPosition)
-				StepCompleted ();
+				CompleteStep ();
 
 			else 
-				highlight.ActivateHighlight ();
+				IdleStep();
 		}
 
 		private void ConfigTotems (int totemPosition) 
@@ -95,7 +88,8 @@ namespace Interactive.Detail
 				{
 					SetToggleTotem (totem, true);
 					activeTotem = totem;
-				}
+                    highlight = activeTotem.GetComponent<HighlightObject>();
+                }
 				else
 					SetToggleTotem (totem, false);
 			}
@@ -106,21 +100,19 @@ namespace Interactive.Detail
 			foreach (Totem totem in totems) {
 				SetToggleTotem (totem, true);
 			}
-
 		}
 
-		private void StepCompleted()
-		{
-			highlight.DeactivateHighlight ();
+		protected override void CompleteStep()
+        {
+            highlight.DeactivateHighlight ();
 			StopListeners (activeTotem);
 			FreeTotems ();
-			EndStep ();
-		}
+            base.CompleteStep();
+        }
 
 		private void SetToggleTotem(Totem totem, bool canBeDragged)
 		{
 			totem.GetComponent<DraggableObject>().CanBeDragged = canBeDragged;
 		}
-
     }
 }

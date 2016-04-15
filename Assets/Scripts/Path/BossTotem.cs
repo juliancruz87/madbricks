@@ -46,7 +46,12 @@ namespace Path {
 			get { return false; }
 		}
 
-		private IGameManagerForStates GameManagerForStates
+        public bool IsInStartPoint
+        {
+            get { return isJailed; }
+        }
+
+        private IGameManagerForStates GameManagerForStates
 		{
 			get { return GameManager.Instance;}
 		}
