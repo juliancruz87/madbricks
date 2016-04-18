@@ -45,6 +45,31 @@ namespace LevelLoaderController
             yield return Application.LoadLevelAsync(pendingScene);
         }
 
+        public static string GetTutorialOrLevelName(int area, int level)
+        {
+            string sceneName = "";
+            int clearedTutorial = int.Parse(SaveManager.Instance.GetClearedTutorial());
+
+            if (area == 1 && level == 1 && clearedTutorial == 0)
+                sceneName = "Tutorial_1";
+            else if (area == 1 && level == 1 && clearedTutorial == 1)
+                sceneName = "Tutorial_2";
+            else if (area == 1 && level == 3 && clearedTutorial <= 2)
+                sceneName = "Tutorial_3";
+            else if (area == 2 && level == 1 && clearedTutorial <= 3)
+                sceneName = "Tutorial_4";
+            else if (area == 3 && level == 1 && clearedTutorial <= 4)
+                sceneName = "Tutorial_5";
+            else if (area == 3 && level == 2 && clearedTutorial <= 5)
+                sceneName = "Tutorial_6";
+            else if (area == 5 && level == 2 && clearedTutorial <= 6)
+                sceneName = "Tutorial_7";
+            else
+                sceneName = "W" + area + "_L" + level;
+
+            return sceneName;
+        }
+
         public void LoadNextLevel()
         {
             string levelName = "";
@@ -53,8 +78,46 @@ namespace LevelLoaderController
             int level = info.level;
 
             Debug.Log("[LevelLoader] Getting level info " + area + " - " + level);
+            
+            //TODO: Awful code, try to refactor
+            if (area == 0)
+            {
+                SaveManager.Instance.SetClearedTutorial(level.ToString());
 
-            if (area < 6)
+                if (level <= 2)
+                {
+                    area = 1;
+                    level = 1;
+                }
+                else if (level == 3)
+                {
+                    area = 1;
+                    level = 3;
+                }
+                else if (level == 4)
+                {
+                    area = 2;
+                    level = 1;
+                }
+                else if (level == 5)
+                {
+                    area = 3;
+                    level = 1;
+                }
+
+                else if (level == 6)
+                {
+                    area = 3;
+                    level = 2;
+                }
+                else if (level == 7)
+                {
+                    area = 5;
+                    level = 2;
+                }
+                
+            }
+            else if (area < 6)
             {
                 if (level < 3)
                     level++;
@@ -75,20 +138,15 @@ namespace LevelLoaderController
 
             if (level == -1)
                 levelName = SceneProperties.SCENE_MAIN_MENU;
-            else
-                levelName = "W" + area + "_L" + level;
-
-            if(level == 1)
+            else if (level == 1 && area != 1)
                 levelName = SceneProperties.SCENE_LOADER_AREA;
-
+            else
+                levelName = GetTutorialOrLevelName(area, level);
 
             SaveManager.Instance.SetSelectedArea(area.ToString());
-
             SaveManager.Instance.SetSelectedLevel(level.ToString());
             SaveManager.Instance.SetClearedArea(area.ToString());
             SaveManager.Instance.SetClearedLevel(level.ToString());
-
-
 
             Debug.Log("[LevelLoader] Loading " + levelName);
             LoadScene(levelName);

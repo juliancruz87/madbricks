@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using LevelLoaderController;
 
 public class AreaLevelManager : MonoBehaviour {
 
@@ -26,10 +26,11 @@ public class AreaLevelManager : MonoBehaviour {
     public string GetSceneToLoad(string level)
     {
         string sceneName = "";
+
         if (int.Parse(level) <= int.Parse(SaveManager.Instance.GetClearedLevel()))
-            sceneName = "W" + SaveManager.Instance.GetSelectedArea() + "_L" + level;
-        else
-            return sceneName;
+        {
+            sceneName = LevelLoader.GetTutorialOrLevelName(int.Parse(SaveManager.Instance.GetSelectedArea()), int.Parse(level));
+        }
         return sceneName;
     }
 

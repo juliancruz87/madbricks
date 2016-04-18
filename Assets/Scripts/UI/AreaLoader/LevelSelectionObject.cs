@@ -17,10 +17,10 @@ public class LevelSelectionObject : MonoBehaviour
         Debug.Log("Selected Level: " + levelID);
         SaveManager.Instance.SetSelectedLevel(levelID);
         //Application.LoadLevel(SceneProperties.SCENE_LOADER_LEVEL);
-        LoadScene("", "");
+        LoadScene();
     }
 
-    public void LoadScene(string area, string level)
+    public void LoadScene()
     {
         string sceneName = transform.parent.GetComponent<AreaLevelManager>().GetSceneToLoad(levelID);
         if (!sceneName.Equals(""))

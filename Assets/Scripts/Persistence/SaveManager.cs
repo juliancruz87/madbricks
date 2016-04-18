@@ -86,11 +86,23 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, clearedLevel.ToString());
     }
 
+
     public string GetClearedLevel()
     {
         string clearedLevel = PlayerPrefs.GetString(PrefsProperties.CLEARED_LEVEL, "1");
         LogGetOperation("Level " + clearedLevel);
         return clearedLevel;
+    }
+
+    public void SetClearedTutorial(string clearedTutorial)
+    {
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_TUTORIAL, clearedTutorial);
+    }
+
+    public string GetClearedTutorial()
+    {
+        string clearedTutorial = PlayerPrefs.GetString(PrefsProperties.CLEARED_TUTORIAL, "0");
+        return clearedTutorial;
     }
 
 

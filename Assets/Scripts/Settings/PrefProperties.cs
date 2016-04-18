@@ -11,5 +11,6 @@ public static class PrefsProperties
 
     public const string CLEARED_AREA = "ClearedArea";
     public const string CLEARED_LEVEL = "ClearedLevel";
+    public const string CLEARED_TUTORIAL = "ClearedTutorial";
 
 }
