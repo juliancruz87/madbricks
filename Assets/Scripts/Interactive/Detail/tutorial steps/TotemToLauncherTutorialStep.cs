@@ -104,9 +104,15 @@ namespace Interactive.Detail
 			}
 		}
 
+        private void PaintHint ()
+        {
+            if(hintPainter != null)
+                hintPainter.Paint(activeTotem.GetPathPositions());
+        }
+
 		protected override void CompleteStep()
         {
-            hintPainter.Paint(activeTotem.GetPathPositions());
+            PaintHint();
             highlight.DeactivateHighlight ();
 			StopListeners (activeTotem);
 			FreeTotems ();
