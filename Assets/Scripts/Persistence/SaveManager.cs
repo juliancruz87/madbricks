@@ -7,6 +7,9 @@ public class SaveManager : MonoBehaviour
 {
     [SerializeField]
     private bool showLogger;
+    [SerializeField]
+    private bool deletePlayerPrefs;
+
     private static SaveManager instance;
 
     public static SaveManager Instance
@@ -24,6 +27,9 @@ public class SaveManager : MonoBehaviour
 
     void Awake()
     {
+        if (deletePlayerPrefs)
+            PlayerPrefs.DeleteAll();
+
         if (instance == null)
         {
             instance = this;
