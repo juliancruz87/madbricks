@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\Interactive\Handler.cs" />
     <Compile Include="Assets\Scripts\Interactive\IGameManagerForStates.cs" />
     <Compile Include="Assets\Scripts\Interactive\ITotemMovesController.cs" />
+    <Compile Include="Assets\Scripts\Interactive\LineHintPainter.cs" />
     <Compile Include="Assets\Scripts\Interactive\PossiblePath.cs" />
     <Compile Include="Assets\Scripts\Interactive\SnapItemToCloserPosition.cs" />
     <Compile Include="Assets\Scripts\Interactive\TappeableObject.cs" />
