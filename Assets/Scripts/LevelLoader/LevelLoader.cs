@@ -138,7 +138,7 @@ namespace LevelLoaderController
 
             if (level == -1)
                 levelName = SceneProperties.SCENE_MAIN_MENU;
-            else if (level == 1 && area != 1)
+            else if (level == 1 && info.area != 0)
                 levelName = SceneProperties.SCENE_LOADER_AREA;
             else
                 levelName = GetTutorialOrLevelName(area, level);
