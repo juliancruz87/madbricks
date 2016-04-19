@@ -161,6 +161,7 @@ namespace Interactive.Detail
 #endif
 		}
 
+        public abstract Vector3[] GetPathPositions();
 		protected abstract void GetReachedToPoint (Node node);
 		protected abstract void Move ();
 	}

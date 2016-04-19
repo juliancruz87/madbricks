@@ -22,7 +22,12 @@ namespace Interactive.Detail
 			get { return TotemType.Triangle; }
 		}
 
-		private bool CanRotate 
+        public override Vector3[] GetPathPositions()
+        {
+            return new Vector3[2];
+        }
+
+        private bool CanRotate 
 		{
 			get{ return TouchChecker.InputIsOverThisCollider(Camera.main, myCollider) && InputManager.Instance.InputDevice.PrimaryTouch.ReleasedTapThisFrame && canRotate;}
 		}

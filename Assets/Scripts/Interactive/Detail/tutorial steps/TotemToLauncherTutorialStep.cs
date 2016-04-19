@@ -17,6 +17,8 @@ namespace Interactive.Detail
 		private int finalTotemPosition;
 		[SerializeField]
 		private Texture launcherHighlightTexture;
+        [SerializeField]
+        private LineHintPainter hintPainter;
 
         private Totem[] totems;
 
@@ -27,12 +29,12 @@ namespace Interactive.Detail
         protected override void BeginTutorialStep()
         {
             totems = FindObjectsOfType<Totem>();
-
             ConfigTotems(activeTotemPosition);
             ConfigLauncher();
             SetListeners(activeTotem);
             highlight.ActivateHighlight();
             ShowStartText();
+            
         }
 
         private void IdleStep()
@@ -104,6 +106,7 @@ namespace Interactive.Detail
 
 		protected override void CompleteStep()
         {
+            hintPainter.Paint(activeTotem.GetPathPositions());
             highlight.DeactivateHighlight ();
 			StopListeners (activeTotem);
 			FreeTotems ();

@@ -9,10 +9,19 @@ namespace Interactive.Detail
 		private int currentNode = 0;
 		private FinderShorterPath finder = new FinderShorterPath ();
 		private List<Node> nodes = new List<Node> ();
-		public override TotemType Type 
+
+        public override TotemType Type 
 		{
 			get { return TotemType.Square; }
 		}
+
+        public override Vector3 [] GetPathPositions()
+        {
+            List<Node> nodes = GetNodesToTravel();
+            List<Vector3> nodePositions = nodes.ConvertAll(item => item.transform.position);
+            nodePositions.Insert(0, transform.position);
+            return nodePositions.ToArray();
+        }
 
 		protected override void Move ()
 		{

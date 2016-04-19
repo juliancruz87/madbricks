@@ -24,6 +24,11 @@ namespace Interactive.Detail
 				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 		}
 
+        public override Vector3 [] GetPathPositions()
+        {
+            return new Vector3 [2];
+        }
+
 		private void ChoseNodeToGo ()
 		{
 			Node node = nodes [currentNode];
