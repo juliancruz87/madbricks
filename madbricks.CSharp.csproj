@@ -123,7 +123,12 @@
     <Compile Include="Assets\Scripts\Interactive\Detail\DelayStep.cs" />
     <Compile Include="Assets\Scripts\Interactive\Detail\ResultsWindows.cs" />
     <Compile Include="Assets\Scripts\Interactive\Detail\SequencerManager.cs" />
-    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\BeginStepTutorial2Step1.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\HighlightObjectTutorialStep.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\RotationToPlayTutorialStep.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\ShowTextTutorialStep.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\TapTotemTutorialStep.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\TotemToLauncherTutorialStep.cs" />
+    <Compile Include="Assets\Scripts\Interactive\Detail\tutorial steps\TutorialStepBase.cs" />
     <Compile Include="Assets\Scripts\Interactive\DragableItem.cs" />
     <Compile Include="Assets\Scripts\Interactive\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interactive\GameResults.cs" />
@@ -202,6 +207,7 @@
     <Compile Include="Assets\Scripts\Tutorials\TutorialContainer.cs" />
     <Compile Include="Assets\Scripts\Tutorials\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Tutorials\TutorialSequence.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\TutorialTextSettings.cs" />
     <Compile Include="Assets\Scripts\UI\AnimatedTexture.cs" />
     <Compile Include="Assets\Scripts\UI\AreaLoader\AreaLevelManager.cs" />
     <Compile Include="Assets\Scripts\UI\AreaLoader\LevelSelectionObject.cs" />
