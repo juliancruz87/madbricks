@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Interactive.Detail
 {
-    public class RotationToPlayTutorialStep : TutorialStepBase
+	public class RotationToPlayTutorialStep : BeginStepGameBase
     {
 
         private const float handlerAngle = 135;
@@ -33,32 +33,53 @@ namespace Interactive.Detail
 		private Transform world;
 
         private bool isStepActive;
-        private bool isInIdle;
+		private bool stepEnded;
 
-        protected override void BeginTutorialStep() 
+		private void Start()
 		{
+			isStepActive = false;
+			stepEnded = false;
+		}
+
+        public override void StartStep() 
+		{
+			isStepActive = true;
 			rotateAnimation.SetActive (true);
-			rotatorCollider.enabled = true;
-            handlerCollider.enabled = true;
-            isStepActive = true;
-            isInIdle = false;
-            ShowStartText();
+			SetActiveColliders (true);
+			GameManager.Instance.GameStateChanged += CheckState;
         }
 			
-        protected override void CompleteStep()
+        protected void CompleteStep()
         {
             isStepActive = false;
-            rotateAnimation.SetActive(false);
-            handlePointerAnimation.SetActive(false);
-            base.CompleteStep();
+			stepEnded = true;
+			rotateAnimation.SetActive(false);
+			handlePointerAnimation.SetActive(false);
+			EndStep ();
         }
+
+		private void Update()
+		{
+			if (!isStepActive && !stepEnded)
+				SetActiveColliders (false);
+		}
 
         private void LateUpdate()
 		{
-            if (!isInIdle && TouchChecker.IsTouchingFromCollider(Camera.main, rotatorCollider))
-                isInIdle = true;
-            if (isStepActive)
-                ToggleAnimations(); 
+			if (isStepActive)
+				ToggleAnimations ();
+		}
+
+		private void SetActiveColliders(bool value)
+		{
+			rotatorCollider.enabled = value;
+			handlerCollider.enabled = value;
+		}
+
+		private void CheckState(GameStates gameState)
+		{
+			if (gameState == GameStates.Play)
+				CompleteStep();
 		}
 
         private void ToggleAnimations()
@@ -71,24 +92,16 @@ namespace Interactive.Detail
                 handlePointerAnimation.SetActive(true);
 
                 Vector3 rotation = handlePointerAnimation.transform.eulerAngles;
-
                 rotation.y = handlerAngle;
 
                 handlePointerAnimation.transform.eulerAngles = rotation;
-                ShowActionText();
             }
             else
             {
-                CheckIdleText();
                 rotateAnimation.SetActive(true);
                 handlePointerAnimation.SetActive(false);
             }
 
-        }
-        private void CheckIdleText()
-        {
-            if (isInIdle)
-                ShowIdleText();
         }
 
     }

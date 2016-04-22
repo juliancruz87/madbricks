@@ -35,7 +35,7 @@ namespace Interactive.Detail
 		{
 			foreach(Totem totem in totems)
 			{
-				if (totem.InitialPosition == totemPosition)
+				if (totem.CurrentNode.Id == totemPosition)
                     totemCollider = totem.GetComponentInChildren<Collider>();
 			}
 		}

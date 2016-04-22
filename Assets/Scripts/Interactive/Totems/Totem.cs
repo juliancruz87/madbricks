@@ -6,6 +6,7 @@ using UnityEngine;
 using Interactive;
 using DG.Tweening;
 using System.Collections.Generic;
+using Graphics;
 
 namespace Interactive.Detail
 {
@@ -16,28 +17,24 @@ namespace Interactive.Detail
 		private SnapItemToCloserPosition snaper;
 		private List<int> validStartPoints;
 		private List<TotemType> validTypes = new List<TotemType> ();
+		private HighlightObject highlightObject;
 
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
-	    public abstract TotemType Type { get; }
+		protected int positionToGo;
+
+		public abstract TotemType Type { get; }
 
 		protected IGameManagerForStates GameManagerForStates
 		{
 			get { return GameManager.Instance;}
 		}
 
-	    protected int positionToGo;
-
-		public int InitialPosition 
-		{
-			get { return totem != null ? totem.PositionToAdd : -1;}
-		}
-
 		public bool IsDragged 
 		{
 			get { return dragObject.IsBeingDragged; }
 		}
-
+			
 		public bool IsBoss 
 		{
 			get { return false; }
@@ -51,6 +48,11 @@ namespace Interactive.Detail
 	    public bool IsInStartPoint
 		{
 			get { return dragObject.CurrentNode != null && validStartPoints != null && validStartPoints.Contains (CurrentNode.Id); }
+		}
+
+		public DraggableObject DragObject
+		{
+			get {  return dragObject; }
 		}
 
 		protected PathBuilderFinder Finder 
@@ -69,6 +71,7 @@ namespace Interactive.Detail
 			snaper = GetComponent<SnapItemToCloserPosition> ();
 			dragObject = GetComponent<DraggableObject> ();
 			controllerToStop = GetComponent<TotemControllerStop> ();
+			highlightObject = GetComponent<HighlightObject> ();
 			validTypes.Add (TotemType.Triangle);
 			validTypes.Add (TotemType.Sphere);
 			validTypes.Add (TotemType.Square);
@@ -148,6 +151,17 @@ namespace Interactive.Detail
 			positionToGo = totem.SecondaryPositionToGo;
 			dragObject.SetCurrentNode (myTransform.position);
 			Move();
+		}
+
+		public void SetHighlight (bool IsActive)
+		{
+			if (highlightObject != null)
+			{
+				if (IsActive)
+					highlightObject.ActivateHighlight ();
+				else
+					highlightObject.DeactivateHighlight ();
+			}
 		}
 
 		protected virtual void Update ()

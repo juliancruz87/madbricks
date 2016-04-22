@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace ManagerInput
 {
@@ -16,6 +17,7 @@ namespace ManagerInput
         {
             if (!TouchInfo.ReleasedTapThisFrame)
                 return false;
+		
 
             return CheckTouchingFromCamera(cam, collider, true, hasToCheckUI);
         }
@@ -30,6 +32,9 @@ namespace ManagerInput
 
         private static bool CheckTouchingFromCamera(Camera cam, Collider collider, bool usePreviousPosition, bool hasToCheckUI)
         {
+			if (hasToCheckUI && EventSystem.current.IsPointerOverGameObject ())
+				return false;
+
 			return InternalIsTouchingFromCamera (cam, collider, usePreviousPosition);
 		}
 
@@ -75,6 +80,9 @@ namespace ManagerInput
 
         private static bool CheckTouchingFromCollider(Camera cam, Collider collider, bool usePreviousPosition, bool hasToCheckUI)
         {
+			if (hasToCheckUI && EventSystem.current.IsPointerOverGameObject ())
+				return false;
+			
            	return InternalIsTouchingFromCollider(cam, collider, usePreviousPosition);
         }
 

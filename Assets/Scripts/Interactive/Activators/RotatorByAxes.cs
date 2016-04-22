@@ -2,6 +2,7 @@ using UnityEngine;
 using ManagerInput.Detail;
 using Interactive;
 using Sound;
+using UnityEngine.EventSystems;
 
 namespace ManagerInput.CameraControls
 {
@@ -43,6 +44,7 @@ namespace ManagerInput.CameraControls
 
 		private void Start ()
 		{
+			
 			conditional.GameManager = GameManagerForStates;
 			myTransform = transform;
 		}
@@ -55,7 +57,7 @@ namespace ManagerInput.CameraControls
 
 		private void Update ()
 		{
-			if (CanDrag && Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false)) 
+			if (CanDrag && Touch.IsDragging && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, true, true)) 
 			{
 				if(!SoundManager.Instance.AudioSourceLib.RotationMusicBox.isPlaying)
 					SoundManager.Instance.AudioSourceLib.RotationMusicBox.Play ();

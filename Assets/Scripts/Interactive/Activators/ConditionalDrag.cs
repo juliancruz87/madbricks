@@ -2,6 +2,7 @@ using UnityEngine;
 using ManagerInput.Detail;
 using System.Collections.Generic;
 using Interactive;
+using UnityEngine.EventSystems;
 
 namespace ManagerInput.CameraControls
 {

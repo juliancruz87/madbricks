@@ -7,6 +7,7 @@ using Interactive.Detail;
 
 // TODO: Extend to touch input
 using Sound;
+using ManagerInput;
 
 
 namespace Drag {
@@ -55,6 +56,8 @@ namespace Drag {
 
 		private Vector3 colliderOriginalSize;
 
+
+
 		public bool IsBeingDragged 
 		{
 			get { return isBeingDragged; }
@@ -75,6 +78,11 @@ namespace Drag {
         public Node CurrentNode 
 		{
 			get { return currentNode; }
+		}
+
+		private static ITouchInfo TouchInfo
+		{
+			get { return InputManager.Instance.InputDevice.PrimaryTouch; }
 		}
 
 		private SnapItemToCloserPosition snapperObject;
@@ -117,36 +125,10 @@ namespace Drag {
 
         private void UpdatePlanning() {
 
-            CheckMouseInput();
             CheckTouchInput();
 
-            if (isBeingDragged) {
-                UpdateDrag();
-			
-				if (IsInputUp() || IsOutsideDragZone()) 
-                    StopDrag();
-            }
-        }
-
-
-
-		private bool IsOutsideDragZone() {
-
-			Ray ray = Camera.main.ScreenPointToRay(GetInputPosition());
-			RaycastHit hit;
-			bool isOutsideDragZone = !myCollider.Raycast (ray, out hit, float.MaxValue);
-
-			return isOutsideDragZone;
-		}
-
-        private bool IsInputUp() {
-            if (Application.isMobilePlatform)
-                if (Input.touchCount > 0)
-                    return (Input.GetTouch(0).phase == TouchPhase.Ended);
-                else
-                    return true;
-            
-            return Input.GetMouseButtonUp(0);
+            if (isBeingDragged)
+				UpdateDrag();
         }
 
         private void UpdateNearestNode() {
@@ -177,19 +159,15 @@ namespace Drag {
             }
         }
 
-        private void CheckTouchInput() {
-            if (Input.touchCount > 0) {
-				if (Input.GetTouch(0).phase != TouchPhase.Ended && Input.GetTouch(0).phase != TouchPhase.Moved) {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-
-                    RaycastHit[] raycastHits = Physics.RaycastAll(ray);
-
-                    if (ThisGameObjectIsTheFirstHit(raycastHits) &&
-                        IsAllowedToStartANewDrag())
-                        StartDrag();
-                }
-            }
-        }
+		private void CheckTouchInput() {
+			if (TouchInfo.StartedTouchThisFrame) 
+			{
+				if (IsAllowedToStartANewDrag () && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false, true))
+					StartDrag ();
+			}
+			else if (!TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false, true))
+				StopDrag();
+		}
 
         private void OnGUI() {
             DebugTouchInput();    

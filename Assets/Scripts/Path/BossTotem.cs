@@ -5,6 +5,7 @@ using UnityEngine;
 using Interactive.Detail;
 using Map;
 using Interactive;
+using Graphics;
 
 namespace Path {
     public class BossTotem : MonoBehaviour, ITotem {
@@ -23,17 +24,25 @@ namespace Path {
         [SerializeField]
         private Node currentNode;
 
-
-
-
         private GameObject dragFloor;
 
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
+		private HighlightObject highlightObject;
 		
 		public bool IsBoss 
 		{
 			get { return true; }
+		}
+
+		public Node CurrentNode 
+		{
+			get { return currentNode; }
+		}
+
+		public DraggableObject DragObject
+		{
+			get { return null; }
 		}
 
 		public bool IsJailed 
@@ -60,12 +69,24 @@ namespace Path {
             dragFloor = GameObject.FindWithTag("Floor");
             myTransform = transform;
             snapperObject = GetComponent<SnapItemToCloserPosition>();
+			highlightObject = GetComponent<HighlightObject> ();
         }
 
         // Use this for initialization
         void Start () {
             InitTotems();
         }
+
+		public void SetHighlight (bool IsActive)
+		{
+			if (highlightObject != null)
+			{
+				if (IsActive)
+					highlightObject.ActivateHighlight ();
+				else
+					highlightObject.DeactivateHighlight ();
+			}
+		}
 
         private void InitTotems() {
             totems = FindObjectsOfType<DraggableObject>();
