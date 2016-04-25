@@ -51,13 +51,11 @@ namespace Interactive.Detail
 			GameManager.Instance.GameStateChanged += CheckState;
         }
 			
-        protected void CompleteStep()
+        protected void DeactivateStep()
         {
             isStepActive = false;
-			stepEnded = true;
 			rotateAnimation.SetActive(false);
 			handlePointerAnimation.SetActive(false);
-			EndStep ();
         }
 
 		private void Update()
@@ -81,7 +79,7 @@ namespace Interactive.Detail
 		private void CheckState(GameStates gameState)
 		{
 			if (gameState == GameStates.Play)
-				CompleteStep();
+				DeactivateStep();
 		}
 
 
@@ -99,6 +97,12 @@ namespace Interactive.Detail
                 rotation.y = handlerAngle;
 
                 handlePointerAnimation.transform.eulerAngles = rotation;
+
+                if (!stepEnded)
+                {
+                    stepEnded = true;
+                    EndStep();
+                }
             }
             else
             {
