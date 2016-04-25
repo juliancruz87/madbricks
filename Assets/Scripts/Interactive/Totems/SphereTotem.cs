@@ -24,12 +24,16 @@ namespace Interactive.Detail
 				Debug.LogWarning (gameObject.name + " wasn't found a path to follow");
 		}
 
-        public override Vector3 [] GetPathPositions()
+
+        public override Vector3[] GetPathPositions()
         {
-            return new Vector3 [2];
+            nodes = DijkstraPathFinder.FindShortestPath(CurrentNode, PathBuilder.Instance.GetNodeById(positionToGo));
+            List<Vector3> nodePositions = nodes.ConvertAll(item => item.transform.position);
+            nodePositions.Insert(0, transform.position);
+            return nodePositions.ToArray();
         }
 
-		private void ChoseNodeToGo ()
+        private void ChoseNodeToGo ()
 		{
 			Node node = nodes [currentNode];
 			GoToNode (node, totem.SpeedPerTile);
