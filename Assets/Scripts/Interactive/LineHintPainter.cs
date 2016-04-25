@@ -1,13 +1,27 @@
+using System;
 using UnityEngine;
 
 namespace Interactive
 {
 	public class LineHintPainter : MonoBehaviour
     {
-        [SerializeField]
-        Transform transformParent;
-
+        private Transform transformParent;
         private LineRenderer lineRenderer;
+        private Color color;
+
+        public Transform TransformParent
+        {
+            set { transformParent = value; }
+        }
+
+        public Color Color
+        {
+            set
+            {
+                color = value;
+                lineRenderer.material.SetColor("_Color", color);
+            }
+        }
 
         private void Awake()
         {

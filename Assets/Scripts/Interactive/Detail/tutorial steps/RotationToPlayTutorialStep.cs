@@ -37,7 +37,9 @@ namespace Interactive.Detail
 
 		private void Start()
 		{
-			isStepActive = false;
+            rotateAnimation.SetActive(false);
+            handlePointerAnimation.SetActive(false);
+            isStepActive = false;
 			stepEnded = false;
 		}
 
@@ -81,6 +83,8 @@ namespace Interactive.Detail
 			if (gameState == GameStates.Play)
 				CompleteStep();
 		}
+
+
 
         private void ToggleAnimations()
         {

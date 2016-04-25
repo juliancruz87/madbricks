@@ -1,5 +1,6 @@
 using Path;
 using Drag;
+using UnityEngine;
 
 namespace Interactive
 {
@@ -13,6 +14,7 @@ namespace Interactive
 		Node CurrentNode { get; }
 		DraggableObject DragObject { get;}
 
-		void SetHighlight(bool active);
+        Vector3[] GetPathPositions();
+        void SetHighlight(bool active);
 	}
 }

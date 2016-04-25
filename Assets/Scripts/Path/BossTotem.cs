@@ -221,5 +221,10 @@ namespace Path {
                 }
             }
         }
+
+        public Vector3[] GetPathPositions()
+        {
+            return new Vector3 [] { };
+        }
     }
 }

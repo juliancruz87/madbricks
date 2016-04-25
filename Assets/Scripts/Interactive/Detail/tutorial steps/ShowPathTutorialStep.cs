@@ -10,25 +10,42 @@ namespace Interactive.Detail
 		[SerializeField]
 		private GameObject pathPrefab;
 
-		private List<GameObject> images = new List<GameObject> ();
+        [SerializeField]
+        private int totemPosition;
 
+        [SerializeField]
+        private Transform worldTransform;
+
+        [SerializeField]
+        private Color hintColor;
+
+        private ITotem totem;
+
+        private LineHintPainter pathPainter;
 
         public override void StartStep()
         {
+            GameObject go = Instantiate(pathPrefab);
+            totem = GetTotem(totemPosition);
 
+            pathPainter = go.GetComponent<LineHintPainter>();
+            SetHintPainter(totem.GetPathPositions());
+
+            EndStep();
         }
 
-		public void CloseText()
-		{
-			EndStep ();
-		}
+        private void SetHintPainter(Vector3[] positions)
+        {
+            pathPainter.TransformParent = worldTransform;
+            pathPainter.Color = hintColor;
+            pathPainter.Paint(totem.GetPathPositions());
+        }
 
-		private void ConfigImage(Image image, Sprite sprite)
-		{
-			image.sprite = sprite;
-			image.preserveAspect = true;
-			image.raycastTarget = false;
-		}			
+        private ITotem GetTotem(int totemPosition)
+        {
+            List<ITotem>totems = GameManager.Instance.Totems;
 
+            return totems.Find(totem => totem.CurrentNode.Id == totemPosition);
+        }	
     }
 }
