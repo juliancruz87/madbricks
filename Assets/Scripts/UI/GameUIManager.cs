@@ -22,12 +22,6 @@ public class GameUIManager : MonoBehaviour
     public void Initialize()
     {
         gameManager = FindObjectOfType<Interactive.GameManager>();
-        if (gameManager.levelInfo.area != 0)
-        {
-            string levelNameLine = LevelNameParser.ParseNames()[gameManager.levelInfo.area - 1];
-            string levelName = levelNameLine.Split(',')[gameManager.levelInfo.level - 1];
-            labeLevellName.text = levelName;
-        }
         
     }
 
