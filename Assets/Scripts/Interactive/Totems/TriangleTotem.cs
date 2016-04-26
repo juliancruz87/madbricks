@@ -1,4 +1,4 @@
-using Path;
+ using Path;
 using UnityEngine;
 using System.Collections.Generic;
 using ManagerInput.CameraControls;
@@ -24,7 +24,10 @@ namespace Interactive.Detail
 
         public override Vector3[] GetPathPositions()
         {
-            return new Vector3[2];
+            List<Node> nodes = DijkstraPathFinder.FindShortestPath(CurrentNode, PathBuilder.Instance.GetNodeById(positionToGo));
+            List<Vector3> nodePositions = nodes.ConvertAll(item => item.transform.position);
+            nodePositions.Insert(0, transform.position);
+            return nodePositions.ToArray();
         }
 
         private bool CanRotate 

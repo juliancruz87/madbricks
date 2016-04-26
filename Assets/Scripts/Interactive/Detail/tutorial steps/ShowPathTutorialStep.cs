@@ -19,26 +19,70 @@ namespace Interactive.Detail
         [SerializeField]
         private Color hintColor;
 
+        [SerializeField]
+        private float checkAngle = 0;
+
         private ITotem totem;
+        private Vector3[] positions;
+
+        private Transform totemTransform;
 
         private LineHintPainter pathPainter;
+
+        private bool hasToRepaint;
+
+        private bool stepActive;
 
         public override void StartStep()
         {
             GameObject go = Instantiate(pathPrefab);
             totem = GetTotem(totemPosition);
+            totemTransform = totem.DragObject.gameObject.transform;
 
+            positions = totem.GetPathPositions();
             pathPainter = go.GetComponent<LineHintPainter>();
-            SetHintPainter(totem.GetPathPositions());
+            SetHintPainter();
 
+            hasToRepaint = true;
+            stepActive = true;
+
+            GameManager.Instance.GameStateChanged += DeactivateStep;
             EndStep();
         }
 
-        private void SetHintPainter(Vector3[] positions)
+        private void Update()
+        {
+            if (stepActive)
+                CheckRepaint();
+        }
+
+        private void CheckRepaint()
+        {
+            if (totem.CurrentNode.Id == totemPosition && totemTransform.localEulerAngles.y == checkAngle)
+            {
+                if (hasToRepaint && !totem.IsDragged)
+                {
+                    hasToRepaint = false;
+                    pathPainter.Paint(positions);
+                }
+            }
+            else
+            {
+                hasToRepaint = true;
+                pathPainter.Erase();
+            }    
+        }
+
+        private void DeactivateStep(GameStates gameState)
+        {
+            if (gameState == GameStates.Play)
+                stepActive = false;
+        }
+
+        private void SetHintPainter()
         {
             pathPainter.TransformParent = worldTransform;
             pathPainter.Color = hintColor;
-            pathPainter.Paint(totem.GetPathPositions());
         }
 
         private ITotem GetTotem(int totemPosition)

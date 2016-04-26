@@ -3,41 +3,52 @@ using Drag;
 using Map;
 using System.Collections.Generic;
 using ManagerInput;
+using System.Collections;
+using System;
 
 namespace Interactive.Detail
 {
-    public class TapTotemTutorialStep : TutorialStepBase {
+    public class TapTotemTutorialStep : BeginStepGameBase {
 
         [SerializeField]
-		private int activeTotemPosition;
+		private int totemPosition;
 
-        private Totem[] totems;
+        private ITotem totem;
 
+        private Transform totemTransform;
 		private Collider totemCollider;
 
-        protected override void BeginTutorialStep()
+        private bool stepActive;
+
+
+        public override void StartStep()
         {
-            totems = FindObjectsOfType<Totem>();
-            ConfigTotems(activeTotemPosition);
-            ShowStartText();
+            totem = GetTotem(totemPosition);
+            totemCollider = totem.DragObject.GetComponentInChildren<Collider>();
+            totemTransform = totem.DragObject.gameObject.transform;
+            stepActive = true;
         }
 
-        private void Update()
+        private void Update ()
         {
-            if(totemCollider != null && TouchChecker.WasTappingFromCollider(Camera.main, totemCollider))
+            if (stepActive && totem.CurrentNode.Id == totemPosition)
+                CheckTotemPosition();
+        }
+
+        private void CheckTotemPosition()
+        {
+            if (totemTransform.localEulerAngles.y < 271 && totemTransform.localEulerAngles.y > 269)
             {
-                ShowIdleText();
-                totemCollider = null;
+                stepActive = false;
+                EndStep();
             }
         }
 
-		private void ConfigTotems (int totemPosition) 
-		{
-			foreach(Totem totem in totems)
-			{
-				if (totem.CurrentNode.Id == totemPosition)
-                    totemCollider = totem.GetComponentInChildren<Collider>();
-			}
-		}
+        private ITotem GetTotem(int totemPosition)
+        {
+            List<ITotem> totems = GameManager.Instance.Totems;
+
+            return totems.Find(totem => totem.CurrentNode.Id == totemPosition);
+        }
     }
 }
