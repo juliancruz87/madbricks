@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UI;
+using Graphics;
 
 namespace Interactive.Detail
 {
@@ -17,8 +18,12 @@ namespace Interactive.Detail
 		[SerializeField]
 		private Text textField;
 
+
+        private bool stepIsActive;
+
 		private void Start()
 		{
+            stepIsActive = false;
 			objectToActivate.SetActive (false);
 		}
 
@@ -26,14 +31,20 @@ namespace Interactive.Detail
         {
 			objectToActivate.SetActive (true);
 			textField.text = text;
+            stepIsActive = true;
 
         }
 
-		public void CloseText()
-		{
-			objectToActivate.SetActive (false);
-			textField.text = "";
-			EndStep ();
-		}
+        private void Update()
+        {
+            if (stepIsActive && !objectToActivate.activeInHierarchy)
+            {
+                Debug.Log("Deactivated");
+                stepIsActive = false;
+                EndStep();
+            }
+
+
+        }
     }
 }

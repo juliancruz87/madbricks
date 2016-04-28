@@ -15,50 +15,70 @@ namespace Interactive.Detail
 		private int totemStartNodeID;
 		[SerializeField]
 		private int totemEndNodeID;
+        [SerializeField]
+        private bool useSnap = true;
+        [SerializeField]
+        private bool useHighlight = true;
 
         private List<ITotem> totems;
 
 		private ITotem activeTotem;
+        
 
         public override void StartStep()
         {
 			totems = GameManager.Instance.Totems;
 			ConfigTotems(totemStartNodeID);
             SetListeners(activeTotem);
-            activeTotem.SetHighlight(true); 
+            activeTotem.SetHighlight(useHighlight); 
         }
 
         private void IdleStep()
         {
-			activeTotem.SetHighlight(true);
+			activeTotem.SetHighlight(useHighlight);
         }
 			
 
 		private void SetListeners(ITotem totem)
 		{
 			totem.DragObject.OnObjectDragged += TotemDragged;
-			totem.DragObject.OnSnap += TotemReleased;	
+            if (useSnap)
+                totem.DragObject.OnSnap += TotemReleased;
+            else
+			    totem.DragObject.OnLauncherTouched += TotemInLauncher;	
 		}
 
 		private void StopListeners(ITotem totem)
 		{
 			totem.DragObject.OnObjectDragged -= TotemDragged;
 			totem.DragObject.OnSnap -= TotemReleased;
-		}
+            totem.DragObject.OnLauncherTouched -= TotemInLauncher;
+        }
 
 		private void TotemDragged(Vector3 initialPosition, Vector3 candidatePosition)
 		{
 			activeTotem.SetHighlight(false);
         }
 
-		private void TotemReleased()
-		{
-			if (activeTotem.CurrentNode.Id == totemEndNodeID)
-				CompleteStep ();
+        private void TotemInLauncher(MapObject launcher)
+        {
+            if (launcher.ParentNode.Id == totemEndNodeID)
+                CompleteStep();
+            else
+                IdleStep();
+            
+        }
 
-			else 
-				IdleStep();
-		}
+        private void TotemReleased()
+        {
+            if (activeTotem.CurrentNode.Id == totemEndNodeID)
+                CompleteStep();
+
+            else
+                IdleStep();
+        }
+
+
 
 		private void ConfigTotems (int totemPosition) 
 		{
@@ -91,7 +111,8 @@ namespace Interactive.Detail
 
 		private void SetToggleTotem(ITotem totem, bool canBeDragged)
 		{
-			totem.DragObject.CanBeDragged = canBeDragged;
+            if(totem.DragObject != null)
+			    totem.DragObject.CanBeDragged = canBeDragged;
 		}
     }
 }
