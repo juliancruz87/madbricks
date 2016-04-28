@@ -149,14 +149,30 @@ namespace LevelLoaderController
             else
                 levelName = GetTutorialOrLevelName(area, level);
 
-            SaveManager.Instance.SetSelectedArea(area.ToString());
-            SaveManager.Instance.SetSelectedLevel(level.ToString());
-            SaveManager.Instance.SetClearedArea(area.ToString());
-            SaveManager.Instance.SetClearedLevel(level.ToString());
+			SaveContent (area, level);
 
             Debug.Log("[LevelLoader] Loading " + levelName);
             LoadScene(levelName);
 
         }
+
+		private void SaveContent(int area, int level)
+		{
+			int previousClearedArea = int.Parse (SaveManager.Instance.GetClearedArea ());
+			int previousClearedLevel = int.Parse (SaveManager.Instance.GetClearedLevel ());
+
+			SaveManager.Instance.SetSelectedArea (area.ToString ());
+			SaveManager.Instance.SetSelectedLevel (level.ToString ());
+
+			if (area > previousClearedArea) 
+			{
+				SaveManager.Instance.SetClearedArea (area.ToString ());
+				SaveManager.Instance.SetClearedLevel (level.ToString ());
+			}
+			else if (area == previousClearedArea && level > previousClearedLevel) 
+			{
+				SaveManager.Instance.SetClearedLevel (level.ToString ());
+			}
+		}
     }
 }

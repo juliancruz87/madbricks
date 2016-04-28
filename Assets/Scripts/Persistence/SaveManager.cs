@@ -18,23 +18,23 @@ public class SaveManager : MonoBehaviour
         {
             if (instance == null)
             {
+				
                 instance = GameObject.FindObjectOfType<SaveManager>();
                 DontDestroyOnLoad(instance.gameObject);
             }
+
             return instance;
         }
     }
 
     void Awake()
     {
-		if (deletePlayerPrefs) 
-		{
-			PlayerPrefs.DeleteAll ();
-			deletePlayerPrefs = false;
-		}
-
+		
         if (instance == null)
         {
+			if (deletePlayerPrefs) 
+				PlayerPrefs.DeleteAll ();
+			
             instance = this;
             DontDestroyOnLoad(this);
         }
