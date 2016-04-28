@@ -160,13 +160,15 @@ namespace Drag {
         }
 
 		private void CheckTouchInput() {
-			if (TouchInfo.StartedTouchThisFrame) 
-			{
-				if (IsAllowedToStartANewDrag () && TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false, true))
-					StartDrag ();
-			}
-			else if (!TouchChecker.IsTouchingFromCollider (Camera.main, myCollider, false, true))
-				StopDrag();
+            if (TouchInfo.StartedTouchThisFrame)
+            {
+                if (IsAllowedToStartANewDrag() && TouchChecker.IsTouchingFromCollider(Camera.main, myCollider, false, true))
+                    StartDrag();
+            }
+            else if (!TouchChecker.IsTouchingFromCollider(Camera.main, myCollider, true, true))
+            {
+                StopDrag();
+            }
 		}
 
         private void OnGUI() {
