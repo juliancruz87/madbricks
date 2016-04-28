@@ -27,8 +27,11 @@ public class SaveManager : MonoBehaviour
 
     void Awake()
     {
-        if (deletePlayerPrefs)
-            PlayerPrefs.DeleteAll();
+		if (deletePlayerPrefs) 
+		{
+			PlayerPrefs.DeleteAll ();
+			deletePlayerPrefs = false;
+		}
 
         if (instance == null)
         {

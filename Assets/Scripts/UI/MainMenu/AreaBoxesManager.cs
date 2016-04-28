@@ -17,7 +17,7 @@ public class AreaBoxesManager : MonoBehaviour
 
     void Start()
     {
-        EnableAreas();
+		ResetAreaBoxes ();
     }
 
     void Update()
