@@ -30,6 +30,8 @@ namespace Interactive
         private SequencerManager tutorialSequencer;
 
         [SerializeField]
+		private GameObject endSequencerPrefab;
+
 		private SequencerManager endSequencer;
 
 	    [SerializeField] 
@@ -105,6 +107,8 @@ namespace Interactive
 
 		private void Start ()
 		{
+			endSequencer = Instantiate(endSequencerPrefab).GetComponent<SequencerManager>();
+
             Launchers = MapObject.GetMapObjectsOfType(MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
             StartGame();
 		}

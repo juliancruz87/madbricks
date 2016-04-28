@@ -5,35 +5,26 @@ using Sound;
 
 namespace Interactive.Detail
 {
-	public class ResultsWindows : BeginStepGameBase
+	public class LoadLevelStep : BeginStepGameBase
 	{
 		private IGameManagerForUI GameManagerForUI
 		{
 			get { return GameManager.Instance;}
 		}
-
-		[SerializeField]
-		private GameObject winResults;
-
-		[SerializeField]
-		private GameObject loseResults;
-
+			
 		public override void StartStep ()
 		{
-            ShowResults ();
+            LoadLevel ();
 
 		}
 
-		private void ShowResults ()
+		private void LoadLevel ()
 		{
-			if (GameManagerForUI.Result == GameResults.Win) {
-				//winResults.SetActive(true);
+			if (GameManagerForUI.Result == GameResults.Win)
 				LevelLoaderController.LevelLoader.Instance.LoadNextLevel ();
-			}
-			else {
-				// loseResults.SetActive(true);
+			else 
 				Application.LoadLevel (Application.loadedLevelName);
-			}
+			
 			EndStep ();
 		}
 	}
