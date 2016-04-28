@@ -64,7 +64,6 @@ namespace Interactive.Detail
 		{
 			MapObject mapObject = gameObjectTotem.GetComponent<MapObject> ();
 			Transform startPosition = CreateStartPosition (points, totem.PositionToAdd);
-            Debug.Log("InitializeComponents( " + gameObjectTotem.name + ", " + totem + " , "+ points+ ")");
 			mapObject.SetStartPosition (startPosition);
 			AddComponent (gameObjectTotem, totem);
 		}
