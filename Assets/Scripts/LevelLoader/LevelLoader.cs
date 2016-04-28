@@ -52,7 +52,7 @@ namespace LevelLoaderController
 
             if (area == 1 && level == 1 && clearedTutorial == 0)
                 sceneName = "Tutorial_1";
-            else if (area == 1 && level == 1 && clearedTutorial == 1)
+            else if (area == 1 && level == 2 && clearedTutorial == 1)
                 sceneName = "Tutorial_2";
             else if (area == 1 && level == 3 && clearedTutorial <= 2)
                 sceneName = "Tutorial_3";
