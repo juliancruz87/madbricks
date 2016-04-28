@@ -84,10 +84,16 @@ namespace LevelLoaderController
             {
                 SaveManager.Instance.SetClearedTutorial(level.ToString());
 
-                if (level <= 2)
+				if (level == 1)
+				{
+					area = 1;
+					level = 1;
+				}
+
+                else if (level == 2)
                 {
                     area = 1;
-                    level = 1;
+                    level = 2;
                 }
                 else if (level == 3)
                 {
