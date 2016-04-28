@@ -23,7 +23,7 @@ namespace Interactive.Detail
         private float checkAngle = 0;
 
         private ITotem totem;
-        private Vector3[] positions;
+        protected Vector3[] positions;
 
         private Transform totemTransform;
 
@@ -39,7 +39,7 @@ namespace Interactive.Detail
             totem = GetTotem(totemPosition);
             totemTransform = totem.DragObject.gameObject.transform;
 
-            positions = totem.GetPathPositions();
+            GetPositions();
             pathPainter = go.GetComponent<LineHintPainter>();
             SetHintPainter();
 
@@ -48,6 +48,11 @@ namespace Interactive.Detail
 
             GameManager.Instance.GameStateChanged += DeactivateStep;
             EndStep();
+        }
+
+        protected virtual void GetPositions()
+        {
+            positions = totem.GetPathPositions();
         }
 
         private void Update()

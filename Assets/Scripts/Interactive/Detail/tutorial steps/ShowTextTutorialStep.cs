@@ -39,7 +39,6 @@ namespace Interactive.Detail
         {
             if (stepIsActive && !objectToActivate.activeInHierarchy)
             {
-                Debug.Log("Deactivated");
                 stepIsActive = false;
                 EndStep();
             }
