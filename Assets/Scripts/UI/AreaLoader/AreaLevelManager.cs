@@ -36,16 +36,17 @@ public class AreaLevelManager : MonoBehaviour {
 
     public void EnableLevels(int levelAmount)
     {
-        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea());
-        int clearedArea = int.Parse(SaveManager.Instance.GetClearedArea());
+        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea()) - 1;
 
-        if (clearedArea > selectedArea)
-            levelAmount = 3;
-
+        //Debug.Log("Enabling levels " + levelAmount);
         for (int i = 0; i < levelAmount; i++)
         {
             Transform level = transform.GetChild(i);
-            level.GetComponent<Renderer>().material = areaMaterials[selectedArea - 1];
+            // if (level.GetComponent<TextMesh>() == null)
+            {
+                //Debug.Log("Enabling level " + (i));
+                level.GetComponent<Renderer>().material = areaMaterials[selectedArea];
+            }
         }
     }
 
