@@ -27,10 +27,19 @@ public class AreaLevelManager : MonoBehaviour {
     {
         string sceneName = "";
 
-        if (int.Parse(level) <= int.Parse(SaveManager.Instance.GetClearedLevel()))
-        {
-            sceneName = LevelLoader.GetTutorialOrLevelName(int.Parse(SaveManager.Instance.GetSelectedArea()), int.Parse(level));
-        }
+        int selectedArea = int.Parse(SaveManager.Instance.GetSelectedArea());
+        int clearedArea = int.Parse(SaveManager.Instance.GetClearedArea());
+        int clearedLevel = int.Parse(SaveManager.Instance.GetClearedLevel());
+        int selectedLevel = int.Parse(level);
+
+        bool condition1 = clearedArea > selectedArea;
+        bool condition2 = clearedArea == selectedArea;
+        bool condition3 = selectedLevel <= clearedLevel;
+
+        if (condition1 || (condition2 && condition3))
+            sceneName = LevelLoader.GetTutorialOrLevelName(selectedArea, selectedLevel);
+
+
         return sceneName;
     }
 
