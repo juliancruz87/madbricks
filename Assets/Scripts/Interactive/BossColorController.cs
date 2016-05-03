@@ -9,9 +9,6 @@ namespace Interactive.Detail
 	{
         public event Action AnimationCompleted;
 
-        [SerializeField]
-        private GameObject secondaryCameraObject;
-
 		[SerializeField]
         private ColorCorrectionCurves colorEffect;
 
@@ -25,7 +22,6 @@ namespace Interactive.Detail
 
         private void Start()
         {
-            secondaryCameraObject.SetActive(true);
             colorEffect.saturation = 0;
             GameManager.Instance.TotemsSet += SetBoss;
             isInGreyScale = true;
@@ -47,8 +43,6 @@ namespace Interactive.Detail
 
         private void OnAnimationComplete()
         {
-            secondaryCameraObject.SetActive(false);
-
             if (AnimationCompleted != null)
                 AnimationCompleted();
 

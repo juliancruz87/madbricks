@@ -1,34 +1,35 @@
-Shader "Bumped Diffuse Gray" {
+Shader "Custom/Progressive Desaturation" {
 	Properties{
-		_Color("Main Color", Color) = (1,1,1,1)
 		_MainTex("Base (RGB)", 2D) = "white" {}
-	_BumpMap("Normalmap", 2D) = "bump" {}
+		_Saturation("Saturation (0,1)", Range(0,1)) = 1
 	}
-
 		SubShader{
 		Tags{ "RenderType" = "Opaque" }
-		LOD 300
+		LOD 200
 
 		CGPROGRAM
 #pragma surface surf Lambert
 
 		sampler2D _MainTex;
-	sampler2D _BumpMap;
-	fixed4 _Color;
+	float _Saturation;
 
 	struct Input {
 		float2 uv_MainTex;
-		float2 uv_BumpMap;
 	};
 
+	// Converts color to luminance (grayscale)
+	float Luminance(float3 c)
+	{
+		return dot(c, float3(0.22, 0.707, 0.071));
+	}
+
 	void surf(Input IN, inout SurfaceOutput o) {
-		fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-		o.Albedo = dot(c.rgb, float3(0.3, 0.59, 0.11));
+		half4 c = tex2D(_MainTex, IN.uv_MainTex);
+		half4 g = Luminance(c.rgb);
+		o.Albedo = lerp(g.rgb, c.rgb, _Saturation);
 		o.Alpha = c.a;
-		o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 	}
 	ENDCG
 	}
-
 		FallBack "Diffuse"
 }
