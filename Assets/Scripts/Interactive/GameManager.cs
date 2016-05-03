@@ -22,6 +22,7 @@ namespace Interactive
 
 		public event Action StartedGame;
 		public event Action<GameStates> GameStateChanged;
+        public event Action TotemsSet;
 
 		[SerializeField]
 		private SequencerManager startSequencer;
@@ -42,6 +43,7 @@ namespace Interactive
 
 		private bool wasEndGame;
 		private int goals = 0;
+        private List<ITotem> totems;
 
         [SerializeField]
         private bool isGamePaused;
@@ -64,20 +66,21 @@ namespace Interactive
 
 		public List<ITotem> Totems 
 		{
-			set;
-			get;
+			set
+            {
+                totems = value;
+                OnTotemsSet();
+            }                
+
+			get { return totems; }
 		}
 
-		private ITotem Boss
+		public ITotem Boss
 		{
 			get
 			{
-				foreach(ITotem totem in Totems)
-					if(totem.IsBoss)
-						return totem;
-
-				return null;
-			}
+				return Totems.Find(totem => totem.IsBoss);
+            }
 		}
 
 		public GameResults Result 
@@ -209,6 +212,12 @@ namespace Interactive
 				return false;
 			return true;
 		}
+
+        private void OnTotemsSet()
+        {
+            if (TotemsSet != null)
+                TotemsSet();
+        }
 
 		public void Lose ()
 		{
