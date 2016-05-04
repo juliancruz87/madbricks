@@ -8,6 +8,8 @@ namespace Interactive.Detail
     { 
         [SerializeField]
         private float duration = 5;
+        [SerializeField]
+        private Ease ease = Ease.Linear;
 
         private CameraManager cameraManager;
         private Camera mainCamera;
@@ -17,7 +19,7 @@ namespace Interactive.Detail
             mainCamera = Camera.main;
             cameraManager = mainCamera.gameObject.GetComponent<CameraManager>();
             cameraManager.enabled = false;
-            mainCamera.gameObject.transform.DOMoveY(14, duration);
+            mainCamera.gameObject.transform.DOMoveY(14, duration).SetEase(ease);
             EndStep();
 		}
 	}

@@ -18,7 +18,7 @@ namespace Interactive.Detail
             instrument = GameObject.FindGameObjectWithTag("Instrument");
             instrumentHighlight = instrument.GetComponent<HighlightObject>();
             instrumentHighlight.ActivateHighlight();
-            instrumentHighlight.AnimationCompleted += CompleteStep;
+            instrumentHighlight.AnimationLoopCompleted += CompleteStep;
 		}
 
         private void CompleteStep()

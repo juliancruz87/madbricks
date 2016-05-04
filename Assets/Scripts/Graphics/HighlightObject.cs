@@ -7,7 +7,7 @@ namespace Graphics
 {
 	public class HighlightObject : MonoBehaviour
 	{
-        public event Action AnimationCompleted;
+        public event Action AnimationLoopCompleted;
 
 		[SerializeField]
 		private Shader outlineShader;
@@ -69,7 +69,7 @@ namespace Graphics
 				material.DOColor (property.maxValue, property.name, animationDuration).SetLoops(loops, LoopType.Yoyo);
 
 			foreach (ShaderFloatProperty property in settings.FloatProperties)
-				material.DOFloat (property.maxValue, property.name, animationDuration).SetLoops(loops, LoopType.Yoyo).OnComplete(OnCompleteAnimation);
+				material.DOFloat (property.maxValue, property.name, animationDuration).SetLoops(loops, LoopType.Yoyo).OnStepComplete(OnLoopCompleted);
 		}
 
 		private void SetUpMaterial(Material material)
@@ -81,12 +81,12 @@ namespace Graphics
 				material.SetFloat(property.name, property.minValue);
 		}
 
-        private void OnCompleteAnimation()
+        private void OnLoopCompleted()
         {
-            if (AnimationCompleted != null)
-                AnimationCompleted();
+            if (AnimationLoopCompleted != null)
+                AnimationLoopCompleted();
 
-            AnimationCompleted = null;
+            AnimationLoopCompleted = null;
         }
 
 	}
