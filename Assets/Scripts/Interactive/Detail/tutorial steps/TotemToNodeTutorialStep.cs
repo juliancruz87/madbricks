@@ -1,15 +1,10 @@
-﻿using System;
-using Assets.Scripts.Util;
-using UnityEngine;
-using Drag;
-using Graphics;
-using Map;
+﻿using Map;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace Interactive.Detail
 {
-	public class TotemToNodeTutorialStep : BeginStepGameBase {
+    public class TotemToNodeTutorialStep : BeginStepGameBase {
 
         [SerializeField]
 		private int totemStartNodeID;

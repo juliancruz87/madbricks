@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Interactive.Detail {
     public class BeginStepTimedPositionLerp : BeginStepGameBase {
+
+        [SerializeField]
+        private GameObject cubes;
         [SerializeField]
         private Transform lerpObject;
         [SerializeField]
@@ -12,22 +15,22 @@ namespace Interactive.Detail {
         [SerializeField]
         private float lerpTime;
 
-        private bool stoped;
+        private bool stopped;
         private float currentTime;
         private AlphaLerp timeAlphaLerp;
 
         private void Awake() {
-            stoped = true;
+            stopped = true;
             timeAlphaLerp = new AlphaLerp(0, lerpTime);
         }
 
         private void Update() {
-            if (!stoped)
+            if (!stopped)
                 Lerp();
         }
 
         public void StartLerp() {
-            stoped = false;
+            stopped = false;
             currentTime = 0;
             lerpObject.position = startPosition.position;
         }
@@ -37,13 +40,21 @@ namespace Interactive.Detail {
             float alpha = timeAlphaLerp.GetAlpha(currentTime);
             if (alpha >= 1) {
                 alpha = 1;
-                stoped = true;
+                stopped = true;
             }
 
             lerpObject.position = Vector3.Lerp(startPosition.position, targetPosition.position, alpha);
 
-            if (stoped &&
-                EndStep != null)
+            if (stopped)
+                CompleteStep();
+               
+        }
+
+        private void CompleteStep()
+        {
+            cubes.SetActive(false);
+
+            if(EndStep != null)
                 EndStep();
         }
 

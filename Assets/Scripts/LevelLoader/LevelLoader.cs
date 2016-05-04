@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using LevelLoaderController.Detail;
+using UnityEngine.SceneManagement;
 
 namespace LevelLoaderController
 {
@@ -29,7 +30,7 @@ namespace LevelLoaderController
         public void LoadScene(string levelName)
         {
             pendingScene = levelName;
-            Application.LoadLevel(settings.LevelLoader);
+            SceneManager.LoadScene(settings.LevelLoader);
         }
 
         public void LoadPendingScene()
@@ -42,7 +43,7 @@ namespace LevelLoaderController
             System.GC.Collect();
             System.GC.WaitForPendingFinalizers();
             yield return Resources.UnloadUnusedAssets();
-            yield return Application.LoadLevelAsync(pendingScene);
+            yield return SceneManager.LoadSceneAsync(pendingScene); 
         }
 
         public static string GetTutorialOrLevelName(int area, int level)

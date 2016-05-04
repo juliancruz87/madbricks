@@ -18,5 +18,5 @@ namespace Interactive.Detail
 			animator.SetTrigger (animationName);
 			StartCoroutine (OnEndStepWithTimer (clip.length));
 		}
-	}	
+    }	
 }

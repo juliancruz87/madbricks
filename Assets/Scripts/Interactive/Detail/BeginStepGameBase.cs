@@ -9,7 +9,7 @@ namespace Interactive.Detail
 		public Action EndStep; 
 		public abstract void StartStep ();
 
-		protected IEnumerator OnEndStepWithTimer (float time)
+		protected virtual IEnumerator OnEndStepWithTimer (float time)
 		{
 			yield return new WaitForSeconds (time);
 			if(EndStep != null)

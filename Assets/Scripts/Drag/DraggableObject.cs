@@ -4,8 +4,6 @@ using Map;
 using UnityEngine;
 using Path;
 using Interactive.Detail;
-
-// TODO: Extend to touch input
 using Sound;
 using ManagerInput;
 

@@ -31,9 +31,12 @@ namespace Interactive
         private SequencerManager tutorialSequencer;
 
         [SerializeField]
-		private GameObject endSequencerPrefab;
+		private GameObject winEndSequencerPrefab;
 
-		private SequencerManager endSequencer;
+        [SerializeField]
+        private GameObject loseEndSequencerPrefab;
+
+        private SequencerManager endSequencer;
 
 	    [SerializeField] 
         private float maxPlayTime = 8f;
@@ -110,7 +113,7 @@ namespace Interactive
 
 		private void Start ()
 		{
-			endSequencer = Instantiate(endSequencerPrefab).GetComponent<SequencerManager>();
+			endSequencer = Instantiate(winEndSequencerPrefab).GetComponent<SequencerManager>();
 
             Launchers = MapObject.GetMapObjectsOfType(MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
             StartGame();
