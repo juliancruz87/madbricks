@@ -20,6 +20,7 @@ namespace Interactive.Detail
 
         public override void StartStep()
         {
+            FindObjectOfType<GameUIManager>().gameObject.SetActive(false);
             mainCamera = Camera.main;
             cameraManager = mainCamera.gameObject.GetComponent<CameraManager>();
             cameraManager.enabled = false;

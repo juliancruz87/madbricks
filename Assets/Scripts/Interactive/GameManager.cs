@@ -113,8 +113,6 @@ namespace Interactive
 
 		private void Start ()
 		{
-			endSequencer = Instantiate(winEndSequencerPrefab).GetComponent<SequencerManager>();
-
             Launchers = MapObject.GetMapObjectsOfType(MapObjectType.LauncherSticky, MapObjectType.LauncherNormal);
             StartGame();
 		}
@@ -232,13 +230,10 @@ namespace Interactive
 		private void PlayEndSequence (GameResults results)
 		{
             if (results == GameResults.Win)
-            {
-
-            }
+                endSequencer = Instantiate(winEndSequencerPrefab).GetComponent<SequencerManager>();
             else
-            {
+                endSequencer = Instantiate(loseEndSequencerPrefab).GetComponent<SequencerManager>();
 
-            }
 			Result = results;
 			endSequencer.Play ();
 			SoundManager.Instance.PlayEndSound (results);

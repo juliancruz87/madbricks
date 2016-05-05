@@ -16,9 +16,17 @@ namespace Interactive.Detail
         public override void StartStep()
         {
             instrument = GameObject.FindGameObjectWithTag("Instrument");
-            instrumentHighlight = instrument.GetComponent<HighlightObject>();
-            instrumentHighlight.ActivateHighlight();
-            instrumentHighlight.AnimationLoopCompleted += CompleteStep;
+
+            if (instrument != null)
+            {
+                instrumentHighlight = instrument.GetComponent<HighlightObject>();
+                instrumentHighlight.ActivateHighlight();
+                instrumentHighlight.AnimationLoopCompleted += CompleteStep;
+            }
+            else
+            {
+                CompleteStep();
+            }
 		}
 
         private void CompleteStep()

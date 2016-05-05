@@ -5,7 +5,9 @@ using CameraTools;
 namespace Interactive.Detail
 {
 	public class MoveCameraStep : BeginStepGameBase
-    { 
+    {
+        private const float toMove = 16;
+
         [SerializeField]
         private float duration = 5;
         [SerializeField]
@@ -19,7 +21,7 @@ namespace Interactive.Detail
             mainCamera = Camera.main;
             cameraManager = mainCamera.gameObject.GetComponent<CameraManager>();
             cameraManager.enabled = false;
-            mainCamera.gameObject.transform.DOMoveY(14, duration).SetEase(ease);
+            mainCamera.gameObject.transform.DOMoveY(toMove, duration).SetEase(ease);
             EndStep();
 		}
 	}

@@ -70,6 +70,7 @@ namespace Interactive.Detail
 
         public void AnimateWinScreen()
         {
+            winScreen.blocksRaycasts = true;
             winScreen.DOFade(1, screenAnimationDuration).OnComplete(OnScreenAnimationComplete); ;
         }
 

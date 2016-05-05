@@ -12,6 +12,7 @@ namespace Interactive.Detail
 
 		public override void StartStep ()
 		{
+
             screen.AnimateGuardian();
             screen.GuardianAnimationCompleted += ShowScreen;
 		}
