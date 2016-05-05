@@ -29,11 +29,9 @@ namespace Interactive.Detail
         [SerializeField]
         private float screenAnimationDuration;
 
-        private Image guardianImage;
-
         private void Start()
         {
-            guardianImage = animatedGuardian.GetComponent<Image>();
+            animatedGuardian.SetActive(false);
         }
 
         public void RestartGame()
@@ -62,8 +60,8 @@ namespace Interactive.Detail
 
         public void AnimateGuardian()
         {
+            animatedGuardian.SetActive(true);
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(guardianImage.DOFade(1, 1));
             sequence.Append(animatedGuardian.transform.DOMove(finalGuardian.position, guardianAnimationDuration));
             sequence.AppendCallback(OnGuardianAnimationComplete);
         }
