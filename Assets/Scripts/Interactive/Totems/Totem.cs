@@ -121,8 +121,6 @@ namespace Interactive.Detail
 				controllerToStop.TurnOnColliderToDetect ();
 				Move ();
 			}
-			else
-				EndGame ("Totem : " + name+ " cannot move");
 		}
 
 		protected void GoToNode (Node node, float speed)

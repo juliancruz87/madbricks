@@ -1,33 +1,36 @@
-﻿using UnityEngine;
-using DG.Tweening;
-using UnityStandardAssets.ImageEffects;
-using System;
+﻿using DG.Tweening;
 using LevelLoaderController;
+using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Interactive.Detail
 {
-	public class WinScreenController : MonoBehaviour 
+    public class WinScreenController : MonoBehaviour 
 	{
         public event Action GuardianAnimationCompleted;
         public event Action ScreenAnimationCompleted;
         public event Action ButtonClicked;
 
         [SerializeField]
-        private GameObject animatedGuardian;
+        protected GameObject animatedGuardian;
 
         [SerializeField]
         private CanvasGroup winScreen;
 
         [SerializeField]
-        private Transform finalGuardian;
+        protected Transform finalGuardian;
 
         [SerializeField]
-        private float guardianAnimationDuration = 5;
+        protected float guardianAnimationDuration = 5;
 
         [SerializeField]
         private float screenAnimationDuration;
+
+        [SerializeField]
+        private Ease guardianAnimationEase;
+
+        protected Sequence guardianSequence;
 
         private void Start()
         {
@@ -58,12 +61,12 @@ namespace Interactive.Detail
             LevelLoader.Instance.LoadScene(SceneProperties.SCENE_LOADER_AREA);
         }
 
-        public void AnimateGuardian()
+        public virtual void AnimateGuardian()
         {
             animatedGuardian.SetActive(true);
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(animatedGuardian.transform.DOMove(finalGuardian.position, guardianAnimationDuration));
-            sequence.AppendCallback(OnGuardianAnimationComplete);
+            guardianSequence = DOTween.Sequence();
+            guardianSequence.Append(animatedGuardian.transform.DOMove(finalGuardian.position, guardianAnimationDuration).SetEase(guardianAnimationEase));
+            guardianSequence.AppendCallback(OnGuardianAnimationComplete);
         }
 
         public void AnimateWinScreen()
