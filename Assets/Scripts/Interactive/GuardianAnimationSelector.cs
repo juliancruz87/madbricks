@@ -15,7 +15,7 @@ namespace Interactive.Detail
             if (area != 0)
             {
                 GameObject guardian = Instantiate(guardians[area - 1]);
-                guardian.transform.SetParent(gameObject.transform);
+				guardian.transform.SetParent(gameObject.transform);
                 guardian.transform.localPosition = Vector3.zero;
             }
         }
