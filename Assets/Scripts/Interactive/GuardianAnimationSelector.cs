@@ -14,9 +14,19 @@ namespace Interactive.Detail
 
             if (area != 0)
             {
-                GameObject guardian = Instantiate(guardians[area - 1]);
-				guardian.transform.SetParent(gameObject.transform);
-                guardian.transform.localPosition = Vector3.zero;
+                ActivateAreaGuardian(area);
+
+            }
+        }
+
+        private void ActivateAreaGuardian(int area)
+        {
+            for (int i = 0; i < guardians.Length; i++)
+            {
+                if (area == i + 1)
+                    guardians[i].SetActive(true);
+                else
+                    guardians[i].SetActive(false);
             }
         }
 
