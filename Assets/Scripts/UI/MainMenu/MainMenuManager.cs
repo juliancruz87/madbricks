@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
@@ -31,14 +32,14 @@ public class MainMenuManager : MonoBehaviour {
     {
         int level = 1;
         if(int.TryParse(textLevel.text, out level))
-            Application.LoadLevel("Level " + level);
+            SceneManager.LoadScene("Level " + level);
         else
-            Application.LoadLevel("Level " + 1);
+            SceneManager.LoadScene("Level " + 1);
     }
 
     public void StartLevel(int level)
     {
-        Application.LoadLevel("Level " + level);
+        SceneManager.LoadScene("Level " + level);
     }
 
     public void SwitchMenuState()
@@ -50,8 +51,8 @@ public class MainMenuManager : MonoBehaviour {
     {
         PlayerPrefs.SetString(PrefsProperties.CLEARED_AREA, "1");
         PlayerPrefs.SetString(PrefsProperties.CLEARED_LEVEL, "1");
+        PlayerPrefs.SetString(PrefsProperties.CLEARED_TUTORIAL, "0");
 
-        //Application.LoadLevel(Application.loadedLevel);
         FindObjectOfType<AreaBoxesManager>().ResetAreaBoxes();
     }
 }
