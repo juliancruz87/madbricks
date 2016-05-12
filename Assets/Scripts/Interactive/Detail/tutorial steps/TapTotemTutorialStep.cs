@@ -16,7 +16,6 @@ namespace Interactive.Detail
         private ITotem totem;
 
         private Transform totemTransform;
-		private Collider totemCollider;
 
         private bool stepActive;
 
@@ -24,7 +23,6 @@ namespace Interactive.Detail
         public override void StartStep()
         {
             totem = GetTotem(totemPosition);
-            totemCollider = totem.DragObject.GetComponentInChildren<Collider>();
             totemTransform = totem.DragObject.gameObject.transform;
             stepActive = true;
         }

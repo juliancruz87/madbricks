@@ -15,7 +15,7 @@ namespace Interactive.Detail
 		[SerializeField]
 		private List<BeginStepGameBase> steps;
 
-		private void Start ()
+		private void Awake ()
 		{
 			steps.ForEach (c => c.EndStep += OnNextStep);
 		}

@@ -12,15 +12,4 @@ public class SplashScreenManager : MonoBehaviour {
         PlayerPrefs.SetInt(PrefsProperties.IS_SFX_ENABLED, 1);
 
 	}
-
-	void Update () {
-	
-	}
-
-    public void LoadFirstTutorial()
-    {
-        Application.LoadLevel(SceneProperties.SCENE_MAIN_MENU);
-    }
-
-
 }

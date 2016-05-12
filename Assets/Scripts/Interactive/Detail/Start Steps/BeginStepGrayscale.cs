@@ -2,6 +2,8 @@
 using Path;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using DG.Tweening;
 
 namespace Interactive.Detail {
 
@@ -10,57 +12,73 @@ namespace Interactive.Detail {
         [SerializeField]
         private Shader grayscaleShader;
 
-        private Dictionary<int, Shader> shaderDictionary = new Dictionary<int, Shader>(); 
+		[SerializeField]
+		private Shader grayscaleAlphaShader;
 
-        private Renderer[] renderers;
-        private ITotem boss;
-        private bool isActive = false;
+		[SerializeField]
+		private float duration;
+
+        private Dictionary<int, Shader> shaderDictionary = new Dictionary<int, Shader>();
+
+		private Sequence animationSequence;
+
+        private Renderer [] renderers;
+		private List<Renderer> excludedRenderers = new List<Renderer>();
 
         public override void StartStep()
         {
-            renderers = FindObjectsOfType<Renderer>();
-            SetGrayscale();
-            boss = GameManager.Instance.Totems.Find(totem => totem.IsBoss);
-            if (EndStep != null)
+			List<MapObject> goals = MapObject.GetMapObjectsOfType (MapObjectType.Totem_target);
+			GameObject[] excludedTotems = GameObject.FindGameObjectsWithTag ("TotemError");
+
+			foreach (MapObject goal in goals) 
+			{
+				excludedRenderers.AddRange (goal.gameObject.GetComponentsInChildren<Renderer> ());
+			}
+
+			foreach (GameObject totem in excludedTotems) 
+			{
+				excludedRenderers.AddRange (totem.GetComponentsInChildren<Renderer> ());
+			}
+				
+
+			renderers = FindObjectsOfType<Renderer>();
+
+			SetGrayscale();
+            
+			if (EndStep != null)
                 EndStep();
         }
 
         private void SetGrayscale()
         {
+			animationSequence = DOTween.Sequence ();
+
             for (int i = 0; i < renderers.Length; i++)
             {
-                if (renderers[i].GetComponentInParent<BossTotem>() == null)
+				if (!excludedRenderers.Contains(renderers[i]))
                 {
-                    MapObject mp = renderers[i].gameObject.GetComponent<MapObject>();
-
-                    if (mp != null)
-                    {
-                        if (mp.Type != MapObjectType.LauncherNormal && mp.Type != MapObjectType.LauncherSticky && mp.Type != MapObjectType.BossJail)
-                            ApplyShader(renderers[i], i);
-                    }
-                    else
-                    {
-                        ApplyShader(renderers[i], i);
-                    }
+					if (renderers[i].material.HasProperty("_Mode") && renderers[i].material.GetFloat("_Mode") > 0)
+						ApplyShader(renderers[i], grayscaleAlphaShader, "_EffectAmount", 0, 1, 1);
+					else
+						ApplyShader(renderers[i], grayscaleShader, "_Saturation", 1, 0, 1);
                 }
             }
-            isActive  = true;
+
+			animationSequence.AppendCallback (CompleteStep);
         }
 
-        private void ApplyShader(Renderer renderer, int position)
+        private void ApplyShader(Renderer renderer, Shader shader, string property, float initialValue, float endValue, float duration)
         {
-            shaderDictionary.Add(position, renderer.material.shader);
-            renderer.material.shader = grayscaleShader;
-        }
+            renderer.material.shader = shader;
+			renderer.material.SetFloat (property, initialValue);
+			animationSequence.Insert(0, renderer.material.DOFloat (endValue, property, duration));
 
-        private void Update()
-        {
-            if (isActive && boss.IsJailed)
-            {
-                isActive = false;
-                DeactivateGrayScale();
-            }
         }
+			
+		private void CompleteStep ()
+		{
+			EndStep ();
+		}	
 
         public void DeactivateGrayScale()
         {

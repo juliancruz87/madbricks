@@ -6,6 +6,7 @@ using System;
 using Map;
 using System.Collections.Generic;
 using Sound;
+using UnityEngine.SceneManagement;
 
 namespace Interactive
 {
@@ -175,7 +176,7 @@ namespace Interactive
 	        Debug.LogWarning("This is a hack that was made to force the end of the game, please fix it");
 
 	        Totem[] totems = FindObjectsOfType<Totem>();
-            ArrayList targets = MapObject.GetMapObjectsOfType(MapObjectType.Totem_target);
+			List<MapObject> targets = MapObject.GetMapObjectsOfType(MapObjectType.Totem_target);
             
 	        foreach (Totem totem in totems) 
 			{
@@ -222,9 +223,12 @@ namespace Interactive
 
 		public void Lose ()
 		{
-			if(!wasEndGame)
+			if (!wasEndGame) 
+			{
+				wasEndGame = true;
 				PlayEndSequence (GameResults.Lose);
-			wasEndGame = true;
+
+			}
 		}
 
 		private void PlayEndSequence (GameResults results)
@@ -267,7 +271,7 @@ namespace Interactive
 
         public void RestartGame()
         {
-            LevelLoaderController.LevelLoader.Instance.LoadScene(Application.loadedLevelName);
+			LevelLoaderController.LevelLoader.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

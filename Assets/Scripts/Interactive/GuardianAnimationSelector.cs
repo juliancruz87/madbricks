@@ -12,11 +12,8 @@ namespace Interactive.Detail
         {
             int area = GameManager.Instance.levelInfo.area;
 
-            if (area != 0)
-            {
-                ActivateAreaGuardian(area);
-
-            }
+            ActivateAreaGuardian(area);
+		
         }
 
         private void ActivateAreaGuardian(int area)

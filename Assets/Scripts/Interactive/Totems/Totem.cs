@@ -89,10 +89,11 @@ namespace Interactive.Detail
 			}
 		}
 
-		private void OnCrashWithOtherCollider ()
+		private void OnCrashWithOtherCollider (GameObject collidedTotem)
 		{
 		    if (GameManager.Instance.CurrentState == GameStates.Play) 
 			{
+				TagErrorTotem ();
                 Stop();
                 EndGame(name + " has been crashed with other totem");    
 		    }
@@ -102,7 +103,6 @@ namespace Interactive.Detail
 		public void Stop ()
 		{
 			myTransform.DOKill ();
-			snaper.SnapToCloserTransform ();
 		}
 		
 		private void OnDestroy ()
@@ -140,6 +140,7 @@ namespace Interactive.Detail
 		}
 
 		protected void EndGame (string warning) {
+			gameObject.tag = "TotemError";
 			Debug.LogWarning (warning);
 			GameManagerForStates.Lose ();
 		}

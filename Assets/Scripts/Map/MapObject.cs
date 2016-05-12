@@ -98,7 +98,7 @@ namespace Map {
 			return filteredMapObjects;
 		}
 
-        public static ArrayList GetMapObjectsOfType(MapObjectType type) {
+        /*public static ListGetMapObjectsOfType(MapObjectType type) {
             ArrayList filteredMapObjects = new ArrayList();
 
             MapObject[] mapObjects = FindObjectsOfType<MapObject>();
@@ -110,6 +110,6 @@ namespace Map {
             }
 
             return filteredMapObjects;
-        }
+        }*/
     }
 }

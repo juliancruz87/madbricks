@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AreaBuilderManager : MonoBehaviour {
 
@@ -26,7 +27,7 @@ public class AreaBuilderManager : MonoBehaviour {
     {
         FadeManager.Instance.FadeOut();
         yield return new WaitForSeconds(1.88f);
-        Application.LoadLevel(SceneProperties.SCENE_MAIN_MENU);
+		SceneManager.LoadScene(SceneProperties.SCENE_MAIN_MENU);
     }
 
     public void SetAreaNumber()

@@ -45,6 +45,7 @@ namespace Interactive.Detail
 			if (nodes.Count <= 0)
 			{
 				Debug.LogWarning (gameObject.name +" try to find an alternative path");
+				Debug.LogWarning (gameObject.name +". Current Node: "+ CurrentNode + " positionToGo: " + positionToGo);
                 nodes = Finder.GetNodesInLongDirection(CurrentNode, positionToGo);
 			}
 

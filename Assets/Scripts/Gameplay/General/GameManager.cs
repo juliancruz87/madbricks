@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager2 : MonoBehaviour {
 
@@ -46,7 +47,7 @@ public class GameManager2 : MonoBehaviour {
 
     private void RestartLevel()
     {
-        Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMenu()
@@ -59,6 +60,6 @@ public class GameManager2 : MonoBehaviour {
         FadeManager.Instance.FadeOut();
         hudContainer.HideButtons();
         yield return new WaitForSeconds(1.88f);
-        Application.LoadLevel(0);
+		SceneManager.LoadScene(0);
     }
 }

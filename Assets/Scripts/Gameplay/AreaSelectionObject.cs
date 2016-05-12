@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AreaSelectionObject : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class AreaSelectionObject : MonoBehaviour {
         {
             Debug.Log("Selected Area: " + areaID);
             SaveManager.Instance.SetSelectedArea(areaID);
-            Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+            SceneManager.LoadScene(SceneProperties.SCENE_LOADER_AREA);
         }
     }
 }

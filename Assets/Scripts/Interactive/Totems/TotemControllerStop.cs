@@ -6,7 +6,7 @@ namespace Interactive.Detail
 {
 	public class TotemControllerStop : MonoBehaviour
 	{
-		public event Action CollidedWithTotem;
+		public event Action<GameObject> CollidedWithTotem;
 		private Collider myCollider;
 		private List<GameObject> forbbidenObjects = new List<GameObject> ();
 
@@ -30,7 +30,7 @@ namespace Interactive.Detail
 			if (forbbidenObjects.Contains(collisionInfo.gameObject)) 
 			{
 				if(CollidedWithTotem != null)
-					CollidedWithTotem ();
+					CollidedWithTotem (collisionInfo.gameObject);
 			}
 		}
 	}

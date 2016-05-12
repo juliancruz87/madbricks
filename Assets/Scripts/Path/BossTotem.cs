@@ -6,6 +6,7 @@ using Interactive.Detail;
 using Map;
 using Interactive;
 using Graphics;
+using System.Collections.Generic;
 
 namespace Path {
     public class BossTotem : MonoBehaviour, ITotem {
@@ -77,6 +78,12 @@ namespace Path {
             InitTotems();
         }
 
+
+		public void Stop()
+		{
+			return;	
+		}
+
 		public void SetHighlight (bool IsActive)
 		{
 			if (highlightObject != null)
@@ -134,7 +141,7 @@ namespace Path {
         }
 
         private MapObject GetNearestMapObject() {
-            ArrayList mapObjects = MapObject.GetMapObjectsOfType(MapObjectType.BossJail);
+			List<MapObject> mapObjects = MapObject.GetMapObjectsOfType(MapObjectType.BossJail);
 
             foreach (MapObject mapObject in mapObjects)
                 if (Vector3.Distance(mapObject.transform.position, myTransform.position) < settings.StickyDistance)

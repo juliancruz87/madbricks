@@ -29,4 +29,9 @@ public class Handler : MonoBehaviour
        }
             
 	}
+
+	public void StopAnimation()
+	{
+		animator.Stop ();
+	}
 }

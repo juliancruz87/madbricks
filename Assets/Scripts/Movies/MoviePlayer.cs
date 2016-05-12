@@ -51,8 +51,6 @@ public class MoviePlayer : MonoBehaviour
         while (movie.isPlaying)
               yield return null;
 
-        //transform.parent.gameObject.SetActive(false);
-        FindObjectOfType<TutorialContainer>().CloseVideo();
     }
 
     IEnumerator PlayMovie()

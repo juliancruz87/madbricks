@@ -16,5 +16,6 @@ namespace Interactive
 
         Vector3[] GetPathPositions();
         void SetHighlight(bool active);
+		void Stop ();
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AreaSelectionManager : MonoBehaviour {
 
@@ -80,7 +81,7 @@ public class AreaSelectionManager : MonoBehaviour {
     {
         FadeManager.Instance.FadeOut();
         yield return new WaitForSeconds(1.88f);
-        Application.LoadLevel(SceneProperties.SCENE_LOADER_AREA);
+		SceneManager.LoadScene(SceneProperties.SCENE_LOADER_AREA);
     }
 
 
