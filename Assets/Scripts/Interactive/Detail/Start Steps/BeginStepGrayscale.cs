@@ -27,7 +27,7 @@ namespace Interactive.Detail {
 
         public override void StartStep()
         {
-			List<MapObject> goals = MapObject.GetMapObjectsOfType (MapObjectType.Totem_target);
+			List<MapObject> goals = MapObject.GetMapObjectsOfType (MapObjectType.Totem_target, MapObjectType.LauncherNormal, MapObjectType.LauncherSticky);
 			GameObject[] excludedTotems = GameObject.FindGameObjectsWithTag ("TotemError");
 
 			foreach (MapObject goal in goals) 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SplashScreenManager : MonoBehaviour {
 
@@ -12,4 +13,9 @@ public class SplashScreenManager : MonoBehaviour {
         PlayerPrefs.SetInt(PrefsProperties.IS_SFX_ENABLED, 1);
 
 	}
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(SceneProperties.SCENE_MAIN_MENU);
+    }
 }
