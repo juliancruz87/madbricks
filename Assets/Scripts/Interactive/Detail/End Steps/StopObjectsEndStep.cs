@@ -10,6 +10,7 @@ namespace Interactive.Detail
         {
 			FindObjectOfType<Handler> ().StopAnimation ();
             ParticleSystem particles = FindObjectOfType<ParticleSystem>();
+            FindObjectOfType<GameUIManager>().gameObject.SetActive(false);
 
             if (particles != null)
                 particles.gameObject.SetActive(false);
