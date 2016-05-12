@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Interactive.Detail
 {
-    public class WinScreenController : MonoBehaviour 
+    public class EndGameScreenController : MonoBehaviour 
 	{
         public event Action ButtonClicked;
 

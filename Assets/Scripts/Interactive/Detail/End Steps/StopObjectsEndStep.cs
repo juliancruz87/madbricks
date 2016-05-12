@@ -9,7 +9,12 @@ namespace Interactive.Detail
         public override void StartStep()
         {
 			FindObjectOfType<Handler> ().StopAnimation ();
-			GameManager.Instance.Totems.ForEach (item => item.Stop ());
+            ParticleSystem particles = FindObjectOfType<ParticleSystem>();
+
+            if (particles != null)
+                particles.gameObject.SetActive(false);
+
+            GameManager.Instance.Totems.ForEach (item => item.Stop ());
 
 			EndStep ();
 		}

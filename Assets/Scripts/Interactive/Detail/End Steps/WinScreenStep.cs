@@ -8,7 +8,7 @@ namespace Interactive.Detail
 	public class WinScreenStep : BeginStepGameBase
 	{
 		[SerializeField]
-		private WinScreenController screen;
+		private EndGameScreenController screen;
 
 		public override void StartStep ()
 		{

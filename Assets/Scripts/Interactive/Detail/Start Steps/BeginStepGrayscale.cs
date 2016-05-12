@@ -15,7 +15,10 @@ namespace Interactive.Detail {
 		[SerializeField]
 		private Shader grayscaleAlphaShader;
 
-		[SerializeField]
+        [SerializeField]
+        private Material grayscaleSkybox;
+
+        [SerializeField]
 		private float duration;
 
         private Dictionary<int, Shader> shaderDictionary = new Dictionary<int, Shader>();
@@ -29,6 +32,10 @@ namespace Interactive.Detail {
         {
 			List<MapObject> goals = MapObject.GetMapObjectsOfType (MapObjectType.Totem_target, MapObjectType.LauncherNormal, MapObjectType.LauncherSticky);
 			GameObject[] excludedTotems = GameObject.FindGameObjectsWithTag ("TotemError");
+
+            Skybox skybox = FindObjectOfType<Skybox>();
+
+            skybox.material = grayscaleSkybox;
 
 			foreach (MapObject goal in goals) 
 			{
@@ -58,9 +65,9 @@ namespace Interactive.Detail {
 				if (!excludedRenderers.Contains(renderers[i]))
                 {
 					if (renderers[i].material.HasProperty("_Mode") && renderers[i].material.GetFloat("_Mode") > 0)
-						ApplyShader(renderers[i], grayscaleAlphaShader, "_EffectAmount", 0, 1, 1);
+						ApplyShader(renderers[i], grayscaleAlphaShader, "_EffectAmount", 0, 1, duration);
 					else
-						ApplyShader(renderers[i], grayscaleShader, "_Saturation", 1, 0, 1);
+						ApplyShader(renderers[i], grayscaleShader, "_Saturation", 1, 0, duration);
                 }
             }
 
