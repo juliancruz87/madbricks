@@ -42,7 +42,12 @@ namespace ManagerInput.CameraControls
 			set;
 		}
 
-		private void Start ()
+        public Collider Collider
+        {
+            get { return myCollider; }
+        }
+
+        private void Start ()
 		{
 			
 			conditional.GameManager = GameManagerForStates;

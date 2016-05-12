@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using CameraTools;
+using ManagerInput.CameraControls;
 
 namespace Interactive.Detail
 {
@@ -11,6 +12,7 @@ namespace Interactive.Detail
 			FindObjectOfType<Handler> ().StopAnimation ();
             ParticleSystem particles = FindObjectOfType<ParticleSystem>();
             FindObjectOfType<GameUIManager>().gameObject.SetActive(false);
+            FindObjectOfType<RotatorByAxes>().Collider.enabled = true;
 
             if (particles != null)
                 particles.gameObject.SetActive(false);
