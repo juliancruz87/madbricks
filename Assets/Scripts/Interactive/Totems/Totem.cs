@@ -93,12 +93,17 @@ namespace Interactive.Detail
 		{
 		    if (GameManager.Instance.CurrentState == GameStates.Play) 
 			{
-				TagErrorTotem ();
+				//TagErrorTotem (collidedTotem);
                 Stop();
                 EndGame(name + " has been crashed with other totem");    
 		    }
 			
 		}
+
+        private void TagErrorTotem(GameObject totem)
+        {
+            gameObject.tag = "TotemError";
+        }
 
 		public void Stop ()
 		{
@@ -139,9 +144,10 @@ namespace Interactive.Detail
 			snaper.SnapInPlace ();
 		}
 
-		protected void EndGame (string warning) {
-			gameObject.tag = "TotemError";
-			Debug.LogWarning (warning);
+		protected void EndGame (string warning)
+        {
+            TagErrorTotem(gameObject);
+            Debug.LogWarning (warning);
 			GameManagerForStates.Lose ();
 		}
 
