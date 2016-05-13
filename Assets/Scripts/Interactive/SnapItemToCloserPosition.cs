@@ -87,10 +87,13 @@ namespace Interactive.Detail
 			keepInSamePlace = true;
 		}
 
+		/*
+
 		public void LateUpdate ()
 		{
 			if(keepInSamePlace)
 				myTransform.position = snapedPosition;
 		}
+		*/
 	}
 }

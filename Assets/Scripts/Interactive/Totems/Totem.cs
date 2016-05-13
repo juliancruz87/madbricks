@@ -93,7 +93,6 @@ namespace Interactive.Detail
 		{
 		    if (GameManager.Instance.CurrentState == GameStates.Play) 
 			{
-				//TagErrorTotem (collidedTotem);
                 Stop();
                 EndGame(name + " has been crashed with other totem");    
 		    }
