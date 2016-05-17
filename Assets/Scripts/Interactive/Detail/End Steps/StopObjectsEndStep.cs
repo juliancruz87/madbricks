@@ -17,10 +17,19 @@ namespace Interactive.Detail
             if (particles != null)
                 particles.gameObject.SetActive(false);
 
-            GameManager.Instance.Totems.ForEach (item => item.Stop ());
+            GameManager.Instance.Totems.ForEach (totem => StopTotems (totem));
 
 			EndStep ();
 		}
+
+        private void StopTotems(ITotem totem)
+        {
+            totem.Stop();
+
+            if (totem.DragObject != null)
+                totem.DragObject.CanBeDragged = false;
+
+        }
 			
 	}
 }
