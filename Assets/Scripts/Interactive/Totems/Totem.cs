@@ -146,7 +146,6 @@ namespace Interactive.Detail
 			if(totem.SoundToGetReach != null) 
 				SoundManager.Instance.Play (totem.SoundToGetReach);
 
-			snaper.SnapInPlace ();
 		}
 
 		protected void EndGame (string warning)

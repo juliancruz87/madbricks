@@ -102,12 +102,14 @@ namespace Path {
             foreach (DraggableObject totem in totems) {
                 totem.OnObjectDragged = OnTotemDragged;
                 totem.OnSnap = Snap;
+                snapperObject.Snapped += CheckMapObjectCondition;
             }
         }
 
         private void Snap() {
             if (snapperObject != null)
                 snapperObject.SnapToCloserTransform();
+
         }
 
         private void OnTotemDragged(Vector3 currentposition, Vector3 newposition) {
@@ -181,9 +183,7 @@ namespace Path {
                 if (obstacle != gameObject &&
                     Vector3.Distance(obstacle.transform.position, newDragPosition) < settings.CollideDistance) {
                     if (obstacle.GetComponent<DraggableObject>()) {
-                        myAnimator.SetTrigger("Explode");
-                        Destroy(obstacle);
-                        GameManagerForStates.Lose();
+                        TotemCollided(obstacle);
                     }
                     return true;
 
@@ -211,7 +211,6 @@ namespace Path {
         // Update is called once per frame
         void Update () {
             UpdateNearestNode();
-            CheckMapObjectCondition();
             if (!isJailed)
                 CheckTotemCollision();
         }
@@ -228,10 +227,16 @@ namespace Path {
             DraggableObject[] totems = FindObjectsOfType<DraggableObject>();
             foreach (DraggableObject totem in totems) {
                 if (Vector3.Distance(totem.transform.position, transform.position) < settings.CollideDistance) {
-                    Destroy(totem.gameObject);
-                    GameManagerForStates.Lose();
+                    TotemCollided(totem.gameObject);
                 }
             }
+        }
+
+        private void TotemCollided(GameObject totem)
+        {
+            myAnimator.SetTrigger("Explode");
+            Destroy(totem);
+            GameManagerForStates.Lose();
         }
 
         public Vector3[] GetPathPositions()

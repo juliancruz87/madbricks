@@ -8,6 +8,8 @@ namespace Interactive.Detail
 {
 	public class SnapItemToCloserPosition : MonoBehaviour 
 	{
+        public Action Snapped;
+
 		[SerializeField]
 		private float timeToSnap = 0.02f;
 
@@ -17,8 +19,6 @@ namespace Interactive.Detail
 		[SerializeField]
 	    private Transform[] transformsToSnap;
 
-		private bool keepInSamePlace = false;
-		private Vector3 snapedPosition = Vector3.zero;
 		private Transform myTransform;
 		private Transform myParent;
 
@@ -79,21 +79,9 @@ namespace Interactive.Detail
 		private void ResetParent ()
 		{
 			myTransform.SetParent (myParent);
-		}
 
-		public void SnapInPlace ()
-		{
-			snapedPosition = myTransform.position;
-			keepInSamePlace = true;
+            if (Snapped != null)
+                Snapped();
 		}
-
-		/*
-
-		public void LateUpdate ()
-		{
-			if(keepInSamePlace)
-				myTransform.position = snapedPosition;
-		}
-		*/
 	}
 }
