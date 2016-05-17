@@ -27,6 +27,7 @@ namespace Path {
 
         private GameObject dragFloor;
 
+        private Animator myAnimator;
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
 		private HighlightObject highlightObject;
@@ -71,6 +72,7 @@ namespace Path {
             myTransform = transform;
             snapperObject = GetComponent<SnapItemToCloserPosition>();
 			highlightObject = GetComponent<HighlightObject> ();
+            myAnimator = GetComponentInChildren<Animator>();
         }
 
         // Use this for initialization
@@ -136,6 +138,8 @@ namespace Path {
 		{
 			if (isJailed)
 				return;
+
+            myAnimator.SetTrigger("Land");
             isJailed = true;
 			GameManager.Instance.Goal ();
         }
@@ -177,6 +181,7 @@ namespace Path {
                 if (obstacle != gameObject &&
                     Vector3.Distance(obstacle.transform.position, newDragPosition) < settings.CollideDistance) {
                     if (obstacle.GetComponent<DraggableObject>()) {
+                        myAnimator.SetTrigger("Explode");
                         Destroy(obstacle);
                         GameManagerForStates.Lose();
                     }
