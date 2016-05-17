@@ -19,6 +19,7 @@ namespace Interactive.Detail
 		private List<TotemType> validTypes = new List<TotemType> ();
 		private HighlightObject highlightObject;
 
+        protected Animator myAnimator;
 		protected Transform myTransform;
 		protected TotemInstantiatorConfig totem;
 		protected int positionToGo;
@@ -72,6 +73,7 @@ namespace Interactive.Detail
 			dragObject = GetComponent<DraggableObject> ();
 			controllerToStop = GetComponent<TotemControllerStop> ();
 			highlightObject = GetComponent<HighlightObject> ();
+            myAnimator = GetComponentInChildren<Animator>();
 			validTypes.Add (TotemType.Triangle);
 			validTypes.Add (TotemType.Sphere);
 			validTypes.Add (TotemType.Square);
@@ -93,6 +95,7 @@ namespace Interactive.Detail
 		{
 		    if (GameManager.Instance.CurrentState == GameStates.Play) 
 			{
+                myAnimator.SetTrigger("Explode");
                 Stop();
                 EndGame(name + " has been crashed with other totem");    
 		    }
@@ -134,8 +137,11 @@ namespace Interactive.Detail
 
 		protected void GoalReachedNode(Node node)
 		{
-			if (node.Id == positionToGo)
-				GameManagerForStates.Goal ();
+            if (node.Id == positionToGo)
+            {
+                myAnimator.SetTrigger("Land");
+                GameManagerForStates.Goal();
+            }
 			
 			if(totem.SoundToGetReach != null) 
 				SoundManager.Instance.Play (totem.SoundToGetReach);
