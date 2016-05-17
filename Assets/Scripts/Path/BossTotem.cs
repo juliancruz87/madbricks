@@ -14,6 +14,9 @@ namespace Path {
         private const string TAG_OBSTACLE = "Obstacle";
 
         [SerializeField]
+        private AnimationClip clip;
+
+        [SerializeField]
         private MovementSettings settings;
 
         [SerializeField]
@@ -31,7 +34,7 @@ namespace Path {
         private Transform myTransform;
         private SnapItemToCloserPosition snapperObject;
 		private HighlightObject highlightObject;
-		
+
 		public bool IsBoss 
 		{
 			get { return true; }
@@ -236,7 +239,14 @@ namespace Path {
         {
             myAnimator.SetTrigger("Explode");
             Destroy(totem);
+            StartCoroutine(WaitForAnimation());
             GameManagerForStates.Lose();
+        }
+
+        private IEnumerator WaitForAnimation()
+        {  
+            yield return new WaitForSeconds(clip.length);
+            Destroy(gameObject);
         }
 
         public Vector3[] GetPathPositions()
