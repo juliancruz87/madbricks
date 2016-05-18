@@ -16,17 +16,24 @@ public class Handler : MonoBehaviour
 
     private void Awake ()
     {
-        animator = GetComponent<Animator>();
+		animator = GetComponentInChildren<Animator>();
     }
 
 	private void Update () 
 	{
+		
 		if (TouchChecker.WasTappingFromCollider(Camera.main, myCollider, true) && GameManager.Instance.IsEveryTotemOnLauncher)
         {
-            animator.SetTrigger ("Start");
-                
-            GameManagerForStates.Play();
+			if (GameManager.Instance.IsEveryTotemOnLauncher) {
+				animator.SetTrigger ("Start");
+				GameManagerForStates.Play ();
+			} 
+			else 
+			{
+				animator.SetTrigger ("Break");
+			}
        }
+
             
 	}
 

@@ -17,15 +17,10 @@ Shader "Custom/Progressive Desaturation" {
 		float2 uv_MainTex;
 	};
 
-	// Converts color to luminance (grayscale)
-	float Luminance(float3 c)
-	{
-		return dot(c, float3(0.22, 0.707, 0.071));
-	}
 
 	void surf(Input IN, inout SurfaceOutput o) {
 		half4 c = tex2D(_MainTex, IN.uv_MainTex);
-		half4 g = Luminance(c.rgb);
+		half4 g = dot(c.rgb, float3(0.22, 0.707, 0.071));
 		o.Albedo = lerp(g.rgb, c.rgb, _Saturation);
 		o.Alpha = c.a;
 	}
